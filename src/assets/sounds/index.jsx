@@ -1,1 +1,0 @@
-export { default as btnClickSound } from "./laserShoot.wav"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import useSound from "use-sound"
-import { layout, style } from "../styles"
-import { btnClickSound } from '../assets/sounds'
+import { layout, style } from "styles"
+import { btnClickSound } from 'assets'
 
 function DefaultBtn({ children }) {
     const [isPressed, setIsPressed] = useState(false)

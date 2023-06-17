@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import { layout } from '..'
-import { btn, pressedBtn } from '../../assets/pixels'
+import { btn, pressedBtn } from 'assets'
 
 export const CanvasContainer = styled.div`
     width: 98vw;
