@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { btn, pressedBtn } from "./pixels"
+import { DefaultBtn } from './components';
+import { layout, style } from './styles';
+import GlobalStyle from './globalStyle';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <layout.FlexCenter>
+        <style.CanvasContainer style={{position: "relative", display: "flex", justifyContent: "center"}}>
+          {/* <img src={btn} style={{position: "absolute", bottom: "20px"}}/> */}
+          <DefaultBtn>click me!</DefaultBtn>
+        </style.CanvasContainer>
+      </layout.FlexCenter>
+    </>
+
+
   );
 }
 
