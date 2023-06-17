@@ -1,2 +1,2 @@
-export * as layout from "./layouts"
-export * as style from "./styled-components/styles"
+export * as layout from "styles/layouts"
+export * as style from "styles/styled-components/styles"
