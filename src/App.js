@@ -1,7 +1,7 @@
 import './App.css';
 import { btn, pressedBtn } from "./assets/pixels"
 import { DefaultBtn } from './components';
-import Login from './pages/login';
+import Login from './pages/Login';
 import { layout, style } from './styles';
 import GlobalStyle from './styles/globalStyle';
 
