@@ -1,8 +1,8 @@
 import './App.css';
-import { btn, pressedBtn } from "./pixels"
+import { btn, pressedBtn } from "./assets/pixels"
 import { DefaultBtn } from './components';
 import { layout, style } from './styles';
-import GlobalStyle from './globalStyle';
+import GlobalStyle from './styles/globalStyle';
 
 function App() {
   return (
