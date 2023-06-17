@@ -21,7 +21,23 @@ export const FlexCenter = styled(FlexDefault)`
     align-items: center;
 `
 
+export const FlexCenter100 = styled(FlexCenter)`
+    width: 100%;
+`
+
 export const FlexColumnCenter = styled(FlexColumn)`
     justify-content: center;
     align-items: center;
+`
+
+export const FlexColumnCenter100 = styled(FlexColumnCenter)`
+    width: 100%;
+`
+
+export const PageLayout = styled(FlexColumnCenter)`
+    width: ${props => props.isMobile ? `99vw` : `500px`};
+    height: 99vh;
+    border: 2px solid lightgray;
+    margin: 0 auto;
+    position: relative;
 `
