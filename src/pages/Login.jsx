@@ -1,5 +1,5 @@
 import React from 'react'
-import { layout, style } from '../styles'
+import { layout, style } from 'styles'
 
 function Login() {
   return (
