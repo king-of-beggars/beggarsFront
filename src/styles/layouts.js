@@ -20,3 +20,8 @@ export const FlexCenter = styled(FlexDefault)`
     justify-content: center;
     align-items: center;
 `
+
+export const FlexColumnCenter = styled(FlexColumn)`
+    justify-content: center;
+    align-items: center;
+`
