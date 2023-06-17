@@ -8,12 +8,11 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <layout.FlexCenter>
+      {/* <layout.FlexCenter>
         <style.CanvasContainer style={{position: "relative", display: "flex", justifyContent: "center"}}>
-          {/* <img src={btn} style={{position: "absolute", bottom: "20px"}}/> */}
           <DefaultBtn>click me!</DefaultBtn>
         </style.CanvasContainer>
-      </layout.FlexCenter>
+      </layout.FlexCenter> */}
     </>
 
 
