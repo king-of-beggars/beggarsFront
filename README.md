@@ -57,7 +57,7 @@
 - router
 - styles
     + global-styles.js
-    + layouts
+    + layouts.js
     + styled-components
 - constants
     + style-variables.js
