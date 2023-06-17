@@ -8,11 +8,11 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Main />} />
+        {/* <Route path="/" element={<Main />} /> */}
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
 
-        <Route path="account" element={<Account />} />
+        {/* <Route path="account" element={<Account />} />
         <Route path="account/:id" element={<AccountDetail />} /> //지출 기록은 modal 혹은 Input으로 처리
         <Route path="account/add" element={<AccountAdd />}/>
         <Route path="account/edit/:id" element={<AccountEdit />} />
@@ -21,7 +21,7 @@ function Router() {
         <Route path="board/:id" element={<BoardDetail />}/>
 
         <Route path="mypage" element={<MyPage />} />
-        <Route path="mypage/edit" element={<MyPageEdit />}/>
+        <Route path="mypage/edit" element={<MyPageEdit />}/> */}
       </Routes>
     </BrowserRouter>
   );
