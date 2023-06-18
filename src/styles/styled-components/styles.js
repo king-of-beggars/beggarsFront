@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import { btn, pressedBtn } from 'assets'
-import { FlexColumn100, FlexColumnCenter, FlexCenter, FlexColumn } from 'styles/layouts'
+import { FlexColumn100, FlexCenterColumn, FlexCenter, FlexColumn, FlexDefault, FlexCenterEven100 } from 'styles/layouts'
 
 export const CanvasContainer = styled.div`
     width: 98vw;
@@ -17,7 +17,7 @@ export const Button = styled.button`
     background: ${props => (props.isPressed ? `url(${pressedBtn}) no-repeat` : `url(${btn}) no-repeat`)};
 `
 
-export const LoginLogoWrap = styled(FlexColumnCenter)`
+export const LoginLogoWrap = styled(FlexCenterColumn)`
     width: 10em;
     height: 10em;
     border: 1px solid black;
@@ -87,4 +87,30 @@ export const SigupInputWrap = styled(FlexColumn100)`
     align-content: space-between;
     width: ${props => props.isMobile ? `calc(100vw * 0.8)`: `calc(500px * 0.8)`};
     margin-bottom: 60px;
+`
+
+// ProfilePicWrap : 프로필 사진
+export const ProfilePicWrap = styled(FlexCenterColumn)`
+    width: 10em;
+    height: 10em;
+    border: 1px solid black;
+    border-radius: 50%;
+`
+
+// MidBlackBtn : 프로필 정보수정 버튼
+export const MidBlackBtn = styled.button`
+    width: 10em;
+    height: 2em;
+    border-radius: 6em;
+    background: black;
+    color: white;
+    font-size: 1em;
+`
+
+
+// Nav바 컨테이너
+export const NavWrap = styled(FlexCenterEven100)`
+    position: absolute;
+    margin: 1em 0 1.3em 0;
+    bottom: 0;
 `
