@@ -5,7 +5,7 @@ import { SignupInputBox,SigupInputWrap,BigBlackBtn } from 'styles/styled-compone
 function Signup() {
   return (
     <>
-      <div style={{position: "absolute", left: "20px", top: "20px"}}> {"<"} </div>
+      <div style={{position: "absolute", left: "1em", top: "1em"}}> {"<"} </div>
       <div style={{fontSize: "1.8em", marginBottom: "80px"}}>회원가입</div>
       <SigupInputWrap>
         <SignupInputBox>

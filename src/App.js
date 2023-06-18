@@ -3,6 +3,8 @@ import { btn, pressedBtn } from "assets"
 import { DefaultBtn } from 'components';
 import Login from 'pages/Login';
 import Signup from 'pages/Signup';
+import Profile from 'pages/Profile'
+import CashBook from 'pages/CashBook'
 import { layout, style } from 'styles';
 import GlobalStyle from 'styles/globalStyle';
 
@@ -13,7 +15,7 @@ function App() {
     <>
       <GlobalStyle />
         <layout.PageLayout isMobile={isMobile}>
-          <Signup />
+          <CashBook />
         </layout.PageLayout>
       {/* <layout.FlexCenter>
         <style.CanvasContainer style={{position: "relative", display: "flex", justifyContent: "center"}}>

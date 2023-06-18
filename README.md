@@ -37,6 +37,8 @@
 - 사진 업로드
 ### 2) ui 관련
 - swiper
+- 캘린더 : react-pikaday
+- 가계부 통계 : ProgressBar.js
 - 등등 적용한 ui 라이브러리 여기에 적기...
 
 ## 3. 폴더구조
