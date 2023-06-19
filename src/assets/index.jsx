@@ -1,7 +1,11 @@
 // pixel arts
 export { default as btn } from "assets/pixels/testButtons/redButton01.png";
 export { default as pressedBtn } from "assets/pixels/testButtons/redButton02.png";
+export { ReactComponent as Box } from "assets/pixels/boxSample.svg"
+export { default as boxSample } from "assets/pixels/boxSample.png"
 
+// pixels > cashbook
+export { ReactComponent as DateBox } from "assets/pixels/cashbook/cashbook_date_box.svg"
 
 // icons
 export { ReactComponent as BackCramps } from "assets/icons/backCramps.svg"
