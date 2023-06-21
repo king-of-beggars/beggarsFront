@@ -1,12 +1,24 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { layout, style } from 'styles'
 import { BigBlackBtn, LoginInputBox } from 'styles/styled-components/styles'
 
 function Login() {
+  const navigate = useNavigate();
+
+  // 회원가입으로 이동
+  const onClickSignup = () => {
+    navigate('/signup');
+  }
+
+  // 뒤로가기
+  const onClickBack = () => {
+    navigate(-1);
+  }
 
   return (
     <>
-      <div style={{position: "absolute", left: "1em", top: "1em"}}> {"<"} </div>
+      <div style={{position: "absolute", left: "1em", top: "1em"}} onClick={onClickBack}> {"<"} </div>
       <style.LoginLogoWrap>로고 들어갈거임</style.LoginLogoWrap>
       <span style={{fontSize: "1.5em"}}>내일은 거지왕</span>
       <layout.FlexCenterColumn100 style={{margin: "20px 0 30px 0"}}>
@@ -21,14 +33,13 @@ function Login() {
       </layout.FlexCenterColumn100>
       <layout.FlexCenterColumn100 style={{width: "90%", gap: "1em", paddingBottom: "3em", borderBottom: "0.5px solid #9D9D9D"}}>
         <style.BigBlackBtn>로그인</style.BigBlackBtn>
-        <span style={{textDecoration: "underline"}}>회원 가입</span>
+        <span style={{textDecoration: "underline"}} onClick={onClickSignup}>회원 가입</span>
       </layout.FlexCenterColumn100>
       <layout.FlexCenterColumn100 style={{gap: "1em", marginTop: "3em"}}>
         <style.SocialLoginBtn site="kakao">카카오 로그인</style.SocialLoginBtn>
         <style.SocialLoginBtn site="naver">네이버 로그인</style.SocialLoginBtn>
       </layout.FlexCenterColumn100>
     </>
-
 
 
     //     <div style={{position: "absolute", left: "20px", top: "20px"}}> {"<"} </div>
