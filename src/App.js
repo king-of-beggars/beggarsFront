@@ -7,6 +7,7 @@ import Profile from 'pages/Profile'
 import CashBook from 'pages/CashBook'
 import { layout, style } from 'styles';
 import GlobalStyle from 'styles/globalStyle';
+import Router from 'router/Router';
 
 function App() {
   console.log(window.navigator.userAgent)
@@ -15,7 +16,7 @@ function App() {
     <>
       <GlobalStyle />
         <layout.PageLayout isMobile={isMobile}>
-          <CashBook />
+          <Router />
         </layout.PageLayout>
       {/* <layout.FlexCenter>
         <style.CanvasContainer style={{position: "relative", display: "flex", justifyContent: "center"}}>
