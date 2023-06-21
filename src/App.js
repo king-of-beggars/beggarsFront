@@ -8,12 +8,16 @@ import CashBook from 'pages/CashBook'
 import { layout, style } from 'styles';
 import GlobalStyle from 'styles/globalStyle';
 import Router from 'router/Router';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   console.log(window.navigator.userAgent)
   const isMobile = /Mobi/i.test(window.navigator.userAgent)
+
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <GlobalStyle />
         <layout.PageLayout isMobile={isMobile}>
           <Router />
@@ -23,7 +27,7 @@ function App() {
           <DefaultBtn>click me!</DefaultBtn>
         </style.CanvasContainer>
       </layout.FlexCenter> */}
-    </>
+    </QueryClientProvider>
 
 
   );

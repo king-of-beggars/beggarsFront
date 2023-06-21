@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { layout, style } from "styles";
 import { BackCramps } from "assets";
 import Navigation from 'components/common/Navigation';
 
+
 function Profile() {
+  const navigate = useNavigate();
+
   return (
     <>
       <layout.FlexCenterRow100 style={{ position: "absolute", top: "1em" }}>

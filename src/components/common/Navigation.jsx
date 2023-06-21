@@ -1,38 +1,64 @@
-import React from 'react'
-import { style } from "styles"
-import { HomeGray, HomeBlack, MoneyGray, MoneyBlack, BoardGray, BoardBlack, ProfileGray, ProfileBlack } from 'assets'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { style } from "styles";
+import {
+  HomeGray,
+  HomeBlack,
+  MoneyGray,
+  MoneyBlack,
+  BoardGray,
+  BoardBlack,
+  ProfileGray,
+  ProfileBlack,
+} from "assets";
+import { useNavigate } from "react-router-dom";
 
 function Navigation({ selected }) {
   const navigate = useNavigate();
 
   // main으로 이동
   const onClickHome = () => {
-    navigate('/');
-  }
+    navigate("/");
+  };
 
   // 가계부로 이동
   const onClickMoney = () => {
-    navigate('/cash-book');
-  }
+    navigate("/cash-book");
+  };
 
   // 게시판으로 이동
   const onClickBoard = () => {
-    navigate('/board');
-  }
+    navigate("/board");
+  };
 
   // 프로필로 이동
   const onClickProfile = () => {
-    navigate('/profile');
-  }
+    if (!sessionStorage.getItem("RefreshToken")) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    } else {
+      navigate("/profile");
+    }
+  };
   return (
     <style.NavWrap>
-        { selected === "home" ? <HomeBlack /> : <HomeGray onClick={onClickHome}/>}
-        { selected === "money" ? <MoneyBlack /> : <MoneyGray onClick={onClickMoney}/>}
-        { selected === "board" ? <BoardBlack /> : <BoardGray onClick={onClickBoard}/>}
-        { selected === "profile" ? <ProfileBlack /> : <ProfileGray onClick={onClickProfile}/>}
+      {selected === "home" ? <HomeBlack /> : <HomeGray onClick={onClickHome} />}
+      {selected === "money" ? (
+        <MoneyBlack />
+      ) : (
+        <MoneyGray onClick={onClickMoney} />
+      )}
+      {selected === "board" ? (
+        <BoardBlack />
+      ) : (
+        <BoardGray onClick={onClickBoard} />
+      )}
+      {selected === "profile" ? (
+        <ProfileBlack />
+      ) : (
+        <ProfileGray onClick={onClickProfile} />
+      )}
     </style.NavWrap>
-  )
+  );
 }
 
-export default Navigation
+export default Navigation;
