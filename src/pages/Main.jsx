@@ -2,13 +2,13 @@ import React from "react";
 
 import { Navigation } from "components";
 
-function Board() {
+function Main() {
   return (
     <>
-      <div>Board</div>
-      <Navigation selected="board" />
+      <div>Main</div>
+      <Navigation selected="home" />
     </>
   );
 }
 
-export default Board;
+export default Main;
