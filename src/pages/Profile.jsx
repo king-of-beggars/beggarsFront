@@ -6,11 +6,11 @@ import { BackCramps } from "assets";
 import Navigation from 'components/common/Navigation';
 
 
-function Profile() {
+function Profile({ isMobile }) {
   const navigate = useNavigate();
 
   return (
-    <>
+    <layout.PageLayout isMobile={isMobile}>
       <layout.FlexCenterRow100 style={{ position: "absolute", top: "1em" }}>
         <BackCramps
           style={{ position: "absolute", left: "1em", float: "left" }}
@@ -33,7 +33,7 @@ function Profile() {
         </span>
       </layout.FlexCenterColumn100>
       <Navigation selected="profile"/>
-    </>
+    </layout.PageLayout>
   );
 }
 

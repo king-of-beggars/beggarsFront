@@ -12,7 +12,9 @@ import {
 } from "assets";
 import { useNavigate } from "react-router-dom";
 
-function Navigation({ selected }) {
+const Navigation = React.forwardRef(({ selected }, ref) => {
+  // console.log("selected:::", selected)
+  // console.log("selected === main:::", selected === "main")
   const navigate = useNavigate();
 
   // main으로 이동
@@ -39,9 +41,14 @@ function Navigation({ selected }) {
       navigate("/profile");
     }
   };
+
   return (
-    <style.NavWrap>
-      {selected === "home" ? <HomeBlack /> : <HomeGray onClick={onClickHome} />}
+    <style.NavWrap ref={ref}>
+      {selected === "main" ? (
+        <HomeBlack />
+      ) : (
+        <HomeGray onClick={onClickHome} />
+      )}
       {selected === "money" ? (
         <MoneyBlack />
       ) : (
@@ -59,6 +66,6 @@ function Navigation({ selected }) {
       )}
     </style.NavWrap>
   );
-}
+});
 
 export default Navigation;

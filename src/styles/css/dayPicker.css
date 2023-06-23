@@ -1,0 +1,7 @@
+.DateInput_input__focused { 
+    border-bottom: none; 
+    background-color: transparent;
+  }
+  .DateInput_input, .SingleDatePickerInput, .DateInput  { 
+    background-color: transparent;
+  }

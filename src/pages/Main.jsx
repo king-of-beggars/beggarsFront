@@ -1,13 +1,14 @@
 import React from "react";
 
-import { Navigation } from "components";
+import { Nav } from "components";
+import { layout } from 'styles';
 
-function Main() {
+function Main({ isMobile }) {
   return (
-    <>
+    <layout.PageLayout isMobile={isMobile}>
       <div>Main</div>
-      <Navigation selected="home" />
-    </>
+      <Nav selected="main" />
+    </layout.PageLayout>
   );
 }
 

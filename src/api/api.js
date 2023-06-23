@@ -44,6 +44,7 @@ instance.interceptors.request.use(
 
 export const AuthAPI = {
   postNickCheck: (payload) => instance.post("/api/user/nickCheck", payload),
+  postIdCheck: (payload) => instance.post("/api/user/idCheck", payload)
   // postLogIn: (payload) => instance.post("/api/login", payload),
 };
 

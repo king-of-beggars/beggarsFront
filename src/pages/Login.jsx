@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { layout, style } from 'styles'
 import { BigBlackBtn, LoginInputBox } from 'styles/styled-components/styles'
 
-function Login() {
+function Login({ isMobile }) {
   const navigate = useNavigate();
 
   // 회원가입으로 이동
@@ -17,7 +17,7 @@ function Login() {
   }
 
   return (
-    <>
+    <layout.PageLayout isMobile={isMobile}>
       <div style={{position: "absolute", left: "1em", top: "1em"}} onClick={onClickBack}> {"<"} </div>
       <style.LoginLogoWrap>로고 들어갈거임</style.LoginLogoWrap>
       <span style={{fontSize: "1.5em"}}>내일은 거지왕</span>
@@ -39,7 +39,7 @@ function Login() {
         <style.SocialLoginBtn site="kakao">카카오 로그인</style.SocialLoginBtn>
         <style.SocialLoginBtn site="naver">네이버 로그인</style.SocialLoginBtn>
       </layout.FlexCenterColumn100>
-    </>
+    </layout.PageLayout>
 
 
     //     <div style={{position: "absolute", left: "20px", top: "20px"}}> {"<"} </div>

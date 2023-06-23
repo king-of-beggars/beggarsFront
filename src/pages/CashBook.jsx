@@ -1,28 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import moment from "moment";
 // import Pikaday from 'react-pikaday';
 
 import { layout, style } from "styles";
 import { CashBookCard, DayPicker, DayWrapper } from "components";
-import Navigation from "components/common/Navigation";
-import { Box, boxSample } from "assets";
-import { BackgroundDiv } from "styles/styled-components/styles";
-import TestBox from "components/ui/box/TestBox";
-import { DateBox } from "assets";
-import backgroundCash from "assets/pixels/cashbook/cashbook_date_box.png";
+import { Nav } from 'components';
+import { cashbookDateBox } from 'assets';
 
-function CashBook() {
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+
+function CashBook({ isMobile }) {
   // 가계부 date
   const [selectDate, setSelectDate] = useState(moment);
   const [focused, setFocused] = useState(false);
+  // header와 nav의 높이를 받아 main의 높이를 계산
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [navHeight, setNavHeight] = useState(0);
+  const headerRef = useRef(null);
+  const navRef = useRef(null);
 
   const getScreenSize = () => {
     const { innerWidth: width, innerHeight: height } = window;
     return { width, height };
   };
 
-  const { width, height } = getScreenSize();
-  console.log(height);
+  const [swiper, setSwiper] = useState(null);
+  // 스와이퍼 인스턴스를 받아 상태로 저장하는 함수
+  // const onSwiper = (swiper) => {
+  //   setSwiper(swiper);
+  // };
+
+  
+  useLayoutEffect(() => {
+    setHeaderHeight(headerRef.current ? headerRef.current.offsetHeight : 0);
+    setNavHeight(navRef.current ? navRef.current.offsetHeight : 0);
+  }, []);
+
+  const screenHeight = parseFloat(sessionStorage.getItem("screenHeight"))
+  const screenWidth = parseFloat(sessionStorage.getItem("screenWidth"))
+
+  // Header와 Nav의 높이 가져오기
+  console.log(screenHeight);
+  console.log(headerHeight);
+  console.log(navHeight);
+  console.log(screenHeight - (headerHeight + navHeight));
 
   const cashbookApiRes = {
     data: [
@@ -62,20 +90,31 @@ function CashBook() {
   };
 
   return (
-    <>
+    <layout.PageLayout isMobile={!!sessionStorage.getItem("isMobile")}>
       <header
-        style={{ position: "fixed", display: "flex", alignItems: "center" }}
+        ref={headerRef}
+        style={{
+          position: "fixed",
+          top: "0px",
+          display: "flex",
+          alignItems: "center",
+          padding: "20px 40px",
+          display: "flex",
+          width: "inherit",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         <div className="heading" style={{ fontSize: "1.56em" }}>
           가계부
         </div>
       </header>
-      <div
-        className="cashBookWrapper"
+      <main
         style={{
-          display: "flex",
-          flexDirection: "column",
-          border: "2px solid black",
+          height: `${screenHeight - (headerHeight + navHeight)}px`,
+          width: "inherit",
+          background: "gray",
+          overflow: "hidden"
         }}
       >
         <div
@@ -85,7 +124,11 @@ function CashBook() {
             backgroundRepeat: "no-repeat",
             width: "155px",
             height: "36px",
-            backgroundImage: `url(${backgroundCash})`,
+            backgroundImage: `url(${cashbookDateBox})`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginLeft: "2em",
           }}
         >
           <DayPicker
@@ -95,27 +138,53 @@ function CashBook() {
             setFocused={setFocused}
           />
         </div>
-        {cashbookApiRes.data.map((v, i) => {
-          if (i === 0) {
-          }
-        })}
-      </div>
+        <div
+          className="cashBookContainer"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            border: "2px solid black",
+            alignItems: "center",
+            height: "inherit"
+            // overflow: "hidden"
+          }}
+        >
+          <Swiper
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            slidesPerView={2}
+            onSlideChange={() => console.log("slide change")}
+            // scrollbar={{ draggable: true }}
+            onSwiper={(swiper) => console.log(swiper)}
+            direction="vertical"
+            loop="infinite"
+            // style={{ height: "50vh"}}
+          >
+            {cashbookApiRes.data.map((card, idx) => {
+              // const isActive = swiper ? swiper.activeIndex === idx : false
+              // console.log(isActive)
+              return (
+                <SwiperSlide key={idx} style={{height: `${screenHeight - (headerHeight + navHeight)}px`}}>
+                  <CashBookCard
+                    id={card.id}
+                    budget={card.cashbookGoalValue}
+                    spend={card.cashbookNowValue}
+                    category={card.cashbookCategory}
+                    title={card.cashbookName}
+                  />
+                </SwiperSlide>
 
-      {/* <DateBox viewBox="0 0 50% 50%">
-          <DayPicker
-            selectDate={selectDate}
-            setSelectDate={setSelectDate}
-            focused={focused}
-            setFocused={setFocused}
-          />
-      </DateBox> */}
+              );
+            })}
+          </Swiper>
 
-      {/* <Pikaday value={selectDate} onChange={onChangeDate}/> */}
-      {/* <Box>테스트</Box> */}
-      {/* <TestBox text="테스트" fontSize="16pt" padding="1em" width="98vw"></TestBox> */}
-      <Navigation selected="money" />
-      <CashBookCard category="대분류" />
-    </>
+          {/* <div className="cashBookWrapper">
+
+          </div>
+          <CardSwiper dataList={cashbookApiRes.data} /> */}
+        </div>
+      </main>
+      <Nav ref={navRef} selected="money" />
+    </layout.PageLayout>
   );
 }
 

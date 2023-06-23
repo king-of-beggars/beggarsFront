@@ -10,7 +10,7 @@ import {
 import { AuthAPI } from "api/api";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Signup({ isMobile }) {
   const navigate = useNavigate();
 
   // user info state
@@ -47,13 +47,25 @@ function Signup() {
     onError: () => alert("다른 닉네임을 사용해 주세요."),
   });
 
+  const mutationId = useMutation(AuthAPI.postIdCheck, {
+    onSuccess: () => {
+      alert("이 아이디를 사용하실 수 있습니다.")
+    },
+    onError: () => alert("다른 아이디를 사용해 주세요.")
+  })
+
   const onClickNickCheck = () => {
     const newNick = {userNickname: nickName}
     mutationNick.mutate(newNick);
   };
 
+  const onClickIdCheck = () => {
+    const newId = { userName: id }
+    mutationId.mutate(newId)
+  }
+
   return (
-    <>
+    <layout.PageLayout isMobile={isMobile}>
       <div style={{ position: "absolute", left: "1em", top: "1em" }} onClick={onClickBack}>
         {" "}
         {"<"}{" "}
@@ -71,8 +83,13 @@ function Signup() {
           <button onClick={onClickNickCheck}>중복확인</button>
         </SignupInputBox>
         <SignupInputBox>
-          <input placeholder="아이디 입력" />
-          <button>중복확인</button>
+          <input 
+          name="id"
+          tyle="text"
+          value={id}
+          onChange={onChangeInput}
+          placeholder="아이디 입력" />
+          <button onClick={onClickIdCheck}>중복확인</button>
         </SignupInputBox>
       </SigupInputWrap>
 
@@ -86,7 +103,7 @@ function Signup() {
       </SigupInputWrap>
 
       <BigBlackBtn>여정 시작</BigBlackBtn>
-    </>
+    </layout.PageLayout>
   );
 }
 

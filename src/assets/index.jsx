@@ -1,16 +1,15 @@
 // pixel arts
 export { default as btn } from "assets/pixels/testButtons/redButton01.png";
 export { default as pressedBtn } from "assets/pixels/testButtons/redButton02.png";
-export { ReactComponent as Box } from "assets/pixels/boxSample.svg"
-export { default as boxSample } from "assets/pixels/boxSample.png"
 
 // pixels > cashbook
-export { ReactComponent as DateBox } from "assets/pixels/cashbook/cashbook_date_box.svg"
+export { default as cashbookCardYellow } from "assets/pixels/cashbook/cashbookCardYellow.png"
+export { default as cashbookDateBox } from "assets/pixels/cashbook/cashbookDateBox.png"
 
 // icons
 export { ReactComponent as BackCramps } from "assets/icons/backCramps.svg"
 export { ReactComponent as HomeGray } from "assets/icons/homeGray.svg"
-export { ReactComponent as HomeBlack } from "assets/icons/homeGray.svg"
+export { ReactComponent as HomeBlack } from "assets/icons/homeBlack.svg"
 export { ReactComponent as MoneyGray } from "assets/icons/moneygray.svg"
 export { ReactComponent as MoneyBlack } from "assets/icons/moneyBlack.svg"
 export { ReactComponent as BoardGray } from "assets/icons/boardGray.svg"
