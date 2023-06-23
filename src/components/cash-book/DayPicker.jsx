@@ -3,8 +3,10 @@ import "react-dates/initialize";
 import moment from "moment";
 import { SingleDatePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
+import "styles/css/dayPicker.css";
 
 function DayPicker({selectDate, setSelectDate, focused, setFocused}) {
+
   const onDateChange = (date) => {
     setSelectDate(moment(date));
   };
@@ -14,7 +16,15 @@ function DayPicker({selectDate, setSelectDate, focused, setFocused}) {
 
   return (
     <>
-      <style>{`.DateInput_input__focused { border-bottom: none; background-color: transparent;}, .DateInput_input { background-color: transparent; }`}</style>
+      {/* <style>{`
+      .DateInput_input__focused { 
+        border-bottom: none; 
+        background-color: transparent;
+      },
+      .DateInput_input, .SingleDatePickerInput, .DateInput  { 
+        background-color: transparent;
+      },
+      `}</style> */}
       <SingleDatePicker
         numberOfMonths={1}
         date={selectDate}

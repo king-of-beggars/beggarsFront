@@ -111,8 +111,10 @@ export const MidBlackBtn = styled.button`
 // Nav바 컨테이너
 export const NavWrap = styled(FlexCenterEven100)`
     position: absolute;
-    margin: 1em 0 1.3em 0;
+    padding: 1em 0 1.3em 0;
     bottom: 0;
+    z-index: 1;
+    background: white;
 `
 
 
