@@ -1,6 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
 import moment from "moment";
-// import Pikaday from 'react-pikaday';
 
 import { layout, style } from "styles";
 import { CashBookCard, DayPicker, DayWrapper } from "components";

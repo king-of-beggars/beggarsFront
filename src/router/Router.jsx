@@ -7,6 +7,8 @@ import Main from "pages/Main";
 import Profile from "pages/Profile";
 import CashBook from "pages/CashBook";
 import Board from "pages/Board";
+import CashBookAdd from "pages/CashBookAdd";
+import CashBookDetail from "pages/CashBookDetail";
 
 function Router() {
   const getScreenSize = () => {
@@ -28,9 +30,9 @@ function Router() {
         <Route path="signup" element={<Signup isMobile={isMobile}/>} />
 
         <Route path="cash-book" element={<CashBook isMobile={isMobile}/>} />
-        {/* <Route path="account/:id" element={<AccountDetail />} /> //지출 기록은 modal 혹은 Input으로 처리
-        <Route path="account/add" element={<AccountAdd />}/>
-        <Route path="account/edit/:id" element={<AccountEdit />} /> */}
+        <Route path="cash-book/:id" element={<CashBookDetail isMobile={isMobile}/>} /> 
+        <Route path="cash-book/add" element={<CashBookAdd isMobile={isMobile}/>}/>
+        {/* <Route path="cash-book/edit/:id" element={<CashBookEdit />} /> */}
         
         <Route path="board" element={<Board isMobile={isMobile}/>}/>
         {/* <Route path="board/:id" element={<BoardDetail />}/> */}

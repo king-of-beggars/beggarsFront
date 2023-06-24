@@ -9,10 +9,16 @@ import Navigation from 'components/common/Navigation';
 function Profile({ isMobile }) {
   const navigate = useNavigate();
 
+  // 뒤로가기
+  const onClickBack = () => {
+    navigate(-1)
+  }
+
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.FlexCenterRow100 style={{ position: "absolute", top: "1em" }}>
         <BackCramps
+          onClick={onClickBack}
           style={{ position: "absolute", left: "1em", float: "left" }}
         />
         <div style={{ fontSize: "1.8em" }}>프로필</div>
