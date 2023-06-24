@@ -17,6 +17,10 @@ export { ReactComponent as BoardBlack } from "assets/icons/boardBlack.svg"
 export { ReactComponent as ProfileGray } from "assets/icons/profileGray.svg"
 export { ReactComponent as ProfileBlack } from "assets/icons/profileBlack.svg"
 export { ReactComponent as GoCardDetails } from "assets/icons/goCardDetails.svg"
+export {ReactComponent as BackCrampsBlack} from "assets/icons/backCrampsBlack.svg"
+export {ReactComponent as DeleteDetail} from "assets/icons/deleteDetail.svg"
+export {ReactComponent as EditCard} from "assets/icons/editCard.svg" 
+export {ReactComponent as AddDetail} from "assets/icons/addDetail.svg"
 
 // sounds
 export { default as btnClickSound } from "assets/sounds/laserShoot.wav"
