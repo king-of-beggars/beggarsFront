@@ -1,7 +1,12 @@
 .DateInput_input__focused { 
-    border-bottom: none; 
-    background-color: transparent;
-  }
-  .DateInput_input, .SingleDatePickerInput, .DateInput  { 
-    background-color: transparent;
-  }
+  border-bottom: none; 
+  background-color: transparent;
+}
+.DateInput_input, .SingleDatePickerInput, .DateInput  { 
+  background-color: transparent;
+}
+
+.DateInput_input {
+  font-size: 0.9em;
+  text-align: center;
+}

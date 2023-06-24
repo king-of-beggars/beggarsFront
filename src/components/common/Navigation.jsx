@@ -12,7 +12,7 @@ import {
 } from "assets";
 import { useNavigate } from "react-router-dom";
 
-const Navigation = React.forwardRef(({ selected }, ref) => {
+function Navigation({ selected }) {
   // console.log("selected:::", selected)
   // console.log("selected === main:::", selected === "main")
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const Navigation = React.forwardRef(({ selected }, ref) => {
   };
 
   return (
-    <style.NavWrap ref={ref}>
+    <style.NavWrap>
       {selected === "main" ? (
         <HomeBlack />
       ) : (
@@ -66,6 +66,6 @@ const Navigation = React.forwardRef(({ selected }, ref) => {
       )}
     </style.NavWrap>
   );
-});
+}
 
 export default Navigation;

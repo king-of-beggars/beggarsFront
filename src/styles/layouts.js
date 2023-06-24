@@ -53,3 +53,67 @@ export const PageLayout = styled(FlexCenterColumn)`
     margin: 0 auto;
     position: relative;
 `
+
+export const PageLayoutTemp = styled.div`
+    width: ${props => props.isMobile ? `100vw` : `393px`};
+    height: 100%;
+
+`
+
+export const HeaderTemp = styled(FlexCenter)`
+    height: ${props => props.headerHeight};
+    position: fixed;
+    top: 0;
+    width: inherit;
+    background: lightblue;
+`
+
+export const HeaderContent = styled.div`
+    width: 85%;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: royalblue;
+`
+
+export const NavTemp = styled.nav`
+    height: ${props => props.navHeight};
+    position: fixed;
+    width: inherit;
+    background: tomato;
+    padding: 1em 0;
+`
+
+export const MainTemp = styled.main`
+    margin-top: ${props => props.headerHeight};
+    height: ${props => props.mainHeight};
+    background: lightgray;
+    width: inherit;
+    max-height: ${props => props.mainHeight};
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const MainContent = styled.div`
+    width: 85%;
+    height: inherit;
+    background: yellowgreen;
+`
+
+export const CashBookMainContent = styled.div`
+    width: inherit;
+    height: inherit;
+    background: yellowgreen;
+`
+
+export const SwiperWrap = styled(FlexCenterRow)`
+    width: auto;
+    background: yellow;
+    height: calc(${props => props.mainHeight} - 24px - ${props => props.dateBoxHeight});
+    min-height: calc(${props => props.cardHeight} + 50px);
+    overflow-y: hidden;
+    /* height: ${props => props.mainHeight} */
+`
