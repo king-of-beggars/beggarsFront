@@ -1,5 +1,8 @@
+
+import styled, { css } from "styled-components"
+import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow } from 'assets'
+import { SwiperSlide } from "swiper/react"
 import styled, { css } from "styled-components";
-import { btn, pressedBtn } from "assets";
 import {
   FlexColumn100,
   FlexCenterColumn,
@@ -123,12 +126,44 @@ export const MidBlackBtn = styled.button`
 
 // Nav바 컨테이너
 export const NavWrap = styled(FlexCenterEven100)`
-  position: absolute;
-  padding: 1em 0 1.3em 0;
-  bottom: 0;
-  z-index: 1;
-  background: white;
-`;
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    background: white;
+    height: 100%;
+`
+
+export const CashBookHeader = styled(FlexCenter)`
+    height: inherit;
+    font-size: 1em;
+`
+
+export const DayPickerWrap = styled(FlexCenter)`
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url(${cashbookDateBox});
+    width: ${props => props.dateBoxWidth};
+    height: ${props => props.dateBoxHeight};
+    margin: 0.5em 1em 1em 1em;
+`
+
+// cashBookCard의 Card 부분 스타일링입니다.
+export const CashBookCardContainer = styled.div`
+    background-image: url(${cashbookCardYellow});
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: ${props => props.cardWidth};
+    height: ${props => props.cardHeight};
+`
+// 회색 dummyCard의 스타일링입니다.
+export const CashBookDummyContainer = styled.div`
+    background-image: url();
+`
+
+export const CustomedSwiperSlide = styled(SwiperSlide)`
+    height: ${props => props.height}px;
+    width: 100%;
+`
 
 // Cashbook 카드 추가 & 지출 추가 화면 input, select box 공통 프레임
 export const CashBookCardWrap = styled(FlexCenterRow)`

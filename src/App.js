@@ -19,7 +19,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       {/* <Test /> */}
-          <Router />
+      <layout.FlexCenterColumn>
+        <Router />
+      </layout.FlexCenterColumn>
+          
     </QueryClientProvider>
 
 
