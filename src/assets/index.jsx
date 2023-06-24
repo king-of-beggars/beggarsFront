@@ -6,6 +6,10 @@ export { default as pressedBtn } from "assets/pixels/testButtons/redButton02.png
 export { default as cashbookCardYellow } from "assets/pixels/cashbook/cashbookCardYellow.png"
 export { default as cashbookDateBox } from "assets/pixels/cashbook/cashbookDateBox.png"
 
+// pixels > profile
+export { default as mainLineLogo } from "assets/pixels/profile/mainLineLogo.png"
+export { default as mainLogo } from "assets/pixels/profile/mainLogo.png"
+
 // icons
 export { ReactComponent as BackCramps } from "assets/icons/backCramps.svg"
 export { ReactComponent as HomeGray } from "assets/icons/homeGray.svg"

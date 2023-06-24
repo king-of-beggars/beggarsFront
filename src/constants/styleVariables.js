@@ -7,8 +7,8 @@ export const bookCategory1FontColor = `#D9D9D9`;
 
 export const bookAddExpendBtnColor = `#3c3c3c`;
 export const bookSelectInputHeadColor = `#3c3c3c`;
-export const bookSelectInputborderColor = `##9c9c9c`;
+export const bookSelectInputborderColor = `rgba(108, 108, 108, 0.6)`;
 export const bookDetailBorderColor = `#6c6c6c`;
 export const bookDetailAddBoxBorderColor = '#cccccc';
-export const bookDetailAddBoxColor = '#d9d9d9';
+export const bookDetailAddBoxColor = `rgba(217, 217, 217, 0.7)`;
 export const bookModalBordorColor = '#9C9C9C';

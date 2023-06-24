@@ -59,6 +59,17 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  div {
+      /* Chrome, Safari, Opera */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    /* Firefox */
+    scrollbar-width: none;
+    /* IE and Edge */
+    -ms-overflow-style: none;
+  }
 `;
 
 export default GlobalStyle;

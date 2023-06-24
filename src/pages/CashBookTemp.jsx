@@ -87,12 +87,12 @@ function CashBookTemp({ isMobile }) {
   console.log("slidesperview:::", Math.round(mainHeight / cardHeight))
   return (
     <layout.PageLayoutTemp>
-      <layout.HeaderTemp headerHeight={`${headerHeight}px`}>
+      <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
             <style.CashBookHeader>가계부</style.CashBookHeader>
         </layout.HeaderContent>
-      </layout.HeaderTemp>
-      <layout.MainTemp headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
+      </layout.Header>
+      <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.MainContent>
             <style.DayPickerWrap dateBoxWidth={`${dateBoxWidth}px`} dateBoxHeight={`${dateBoxHeight}px`}>
                 <DayPicker
@@ -134,10 +134,10 @@ function CashBookTemp({ isMobile }) {
                 </Swiper>
             </layout.SwiperWrap>
         </layout.MainContent>
-      </layout.MainTemp>
-      <layout.NavTemp navHeight={`${navHeight}px`}>
+      </layout.Main>
+      <layout.Nav navHeight={`${navHeight}px`}>
         <Nav selected="money" />
-      </layout.NavTemp>
+      </layout.Nav>
     </layout.PageLayoutTemp>
   )
 }

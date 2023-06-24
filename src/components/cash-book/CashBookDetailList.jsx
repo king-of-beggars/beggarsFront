@@ -6,9 +6,9 @@ import { DeleteDetail } from "assets";
 function CashBookDetailList({ expendName, expendMoney }) {
   return (
     <style.CashBookDetailBox>
-      <DeleteDetail style={{marginLeft:"15px"}}/>
-      <div style={{width:"200px", marginLeft:"15px"}}>{expendName}</div>
-      <div style={{width:"80px", marginLeft:"15px", float: "right"}}>{expendMoney}원</div>
+      <DeleteDetail style={{marginLeft:"1em", width:"8%"}}/>
+      <div style={{width:"64%", marginLeft:"1em"}}>{expendName}</div>
+      <div style={{width:"28%", display: "flex", justifyContent: "flex-end", marginRight:"1.5em"}}>{expendMoney}원</div>
     </style.CashBookDetailBox>
   );
 }

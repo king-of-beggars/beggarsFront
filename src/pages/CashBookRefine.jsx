@@ -88,13 +88,13 @@ function CashBookTemp({ isMobile }) {
   // Daypicker width & height 계산
   console.log("slidesperview:::", slidesPerViewValue)
   return (
-    <layout.PageLayoutTemp>
-      <layout.HeaderTemp headerHeight={`${headerHeight}px`}>
+    <layout.PageLayout>
+      <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
             <style.CashBookHeader>가계부</style.CashBookHeader>
         </layout.HeaderContent>
-      </layout.HeaderTemp>
-      <layout.MainTemp headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
+      </layout.Header>
+      <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.CashBookMainContent className='thisCash'>
             <style.DayPickerWrap dateBoxWidth={`${dateBoxWidth}px`} dateBoxHeight={`${dateBoxHeight}px`}>
                 <DayPicker
@@ -199,11 +199,11 @@ function CashBookTemp({ isMobile }) {
                 </Swiper>
             </layout.SwiperWrap>
         </layout.CashBookMainContent>
-      </layout.MainTemp>
-      <layout.NavTemp navHeight={`${navHeight}px`}>
+      </layout.Main>
+      <layout.Nav navHeight={`${navHeight}px`}>
         <Nav selected="money" />
-      </layout.NavTemp>
-    </layout.PageLayoutTemp>
+      </layout.Nav>
+    </layout.PageLayout>
   )
 }
 

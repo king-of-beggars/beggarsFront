@@ -1,8 +1,7 @@
 
 import styled, { css } from "styled-components"
-import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow } from 'assets'
+import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow, mainLineLogo, mainLogo } from 'assets'
 import { SwiperSlide } from "swiper/react"
-import styled, { css } from "styled-components";
 import {
   FlexColumn100,
   FlexCenterColumn,
@@ -12,7 +11,7 @@ import {
   FlexCenterEven100,
   FlexCenterRow,
 } from "styles/layouts";
-import { layout, style } from "styles";
+import { layout } from "styles";
 import { bookAddExpendBtnColor, bookDetailAddBoxBorderColor, bookDetailAddBoxColor, bookDetailBorderColor, bookModalBordorColor, bookSelectInputHeadColor, bookSelectInputborderColor } from "constants/styleVariables";
 
 export const CanvasContainer = styled.div`
@@ -32,21 +31,25 @@ export const Button = styled.button`
 `;
 
 export const LoginLogoWrap = styled(FlexCenterColumn)`
-  width: 10em;
-  height: 10em;
-  border: 1px solid black;
+  min-width: 10em;
+  min-height: 10em;
+  background-image: url(${mainLineLogo});
+  object-fit: cover;
+  margin-bottom: 0.5em;
+  /* border: 1px solid black; */
 `;
 
 // LoginInputBox : 로그인 input 세트 (아이디, 비밀번호)
 export const LoginInputBox = styled(FlexColumn)`
+  width: 100%;
   margin: 20px;
   > input {
-    width: ${(props) =>
-      props.isMobile ? `calc(100vw * 0.8)` : `calc(500px * 0.8)`};
+    width: auto;
     height: 2.6em;
     border: none;
     border-bottom: 2px solid black;
     outline: none;
+    margin-top: 0.8em;
   }
   > span {
     font-size: 12pt;
@@ -61,17 +64,16 @@ export const BigBlackBtn = styled.button`
   border-radius: 6em;
   background: black;
   color: white;
-  font-size: 1.3em;
+  font-size: 1em;
 `;
 
 export const SocialLoginBtn = styled.button`
-  width: ${(props) =>
-    props.isMobile ? `calc(100vw * 0.8)` : `calc(500px * 0.8)`};
-  height: 2.5em;
-  border-radius: 6em;
+  width: 90%;
+  border-radius: 0.9em;
   background: ${(props) => (props.site === "naver" ? `#4EBE44` : `#F8CD40`)};
   color: black;
-  font-size: 1em;
+  padding: 1em;
+  font-size: 0.8em;
   border: none;
 `;
 
@@ -83,15 +85,16 @@ export const SignupInputBox = styled(FlexCenter)`
   outline: none;
 
   > input {
-    width: ${(props) => (props.isInput ? `calc(100% - 90px)` : `100%`)};
+    width: 100%;
     border: none;
     outline: none;
+    height: 2.6em;
   }
 
   > button {
     width: 100px;
-    height: 30px;
-    font-size: 16px;
+    height: 2.6em;
+    font-size: 0.8em;
     background: black;
     color: white;
     border-radius: 5px;
@@ -99,10 +102,9 @@ export const SignupInputBox = styled(FlexCenter)`
 `;
 
 // SigupInputWrap : 회원가입 input wrapper
-export const SigupInputWrap = styled(FlexColumn100)`
+export const SignupInputWrap = styled(FlexColumn)`
   align-content: space-between;
-  width: ${(props) =>
-    props.isMobile ? `calc(100vw * 0.8)` : `calc(500px * 0.8)`};
+  width: inherit;
   margin-bottom: 60px;
 `;
 
@@ -167,46 +169,57 @@ export const CustomedSwiperSlide = styled(SwiperSlide)`
 
 // Cashbook 카드 추가 & 지출 추가 화면 input, select box 공통 프레임
 export const CashBookCardWrap = styled(FlexCenterRow)`
-  width: 330px;
-  height: 50px;
-  margin-bottom: 2em;
+  width: 100%;
+  height: 3em;
+  margin-bottom: 1em;
 
-  border: 1px solid ${bookSelectInputborderColor};
-  border-radius: 15px;
+  /* border: 1px solid ${bookSelectInputborderColor}; */
+  border-radius: 0.6em;
 `;
 
 // Cashbook input, select box 앞머리
 export const CashBookHead = styled(FlexCenter)`
-  width: 80px;
-  border-radius: 15px 0px 0px 15px;
-
+  width: 25%;
+  border-radius: 0.8em 0 0 0.8em;
   background-color: ${bookSelectInputHeadColor};
-  color: white;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8em;
+  border-left: 2px solid ${bookSelectInputborderColor};
+  border-top: 2px solid ${bookSelectInputborderColor};
+  border-bottom:2px solid ${bookSelectInputborderColor};
 `;
 
 // Cashbook Select box
 export const CashBookSelect = styled.select`
   padding: 10px;
-  width: 250px;
-  border-radius: 0px 15px 15px 0px;
-  
-  font-size: 14px;
+  width: 75%;
+  border-radius: 0px 0.8em 0.8em 0px;
+  font-size: 0.8em;
+  border-top: 2px solid ${bookSelectInputborderColor};
+  border-right: 2px solid ${bookSelectInputborderColor};
+  border-bottom: 2px solid ${bookSelectInputborderColor};
+  font-size: 0.8em;
+  &:focus {
+    outline: none;
+  }
 `;
 
 // Cashbook Select Input
 export const CashBookInput = styled.input`
   padding: 10px;
-  width: 250px;
-  border-radius: 0px 15px 15px 0px;
-  border: 1px solid ${bookSelectInputborderColor};
+  width: 75%;
+  border-radius: 0px 0.8em 0.8em 0px;
+  border-top: 2px solid ${bookSelectInputborderColor};
+  border-right: 2px solid ${bookSelectInputborderColor};
+  border-bottom: 2px solid ${bookSelectInputborderColor};
   outline: none;
-  font-size: 14px;
+  font-size: 0.8em;
 `;
 
 // Cashbook Button
 export const CashBookBtn = styled.button`
-  width: 330px;
-  height: 44px;
+  width: 100%;
+  height: 2.5em;
   margin-top: ${(props)=>props.marginTop};
   border-radius: 15px;
   background-color: ${bookAddExpendBtnColor};
@@ -215,20 +228,21 @@ export const CashBookBtn = styled.button`
 
 // Cashbook Detail Box
 export const CashBookDetailBox = styled(layout.FlexCenter)`
-  width: 340px;
-  height: 75px;
+  width: inherit;
+  height: 4em;
   background-color: white;
   border: 2px solid ${bookDetailBorderColor};
-  border-radius: 10px;
+  border-radius: 0.5em;
 `;
 
 // Cashbook Detail Add Box
 export const CashBookDetailAddBox = styled(layout.FlexCenter)`
-  width: 340px;
-  height: 75px;
+  width: 100%;
+  height: 4em;
   background-color: ${bookDetailAddBoxColor};
   border: 2px dashed ${bookDetailAddBoxBorderColor};
-  border-radius: 10px;
+  border-radius: 0.5em;
+  margin-top: 0.4em;
 `;
 
 // Cashbook Detail Add Modal 배경 (어둡게)
@@ -253,4 +267,25 @@ export const Modal = styled.div`
   min-height: 320px;
   border-radius: 10px;
   border: 1px solid ${bookModalBordorColor};
+`
+
+// 회원가입의 제목 헤더를 감싸는 div입니다.
+export const JoinHeader = styled.div`
+    font-size: 1.5em;
+    margin: 1em 0 2em 0;
+`
+
+// 조건 텍스트입니다.
+export const ConditionText = styled.div`
+  font-size: 0.5em;
+  color: gray;
+  border: none;
+  text-align: left;
+  margin: 0.8em 0;
+`
+
+
+// 조건에 따라 텍스트 컬러를 다르게 줄 수 있는 조건 텍스트입니다.
+export const ConditionColorText = styled(ConditionText)`
+  color: ${props => props.color}
 `

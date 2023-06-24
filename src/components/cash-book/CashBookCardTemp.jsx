@@ -1,5 +1,5 @@
 import React from 'react'
-import { style } from 'styles'
+import { style, layout } from "styles"
 import * as sVar from "constants/styleVariables";
 
 function CashBookCardTemp({ id, index, budget, spend, category, title, cardWidth, cardHeight }) {
