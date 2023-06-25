@@ -6,6 +6,7 @@ export { default as pressedBtn } from "assets/pixels/testButtons/redButton02.png
 export { default as cashbookCardYellow } from "assets/pixels/cashbook/cashbookCardYellow.png"
 export { default as cashbookDateBox } from "assets/pixels/cashbook/cashbookDateBox.png"
 export { default as cashbookCardEmpty } from "assets/pixels/cashbook/CashbookCardEmpty.png"
+export { default as cashbookCardBtn } from "assets/pixels/cashbook/cashbookCardBtn.png"
 
 // pixels > profile
 export { default as mainLineLogo } from "assets/pixels/profile/mainLineLogo.png"
@@ -26,6 +27,12 @@ export {ReactComponent as BackCrampsBlack} from "assets/icons/backCrampsBlack.sv
 export {ReactComponent as DeleteDetail} from "assets/icons/deleteDetail.svg"
 export {ReactComponent as EditCard} from "assets/icons/editCard.svg" 
 export {ReactComponent as AddDetail} from "assets/icons/addDetail.svg"
+
+// backgrounds
+export { default as mainBackground } from "assets/pixels/backgrounds/mainBackground.png"
+export { default as mainBackgroundTop } from "assets/pixels/backgrounds/mainBackgroundTop.png"
+export { default as mainBackgroundMiddle } from "assets/pixels/backgrounds/mainBackgroundMiddle.png"
+export { default as mainBackgroundTail } from "assets/pixels/backgrounds/mainBackgroundTail.png"
 
 // sounds
 export { default as btnClickSound } from "assets/sounds/laserShoot.wav"

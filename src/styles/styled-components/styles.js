@@ -1,18 +1,9 @@
 
 import styled, { css } from "styled-components"
-import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow, mainLineLogo, mainLogo, cashbookCardEmpty } from 'assets'
+import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow, mainLineLogo, mainLogo, cashbookCardEmpty, cashbookCardBtn } from 'assets'
 import { SwiperSlide } from "swiper/react"
-import {
-  FlexColumn100,
-  FlexCenterColumn,
-  FlexCenter,
-  FlexColumn,
-  FlexDefault,
-  FlexCenterEven100,
-  FlexCenterRow,
-} from "styles/layouts";
 import { layout } from "styles";
-import { bookAddExpendBtnColor, bookDetailAddBoxBorderColor, bookDetailAddBoxColor, bookDetailBorderColor, bookModalBordorColor, bookSelectInputHeadColor, bookSelectInputborderColor } from "constants/styleVariables";
+import * as sVar from "constants/styleVariables.js"
 
 export const CanvasContainer = styled.div`
   width: 98vw;
@@ -30,7 +21,7 @@ export const Button = styled.button`
     props.isPressed ? `url(${pressedBtn}) no-repeat` : `url(${btn}) no-repeat`};
 `;
 
-export const LoginLogoWrap = styled(FlexCenterColumn)`
+export const LoginLogoWrap = styled(layout.FlexCenterColumn)`
   min-width: 10em;
   min-height: 10em;
   background-image: url(${mainLineLogo});
@@ -40,7 +31,7 @@ export const LoginLogoWrap = styled(FlexCenterColumn)`
 `;
 
 // LoginInputBox : 로그인 input 세트 (아이디, 비밀번호)
-export const LoginInputBox = styled(FlexColumn)`
+export const LoginInputBox = styled(layout.FlexColumn)`
   width: 100%;
   margin: 20px;
   > input {
@@ -78,7 +69,7 @@ export const SocialLoginBtn = styled.button`
 `;
 
 // SignupInputBox : 회원가입 아이디, 닉네임, 비밀번호 입력 input
-export const SignupInputBox = styled(FlexCenter)`
+export const SignupInputBox = styled(layout.FlexCenter)`
   height: 4em;
   border: none;
   border-bottom: 1px solid black;
@@ -102,14 +93,14 @@ export const SignupInputBox = styled(FlexCenter)`
 `;
 
 // SigupInputWrap : 회원가입 input wrapper
-export const SignupInputWrap = styled(FlexColumn)`
+export const SignupInputWrap = styled(layout.FlexColumn)`
   align-content: space-between;
   width: inherit;
   margin-bottom: 60px;
 `;
 
 // ProfilePicWrap : 프로필 사진
-export const ProfilePicWrap = styled(FlexCenterColumn)`
+export const ProfilePicWrap = styled(layout.FlexCenterColumn)`
   width: 10em;
   height: 10em;
   border: 1px solid black;
@@ -127,7 +118,7 @@ export const MidBlackBtn = styled.button`
 `;
 
 // Nav바 컨테이너
-export const NavWrap = styled(FlexCenterEven100)`
+export const NavWrap = styled(layout.FlexCenterEven100)`
     position: absolute;
     bottom: 0;
     z-index: 1;
@@ -135,12 +126,12 @@ export const NavWrap = styled(FlexCenterEven100)`
     height: 100%;
 `
 
-export const CashBookHeader = styled(FlexCenter)`
+export const CashBookHeader = styled(layout.FlexCenter)`
     height: inherit;
     font-size: 1em;
 `
 
-export const DayPickerWrap = styled(FlexCenter)`
+export const DayPickerWrap = styled(layout.FlexCenter)`
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-image: url(${cashbookDateBox});
@@ -156,6 +147,11 @@ export const CashBookCardContainer = styled.div`
     background-repeat: no-repeat;
     width: ${props => props.cardWidth};
     height: ${props => props.cardHeight};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em 0.8em;
 `
 // 회색 dummyCard의 스타일링입니다.
 export const CashBookDummyContainer = styled.div`
@@ -168,7 +164,7 @@ export const CashBookDummyContainer = styled.div`
     align-items: center;
 `
 // dummyCard 안의 안내 문구 스타일링입니다.
-export const CashBookAddExplain = styled(FlexCenter)`
+export const CashBookAddExplain = styled(layout.FlexCenter)`
   position: relative;
   left: calc(${props => props.cardWidth} * 0.08);
   width: calc(${props => props.cardWidth} * 0.2);
@@ -184,25 +180,25 @@ export const CustomedSwiperSlide = styled(SwiperSlide)`
 `
 
 // Cashbook 카드 추가 & 지출 추가 화면 input, select box 공통 프레임
-export const CashBookCardWrap = styled(FlexCenterRow)`
+export const CashBookCardWrap = styled(layout.FlexCenterRow)`
   width: 100%;
   height: 3em;
   margin-bottom: 1em;
 
-  /* border: 1px solid ${bookSelectInputborderColor}; */
+  /* border: 1px solid ${sVar.bookSelectInputborderColor}; */
   border-radius: 0.6em;
 `;
 
 // Cashbook input, select box 앞머리
-export const CashBookHead = styled(FlexCenter)`
+export const CashBookHead = styled(layout.FlexCenter)`
   width: 25%;
   border-radius: 0.8em 0 0 0.8em;
-  background-color: ${bookSelectInputHeadColor};
+  background-color: ${sVar.bookSelectInputHeadColor};
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.8em;
-  border-left: 2px solid ${bookSelectInputborderColor};
-  border-top: 2px solid ${bookSelectInputborderColor};
-  border-bottom:2px solid ${bookSelectInputborderColor};
+  border-left: 2px solid ${sVar.bookSelectInputborderColor};
+  border-top: 2px solid ${sVar.bookSelectInputborderColor};
+  border-bottom:2px solid ${sVar.bookSelectInputborderColor};
 `;
 
 // Cashbook Select box
@@ -211,9 +207,9 @@ export const CashBookSelect = styled.select`
   width: 75%;
   border-radius: 0px 0.8em 0.8em 0px;
   font-size: 0.8em;
-  border-top: 2px solid ${bookSelectInputborderColor};
-  border-right: 2px solid ${bookSelectInputborderColor};
-  border-bottom: 2px solid ${bookSelectInputborderColor};
+  border-top: 2px solid ${sVar.bookSelectInputborderColor};
+  border-right: 2px solid ${sVar.bookSelectInputborderColor};
+  border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   font-size: 0.8em;
   &:focus {
     outline: none;
@@ -225,9 +221,9 @@ export const CashBookInput = styled.input`
   padding: 10px;
   width: 75%;
   border-radius: 0px 0.8em 0.8em 0px;
-  border-top: 2px solid ${bookSelectInputborderColor};
-  border-right: 2px solid ${bookSelectInputborderColor};
-  border-bottom: 2px solid ${bookSelectInputborderColor};
+  border-top: 2px solid ${sVar.bookSelectInputborderColor};
+  border-right: 2px solid ${sVar.bookSelectInputborderColor};
+  border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   outline: none;
   font-size: 0.8em;
 `;
@@ -238,7 +234,7 @@ export const CashBookBtn = styled.button`
   height: 2.5em;
   margin-top: ${(props)=>props.marginTop};
   border-radius: 15px;
-  background-color: ${bookAddExpendBtnColor};
+  background-color: ${sVar.bookAddExpendBtnColor};
   color: white;
 `;
 
@@ -247,7 +243,7 @@ export const CashBookDetailBox = styled(layout.FlexCenter)`
   width: inherit;
   height: 4em;
   background-color: white;
-  border: 2px solid ${bookDetailBorderColor};
+  border: 2px solid ${sVar.bookDetailBorderColor};
   border-radius: 0.5em;
 `;
 
@@ -255,8 +251,8 @@ export const CashBookDetailBox = styled(layout.FlexCenter)`
 export const CashBookDetailAddBox = styled(layout.FlexCenter)`
   width: 100%;
   height: 4em;
-  background-color: ${bookDetailAddBoxColor};
-  border: 2px dashed ${bookDetailAddBoxBorderColor};
+  background-color: ${sVar.bookDetailAddBoxColor};
+  border: 2px dashed ${sVar.bookDetailAddBoxBorderColor};
   border-radius: 0.5em;
   margin-top: 0.4em;
 `;
@@ -282,7 +278,7 @@ export const Modal = styled.div`
   width: 340px;
   min-height: 320px;
   border-radius: 10px;
-  border: 1px solid ${bookModalBordorColor};
+  border: 1px solid ${sVar.bookModalBordorColor};
 `
 
 // 회원가입의 제목 헤더를 감싸는 div입니다.
@@ -304,4 +300,58 @@ export const ConditionText = styled.div`
 // 조건에 따라 텍스트 컬러를 다르게 줄 수 있는 조건 텍스트입니다.
 export const ConditionColorText = styled(ConditionText)`
   color: ${props => props.color}
+`
+
+// 가계부 카드 내 대분류명으로 들어가는 스타일링입니다.
+export const FirstCategoryText = styled.div`
+  font-size: 0.8em;
+  padding: 0.3em 0.6em;
+  background-color: ${sVar.middleYellow};
+  color: ${sVar.lightYellow};
+  border-radius: 0.6em;
+  margin: 0.3em 0;
+`
+// 가계부 카드 내 소분류명으로 들어가는 스타일링입니다. 소분류명이 없을 때는 대분류가 여기에 들어갑니다.
+export const SecondCategoryText = styled.div`
+  font-size: 1.2em;
+  color: ${sVar.middleYellow};
+`
+
+// 가계부의 소분류명 및 대분류명을 감싸는 컨테이너입니다.
+export const CashbookCategoryContainer = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 1em 0;
+  border-bottom: 0.4px solid ${sVar.middleYellow};
+  margin: 0 0 1em 0;
+`
+
+// 가계부의 자랑하러 가기 또는 혼쭐나러 가기 버튼 스타일링
+export const CashbookBtn = styled.button`
+  background-image: url(${cashbookCardBtn});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: ${props => props.btnWidth};
+  height: ${props => props.btnHeight};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: ${sVar.lightYellow};
+  border: none;
+  margin-top: "1em";
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+`
+
+// 백그라운드가 있는 pageLayout 스타일링입니다.
+export const BackgroundPageLayout = styled(layout.PageLayout)`
+  background-image: ${props => props.backPngTop}, ${props => props.backPngTail}, ${props => props.backPngMiddle};
+  /* object-fit: cover; */
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-position: top, bottom, center;
 `
