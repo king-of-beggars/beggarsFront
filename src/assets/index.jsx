@@ -5,6 +5,7 @@ export { default as pressedBtn } from "assets/pixels/testButtons/redButton02.png
 // pixels > cashbook
 export { default as cashbookCardYellow } from "assets/pixels/cashbook/cashbookCardYellow.png"
 export { default as cashbookDateBox } from "assets/pixels/cashbook/cashbookDateBox.png"
+export { default as cashbookCardEmpty } from "assets/pixels/cashbook/CashbookCardEmpty.png"
 
 // pixels > profile
 export { default as mainLineLogo } from "assets/pixels/profile/mainLineLogo.png"

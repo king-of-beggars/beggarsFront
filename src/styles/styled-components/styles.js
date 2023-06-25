@@ -1,6 +1,6 @@
 
 import styled, { css } from "styled-components"
-import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow, mainLineLogo, mainLogo } from 'assets'
+import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow, mainLineLogo, mainLogo, cashbookCardEmpty } from 'assets'
 import { SwiperSlide } from "swiper/react"
 import {
   FlexColumn100,
@@ -159,7 +159,23 @@ export const CashBookCardContainer = styled.div`
 `
 // 회색 dummyCard의 스타일링입니다.
 export const CashBookDummyContainer = styled.div`
-    background-image: url();
+    background-image: url(${cashbookCardEmpty});
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: ${props => props.cardWidth};
+    height: ${props => props.cardHeight};
+    display: flex;
+    align-items: center;
+`
+// dummyCard 안의 안내 문구 스타일링입니다.
+export const CashBookAddExplain = styled(FlexCenter)`
+  position: relative;
+  left: calc(${props => props.cardWidth} * 0.08);
+  width: calc(${props => props.cardWidth} * 0.2);
+  height: calc(${props => props.cardWidth} * 0.8);
+  writing-mode: vertical-lr;
+  text-align: center;
+  line-height: 150%;
 `
 
 export const CustomedSwiperSlide = styled(SwiperSlide)`
