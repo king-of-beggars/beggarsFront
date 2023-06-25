@@ -11,6 +11,7 @@ import CashBookRefine from "pages/CashBookRefine"
 import Board from "pages/Board";
 import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
+import CashBookEdit from "pages/CashBookEdit";
 
 function Router() {
   const getScreenSize = () => {
@@ -38,7 +39,7 @@ function Router() {
         <Route path="cash-book" element={<CashBook isMobile={isMobile}/>} />
         <Route path="cash-book/:id" element={<CashBookDetail isMobile={isMobile}/>} /> 
         <Route path="cash-book/add" element={<CashBookAdd isMobile={isMobile}/>}/>
-        {/* <Route path="cash-book/edit/:id" element={<CashBookEdit />} /> */}
+        <Route path="cash-book/edit/:id" element={<CashBookEdit />} />
         
         <Route path="board" element={<Board isMobile={isMobile}/>}/>
         {/* <Route path="board/:id" element={<BoardDetail />}/> */}

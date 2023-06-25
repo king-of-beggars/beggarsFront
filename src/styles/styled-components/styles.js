@@ -2,7 +2,6 @@
 import styled, { css } from "styled-components"
 import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow } from 'assets'
 import { SwiperSlide } from "swiper/react"
-import styled, { css } from "styled-components";
 import {
   FlexColumn100,
   FlexCenterColumn,
