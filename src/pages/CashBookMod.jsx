@@ -1,17 +1,11 @@
-import { Nav, CashBookInput, CashAddSelect } from "components";
-import React from "react";
+import React from 'react'
+import { Nav } from "components";
+import { layout, style } from 'styles';
 import { BackCrampsBlack, } from "assets";
-
-import { layout, style } from "styles";
+import { Nav, CashBookInput, CashAddSelect } from "components";
 import { useNavigate } from 'react-router-dom';
 
-const options = [
-  { value: "식비", name: "식비" },
-  { value: "교통비", name: "교통비" },
-  { value: "여가비", name: "여가비" },
-];
-
-function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
+function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 뒤로가기
   const navigate = useNavigate();
   const onClickBack = () => {
@@ -25,7 +19,7 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
             onClick={onClickBack}
             style={{ position: "absolute", left: "1em", float: "left" }}
           />
-          <div style={{ fontSize: "1em" }}>카드 추가</div>
+          <div style={{ fontSize: "1em" }}>카드 수정</div>
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
@@ -53,4 +47,4 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   );
 }
 
-export default CashBookAdd;
+export default CashBookMod

@@ -87,9 +87,8 @@ function CashBook({ isMobile }) {
       },
     ],
   };
-
   return (
-    <layout.PageLayout isMobile={!!sessionStorage.getItem("isMobile")}>
+    <layout.PageLayout isMobile={sessionStorage.getItem("isMobile") === "true"}>
       <header
         ref={headerRef}
         style={{
@@ -152,6 +151,7 @@ function CashBook({ isMobile }) {
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             slidesPerView={2}
             onSlideChange={() => console.log("slide change")}
+            // spaceBetween={50}
             // scrollbar={{ draggable: true }}
             onSwiper={(swiper) => console.log(swiper)}
             direction="vertical"
@@ -162,7 +162,7 @@ function CashBook({ isMobile }) {
               // const isActive = swiper ? swiper.activeIndex === idx : false
               // console.log(isActive)
               return (
-                <SwiperSlide key={idx} style={{height: `${screenHeight - (headerHeight + navHeight)}px`}}>
+                <SwiperSlide key={idx}> {/* height를 CashBookCard와 동일하게 주어야 함*/}
                   <CashBookCard
                     id={card.id}
                     budget={card.cashbookGoalValue}

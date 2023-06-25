@@ -10,6 +10,7 @@ import GlobalStyle from 'styles/globalStyle';
 import Router from 'router/Router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Test from 'pages/Test';
+import CashBookDetail from 'pages/CashBookDetail';
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       {/* <Test /> */}
-          <Router />
+      <layout.FlexCenterColumn>
+        <Router />
+      </layout.FlexCenterColumn>
+          
     </QueryClientProvider>
 
 

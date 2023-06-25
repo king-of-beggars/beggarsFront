@@ -46,10 +46,121 @@ export const FlexCenterColumn100 = styled(FlexCenterColumn)`
     width: 100%;
 `
 
-export const PageLayout = styled(FlexCenterColumn)`
+export const PageLayoutTemp = styled(FlexCenterColumn)`
     width: ${props => props.isMobile ? `99vw` : `500px`};
     height: 99vh;
     border: 2px solid lightgray;
     margin: 0 auto;
     position: relative;
+`
+
+export const PageLayout = styled.div`
+    width: ${props => props.isMobile ? `100vw` : `393px`};
+    height: 100%;
+
+`
+
+export const Header = styled(FlexCenter)`
+    height: ${props => props.headerHeight};
+    position: fixed;
+    top: 0;
+    width: inherit;
+    background: lightblue;
+`
+
+export const HeaderContent = styled.div`
+    width: 85%;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: royalblue;
+`
+
+export const Nav = styled.nav`
+    height: ${props => props.navHeight};
+    position: fixed;
+    width: inherit;
+    background: tomato;
+    padding: 1em 0;
+`
+
+export const Main = styled.main`
+    margin-top: ${props => props.headerHeight};
+    height: ${props => props.mainHeight};
+    background: lightgray;
+    width: inherit;
+    max-height: ${props => props.mainHeight};
+    overflow-y: scroll;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+export const MainContent = styled.div`
+    width: 85%;
+    height: inherit;
+    background: yellowgreen;
+    overflow-y: scroll;
+`
+
+export const CashBookMainContent = styled.div`
+    width: inherit;
+    height: inherit;
+    background: yellowgreen;
+`
+
+export const SwiperWrap = styled(FlexCenterRow)`
+    width: auto;
+    background: yellow;
+    height: calc(${props => props.mainHeight} - 24px - ${props => props.dateBoxHeight});
+    min-height: calc(${props => props.cardHeight} + 50px);
+    overflow-y: hidden;
+    /* height: ${props => props.mainHeight} */
+`
+
+// login 페이지의 메인 내부 전체를 감싸는 wrap입니다.
+export const LoginWrap = styled.div`
+    width: 100%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+
+`
+
+// login의 아이디 및 비밀번호 input을 감싸는 wrap입니다.
+export const LoginInputWrap = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+`
+
+// login의 로그인 및 회원가입 버튼을 감싸는 wrap입니다.
+export const LoginBtnWrap = styled(FlexCenterColumn)`
+    width: 100%;
+    gap: 1em;
+    padding: 0 0 3em 0;
+    border-bottom: 0.5px solid #9D9D9D;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+`
+
+// 소셜 로그인 버튼을 감싸는 wrap입니다.
+export const SocialBtnWrap = styled(FlexCenterColumn)`
+    width: 100%;
+    gap: 1em;
+    margin: 3em 0;
+`
+
+// 식비 지출 카드 목록을 감싸는 wrap입니다.
+export const SpendingListWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
 `

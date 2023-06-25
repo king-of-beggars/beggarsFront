@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
-    box-sizing: border-box;
   }
   /* HTML5 display-role reset for older browsers */
   article, aside, details, figcaption, figure, 
@@ -55,6 +54,21 @@ const GlobalStyle = createGlobalStyle`
 
   body, * {
     font-family: 'DOSMyungjo', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  div {
+      /* Chrome, Safari, Opera */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    /* Firefox */
+    scrollbar-width: none;
+    /* IE and Edge */
+    -ms-overflow-style: none;
   }
 `;
 
