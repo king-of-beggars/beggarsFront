@@ -87,8 +87,6 @@ function CashBookRefine({ isMobile, headerHeight, navHeight, mainHeight }) {
   const [selectDate, setSelectDate] = useState(moment);
   const [focused, setFocused] = useState(false);
 
-
-
   return (
     <style.BackgroundPageLayout backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
@@ -114,7 +112,6 @@ function CashBookRefine({ isMobile, headerHeight, navHeight, mainHeight }) {
                         console.log("slide change");
                         console.log("activeIndex:::", swiper.activeIndex)
                         setActiveSlide(swiper.activeIndex)
-                        console.log("activeSlideInOnSlide:::", activeSlide)
                     }}
                     // scrollbar={{ draggable: true }}
                     onSwiper={(swiper) => {
@@ -143,6 +140,11 @@ function CashBookRefine({ isMobile, headerHeight, navHeight, mainHeight }) {
                                 allowSlidePrev={idx === activeSlide}
                                 allowTouchMove={idx === activeSlide}
                                 style={{height: `${mainHeight-dateBoxHeight-24}px`}}
+                                onTouchMove={(swiper) => {
+                                  if (swiper.touches.diff < -90) {
+                                    window.location.href = "/cash-book/add"
+                                  }
+                                }}
                             >
                                 <SwiperSlide>
                                     <CashBookCardTemp

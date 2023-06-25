@@ -26,7 +26,7 @@ function ProgressBarCashbook( { type, budget, spend }) {
             step: (state, bar) => {
               bar.path.setAttribute('stroke', state.color);
               const value = graphValue;
-              console.log("value::", graphValue)
+              // console.log("value::", graphValue)
               if (value === 0) {
                 bar.setText("0%");
                 // bar.animate(0)
