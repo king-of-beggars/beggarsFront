@@ -10,6 +10,7 @@ import {
 import { AuthAPI } from "api/api";
 import { useNavigate } from "react-router-dom";
 import { BackCramps } from 'assets';
+import * as sVar from "constants/styleVariables"
 
 function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
   const navigate = useNavigate();
@@ -57,6 +58,8 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
 
   const [isNickChked, setIsNickChked] = useState(false)
   const [isIdChked, setIsIdChked] = useState(false)
+  const [pwLengthChk, setPwLengthChk] = useState(null)
+  const [pwRegChk, setPwRegChk] = useState(null)
 
   const onClickNickCheck = () => {
     const minLenChk = nickName.length > 1;
@@ -99,13 +102,20 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
     const regexChk = /^[a-zA-Z0-9]+$/
     if (!(minLenChk && maxLenChk)) {
       alert("아이디의 길이를 다시 확인하세요.");
-    } else if(!nickName.match(regexChk)) {
+    } else if(!id.match(regexChk)) {
       alert("아이디에는 영어 및 숫자만 사용 가능합니다.")
     } else {
       const newId = { userName: id }
       mutationId.mutate(newId)
     }
   }
+
+  // const pwChk = () => {
+  //   const lengthChk = pw.length > 7 && pw.length < 21
+  //   const regex = /[^A-Za-z0-9]/;
+  //   const regexChk = regex.test(pw)
+  //   setPwChkResult(lengthChk && regexChk)
+  // }
 
   const samePwChk = (pw, pwConfirm) => {
     if (pwConfirm.length === 0) {
@@ -121,7 +131,6 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
         <style.ConditionColorText color={"tomato"}>비밀번호가 일치하지 않아요...</style.ConditionColorText>
       )
     }
-
   }
 
   const signUpHandler = () => {
@@ -170,9 +179,27 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
             </style.SignupInputWrap>
             <style.SignupInputWrap>
               <style.SignupInputBox>
-                <input name="pw" type="password" value={pw} onChange={onChangeInput} placeholder="비밀번호 입력" />
+                <input name="pw" type="text" value={pw} onChange={(event) => {
+                  onChangeInput(event)
+                  const regex = /[^A-Za-z0-9]/;
+                  if (pw.length == 0 || pw === "") {
+                    setPwLengthChk(null)
+                    setPwRegChk(null)
+                  } else {
+                    setPwLengthChk(pw.length > 5 && pw.length < 21)
+                    setPwRegChk(regex.test(pw))
+                  }
+                  console.log(pwLengthChk)
+                }} placeholder="비밀번호 입력" />
               </style.SignupInputBox>
-              <style.ConditionText><span>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> <span>6~20자</span></style.ConditionText>
+              <style.ConditionText>
+                { pwRegChk === null && <span>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
+                { pwRegChk === true && <span style={{color: `${sVar.trusyBlue}`}}>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
+                { pwRegChk === false && <span style={{color: `${sVar.falsyRed}`}}>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
+                { pwLengthChk === null && <span> 6~20자</span> }
+                { pwLengthChk === true && <span style={{color: `${sVar.trusyBlue}`}}> 6~20자</span> }
+                { pwLengthChk === false && <span style={{color: `${sVar.falsyRed}`}}> 6~20자</span> }
+              </style.ConditionText>
               <style.SignupInputBox>
                 <input name="pwConfirm" type="password" value={pwConfirm} onChange={onChangeInput} placeholder="비밀번호 확인" />
               </style.SignupInputBox>

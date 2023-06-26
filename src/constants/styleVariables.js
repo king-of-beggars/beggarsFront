@@ -19,3 +19,6 @@ export const regularYellow = `rgba(255, 181, 113, 1)`
 export const strongYellow = `rgba(238, 149, 66, 1)`
 export const textGray = `rgba(133, 133, 133, 1)`
 export const lightGray = `rgba(133, 133, 133, 0.3)`
+
+export const falsyRed = `rgba(255, 137, 137, 1)`;
+export const trusyBlue = `rgba(126, 198, 204, 1)`;

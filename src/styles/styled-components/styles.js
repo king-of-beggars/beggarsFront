@@ -333,6 +333,7 @@ export const CashbookBtn = styled.button`
   background-image: url(${cashbookCardBtn});
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  background-color: ${sVar.lightYellow};
   width: ${props => props.btnWidth};
   height: ${props => props.btnHeight};
   display: flex;
