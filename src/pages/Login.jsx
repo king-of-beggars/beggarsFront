@@ -17,9 +17,16 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
     navigate(-1);
   }
 
+  // 카카오 로그인 direct
   const kakaoLoginHandler = () => {
-    const redirectURL = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=2ad53ec39ebaac5ba8a250967f431977&redirect_uri=https://poorkingapi.shop/api/user/login/kakao"
+    const redirecKakaotURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_AUTH}&redirect_uri=https://poorkingapi.shop/api/user/login/kakao`
+    window.location.replace(redirecKakaotURL);
+  }
 
+  // 카카오 로그인 direct
+  const naverLoginHandler = () => {
+    const redirectNaverURL = ``
+    window.location.replace(redirectNaverURL);
   }
 
   return (
@@ -53,7 +60,7 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
             </layout.LoginBtnWrap>
             <layout.SocialBtnWrap style={{gap: "1em", margin: "2em, 0"}}>
               <style.SocialLoginBtn site="kakao" onClick={kakaoLoginHandler}>카카오 로그인</style.SocialLoginBtn>
-              <style.SocialLoginBtn site="naver">네이버 로그인</style.SocialLoginBtn>
+              <style.SocialLoginBtn site="naver" onClick={naverLoginHandler}>네이버 로그인</style.SocialLoginBtn>
             </layout.SocialBtnWrap>
           </layout.LoginWrap>
         </layout.MainContent>
