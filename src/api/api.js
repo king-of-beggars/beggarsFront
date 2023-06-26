@@ -31,7 +31,10 @@ instance.interceptors.request.use(
 // response access/refresh token 변경 적용
 instance.interceptors.response.use(
   function (response) {
-    console.log(response);
+    if (response.headers.Loginsuccess === false) {
+      localStorage.setItem('test', false);
+    }
+    console.log(response.headers);
     return response;
   },
 
