@@ -9,6 +9,7 @@ import {
 } from "styles/styled-components/styles";
 import { AuthAPI } from "api/api";
 import { useNavigate } from "react-router-dom";
+import { BackCramps } from 'assets';
 
 function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
   const navigate = useNavigate();
@@ -131,7 +132,10 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
-          <div style={{position: "absolute", left: "1em", top: "1em"}} onClick={onClickBack}> {"<"} </div>
+          <BackCramps
+              onClick={onClickBack}
+              style={{ position: "absolute", left: "1em", top: "2em" }}
+          />
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>

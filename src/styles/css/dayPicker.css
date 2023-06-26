@@ -9,4 +9,9 @@
 .DateInput_input {
   font-size: 0.9em;
   text-align: center;
+  cursor: pointer;
+}
+
+.SingleDatePicker_picker {
+  z-index: 10;
 }
