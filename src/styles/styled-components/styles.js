@@ -57,6 +57,8 @@ export const BigBlackBtn = styled.button`
   color: white;
   font-size: 1em;
 `;
+// 작은 라운드 버튼 스타일링
+
 
 export const SocialLoginBtn = styled.button`
   width: 90%;
@@ -74,6 +76,7 @@ export const SignupInputBox = styled(layout.FlexCenter)`
   border: none;
   border-bottom: 1px solid black;
   outline: none;
+  align-items: flex-end;
 
   > input {
     width: 100%;
@@ -355,4 +358,34 @@ export const BackgroundPageLayout = styled(layout.PageLayout)`
   /* object-fit: cover; */
   background-repeat: no-repeat, no-repeat, repeat;
   background-position: top, bottom, center;
+`
+
+// modal의 검은 background 속성입니다.
+export const ModalOverlay = styled(layout.FlexCenter)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+`
+
+// 모달 기본 스타일링입니다.
+export const ModalDefault = styled(layout.FlexCenterColumn)`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  background: white;
+  padding: 50px;
+  border-radius: 10px;
+  z-index: 21;
+`
+
+// 모달 제목 스타일링입니다.
+export const ModalHeader = styled.header`
+  font-weight: bold;
+  font-size: 1.2em;
 `
