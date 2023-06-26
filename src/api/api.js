@@ -29,18 +29,17 @@ instance.interceptors.request.use(
 );
 
 // response access/refresh token 변경 적용
-// instance.interceptors.response.use(
-//   function (response) {
-//     // console.log("인터넵트 응답 받았어요!");
-//     // 정상 응답
-//     return response;
-//   },
+instance.interceptors.response.use(
+  function (response) {
+    console.log(response);
+    return response;
+  },
 
-//   function (error) {
-//     console.log("인터셉트 응답 못받았어요...ㅠㅠ");
-//     return Promise.reject(error);
-//   }
-// );
+  function (error) {
+    console.log("인터셉트 응답 못받았어요...ㅠㅠ");
+    return Promise.reject(error);
+  }
+);
 
 export const AuthAPI = {
   postNickCheck: (payload) => instance.post("/api/user/nickCheck", payload),
