@@ -6,8 +6,6 @@ import Signup from "pages/Signup";
 import Main from "pages/Main";
 import Profile from "pages/Profile";
 import CashBook from "pages/CashBook";
-import CashBookTemp from 'pages/CashBookTemp';
-import CashBookRefine from "pages/CashBookRefine"
 import Board from "pages/Board";
 import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
@@ -49,7 +47,6 @@ function Router() {
         <Route path="login" element={<Login isMobile={isMobile} headerHeight={headerHeight-50} navHeight={0} mainHeight={mainHeight + navHeight + 50} />} />
         <Route path="signup" element={<Signup isMobile={isMobile} headerHeight={headerHeight-50} navHeight={0} mainHeight={mainHeight + navHeight + 50} />} />
 
-        <Route path="cash-book" element={<CashBookRefine isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />} />
         {/* <Route path="account/:id" element={<AccountDetail />} /> //지출 기록은 modal 혹은 Input으로 처리
         <Route path="account/add" element={<AccountAdd />}/>
         <Route path="account/edit/:id" element={<AccountEdit />} /> */}

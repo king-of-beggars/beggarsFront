@@ -65,7 +65,6 @@ export const Header = styled(FlexCenter)`
     position: fixed;
     top: 0;
     width: inherit;
-    background: lightblue;
 `
 
 export const HeaderContent = styled.div`
@@ -74,21 +73,18 @@ export const HeaderContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: royalblue;
 `
 
 export const Nav = styled.nav`
     height: ${props => props.navHeight};
     position: fixed;
     width: inherit;
-    background: tomato;
     padding: 1em 0;
 `
 
 export const Main = styled.main`
     margin-top: ${props => props.headerHeight};
     height: ${props => props.mainHeight};
-    background: lightgray;
     width: inherit;
     max-height: ${props => props.mainHeight};
     overflow-y: scroll;
@@ -100,19 +96,16 @@ export const Main = styled.main`
 export const MainContent = styled.div`
     width: 85%;
     height: inherit;
-    background: yellowgreen;
     overflow-y: scroll;
 `
 
 export const CashBookMainContent = styled.div`
     width: inherit;
     height: inherit;
-    background: yellowgreen;
 `
 
 export const SwiperWrap = styled(FlexCenterRow)`
     width: auto;
-    background: yellow;
     height: calc(${props => props.mainHeight} - 24px - ${props => props.dateBoxHeight});
     min-height: calc(${props => props.cardHeight} + 50px);
     overflow-y: hidden;

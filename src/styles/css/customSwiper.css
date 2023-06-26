@@ -1,0 +1,12 @@
+.swiper-pagination-bullet {
+    background-color: rgba(217, 217, 217, 1);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: black;
+}
+
+.swiper-pagination {
+    /* position: fixed; */
+    left: 30px !important;
+}

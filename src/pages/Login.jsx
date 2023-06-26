@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { layout, style } from 'styles'
 import { BigBlackBtn, LoginInputBox } from 'styles/styled-components/styles'
+import { BackCramps } from 'assets'
 
 function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
   const navigate = useNavigate();
@@ -25,7 +26,10 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
-          <div style={{position: "absolute", left: "1em", top: "1em"}} onClick={onClickBack}> {"<"} </div>
+        <BackCramps
+            onClick={onClickBack}
+            style={{ position: "absolute", left: "1em", top: "2em" }}
+          />
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
@@ -45,7 +49,7 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
             </layout.LoginInputWrap>
             <layout.LoginBtnWrap>
               <style.BigBlackBtn>로그인</style.BigBlackBtn>
-              <span style={{textDecoration: "underline", fontSize: "0.8em"}} onClick={onClickSignup}>회원 가입</span>
+              <span style={{textDecoration: "underline", fontSize: "0.8em"}} onClick={onClickSignup}>회원가입</span>
             </layout.LoginBtnWrap>
             <layout.SocialBtnWrap style={{gap: "1em", margin: "2em, 0"}}>
               <style.SocialLoginBtn site="kakao" onClick={kakaoLoginHandler}>카카오 로그인</style.SocialLoginBtn>
