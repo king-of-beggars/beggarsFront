@@ -12,6 +12,22 @@ const options = [
 ];
 
 function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
+  // 
+  const [userInfo, setUserInfo] = useState({ id: "", pw: "" });
+  const { id, pw } = userInfo;
+
+  // onChange 적용 함수
+  const onChangeInput = (changeObj) => {
+    const { name, value } = changeObj.target;
+
+    const newUser = {
+      ...userInfo,
+      [name]: value,
+    };
+
+    setUserInfo(newUser);
+  };
+
   // 뒤로가기
   const navigate = useNavigate();
   const onClickBack = () => {
