@@ -58,7 +58,15 @@ export const BigBlackBtn = styled.button`
   font-size: 1em;
 `;
 // 작은 라운드 버튼 스타일링
-
+export const SmallBtn = styled.button`
+  width: 5em;
+  height: 2.5em;
+  border-radius: 1.5em;
+  background-color: ${props => props.backcolor};
+  color: ${props => props.color};
+  font-size: 1em;
+  border: ${props => props.border};
+`
 
 export const SocialLoginBtn = styled.button`
   width: 90%;
@@ -378,6 +386,8 @@ export const ModalOverlay = styled(layout.FlexCenter)`
 export const ModalDefault = styled(layout.FlexCenterColumn)`
   width: ${props => props.width};
   height: ${props => props.height};
+  min-width: 320px;
+  max-width: 400px;
   background: white;
   padding: 50px;
   border-radius: 10px;
