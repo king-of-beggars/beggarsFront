@@ -1,39 +1,41 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
-
 import { layout, style } from "styles";
-import {
-  SignupInputBox,
-  SigupInputWrap,
-  BigBlackBtn,
-} from "styles/styled-components/styles";
 import { AuthAPI } from "api/api";
 import { useNavigate } from "react-router-dom";
 import { BackCramps } from 'assets';
 import * as sVar from "constants/styleVariables"
+import { usePassword, useNickname, useId } from 'hooks';
+
+const INIT_INPUT_VALUE = ""
 
 function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
   const navigate = useNavigate();
 
-  // user info state
-  const [userInfo, setUserInfo] = useState({
-    nickName: "",
-    id: "",
-    pw: "",
-    pwConfirm: "",
-  });
-  const { nickName, id, pw, pwConfirm } = userInfo;
+  const [password, setPassword, isValid] = usePassword(INIT_INPUT_VALUE)
+  const [nickname, setNickname, isNickValid] = useNickname(INIT_INPUT_VALUE)
+  const [id, setId, isIdValid] = useId(INIT_INPUT_VALUE)
+  const [passConfirm, setPassConfirm] = useState(INIT_INPUT_VALUE)
+
+  const [isNickChked, setIsNickChked] = useState(false)
+  const [isIdChked, setIsIdChked] = useState(false)
 
   // onChange 적용 함수
   const onChangeInput = (changeObj) => {
     const { name, value } = changeObj.target;
 
-    const newUser = {
-      ...userInfo,
-      [name]: value,
-    };
-
-    setUserInfo(newUser);
+    if (name === "pw") {
+      setPassword(value)
+      setPassConfirm(passConfirm, value)
+    } else if (name === "nickName") {
+      setNickname(value)
+      setIsNickChked(false)
+    } else if (name === "id") {
+      setId(value)
+      setIsIdChked(false)
+    } else if (name === "pwConfirm") {
+      setPassConfirm(value)
+    }
   };
 
   // 뒤로가기
@@ -45,96 +47,80 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
   const mutationNick = useMutation(AuthAPI.postNickCheck, {
     onSuccess: () => {
       alert("이 닉네임을 사용하실 수 있습니다.");
+      setIsNickChked(true)
     },
-    onError: () => alert("다른 닉네임을 사용해 주세요."),
+    onError: () => {
+      alert("중복된 닉네임입니다. 다른 닉네임을 사용해 주세요.")
+      setIsNickChked(false)
+    }
   });
 
   const mutationId = useMutation(AuthAPI.postIdCheck, {
     onSuccess: () => {
       alert("이 아이디를 사용하실 수 있습니다.")
+      setIsIdChked(true)
     },
-    onError: () => alert("다른 아이디를 사용해 주세요.")
+    onError: () => {
+      alert("다른 아이디를 사용해 주세요.")
+      setIsIdChked(false)
+    }
   })
 
-  const [isNickChked, setIsNickChked] = useState(false)
-  const [isIdChked, setIsIdChked] = useState(false)
-  const [pwLengthChk, setPwLengthChk] = useState(null)
-  const [pwRegChk, setPwRegChk] = useState(null)
+  const mutationSignUp = useMutation(AuthAPI.postSignUp, {
+    onSuccess: () => {
+      alert("회원가입이 완료되었습니다.")
+      navigate("/login")
+    },
+    onError: () => alert("회원가입이 실패하였습니다.")
+  })
 
-  const onClickNickCheck = () => {
-    const minLenChk = nickName.length > 1;
-    const maxLenChk = nickName.length < 13;
-    const regexChk = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9]+$/
-    if (!(minLenChk && maxLenChk)) {
-      alert("닉네임의 길이를 다시 확인하세요.");
-    } else if(!nickName.match(regexChk)) {
-      alert("닉네임으로는 한글, 영어, 숫자만 입력이 가능합니다.")
+  const nickDupleChk = () => {
+    if (!!isNickValid.isValidLen && !!isNickValid.isValidRegex) {
+      const newNick = { userNickname: nickname }
+      mutationNick.mutate(newNick)
     } else {
-      const newNick = {userNickname: nickName}
-      mutationNick.mutate(newNick);
+      alert("닉네임의 조건이 맞지 않습니다.")
     }
-  };
 
-  // 이후에 텍스트 조건 변경해서 보여주는 것으로 바꿀 예정!
-  // const idCheck = (id) => {
-  //   const minLenChk = id.length > 3;
-  //   const maxLenChk = id.length < 13;
-  //   const regexChk = /^[a-zA-Z0-9]+$/
-    // if (id.length === 0) {
-    //   setIsIdChked(false)
-    //   return <style.ConditionText>영문 및 숫자로 이루어진 4~12자</style.ConditionText>
-    // } else if (!(minLenChk && maxLenChk)) {
-    //   setIsIdChked(false)
-    //   return <style.ConditionColorText color={"tomato"}>아이디의 길이를 다시 확인해줘...</style.ConditionColorText>
-    // } else if (!id.match(regexChk)) {
-    //   setIsIdChked(false)
-    //   return <style.ConditionColorText color={"tomato"}>아이디에는 영어 또는 숫자만 사용 가능하다네!</style.ConditionColorText>
-    // } else {
-    //   setIsIdChked(true)
-    //   return <style.ConditionColorText color={"#00804f"}>아주 좋아!</style.ConditionColorText>
-    // }
-
-  // }
-
-  const onClickIdChk = () => {
-    const minLenChk = id.length > 3;
-    const maxLenChk = id.length < 13;
-    const regexChk = /^[a-zA-Z0-9]+$/
-    if (!(minLenChk && maxLenChk)) {
-      alert("아이디의 길이를 다시 확인하세요.");
-    } else if(!id.match(regexChk)) {
-      alert("아이디에는 영어 및 숫자만 사용 가능합니다.")
-    } else {
-      const newId = { userName: id }
-      mutationId.mutate(newId)
-    }
   }
 
-  // const pwChk = () => {
-  //   const lengthChk = pw.length > 7 && pw.length < 21
-  //   const regex = /[^A-Za-z0-9]/;
-  //   const regexChk = regex.test(pw)
-  //   setPwChkResult(lengthChk && regexChk)
-  // }
-
-  const samePwChk = (pw, pwConfirm) => {
-    if (pwConfirm.length === 0) {
-      return (
-        <style.ConditionText>비밀번호를 확인해주세요!</style.ConditionText>
-      )
-    } else if (pwConfirm === pw) {
-      return (
-        <style.ConditionColorText color={"#00804f"}>비밀번호가 일치합니다!</style.ConditionColorText>
-      )
+  const idDupleChk = () => {
+    if (!!isIdValid.isValidLen && !!isIdValid.isValidRegex) {
+      const newId = { userName: id }
+      mutationId.mutate(newId)
     } else {
-      return (
-        <style.ConditionColorText color={"tomato"}>비밀번호가 일치하지 않아요...</style.ConditionColorText>
-      )
+      alert("아이디의 조건이 맞지 않습니다.")
     }
   }
 
   const signUpHandler = () => {
+    const isPwSame = passConfirm === password
+    if (isIdChked && isNickChked && isPwSame) {
+      const newUser = {
+        userName: id,
+        userPwd: password,
+        userNickname: nickname
+      }
+      mutationSignUp.mutate(newUser)
+    } else {
+      alert("정보를 제대로 입력했는지 확인해주세요.")
+    }
+  }
 
+  const samePwTextRenderer = (passConfirm, password) => {
+    if (passConfirm === "") {
+      return (
+        <style.ConditionText>비밀번호를 확인해주세요!</style.ConditionText>
+      )
+    } else if (passConfirm === password) {
+      return (
+        <style.ConditionColorText color={`${sVar.trusyBlue}`}>비밀번호가 일치합니다!</style.ConditionColorText>
+      )
+    } else {
+      return (
+        <style.ConditionColorText color={`${sVar.falsyRed}`}>비밀번호가 일치하지 않아요...</style.ConditionColorText>
+      )
+    }
   }
 
   return (
@@ -156,13 +142,20 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
                 <input
                   name="nickName"
                   type="text"
-                  value={nickName}
+                  value={nickname}
                   onChange={onChangeInput}
                   placeholder="닉네임 입력"
                 />
-                <button style={{marginBottom: "5px"}} tf={isNickChked} onClick={onClickNickCheck}>중복확인</button>
+                <button style={{marginBottom: "5px"}} tf={isNickChked} onClick={nickDupleChk}>중복확인</button>
               </style.SignupInputBox>
-              <style.ConditionText><span>한/영 숫자로 이루어진</span> <span>2~12자</span></style.ConditionText>
+              <style.ConditionText>
+                { isNickValid.isValidRegex === null && <span>한/영 숫자로 이루어진</span> }
+                { isNickValid.isValidRegex === true && <span style={{color: `${sVar.trusyBlue}`}}>한/영 숫자로 이루어진</span> }
+                { isNickValid.isValidRegex === false && <span style={{color: `${sVar.falsyRed}`}}>한/영 숫자로 이루어진</span> }
+                { isNickValid.isValidLen === null && <span> 2~12자</span> }
+                { isNickValid.isValidLen === true && <span style={{color: `${sVar.trusyBlue}`}}> 2~12자</span> }
+                { isNickValid.isValidLen === false && <span style={{color: `${sVar.falsyRed}`}}> 2~12자</span> }
+              </style.ConditionText>
               <style.SignupInputBox>
                 <input
                   name="id"
@@ -171,44 +164,38 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
                   onChange={onChangeInput}
                   placeholder="아이디 입력"
                 />
-                {/* { isIdChked ? <button onClick={onClickIdChk}>중복확인</button> : <button style={{cursor: "not-allowed", background: "lightgray", color: "gray"}} disabled>중복확인</button>} */}
-                <button style={{marginBottom: "5px"}} onClick={onClickIdChk}>중복확인</button>
+                <button style={{marginBottom: "5px"}} onClick={idDupleChk}>중복확인</button>
               </style.SignupInputBox>
-              {/* { idCheck(id) } */}
-              <style.ConditionText><span>영문 및 숫자로 이루어진</span> <span>4~12자</span></style.ConditionText>
+              <style.ConditionText>
+                { isIdValid.isValidRegex === null && <span>영문 및 숫자로 이루어진</span> }
+                { isIdValid.isValidRegex === true && <span style={{color: `${sVar.trusyBlue}`}}>영문 및 숫자로 이루어진</span> }
+                { isIdValid.isValidRegex === false && <span style={{color: `${sVar.falsyRed}`}}>영문 및 숫자로 이루어진</span> }
+                { isIdValid.isValidLen === null && <span> 4~12자</span> }
+                { isIdValid.isValidLen === true && <span style={{color: `${sVar.trusyBlue}`}}> 4~12자</span> }
+                { isIdValid.isValidLen === false && <span style={{color: `${sVar.falsyRed}`}}> 4~12자</span> }
+                {/* <style.ConditionText><span>영문 및 숫자로 이루어진</span> <span>4~12자</span></style.ConditionText> */}
+              </style.ConditionText>
             </style.SignupInputWrap>
             <style.SignupInputWrap>
               <style.SignupInputBox>
-                <input name="pw" type="text" value={pw} onChange={(event) => {
-                  onChangeInput(event)
-                  const regex = /[^A-Za-z0-9]/;
-                  if (pw.length == 0 || pw === "") {
-                    setPwLengthChk(null)
-                    setPwRegChk(null)
-                  } else {
-                    setPwLengthChk(pw.length > 5 && pw.length < 21)
-                    setPwRegChk(regex.test(pw))
-                  }
-                  console.log(pwLengthChk)
-                }} placeholder="비밀번호 입력" />
+                <input name="pw" type="text" value={password} onChange={onChangeInput} placeholder="비밀번호 입력" />
               </style.SignupInputBox>
               <style.ConditionText>
-                { pwRegChk === null && <span>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
-                { pwRegChk === true && <span style={{color: `${sVar.trusyBlue}`}}>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
-                { pwRegChk === false && <span style={{color: `${sVar.falsyRed}`}}>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
-                { pwLengthChk === null && <span> 6~20자</span> }
-                { pwLengthChk === true && <span style={{color: `${sVar.trusyBlue}`}}> 6~20자</span> }
-                { pwLengthChk === false && <span style={{color: `${sVar.falsyRed}`}}> 6~20자</span> }
+                { isValid.isValidRegex === null && <span>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
+                { isValid.isValidRegex === true && <span style={{color: `${sVar.trusyBlue}`}}>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
+                { isValid.isValidRegex === false && <span style={{color: `${sVar.falsyRed}`}}>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
+                { isValid.isValidLen === null && <span> 6~20자</span> }
+                { isValid.isValidLen === true && <span style={{color: `${sVar.trusyBlue}`}}> 6~20자</span> }
+                { isValid.isValidLen === false && <span style={{color: `${sVar.falsyRed}`}}> 6~20자</span> }
               </style.ConditionText>
               <style.SignupInputBox>
-                <input name="pwConfirm" type="password" value={pwConfirm} onChange={onChangeInput} placeholder="비밀번호 확인" />
+                <input name="pwConfirm" type="text" value={passConfirm} onChange={onChangeInput} placeholder="비밀번호 확인" />
               </style.SignupInputBox>
-              { samePwChk(pw, pwConfirm) }
+              { samePwTextRenderer(passConfirm, password) }
             </style.SignupInputWrap>
             <layout.FlexCenter style={{marginBottom: "3em"}}>
               <style.BigBlackBtn onClick={signUpHandler}>여정 시작</style.BigBlackBtn>
             </layout.FlexCenter>
-            
           </layout.LoginWrap>
         </layout.MainContent>
       </layout.Main>
