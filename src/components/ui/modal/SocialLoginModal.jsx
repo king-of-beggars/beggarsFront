@@ -8,6 +8,7 @@ import * as sVar from "constants/styleVariables"
 function SocialLoginModal({ children, }) {
     const [nickName, setNickName] = useState("")
     const [isNickChked, setIsNickChked] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(true)
     const onChangeHandler = (event) => {
         setNickName(event.target.value);
     }
@@ -34,29 +35,30 @@ function SocialLoginModal({ children, }) {
     };
 
   return (
-    <style.ModalOverlay>
-        <style.ModalDefault width="80%">
-            <style.ModalHeader>{children}</style.ModalHeader>
-            <layout.FlexColumn>
-                <style.SignupInputBox>
-                    <input
-                    name="nickName"
-                    type="text"
-                    value={nickName}
-                    onChange={onChangeHandler}
-                    placeholder="닉네임 입력"
-                    />
-                    <button style={{marginBottom: "5px"}} tf={isNickChked} onClick={onClickNickCheck}>중복확인</button>
-                </style.SignupInputBox>
-                <style.ConditionText><span>영문 및 숫자로 이루어진</span> <span>4~12자</span></style.ConditionText>
-                <layout.FlexDefault style={{justifyContent: "space-around", margin: "2em 0 0 0", gap: "10px"}}>
-                    <style.SmallBtn color={sVar.borderGray} backcolor={sVar.backgroundGray} border={sVar.borderGray}>닫기</style.SmallBtn>
-                    <style.BigBlackBtn>여정 시작</style.BigBlackBtn>
-                </layout.FlexDefault>
-            </layout.FlexColumn>
-
-        </style.ModalDefault>
-    </style.ModalOverlay>
+    isModalOpen && (
+      <style.ModalOverlay>
+          <style.ModalDefault width="80%">
+              <style.ModalHeader>{children}</style.ModalHeader>
+              <layout.FlexColumn>
+                  <style.SignupInputBox>
+                      <input
+                      name="nickName"
+                      type="text"
+                      value={nickName}
+                      onChange={onChangeHandler}
+                      placeholder="닉네임 입력"
+                      />
+                      <button style={{marginBottom: "5px"}} tf={isNickChked} onClick={onClickNickCheck}>중복확인</button>
+                  </style.SignupInputBox>
+                  <style.ConditionText><span>영문 및 숫자로 이루어진</span> <span>4~12자</span></style.ConditionText>
+                  <layout.FlexDefault style={{justifyContent: "space-around", margin: "2em 0 0 0", gap: "10px"}}>
+                      <style.SmallBtn onClick={() => setIsModalOpen(false)} color={sVar.borderGray} backcolor={sVar.backgroundGray} border={sVar.borderGray}>닫기</style.SmallBtn>
+                      <style.BigBlackBtn>여정 시작</style.BigBlackBtn>
+                  </layout.FlexDefault>
+              </layout.FlexColumn>
+          </style.ModalDefault>
+      </style.ModalOverlay>
+    )
   )
 }
 
