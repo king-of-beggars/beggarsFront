@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import ProgressBar from "progressbar.js"
 import * as sVar from "constants/styleVariables"
 
-function ProgressBarCashbook( { type, budget, spend }) {
+function ProgressBarSemiCircle( { type, budget, spend }) {
     const progressBarRef = useRef(null)
 
     useEffect(() => {
@@ -127,4 +127,4 @@ function ProgressBarCashbook( { type, budget, spend }) {
         return <div ref={progressBarRef} />;
       };
 
-export default ProgressBarCashbook
+export default ProgressBarSemiCircle
