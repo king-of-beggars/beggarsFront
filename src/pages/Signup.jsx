@@ -160,7 +160,7 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
                   onChange={onChangeInput}
                   placeholder="닉네임 입력"
                 />
-                <button tf={isNickChked} onClick={onClickNickCheck}>중복확인</button>
+                <button style={{marginBottom: "5px"}} tf={isNickChked} onClick={onClickNickCheck}>중복확인</button>
               </style.SignupInputBox>
               <style.ConditionText><span>한/영 숫자로 이루어진</span> <span>2~12자</span></style.ConditionText>
               <style.SignupInputBox>
@@ -172,7 +172,7 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
                   placeholder="아이디 입력"
                 />
                 {/* { isIdChked ? <button onClick={onClickIdChk}>중복확인</button> : <button style={{cursor: "not-allowed", background: "lightgray", color: "gray"}} disabled>중복확인</button>} */}
-                <button onClick={onClickIdChk}>중복확인</button>
+                <button style={{marginBottom: "5px"}} onClick={onClickIdChk}>중복확인</button>
               </style.SignupInputBox>
               {/* { idCheck(id) } */}
               <style.ConditionText><span>영문 및 숫자로 이루어진</span> <span>4~12자</span></style.ConditionText>
