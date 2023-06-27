@@ -1,11 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { layout, style } from 'styles'
 import { BigBlackBtn, LoginInputBox } from 'styles/styled-components/styles'
 import { BackCramps } from 'assets'
+import { useMutation } from 'react-query'
+import { AuthAPI } from 'api/api'
 
 function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
+  const INIT_INPUT_VALUE = ""
   const navigate = useNavigate();
+
+  const [userInfo, setUserInfo] = useState({
+    userName: INIT_INPUT_VALUE,
+    userPwd: INIT_INPUT_VALUE
+  });
+  const { userName, userPwd } = userInfo;
+
+  // onChange 적용 함수
+  const onChangeInput = (changeObj) => {
+    const { name, value } = changeObj.target;
+
+    const newUser = {
+      ...userInfo,
+      [name]: value,
+    };
+
+    setUserInfo(newUser);
+  }
 
   // 회원가입으로 이동
   const onClickSignup = () => {
@@ -29,6 +50,26 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
     window.location.replace(redirectNaverURL);
   }
 
+  const loginHandler = () => {
+    console.log("userInfo:::", userInfo)
+    mutationLogin.mutate(userInfo)
+  }
+
+  // 토큰 저장 함수
+  const saveTokens = (accessToken, refreshToken) => {
+    localStorage.setItem("accessToken", accessToken)
+    localStorage.setItem("refreshToken", refreshToken)
+  }
+
+  const mutationLogin = useMutation(AuthAPI.postLogIn, {
+    onSuccess: (response) => {
+      alert("로그인이 완료되었습니다.")
+      // saveTokens(response.accessToken, response.refreshToken)
+      navigate("/") // 회원가입 완료시 메인 이동
+    },
+    onError: () => alert("로그인이 실패하였습니다.")
+  })
+
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
@@ -47,15 +88,25 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
             <layout.LoginInputWrap>
               <style.LoginInputBox>
                 <span>아이디</span>
-                <input />
+                <input
+                  name="userName"
+                  type="text"
+                  value={userName}
+                  onChange={onChangeInput}
+                />
               </style.LoginInputBox>
               <style.LoginInputBox>
                 <span>비밀번호</span>
-                <input />
+                <input
+                  name="userPwd"
+                  type="text"
+                  value={userPwd}
+                  onChange={onChangeInput} 
+                />
               </style.LoginInputBox>
             </layout.LoginInputWrap>
             <layout.LoginBtnWrap>
-              <style.BigBlackBtn>로그인</style.BigBlackBtn>
+              <style.BigBlackBtn onClick={loginHandler}>로그인</style.BigBlackBtn>
               <span style={{textDecoration: "underline", fontSize: "0.8em"}} onClick={onClickSignup}>회원가입</span>
             </layout.LoginBtnWrap>
             <layout.SocialBtnWrap style={{gap: "1em", margin: "2em, 0"}}>

@@ -46,8 +46,9 @@ instance.interceptors.response.use(
 
 export const AuthAPI = {
   postNickCheck: (payload) => instance.post("/api/user/nickCheck", payload),
-  postIdCheck: (payload) => instance.post("/api/user/idCheck", payload)
-  // postLogIn: (payload) => instance.post("/api/login", payload),
+  postIdCheck: (payload) => instance.post("/api/user/idCheck", payload),
+  postSignUp: (payload) => instance.post("/api/user/signup", payload),
+  postLogIn: (payload) => instance.post("/api/user/login", payload),
 };
 
 export default instance;

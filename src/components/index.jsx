@@ -7,5 +7,9 @@ export { default as DayWrapper } from "components/cash-book/DayWrapper"
 export { default as CashBookDetailList } from "components/cash-book/CashBookDetailList";
 export { default as ExpendAddModal } from "components/cash-book/ExpendAddModal";
 
+export { default as BoardCard } from "components/board/BoardCard"
+
 export { default as CashBookInput } from "components/ui/input/CashBookInput";
 export { default as CashAddSelect } from "components/ui/select-box/CashAddSelect";
+
+export { default as ProgressBarSemiCircle } from "components/ui/progress/ProgressBarSemiCircle"

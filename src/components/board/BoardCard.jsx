@@ -1,11 +1,12 @@
-import React from 'react'
-import { style, layout } from "styles"
-import * as sVar from "constants/styleVariables";
 import "styles/css/progressBar.css"
-import { ProgressBarSemiCircle } from 'components';
+import React from 'react'
 import { CashbookBtn } from 'styles/styled-components/styles';
+import { ProgressBarSemiCircle } from 'components';
+import { style, layout } from "styles"
+import * as sVar from "constants/styleVariables";;
 
-function CashBookCard({ id, index, budget, spend, category, title, cardWidth, cardHeight }) {
+
+function BoardCard({ id, index, budget, spend, category, title, cardWidth, cardHeight }) {
   const btnWidth = 274 * 0.8;
   const btnHeight = 46 * 0.8;
   return (
@@ -28,9 +29,9 @@ function CashBookCard({ id, index, budget, spend, category, title, cardWidth, ca
         <ProgressBarSemiCircle type="semiCircle" spend={spend} budget={budget}/>
       </div>
       <div style={{color: `${sVar.middleYellow}`, margin: "1em 0"}}>{spend}원 사용</div>
-      <CashbookBtn btnWidth={`${btnWidth}px`} btnHeight={`${btnHeight}px`}>{spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"}</CashbookBtn>
+      <CashbookBtn btnWidth={`${btnWidth}px`} btnHeight={`${btnHeight}px`}>자세히 보기</CashbookBtn>
     </style.CashBookCardContainer>
   )
 }
 
-export default CashBookCard
+export default BoardCard
