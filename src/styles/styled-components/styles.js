@@ -310,7 +310,7 @@ export const ConditionText = styled.div`
 
 // 조건에 따라 텍스트 컬러를 다르게 줄 수 있는 조건 텍스트입니다.
 export const ConditionColorText = styled(ConditionText)`
-  color: ${props => props.color}
+  color: ${props => props.color};
 `
 
 // 가계부 카드 내 대분류명으로 들어가는 스타일링입니다.
@@ -398,4 +398,12 @@ export const ModalDefault = styled(layout.FlexCenterColumn)`
 export const ModalHeader = styled.header`
   font-weight: bold;
   font-size: 1.2em;
+`
+
+// 게시판 댓글 프로필 사진
+export const BoardProfilePhoto = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: gray;
 `
