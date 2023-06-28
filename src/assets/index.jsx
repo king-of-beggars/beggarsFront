@@ -3,10 +3,14 @@ export { default as btn } from "assets/pixels/testButtons/redButton01.png";
 export { default as pressedBtn } from "assets/pixels/testButtons/redButton02.png";
 
 // pixels > cashbook
-export { default as cashbookCardYellow } from "assets/pixels/cashbook/cashbookCardYellow.png"
 export { default as cashbookDateBox } from "assets/pixels/cashbook/cashbookDateBox.png"
-export { default as cashbookCardEmpty } from "assets/pixels/cashbook/CashbookCardEmpty.png"
-export { default as cashbookCardBtn } from "assets/pixels/cashbook/cashbookCardBtn.png"
+
+// pixels > card
+export { default as cardBgGray } from "assets/pixels/card/cardBgGray.png"
+export { default as cardBgBlack } from "assets/pixels/card/cardBgBlack.png"
+export { default as cardBgYellow } from "assets/pixels/card/cardBgYellow.png"
+export { default as cardBtnYellow } from "assets/pixels/card/cardBtnYellow.png"
+
 
 // pixels > profile
 export { default as mainLineLogo } from "assets/pixels/profile/mainLineLogo.png"

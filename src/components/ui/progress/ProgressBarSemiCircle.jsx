@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import ProgressBar from "progressbar.js"
 import * as sVar from "constants/styleVariables"
 
-function ProgressBarSemiCircle( { type, budget, spend }) {
+function ProgressBarSemiCircle( { type, budget, spend, ratio }) {
     const progressBarRef = useRef(null)
 
     useEffect(() => {
@@ -45,7 +45,7 @@ function ProgressBarSemiCircle( { type, budget, spend }) {
             },
           });
           semiCircle.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-          semiCircle.text.style.fontSize = '1em';
+          semiCircle.text.style.fontSize = `${1 * ratio}em`;
           
           if (graphValue > 100) {
             console.log(graphValue / 100)

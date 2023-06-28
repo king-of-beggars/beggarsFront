@@ -1,28 +1,55 @@
 import React from "react";
 
 import { layout } from "styles";
-import { Nav } from "components";
+import { Nav, BoardCard } from "components";
 
 const dummies = {
-  // data:{
-  //  [
-  //      {
-  //         boardId:0,
-  //         boardText : “String”,
-  //         userName : “String”,
-  //         userNickName : “String”
-  //      },
-  //      {
-  //         boardId:1,
-  //         boardText : “String”,
-  //         userName : “String”,
-  //         userNickName : “String”
-  //      }
-  //  ]
-  // }
-  }
+  data: [
+    {
+      id: 0,
+      cashbookCategory: "식비",
+      cashbookName: "아침",
+      cashbookNowValue: 4000,
+      cashbookGoalValue: 8000,
+      cashbookOrder: 0,
+      date: "2023-06-28"
+    },
+    {
+      id: 1,
+      cashbookCategory: "식비",
+      cashbookName: "점심",
+      cashbookNowValue: 12000,
+      cashbookGoalValue: 15000,
+      cashbookOrder: 1,
+      date: "2023-06-28"
+    },
+    {
+      id: 2,
+      cashbookCategory: "식비",
+      cashbookName: "저녁",
+      cashbookNowValue: 0,
+      cashbookGoalValue: 12000,
+      cashbookOrder: 2,
+      date: "2023-06-29"
+      
+    },
+    {
+      id: 3,
+      cashbookCategory: "간식비 / 카페",
+      cashbookName: "",
+      cashbookNowValue: 6000,
+      cashbookGoalValue: 5000,
+      cashbookOrder: 3,
+      date: "2023-06-30"
+    },
+  ],
+};
 
 function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
+  // card 크기 결정
+  // const cardWidth = 301 * 0.5
+  // const cardHeight = 356 * 0.5
+
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
@@ -32,7 +59,24 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
-        <layout.MainContent>board의 main 내용</layout.MainContent>
+        <layout.MainContent>
+          <layout.Grid2Row>
+            { console.log(dummies.data)}
+            { dummies.data.map(card => {
+              return (
+                <BoardCard 
+                  id={ card.id }
+                  budget={ card.cashbookGoalValue }
+                  spend={ card.cashbookNowValue }
+                  category={ card.cashbookCategory }
+                  title={ card.cashbookName }
+                  ratio={ 0.5 }
+                  key={ card.id }
+                />
+              )
+            })}
+          </layout.Grid2Row>
+        </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
         <Nav selected="board" />
