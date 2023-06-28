@@ -157,3 +157,9 @@ export const SpendingListWrap = styled.div`
     flex-direction: column;
     gap: 0.4em;
 `
+
+export const Grid2Row = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.8em;
+`

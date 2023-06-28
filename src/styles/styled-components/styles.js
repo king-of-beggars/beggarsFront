@@ -1,6 +1,6 @@
 
 import styled, { css } from "styled-components"
-import { btn, pressedBtn, cashbookDateBox, cashbookCardYellow, mainLineLogo, mainLogo, cashbookCardEmpty, cashbookCardBtn } from 'assets'
+import { btn, pressedBtn, cashbookDateBox, cardBgYellow, mainLineLogo, mainLogo, cardBgGray, cardBtnYellow, cardBgBlack } from 'assets'
 import { SwiperSlide } from "swiper/react"
 import { layout } from "styles";
 import * as sVar from "constants/styleVariables.js"
@@ -151,9 +151,46 @@ export const DayPickerWrap = styled(layout.FlexCenter)`
     margin: 0.5em 1em 1em 1em;
 `
 
+// 반응형으로 새로 생성된 CardBox의 컨테이너 스타일링입니다.
+export const CardBoxContainer = styled.div`
+  background-image: ${props => props.isDefault ? `url(${cardBgYellow})` : `url(${cardBgBlack})`};
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  width: ${props => props.cardWidth};
+  height: ${props => props.cardHeight};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(${props => props.ratio} * 1em);
+  padding-bottom: calc(${props => props.ratio} * 1em);
+  padding-left: calc(${props => props.ratio} * 0.8em);
+  padding-right: calc(${props => props.ratio} * 0.8em);
+`
+
+// 반응형으로 새로 생성된 Card의 카테고리 컨테이너입니다.
+export const CardCategoryContainer = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: calc(${props => props.ratio} * 1em);
+  margin-bottom: calc(${props => props.ratio} * 1em);
+  border-bottom: 0.4px solid ${props => props.isDefault ? null : null};
+`
+
+// Card 대분류명으로 들어가는 스타일링입니다.
+export const Card1stCategoryText = styled.div`
+  font-size: calc(${props => props.ratio} * 0.9em);
+  padding-top: calc(${props => props.ratio} * 0.5em);
+  padding-bottom: calc(${props => props.ratio} * 0.5em);
+  padding-left: calc(${props => props.ratio} * 0.8em);
+  padding-right: calc(${props => props.ratio} * 0.8em);
+  // background-color: 
+`
+
 // cashBookCard의 Card 부분 스타일링입니다.
 export const CashBookCardContainer = styled.div`
-    background-image: url(${cashbookCardYellow});
+    background-image: url(${cardBgYellow});
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: ${props => props.cardWidth};
@@ -166,7 +203,7 @@ export const CashBookCardContainer = styled.div`
 `
 // 회색 dummyCard의 스타일링입니다.
 export const CashBookDummyContainer = styled.div`
-    background-image: url(${cashbookCardEmpty});
+    background-image: url(${cardBgGray});
     background-size: 100% 100%;
     background-repeat: no-repeat;
     width: ${props => props.cardWidth};
@@ -341,7 +378,7 @@ export const CashbookCategoryContainer = styled.div`
 
 // 가계부의 자랑하러 가기 또는 혼쭐나러 가기 버튼 스타일링
 export const CashbookBtn = styled.button`
-  background-image: url(${cashbookCardBtn});
+  background-image: url(${cardBtnYellow});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: ${sVar.lightYellow};
