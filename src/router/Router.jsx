@@ -10,6 +10,7 @@ import Board from "pages/Board";
 import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
 import CashBookMod from "pages/CashBookMod";
+import BoardDetail from "pages/BoardDetail";
 
 function Router() {
   // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
@@ -57,7 +58,7 @@ function Router() {
         <Route path="cash-book/edit/:id" element={<CashBookMod isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight}/>} />
         
         <Route path="board" element={<Board isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
-        {/* <Route path="board/:id" element={<BoardDetail />}/> */}
+        <Route path="board/:id" element={<BoardDetail isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight}  />}/>
 
         <Route path="profile" element={<Profile isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />} />
         {/* <Route path="mypage/edit" element={<MyPageEdit />}/> */}

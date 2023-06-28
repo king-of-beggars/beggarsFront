@@ -64,6 +64,7 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
   const mutationLogin = useMutation(AuthAPI.postLogIn, {
     onSuccess: (response) => {
       alert("로그인이 완료되었습니다.")
+      console.log(response)
       // saveTokens(response.accessToken, response.refreshToken)
       navigate("/") // 회원가입 완료시 메인 이동
     },

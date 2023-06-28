@@ -27,6 +27,7 @@ export {ReactComponent as BackCrampsBlack} from "assets/icons/backCrampsBlack.sv
 export {ReactComponent as DeleteDetail} from "assets/icons/deleteDetail.svg"
 export {ReactComponent as EditCard} from "assets/icons/editCard.svg" 
 export {ReactComponent as AddDetail} from "assets/icons/addDetail.svg"
+export {ReactComponent as BackArrow} from "assets/icons/backArrow.svg"
 
 // backgrounds
 export { default as mainBackground } from "assets/pixels/backgrounds/mainBackground.png"
