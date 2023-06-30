@@ -52,4 +52,8 @@ export const AuthAPI = {
   postNickSocial: (payload) => instance.post("/api/user/signup/social", payload),
 };
 
+export const CashBookAPI = {
+  getCashCard: (date) => instance.post(`/api/cashbook?date=${date}`)
+}
+
 export default instance;
