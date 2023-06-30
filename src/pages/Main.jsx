@@ -13,7 +13,6 @@ function Main({ isMobile, headerHeight, navHeight, mainHeight}) {
 
   useEffect(() => {
     let loginSuccess = queryString.parse(search);
-    console.log()
     loginSuccess = Object.keys(loginSuccess).length === 0 ? true : JSON.parse(loginSuccess.loginSuccess)
 
     if (!loginSuccess){
@@ -34,7 +33,7 @@ function Main({ isMobile, headerHeight, navHeight, mainHeight}) {
       <layout.Nav navHeight={`${navHeight}px`}>
         <Nav selected="main" />
       </layout.Nav>
-      { isSocialLogin && <SocialLoginModal setClose={setIsSocialLogin}>회원가입</SocialLoginModal> }
+      { isSocialLogin && <SocialLoginModal>회원가입</SocialLoginModal> }
     </layout.PageLayout>
   );
 }

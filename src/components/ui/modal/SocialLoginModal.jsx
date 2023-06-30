@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 
 import { style, layout } from "styles";
 import { AuthAPI } from "api/api";
@@ -8,7 +9,8 @@ import { useNickname} from 'hooks';
 
 const INIT_INPUT_VALUE = ""
 
-function SocialLoginModal({ setClose, children }) {
+function SocialLoginModal({ children }) {
+  const navigate = useNavigate();
   const [nickname, setNickname, isNickValid] = useNickname(INIT_INPUT_VALUE);
   const [isNickChked, setIsNickChked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -39,8 +41,6 @@ function SocialLoginModal({ setClose, children }) {
 
   }
 
-  
-
   // 여정 시작
   const mutationSignUp = useMutation(AuthAPI.postNickSocial, {
     onSuccess: () => {
@@ -54,8 +54,9 @@ function SocialLoginModal({ setClose, children }) {
       const newUser = {
         userNickName: nickname
       }
-
       mutationSignUp.mutate(newUser)
+      
+      navigate('/');
     } else {
       alert("정보를 제대로 입력했는지 확인해주세요.")
     }
