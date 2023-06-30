@@ -49,6 +49,7 @@ export const AuthAPI = {
   postIdCheck: (payload) => instance.post("/api/user/idCheck", payload),
   postSignUp: (payload) => instance.post("/api/user/signup", payload),
   postLogIn: (payload) => instance.post("/api/user/login", payload),
+  postNickSocial: (payload) => instance.post("/api/user/signup/social", payload),
 };
 
 export default instance;
