@@ -10,7 +10,11 @@ import { btn,
         cardBtnYellow,
         cardBgBlack,
         cardBtnBoardYellow,
-        cardBtnBoardBlack } from 'assets'
+        cardBtnBoardBlack, 
+        boardBtnActivate,
+        boardBtnLeft,
+        boardBtnRight,
+        boardBtnBar} from 'assets'
 import { SwiperSlide } from "swiper/react"
 import { layout } from "styles";
 import * as sVar from "constants/styleVariables.js"
@@ -514,4 +518,51 @@ export const BoardProfilePhoto = styled.div`
   height: 40px;
   border-radius: 50%;
   background-color: gray;
+`
+
+// 게시판 활성화 버튼 렌더링
+export const BoardBtnActivate = styled.button`
+  width: 160px;
+  height: 38px;
+  background-image: url(${boardBtnActivate});
+  background-color: transparent;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+`
+
+// 게시판 비활성화 버튼 렌더링
+export const BoardBtnSleep = styled.button`
+  width: 154px;
+  height: 36px;
+  background: transparent;
+  /* background-image: ${props => props.isBoasting ? `url(${boardBtnRight})` : `url(${boardBtnLeft})`}; */
+  /* background-color: ${sVar.darkGray}; */
+  border: none;
+  &:focus {
+    outline: none;
+  }
+`
+
+// 게시판 버튼 컨테이너 스타일링
+export const BoardBtnContainer = styled.div`
+  width: 310px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+`
+
+export const BoardBtnBar = styled.div`
+  width: 307px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(${boardBtnBar});
+  background-position: center;
+  background-size: auto;
+  /* z-index: -1; */
+  border: none;
 `
