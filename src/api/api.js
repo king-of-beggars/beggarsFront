@@ -64,6 +64,12 @@ export const boardAPI = {
       limit: 15,
       page: 1
     }
+  }),
+  getScoldedList: async () => await instance.get("/api/board/noway", {
+    params: {
+      limit: 15,
+      page: 1
+    }
   })
 }
 
