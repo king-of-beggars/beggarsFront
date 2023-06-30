@@ -9,9 +9,13 @@ import { Nav } from "components";
 function Profile({ isMobile, headerHeight, navHeight, mainHeight  }) {
   const navigate = useNavigate();
 
-  // 뒤로가기
-  const onClickBack = () => {
-    navigate(-1)
+  // 로그아웃
+  const onClickLogout = () => {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('nickname');
+
+    alert("로그아웃에 성공하셨습니다.");
+    navigate('/')
   }
 
   return (
@@ -32,7 +36,7 @@ function Profile({ isMobile, headerHeight, navHeight, mainHeight  }) {
           </layout.FlexCenterColumn100>
           <layout.FlexCenterColumn100 style={{ gap: "1em" }}>
             <style.MidBlackBtn>정보수정</style.MidBlackBtn>
-            <span style={{ fontSize: "1em", textDecoration: "underline" }}>
+            <span style={{ fontSize: "1em", textDecoration: "underline" }} onClick={onClickLogout}>
               로그아웃
             </span>
           </layout.FlexCenterColumn100>
