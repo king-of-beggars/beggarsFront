@@ -64,12 +64,13 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
   const mutationLogin = useMutation(AuthAPI.postLogIn, {
     onSuccess: (response) => {
       alert("로그인이 완료되었습니다.")
-      console.log(response)
-      saveInfo(response.headers["Userid"], response.headers["Usernickname"])
+      // console.log(decodeURIComponent(response.headers["usernickname"]))
+      saveInfo(response.headers["userid"], response.headers["usernickname"])
       navigate("/") // 회원가입 완료시 메인 이동
     },
     onError: () => alert("로그인이 실패하였습니다.")
   })
+  
 
   return (
     <layout.PageLayout isMobile={isMobile}>

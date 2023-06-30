@@ -34,7 +34,7 @@ function Navigation({ selected }) {
 
   // 프로필로 이동
   const onClickProfile = () => {
-    if (!sessionStorage.getItem("RefreshToken")) {
+    if (!localStorage.getItem("userId")) {
       alert("로그인이 필요합니다.");
       navigate("/login");
     } else {
