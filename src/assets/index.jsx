@@ -10,6 +10,8 @@ export { default as cardBgGray } from "assets/pixels/card/cardBgGray.png"
 export { default as cardBgBlack } from "assets/pixels/card/cardBgBlack.png"
 export { default as cardBgYellow } from "assets/pixels/card/cardBgYellow.png"
 export { default as cardBtnYellow } from "assets/pixels/card/cardBtnYellow.png"
+export { default as cardBtnBoardYellow } from "assets/pixels/card/cardBtnBoardYellow.png"
+export { default as cardBtnBoardBlack } from "assets/pixels/card/cardBtnBoardBlack.png"
 
 
 // pixels > profile

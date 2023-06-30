@@ -24,6 +24,8 @@ function Router() {
       width: window.innerWidth,
       height: window.innerHeight
     })
+    localStorage.setItem("screenWidth", window.innerWidth)
+    localStorage.setItem("screenHeight", window.innerHeight)
   }
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { layout, style } from 'styles'
-import { DayPicker, Nav, CashBookCard } from 'components'
+import { DayPicker, Nav, CashBookCard, CardBox } from 'components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import moment from "moment"
@@ -46,29 +46,32 @@ const cashbookApiRes = {
 };
 
 function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
-  // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight
-  })
+  console.log("들어오긴 함?")
+  console.log(cashbookApiRes)
+  // // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
+  // const [windowSize, setWindowSize] = useState({
+  //   width: window.innerWidth,
+  //   height: window.innerHeight
+  // })
 
-  const handleResize = () => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight
-    })
-  }
+  // const handleResize = () => {
+  //   setWindowSize({
+  //     width: window.innerWidth,
+  //     height: window.innerHeight
+  //   })
+  // }
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize)
+  //   }
+  // }, [])
+  const screenWidth = parseFloat(localStorage.getItem("screenWidth"))
 
   // datepicker 박스 크기 결정
-  const dateBoxWidth = isMobile || windowSize.width < 500 ? ((windowSize.width * 155) / 393) * 0.65 : ((500 * 155) / 393) * 0.65
+  const dateBoxWidth = isMobile || screenWidth < 500 ? ((screenWidth * 155) / 393) * 0.65 : ((500 * 155) / 393) * 0.65
   const dateBoxHeight = dateBoxWidth * (36 / 155)
 
   // card 크기 결정
@@ -88,7 +91,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const [focused, setFocused] = useState(false);
 
   return (
-    <style.BackgroundPageLayout backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
+    <style.BackgroundPageLayout isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
             <style.CashBookHeader>가계부</style.CashBookHeader>
@@ -147,7 +150,17 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
                                 }}
                             >
                                 <SwiperSlide>
-                                    <CashBookCard
+                                  <CardBox
+                                    id={card.id}
+                                    budget={card.cashbookGoalValue}
+                                    spend={card.cashbookNowValue}
+                                    category={card.cashbookCategory}
+                                    title={card.cashbookName}
+                                    screenWidth={screenWidth}
+                                    ratio={0.9}
+                                    isDefault={true}
+                                  />
+                                    {/* <CashBookCard
                                         id={card.id}
                                         budget={card.cashbookGoalValue}
                                         spend={card.cashbookNowValue}
@@ -156,7 +169,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
                                         cardWidth={`${cardWidth}px`}
                                         cardHeight={`${cardHeight}px`}
                                         index={idx}
-                                    />
+                                    /> */}
                                 </SwiperSlide>
                                 <SwiperSlide>
                                   { idx === activeSlide ?

@@ -1,7 +1,8 @@
 import React from "react";
 
-import { layout } from "styles";
-import { Nav, BoardCard } from "components";
+import { layout, style } from "styles";
+import { Nav, CardBox } from "components";
+import { mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail } from 'assets';
 
 const dummies = {
   data: [
@@ -51,7 +52,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   // const cardHeight = 356 * 0.5
 
   return (
-    <layout.PageLayout isMobile={isMobile}>
+    <style.BackgroundPageLayout isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
           <button>자랑하기</button>
@@ -64,13 +65,14 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
             { console.log(dummies.data)}
             { dummies.data.map(card => {
               return (
-                <BoardCard 
+                <CardBox 
                   id={ card.id }
                   budget={ card.cashbookGoalValue }
                   spend={ card.cashbookNowValue }
                   category={ card.cashbookCategory }
                   title={ card.cashbookName }
-                  ratio={ 0.5 }
+                  ratio={ 0.6 }
+                  isDefault= { true }
                   key={ card.id }
                 />
               )
@@ -81,7 +83,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
       <layout.Nav navHeight={`${navHeight}px`}>
         <Nav selected="board" />
       </layout.Nav>
-    </layout.PageLayout>
+    </style.BackgroundPageLayout>
   );
 }
 
