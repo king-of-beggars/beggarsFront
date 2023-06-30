@@ -4,14 +4,19 @@ import { BackCrampsBlack } from "assets";
 
 import { layout, style } from "styles";
 import { useNavigate } from "react-router-dom";
+import { categoryList } from "constants/category";
+import { useMutation } from "react-query";
+import { CashBookAPI } from "api/api";
 
-const options = [
-  { value: "식비", name: "식비" },
-  { value: "교통비", name: "교통비" },
-  { value: "여가비", name: "여가비" },
-];
+// const options = [
+//   { value: "식비", name: "식비" },
+//   { value: "교통비", name: "교통비" },
+//   { value: "여가비", name: "여가비" },
+// ];
 
 function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
+  // 카테고리 정보
+  const options = categoryList;
   // 카드 정보 state
   const [cardInfo, setCardInfo] = useState({
     category: "",
@@ -48,6 +53,12 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   };
 
   // 저장하기 버튼 클릭
+  const mutationAddCard = useMutation(CashBookAPI.postCardAdd, {
+    onSuccess: (response) => {
+      navigate('/cash-book') 
+    },
+    onError: () => alert("카드 추가에 실패하였습니다.")
+  })
   const onClickSave = () => {
 
     navigate('/cash-book');
@@ -74,6 +85,8 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
             options={options}
             placeholder={"카테고리 선택"}
             onChange={onChangeInput}
+            name={"category"}
+            value={category}
           />
           <CashBookInput
             title={"소제목"}
