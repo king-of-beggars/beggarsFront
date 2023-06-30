@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { layout, style } from "styles";
 import { Nav, CardBox } from "components";
@@ -52,13 +52,29 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   // const cardHeight = 356 * 0.5
 
   const screenWidth = parseFloat(localStorage.getItem("screenWidth"))
+  const [isBoasting, setIsBoasting] = useState(true)
+
+  const toggleBtnHandler = () => {
+    setIsBoasting(!isBoasting)
+  }
 
   return (
     <style.BackgroundPageLayout screenWidth={`${screenWidth}px`} isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
-          <button>자랑하기</button>
-          <button>혼쭐나기</button>
+            { isBoasting
+              ? (
+                <style.BoardBtnBar>
+                  <style.BoardBtnActivate isBoasting={isBoasting}>자랑하기</style.BoardBtnActivate>
+                  <style.BoardBtnSleep onClick={toggleBtnHandler} isBoasting={isBoasting}>혼쭐나기</style.BoardBtnSleep>
+                </style.BoardBtnBar>
+              ) : (
+                <style.BoardBtnBar>
+                  <style.BoardBtnSleep onClick={toggleBtnHandler} isBoasting={isBoasting}>자랑하기</style.BoardBtnSleep>
+                  <style.BoardBtnActivate isBoasting={isBoasting}>혼쭐나기</style.BoardBtnActivate>
+                </style.BoardBtnBar>
+              )
+            }
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>

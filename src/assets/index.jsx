@@ -13,10 +13,15 @@ export { default as cardBtnYellow } from "assets/pixels/card/cardBtnYellow.png"
 export { default as cardBtnBoardYellow } from "assets/pixels/card/cardBtnBoardYellow.png"
 export { default as cardBtnBoardBlack } from "assets/pixels/card/cardBtnBoardBlack.png"
 
-
 // pixels > profile
 export { default as mainLineLogo } from "assets/pixels/profile/mainLineLogo.png"
 export { default as mainLogo } from "assets/pixels/profile/mainLogo.png"
+
+// pixels > board
+export { default as boardBtnActivate } from "assets/pixels/board/boardBtnActivate.png"
+export { default as boardBtnLeft } from "assets/pixels/board/boardBtnLeft.png"
+export { default as boardBtnRight } from "assets/pixels/board/boardBtnRight.png"
+export { default as boardBtnBar } from "assets/pixels/board/boardBtnBar.png"
 
 // icons
 export { ReactComponent as BackCramps } from "assets/icons/backCramps.svg"
