@@ -57,4 +57,13 @@ export const CashBookAPI = {
   getCashCard: (date) => instance.post(`/api/cashbook?date=${date}`)
 }
 
+export const boardAPI = {
+  getBoastList: async () => await instance.get("/api/board/goodjob", {
+    params: {
+      limit: 15,
+      page: 1
+    }
+  })
+}
+
 export default instance;

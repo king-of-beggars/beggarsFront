@@ -5,8 +5,6 @@ import * as sVar from "constants/styleVariables"
 function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
     const progressBarRef = useRef(null)
 
-    console.log("isDefaultInProgressBar:::", isDefault)
-
     useEffect(() => {
         const graphValue = (Math.round((spend / budget) * 10)) / 10 * 100
         console.log("origin:::", Math.round((spend / budget) * 10) / 10)
