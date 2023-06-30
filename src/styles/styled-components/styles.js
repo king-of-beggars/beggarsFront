@@ -190,21 +190,22 @@ export const CardCategoryContainer = styled.div`
 // Card 대분류명으로 들어가는 스타일링입니다.
 export const Card1stCategoryText = styled.div`
   font-size: calc(${props => props.ratio} * 0.9em);
-  padding-top: calc(${props => props.ratio} * 0.5em);
-  padding-bottom: calc(${props => props.ratio} * 0.5em);
-  padding-left: calc(${props => props.ratio} * 0.8em);
-  padding-right: calc(${props => props.ratio} * 0.8em);
+  padding-top: calc(${props => props.ratio} * 0.3em);
+  padding-bottom: calc(${props => props.ratio} * 0.3em);
+  padding-left: calc(${props => props.ratio} * 0.6em);
+  padding-right: calc(${props => props.ratio} * 0.6em);
   background-color: ${props => props.isDefault ? `${sVar.middleYellow}` : `${sVar.white70}`};
   color: ${props => props.isDefault ? `${sVar.lightYellow}` : `${sVar.nightyBlue}`};
   font-family: "DOSGothic";
   border-radius: calc(${props => props.ratio} * 0.6em);
-  margin: calc(${props => props.ratio} * 0.5em), 0;
+  margin-bottom : calc(${props => props.ratio} * 0.5em);
 `
 
 // Card 소분류명으로 들어가는 스타일링입니다.
 export const Card2ndCategoryText = styled.div`
   font-size: calc(${props => props.ratio} * 1.2em);
   color: ${props => props.isDefault ? `${sVar.middleYellow}` : "white"};
+  margin-bottom : calc(${props => props.ratio} * 0.5em);
 `
 
 // Card에서 중간 border를 넣기 위한 div 스타일링입니다.
@@ -225,13 +226,13 @@ export const CardBudgetText = styled.div`
 export const CardProgressBarContainer = styled.div`
   width: calc(${props => props.ratio} * 9em);
   height: calc(${props => props.ratio} * 3em);
-  margin: calc(${props => props.ratio} * 1em);
+  margin: calc(${props => props.ratio} * 0.8em);
 `
 
 // Card 내 예산 사용량 스타일링입니다.
 export const CardSpendText = styled.div`
   color: ${props => props.isDefault ? `${sVar.middleYellow}` : "white" };
-  margin: calc(${props => props.ratio} * 1em), 0;
+  margin-top: calc(${props => props.ratio} * 1em);
 `
 
 // Card 내 버튼 스타일링입니다.

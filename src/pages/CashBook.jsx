@@ -157,7 +157,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
                                     category={card.cashbookCategory}
                                     title={card.cashbookName}
                                     screenWidth={screenWidth}
-                                    ratio={1}
+                                    ratio={0.9}
                                     isDefault={true}
                                   />
                                     {/* <CashBookCard
