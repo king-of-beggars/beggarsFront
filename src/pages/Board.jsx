@@ -4,7 +4,7 @@ import { layout, style } from "styles";
 import { Nav, CardBox } from "components";
 import { useQuery, useQueryClient } from "react-query";
 import { mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
-import { boardAPI } from 'api/api';
+import instance, { boardAPI } from 'api/api';
 
 const dummies = {
   data: [
@@ -49,14 +49,6 @@ const dummies = {
 };
 
 function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
-
-  const queryClient = useQueryClient();
-  const { data: boastList } = useQuery(["boastList"], boardAPI.getBoastList, {
-    onSuccess: (res) => {
-      console.log("response:::", res)
-    },
-    select: (data) => data.data
-  })
   // card 크기 결정
   // const cardWidth = 301 * 0.5
   // const cardHeight = 356 * 0.5
@@ -64,8 +56,31 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
   const [isBoasting, setIsBoasting] = useState(true)
 
+  const queryClient = useQueryClient();
+  // isBoasting 상태에 따라 get 요청이 변경되어야 하는데 react-query의 쿼리문은 훅 안에서 쓰일 수 없으므로 useQuery의 key를 이용해 문제를 해결한다.
+  // useQuery의 key가 변경되면 useQuery는 새로운 데이터를 자동으로 가져오므로, useQuery의 key를 isBoasting 상태와 연동시킨다.
+  const queryNode = isBoasting
+                    ? { queryKey: ["boastList"], queryFn: boardAPI.getBoastList, select: data => data.data }
+                    : { queryKey: ["scoldedList"], queryFn: boardAPI.getScoldedList, select: data => data.data }
+
   const toggleBtnHandler = () => {
     setIsBoasting(!isBoasting)
+  }
+  
+  const { 
+    data: cardList,
+    isLoading,
+    isError
+  } = useQuery(queryNode, {
+    onSuccess: (res) => {
+      console.log("response:::", res)
+    },
+  })
+
+  if (isLoading) {
+    return <div>로딩중!</div>
+  } else if (isError) {
+    return <div>에러!</div>
   }
 
   return (
@@ -95,18 +110,19 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.MainContent>
           <layout.Grid2Row>
-            { console.log(dummies.data)}
-            { dummies.data.map(card => {
+            { console.log("cardList:::", cardList)}
+            { cardList.length !== 0 && cardList.map(card => {
+              console.log(card)
               return (
                 <CardBox 
-                  id={ card.id }
-                  budget={ card.cashbookGoalValue }
-                  spend={ card.cashbookNowValue }
-                  category={ card.cashbookCategory }
-                  title={ card.cashbookName }
+                  id={ card.cashbookId.boardId }
+                  budget={ card.cashbookId.cashbookGoalValue }
+                  spend={ card.cashbookId.cashbookNowValue }
+                  category={ card.cashbookId.cashbookCategory }
+                  title={ card.cashbookId.cashbookName }
                   ratio={ 0.6 }
                   isDefault= { isBoasting }
-                  key={ card.id }
+                  key={ card.cashbookId.boardId }
                 />
               )
             })}
