@@ -54,7 +54,8 @@ export const AuthAPI = {
 };
 
 export const CashBookAPI = {
-  getCashCard: (date) => instance.post(`/api/cashbook?date=${date}`)
+  getCashCard: (date) => instance.get(`/api/cashbook?date=${date}`),
+  getCashDetail: (id) => instance.get(`/api/cashbook/${id}`)
 }
 
 export const boardAPI = {
