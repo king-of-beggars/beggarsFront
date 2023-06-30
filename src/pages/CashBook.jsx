@@ -8,6 +8,7 @@ import { layout, style } from 'styles'
 import { DayPicker, Nav, CashBookCard, CardBox } from 'components'
 import "styles/css/customSwiper.css"
 import { mainBackground, mainBackgroundMiddle, mainBackgroundTail, mainBackgroundTop } from 'assets';
+import { CashBookAPI } from 'api/api';
 
 // dummy data
 const cashbookApiRes = {
@@ -90,8 +91,13 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const [selectDate, setSelectDate] = useState(moment);
   const [focused, setFocused] = useState(false);
 
-  // 가계부 data
-  const cashbookApiRes = ''
+  // 가계부 data 
+  // const { data, isLoading, error } = useQuery(['cashCard'], () => CashBookAPI.getCashCard(selectDate.format('YYYY-MM-DD')));
+  // // const cashbookApiRes = data;
+  // console.log(data);
+  // if (isLoading || error) {
+  //   return <></>;
+  // }
 
   return (
     <style.BackgroundPageLayout screenWidth={`${screenWidth}px`} isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
