@@ -51,8 +51,10 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   // const cardWidth = 301 * 0.5
   // const cardHeight = 356 * 0.5
 
+  const screenWidth = parseFloat(localStorage.getItem("screenWidth"))
+
   return (
-    <style.BackgroundPageLayout isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
+    <style.BackgroundPageLayout screenWidth={`${screenWidth}px`} isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
           <button>자랑하기</button>

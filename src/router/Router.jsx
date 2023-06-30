@@ -41,6 +41,7 @@ function Router() {
   const mainHeight = Math.ceil(windowSize.height - (headerHeight + navHeight))
 
   const isMobile = /Mobi/i.test(window.navigator.userAgent)
+  console.log(isMobile)
 
 
   return (

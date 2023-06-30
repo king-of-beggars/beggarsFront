@@ -46,8 +46,6 @@ const cashbookApiRes = {
 };
 
 function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
-  console.log("들어오긴 함?")
-  console.log(cashbookApiRes)
   // // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
   // const [windowSize, setWindowSize] = useState({
   //   width: window.innerWidth,
@@ -90,8 +88,9 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const [selectDate, setSelectDate] = useState(moment);
   const [focused, setFocused] = useState(false);
 
+
   return (
-    <style.BackgroundPageLayout isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
+    <style.BackgroundPageLayout screenWidth={`${screenWidth}px`} isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
             <style.CashBookHeader>가계부</style.CashBookHeader>

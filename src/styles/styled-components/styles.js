@@ -473,7 +473,7 @@ export const BackgroundPageLayout = styled(layout.PageLayout)`
   background-image: ${props => props.backPngTop}, ${props => props.backPngTail}, ${props => props.backPngMiddle};
   background-repeat: no-repeat, no-repeat, repeat;
   background-position: top, bottom, center;
-  background-size: cover, auto, cover;
+  background-size: ${props => props.screenWidth}, ${props => props.screenWidth}, auto;
 `
 
 // modal의 검은 background 속성입니다.
