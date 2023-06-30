@@ -171,7 +171,8 @@ export const CardBoxContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: calc(${props => props.ratio} * 1em);
+  flex-direction: column;
+  padding-top: calc(${props => props.ratio}* 1em);
   padding-bottom: calc(${props => props.ratio} * 1em);
   padding-left: calc(${props => props.ratio} * 0.8em);
   padding-right: calc(${props => props.ratio} * 0.8em);

@@ -5,13 +5,13 @@ import { ProgressBarSemiCircle } from "components"
 function CardBox({id, budget, spend, category, title, screenWidth, ratio, isDefault=true}) {
     const [cardWidthOrigin, cardHeightOrigin] = [301, 356]
     const [screenWidthOrigin, screenHeightOrigin] = [393, 852]
-    const cardWidth = ((screenWidth / screenWidthOrigin) * cardWidthOrigin) * ratio
+    const cardWidth = screenWidth > 393 ? cardWidthOrigin * ratio : ((screenWidth / screenWidthOrigin) * cardWidthOrigin) * ratio
     const cardHeight = cardWidth * (cardHeightOrigin / cardWidthOrigin)
 
     const [bigCardBtnWidth, bigCardBtnHeight] = [274, 46]
     const [smallCardBtnWidth, smallCardBtnHeight] = [151, 26]
   return (
-    <style.CardBoxContainer cardWidth={cardWidth} cardHeight={cardHeight}>
+    <style.CardBoxContainer ratio={ratio} isDefault={isDefault} cardWidth={`${cardWidth}px`} cardHeight={`${cardHeight}px`}>
         {
             !!title ? (
                     <style.CardCategoryContainer isDefault={isDefault}>
