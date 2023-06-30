@@ -5,6 +5,8 @@ import * as sVar from "constants/styleVariables"
 function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
     const progressBarRef = useRef(null)
 
+    console.log("isDefaultInProgressBar:::", isDefault)
+
     useEffect(() => {
         const graphValue = (Math.round((spend / budget) * 10)) / 10 * 100
         console.log("origin:::", Math.round((spend / budget) * 10) / 10)
@@ -20,7 +22,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
             value: "0%",
             alignToBottom: false,
           },
-          from: { color: isDefault ? `${sVar.lightYellow}` : "white"},
+          from: { color: isDefault ? `${sVar.lightYellow}` : "#ffffff"},
           to: { color: isDefault ? `${sVar.strongYellow}` : `${sVar.darkGray}`},
           step: (state, bar) => {
             bar.path.setAttribute('stroke', state.color);
@@ -35,16 +37,16 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
               // bar.animate(graphValue / 100)
               bar.text.style.color = "tomato";
               bar.path.setAttribute('stroke', "tomato");
-              { isDefault ? bar.trail.setAttribute("stroke", `${sVar.middleYellow}`) : bar.trail.setAttribute("stroke", `${sVar.darkGray}`) }
+              { isDefault ? bar.trail.setAttribute("stroke", `${sVar.middleYellow}`) : bar.trail.setAttribute("stroke", `${sVar.textGray}`) }
             } else {
               bar.setText(`${value}%`);
-              { isDefault ? bar.text.style.color = `${sVar.middleYellow}` : bar.text.style.color = "white" }
+              { isDefault ? bar.text.style.color = `${sVar.middleYellow}` : bar.text.style.color = "#ffffff" }
             }
           //   bar.text.style.color = `${sVar.middleYellow}`;
           },
         });
         semiCircle.text.style.fontFamily = '"DOSGothic", Helvetica, sans-serif';
-        semiCircle.text.style.fontSize = `${1 * ratio}em`;
+        semiCircle.text.style.fontSize = `1em`;
         
         if (graphValue > 100) {
           console.log(graphValue / 100)
@@ -57,72 +59,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
         return () => {
           semiCircle.destroy();
         };
-        
-        // else if (type === "bar") {
-        //     const bar = new ProgressBar.Line(progressBarRef.current, {
-        //         strokeWidth: 4,
-        //         easing: 'easeInOut',
-        //         duration: 1400,
-        //         color: '#FFEA82',
-        //         trailColor: '#eee',
-        //         trailWidth: 1,
-        //         svgStyle: {width: '100%', height: '100%'},
-        //         text: {
-        //           style: {
-        //             // Text color.
-        //             // Default: same as stroke color (options.color)
-        //             color: '#999',
-        //             position: 'absolute',
-        //             right: '0',
-        //             top: '30px',
-        //             padding: 0,
-        //             margin: 0,
-        //             transform: null
-        //           },
-        //           autoStyleContainer: false
-        //         },
-        //         from: {color: '#FFEA82'},
-        //         to: {color: '#ED6A5A'},
-        //         step: (state, bar) => {
-        //           bar.setText(Math.round(bar.value() * 100) + ' %');
-        //         }
-        //     });
-            
-        //     bar.animate(1.0)
-
-        //     return () => {
-        //         bar.destroy();
-        //       };
-        // } else if (type === "circle") {
-        //     const circle = new ProgressBar.Circle(progressBarRef.current, {
-        //         color: '#FFEA82',
-        //         trailColor: '#eee',
-        //         trailWidth: 1,
-        //         duration: 1400,
-        //         easing: 'bounce',
-        //         strokeWidth: 6,
-        //         from: {color: '#FFEA82', a:0},
-        //         to: {color: '#ED6A5A', a:1},
-        //         // Set default step function for all animate calls
-        //         step: function(state, circle) {
-        //           circle.path.setAttribute('stroke', state.color);
-        //           var value = Math.round(circle.value() * 100);
-        //           if (value === 0) {
-        //             circle.setText('');
-        //           } else {
-        //             circle.setText(value);
-        //           }
-        //         }
-        //     });
-        //     circle.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-        //     circle.text.style.fontSize = '2rem';
-
-        //     circle.animate(1.0);
-        //     return () => {
-        //         circle.destroy();
-        //       };
-        //     }
-        }, []);
+        }, [isDefault]);
 
         return <div ref={progressBarRef} />;
       };
