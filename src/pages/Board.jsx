@@ -1,7 +1,7 @@
 import React from "react";
 
 import { layout } from "styles";
-import { Nav, BoardCard } from "components";
+import { Nav, CardBox } from "components";
 
 const dummies = {
   data: [
@@ -64,13 +64,14 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
             { console.log(dummies.data)}
             { dummies.data.map(card => {
               return (
-                <BoardCard 
+                <CardBox 
                   id={ card.id }
                   budget={ card.cashbookGoalValue }
                   spend={ card.cashbookNowValue }
                   category={ card.cashbookCategory }
                   title={ card.cashbookName }
-                  ratio={ 0.5 }
+                  ratio={ 0.73 }
+                  isDefault= { true }
                   key={ card.id }
                 />
               )

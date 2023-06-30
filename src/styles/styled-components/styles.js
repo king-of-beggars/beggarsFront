@@ -217,7 +217,7 @@ export const CardDivision = styled.div`
 
 // 매일의 예산이 출력되는 div의 스타일링입니다.
 export const CardBudgetText = styled.div`
-  font-size: calc(${props => props.ratio} * 0.9em);
+  font-size: calc(${props => props.ratio} * 1em);
   font-family: "DOSGothic";
   color: ${props => props.isDefault ? `${sVar.middleYellow}` : "white"};
 `
@@ -233,6 +233,7 @@ export const CardProgressBarContainer = styled.div`
 export const CardSpendText = styled.div`
   color: ${props => props.isDefault ? `${sVar.middleYellow}` : "white" };
   margin-top: calc(${props => props.ratio} * 1em);
+  font-size: calc(${props => props.ratio} * 1em);
 `
 
 // Card 내 버튼 스타일링입니다.
@@ -251,6 +252,7 @@ export const CardBtn = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: calc(${props => props.ratio} * 1em);
 
   &:focus {
     outline: none;
