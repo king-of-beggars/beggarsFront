@@ -1,6 +1,16 @@
 
-import styled, { css } from "styled-components"
-import { btn, pressedBtn, cashbookDateBox, cardBgYellow, mainLineLogo, mainLogo, cardBgGray, cardBtnYellow, cardBgBlack } from 'assets'
+import styled from "styled-components"
+import { btn,
+        pressedBtn,
+        cashbookDateBox,
+        cardBgYellow,
+        mainLineLogo,
+        mainLogo,
+        cardBgGray,
+        cardBtnYellow,
+        cardBgBlack,
+        cardBtnBoardYellow,
+        cardBtnBoardBlack } from 'assets'
 import { SwiperSlide } from "swiper/react"
 import { layout } from "styles";
 import * as sVar from "constants/styleVariables.js"
@@ -174,8 +184,6 @@ export const CardCategoryContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: calc(${props => props.ratio} * 1em);
-  margin-bottom: calc(${props => props.ratio} * 1em);
-  border-bottom: 0.4px solid ${props => props.isDefault ? null : null};
 `
 
 // Card 대분류명으로 들어가는 스타일링입니다.
@@ -185,7 +193,66 @@ export const Card1stCategoryText = styled.div`
   padding-bottom: calc(${props => props.ratio} * 0.5em);
   padding-left: calc(${props => props.ratio} * 0.8em);
   padding-right: calc(${props => props.ratio} * 0.8em);
-  // background-color: 
+  background-color: ${props => props.isDefault ? `${sVar.middleYellow}` : `${sVar.white70}`};
+  color: ${props => props.isDefault ? `${sVar.lightYellow}` : `${sVar.nightyBlue}`};
+  font-family: "DOSGothic";
+  border-radius: calc(${props => props.ratio} * 0.6em);
+  margin: calc(${props => props.ratio} * 0.5em), 0;
+`
+
+// Card 소분류명으로 들어가는 스타일링입니다.
+export const Card2ndCategoryText = styled.div`
+  font-size: calc(${props => props.ratio} * 1.2em);
+  color: ${props => props.isDefault ? `${sVar.middleYellow}` : "white"};
+`
+
+// Card에서 중간 border를 넣기 위한 div 스타일링입니다.
+export const CardDivision = styled.div`
+  width: 100%;
+  border-bottom: 0.4px solid ${props => props.isDefault ? `${sVar.middleYellow}` : `${sVar.lightGray}`};
+  margin-bottom: calc(${props => props.ratio} * 1em);
+`
+
+// 매일의 예산이 출력되는 div의 스타일링입니다.
+export const CardBudgetText = styled.div`
+  font-size: calc(${props => props.ratio} * 0.9em);
+  font-family: "DOSGothic";
+  color: ${props => props.isDefault ? `${sVar.middleYellow}` : "white"};
+`
+
+// Card 내 프로그레스 바 컨테이너의 스타일링입니다.
+export const CardProgressBarContainer = styled.div`
+  width: calc(${props => props.ratio} * 9em);
+  height: calc(${props => props.ratio} * 3em);
+  margin: calc(${props => props.ratio} * 1em);
+`
+
+// Card 내 예산 사용량 스타일링입니다.
+export const CardSpendText = styled.div`
+  color: ${props => props.isDefault ? `${sVar.middleYellow}` : "white" };
+  margin: calc(${props => props.ratio} * 1em), 0;
+`
+
+// Card 내 버튼 스타일링입니다.
+export const CardBtn = styled.button`
+  background-image: ${props => props.isDefault ? `url(${cardBtnBoardYellow})` : `url(${cardBtnBoardBlack})`};
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: ${props => props.isDefault ? `${sVar.lightYellow}` : `${sVar.darkGray}`};
+  width: ${props => props.btnWidth};
+  height: ${props => props.btnHeight};
+  color: ${props => props.isDefault ? `${sVar.lightYellow}` : "white"};
+  border: none;
+  outline: none;
+  margin-top: calc(${props => props.ratio} * 1em);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &:focus {
+    outline: none;
+  }
 `
 
 // cashBookCard의 Card 부분 스타일링입니다.

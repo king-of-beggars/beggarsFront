@@ -56,16 +56,16 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
   }
 
   // 토큰 저장 함수
-  const saveTokens = (accessToken, refreshToken) => {
-    localStorage.setItem("accessToken", accessToken)
-    localStorage.setItem("refreshToken", refreshToken)
+  const saveInfo = (userId, nickname) => {
+    localStorage.setItem("userId", userId)
+    localStorage.setItem("nickname", nickname)
   }
 
   const mutationLogin = useMutation(AuthAPI.postLogIn, {
     onSuccess: (response) => {
       alert("로그인이 완료되었습니다.")
       console.log(response)
-      // saveTokens(response.accessToken, response.refreshToken)
+      saveInfo(response.headers["Userid"], response.headers["Usernickname"])
       navigate("/") // 회원가입 완료시 메인 이동
     },
     onError: () => alert("로그인이 실패하였습니다.")
