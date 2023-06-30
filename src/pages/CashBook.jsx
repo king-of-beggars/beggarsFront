@@ -9,46 +9,48 @@ import { DayPicker, Nav, CashBookCard, CardBox } from 'components'
 import "styles/css/customSwiper.css"
 import { mainBackground, mainBackgroundMiddle, mainBackgroundTail, mainBackgroundTop } from 'assets';
 import { CashBookAPI } from 'api/api';
+import { useNavigate } from 'react-router-dom';
 
 // dummy data
-const cashbookApiRes = {
-  data: [
-    {
-      id: 0,
-      cashbookCategory: "식비",
-      cashbookName: "아침",
-      cashbookNowValue: 4000,
-      cashbookGoalValue: 8000,
-      cashbookOrder: 0,
-    },
-    {
-      id: 1,
-      cashbookCategory: "식비",
-      cashbookName: "점심",
-      cashbookNowValue: 12000,
-      cashbookGoalValue: 15000,
-      cashbookOrder: 1,
-    },
-    {
-      id: 2,
-      cashbookCategory: "식비",
-      cashbookName: "저녁",
-      cashbookNowValue: 0,
-      cashbookGoalValue: 12000,
-      cashbookOrder: 2,
-    },
-    {
-      id: 3,
-      cashbookCategory: "간식비 / 카페",
-      cashbookName: "",
-      cashbookNowValue: 6000,
-      cashbookGoalValue: 5000,
-      cashbookOrder: 3,
-    },
-  ],
-};
+// const cashbookApiRes = {
+//   data: [
+//     {
+//       id: 0,
+//       cashbookCategory: "식비",
+//       cashbookName: "아침",
+//       cashbookNowValue: 4000,
+//       cashbookGoalValue: 8000,
+//       cashbookOrder: 0,
+//     },
+//     {
+//       id: 1,
+//       cashbookCategory: "식비",
+//       cashbookName: "점심",
+//       cashbookNowValue: 12000,
+//       cashbookGoalValue: 15000,
+//       cashbookOrder: 1,
+//     },
+//     {
+//       id: 2,
+//       cashbookCategory: "식비",
+//       cashbookName: "저녁",
+//       cashbookNowValue: 0,
+//       cashbookGoalValue: 12000,
+//       cashbookOrder: 2,
+//     },
+//     {
+//       id: 3,
+//       cashbookCategory: "간식비 / 카페",
+//       cashbookName: "",
+//       cashbookNowValue: 6000,
+//       cashbookGoalValue: 5000,
+//       cashbookOrder: 3,
+//     },
+//   ],
+// };
 
 function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
+  const navigate = useNavigate();
   // // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
   // const [windowSize, setWindowSize] = useState({
   //   width: window.innerWidth,
@@ -92,12 +94,17 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const [focused, setFocused] = useState(false);
 
   // 가계부 data 
-  // const { data, isLoading, error } = useQuery(['cashCard'], () => CashBookAPI.getCashCard(selectDate.format('YYYY-MM-DD')));
-  // // const cashbookApiRes = data;
+  const { data, isLoading, error } = useQuery(['cashCard'], () => CashBookAPI.getCashCard(selectDate.format('YYYY-MM-DD')));
+  const cashbookApiRes = data;
   // console.log(data);
-  // if (isLoading || error) {
-  //   return <></>;
-  // }
+  if (isLoading || error) {
+    return <></>;
+  }
+
+  // 카드 상세 박스로 이동
+  const onClickCard = (id) => {
+    navigate(`/cash-book/${id}`);
+  }
 
   return (
     <style.BackgroundPageLayout screenWidth={`${screenWidth}px`} isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
@@ -160,13 +167,14 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
                             >
                                 <SwiperSlide>
                                   <CardBox
-                                    id={card.id}
+                                    id={card.cashbookId}
                                     budget={card.cashbookGoalValue}
                                     spend={card.cashbookNowValue}
                                     category={card.cashbookCategory}
                                     title={card.cashbookName}
                                     screenWidth={screenWidth}
                                     ratio={0.9}
+                                    onClickCard={()=>onClickCard(card.cashbookId)}
                                     isDefault={true}
                                   />
                                     {/* <CashBookCard
