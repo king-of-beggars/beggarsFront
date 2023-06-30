@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { layout, style } from "styles";
 import { Nav, CardBox } from "components";
-import { mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail } from 'assets';
+import { mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
 
 const dummies = {
   data: [
@@ -51,7 +51,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   // const cardWidth = 301 * 0.5
   // const cardHeight = 356 * 0.5
 
-  const screenWidth = parseFloat(localStorage.getItem("screenWidth"))
+  const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
   const [isBoasting, setIsBoasting] = useState(true)
 
   const toggleBtnHandler = () => {
@@ -59,7 +59,12 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   }
 
   return (
-    <style.BackgroundPageLayout screenWidth={`${screenWidth}px`} isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
+    <style.BackgroundPageLayout
+      screenWidth={`${screenWidth}px`}
+      isMobile={isMobile}
+      backPngTop={isBoasting ? `url(${backgroundBrightTop})` : `url(${backgroundDarkTop})`}
+      backPngTail={isBoasting ? `url(${backgroundBrightTail})` : `url(${backgroundDarkTail})`}
+      backPngMiddle={isBoasting ? `url(${backgroundBrightMiddle})` : `url(${backgroundDarkMiddle})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
             { isBoasting
@@ -81,6 +86,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
         <layout.MainContent>
           <layout.Grid2Row>
             { console.log(dummies.data)}
+            { console.log("isBoasting:::", isBoasting)}
             { dummies.data.map(card => {
               return (
                 <CardBox 
@@ -90,7 +96,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
                   category={ card.cashbookCategory }
                   title={ card.cashbookName }
                   ratio={ 0.6 }
-                  isDefault= { true }
+                  isDefault= { isBoasting }
                   key={ card.id }
                 />
               )

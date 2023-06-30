@@ -66,7 +66,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   //     window.removeEventListener("resize", handleResize)
   //   }
   // }, [])
-  const screenWidth = parseFloat(localStorage.getItem("screenWidth"))
+  const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
 
   // datepicker 박스 크기 결정
   const dateBoxWidth = isMobile || screenWidth < 500 ? ((screenWidth * 155) / 393) * 0.65 : ((500 * 155) / 393) * 0.65
