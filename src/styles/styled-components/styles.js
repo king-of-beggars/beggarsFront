@@ -471,9 +471,9 @@ export const CashbookBtn = styled.button`
 // 백그라운드가 있는 pageLayout 스타일링입니다.
 export const BackgroundPageLayout = styled(layout.PageLayout)`
   background-image: ${props => props.backPngTop}, ${props => props.backPngTail}, ${props => props.backPngMiddle};
-  /* object-fit: cover; */
   background-repeat: no-repeat, no-repeat, repeat;
   background-position: top, bottom, center;
+  background-size: cover, auto, cover;
 `
 
 // modal의 검은 background 속성입니다.

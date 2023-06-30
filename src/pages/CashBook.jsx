@@ -91,7 +91,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const [focused, setFocused] = useState(false);
 
   return (
-    <style.BackgroundPageLayout backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
+    <style.BackgroundPageLayout isMobile={isMobile} backPngTop={`url(${mainBackgroundTop})`} backPngMiddle={`url(${mainBackgroundMiddle})`} backPngTail={`url(${mainBackgroundTail})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <layout.HeaderContent>
             <style.CashBookHeader>가계부</style.CashBookHeader>
