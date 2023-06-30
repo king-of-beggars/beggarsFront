@@ -10,6 +10,10 @@ function CardBox({id, budget, spend, category, title, screenWidth, ratio, isDefa
 
     const [bigCardBtnWidth, bigCardBtnHeight] = [274, 46]
     const [smallCardBtnWidth, smallCardBtnHeight] = [151, 26]
+
+    const cardOnClickHandler = () => {
+      
+    }
   return (
     <style.CardBoxContainer ratio={ratio} isDefault={isDefault} cardWidth={`${cardWidth}px`} cardHeight={`${cardHeight}px`}>
         {

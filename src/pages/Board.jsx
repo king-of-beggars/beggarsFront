@@ -2,7 +2,9 @@ import React, { useState } from "react";
 
 import { layout, style } from "styles";
 import { Nav, CardBox } from "components";
+import { useQuery, useQueryClient } from "react-query";
 import { mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
+import { boardAPI } from 'api/api';
 
 const dummies = {
   data: [
@@ -47,6 +49,14 @@ const dummies = {
 };
 
 function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
+
+  const queryClient = useQueryClient();
+  const { data: boastList } = useQuery(["boastList"], boardAPI.getBoastList, {
+    onSuccess: (res) => {
+      console.log("response:::", res)
+    },
+    select: (data) => data.data
+  })
   // card 크기 결정
   // const cardWidth = 301 * 0.5
   // const cardHeight = 356 * 0.5
@@ -86,7 +96,6 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
         <layout.MainContent>
           <layout.Grid2Row>
             { console.log(dummies.data)}
-            { console.log("isBoasting:::", isBoasting)}
             { dummies.data.map(card => {
               return (
                 <CardBox 

@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Nav } from "components";
-import { layout } from "styles";
-import { BackArrow } from "assets";
+import { layout, style } from "styles";
+import { BackArrowWhite, BackArrowWGray } from "assets";
 import BoardDetailComment from "components/board/BoardDetailComment";
+import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
 
-function BoardDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
+function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
+
+  const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
   const navigate = useNavigate();
 
   // 뒤로 가기
@@ -65,15 +68,19 @@ function BoardDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   };
 
   return (
-    <layout.PageLayout isMobile={isMobile}>
+    <style.BackgroundPageLayout
+      screenWidth={`${screenWidth}px`}
+      isMobile={isMobile}
+      backPngTop={isBoasting ? `url(${backgroundBrightTop})` : `url(${backgroundDarkTop})`}
+      backPngTail={isBoasting ? `url(${backgroundBrightTail})` : `url(${backgroundDarkTail})`}
+      backPngMiddle={isBoasting ? `url(${backgroundBrightMiddle})` : `url(${backgroundDarkMiddle})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
-        <BackArrow
+        <BackArrowWhite
           onClick={onClickBack}
           style={{
             position: "absolute",
             left: "1em",
             top: "2em",
-            backgroundColor: "green",
           }}
         />
         <layout.HeaderContent style={{ fontSize: "25px" }}>
@@ -204,7 +211,7 @@ function BoardDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
       <layout.Nav navHeight={`${navHeight}px`}>
         <Nav selected="main" />
       </layout.Nav>
-    </layout.PageLayout>
+    </style.BackgroundPageLayout>
   );
 }
 
