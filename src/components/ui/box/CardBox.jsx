@@ -1,6 +1,7 @@
 import React from 'react'
 import { style, layout } from "styles"
 import { ProgressBarSemiCircle } from "components"
+import { useNavigate } from 'react-router-dom'
 
 function CardBox({id, budget, spend, category, title, screenWidth, ratio, isDefault=true}) {
     const [cardWidthOrigin, cardHeightOrigin] = [301, 356]
@@ -11,11 +12,13 @@ function CardBox({id, budget, spend, category, title, screenWidth, ratio, isDefa
     const [bigCardBtnWidth, bigCardBtnHeight] = [274, 46]
     const [smallCardBtnWidth, smallCardBtnHeight] = [151, 26]
 
-    const cardOnClickHandler = () => {
-      
+    // 카드 상세 박스로 이동
+    const navigate = useNavigate();
+    const onClickCard = () => {
+      navigate(`/cash-book/${id}`);
     }
   return (
-    <style.CardBoxContainer ratio={ratio} isDefault={isDefault} cardWidth={`${cardWidth}px`} cardHeight={`${cardHeight}px`}>
+    <style.CardBoxContainer onClick={onClickCard} ratio={ratio} isDefault={isDefault} cardWidth={`${cardWidth}px`} cardHeight={`${cardHeight}px`}>
         {
             !!title ? (
                     <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
