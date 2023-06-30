@@ -31,10 +31,13 @@ function CardBox({id, budget, spend, category, title, screenWidth, ratio, isDefa
       <style.CardProgressBarContainer ratio={ratio}>
         <ProgressBarSemiCircle ratio={ratio} isDefault={isDefault} spend={spend} budget={budget}/>
       </style.CardProgressBarContainer>
-      <style.CardSpendText ratio={ratio} isDefault={isDefault}>{spend}원 사용</style.CardSpendText>
+      { (!!isDefault && ratio >= 0.9) 
+        ? <style.CardSpendText ratio={ratio} isDefault={isDefault}>{spend}원 사용</style.CardSpendText> 
+        : <style.CardSpendText ratio={ratio} isDefault={isDefault} style={{paddingBottom: "0.5em"}}></style.CardSpendText> 
+      }
       { (!!isDefault && ratio >= 0.9)
         ? <style.CardBtn ratio={ratio} id={id} isDefault={isDefault} btnWidth={`${bigCardBtnWidth * ratio}px`} btnHeight={`${bigCardBtnHeight * ratio}px`}>{spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"}</style.CardBtn>
-        : <style.CardBtn ratio={ratio} id={id} isDefault={isDefault} btnWidth={`${smallCardBtnWidth * (ratio + 0.2)}px`} btnHeight={`${smallCardBtnHeight * (ratio + 0.2)}px`}>자세히 보기</style.CardBtn>}
+        : <style.CardBtn ratio={ratio} id={id} isDefault={isDefault} btnWidth={`${smallCardBtnWidth * (ratio + 0.2)}px`} btnHeight={`${smallCardBtnHeight * (ratio + 0.2)}px`}>{spend > budget ? `${spend-budget}원 초과` : `${budget-spend}원 절약`}</style.CardBtn>}
     </style.CardBoxContainer>
   )
 }

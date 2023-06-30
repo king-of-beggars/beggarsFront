@@ -45,6 +45,12 @@ export { default as mainBackground } from "assets/pixels/backgrounds/mainBackgro
 export { default as mainBackgroundTop } from "assets/pixels/backgrounds/mainBackgroundTop.png"
 export { default as mainBackgroundMiddle } from "assets/pixels/backgrounds/mainBackgroundMiddle.png"
 export { default as mainBackgroundTail } from "assets/pixels/backgrounds/mainBackgroundTail.png"
+export { default as backgroundBrightTop } from "assets/pixels/backgrounds/backgroundBrightTop.png"
+export { default as backgroundBrightMiddle } from "assets/pixels/backgrounds/backgroundBrightMiddle.png"
+export { default as backgroundBrightTail } from "assets/pixels/backgrounds/backgroundBrightTail.png"
+export { default as backgroundDarkTop } from "assets/pixels/backgrounds/backgroundDarkTop.png"
+export { default as backgroundDarkMiddle } from "assets/pixels/backgrounds/backgroundDarkMiddle.png"
+export { default as backgroundDarkTail } from "assets/pixels/backgrounds/backgroundDarkTail.png"
 
 // sounds
 export { default as btnClickSound } from "assets/sounds/laserShoot.wav"
