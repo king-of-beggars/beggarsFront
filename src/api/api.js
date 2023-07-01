@@ -1,10 +1,12 @@
 import axios from "axios";
 
 const instance = axios.create({
+  method: "options",
   baseURL: process.env.REACT_APP_SERVER_URL,
   headers: {
     withCredentials: true,
     "Content-Type": `application/json`,
+    'Access-Control-Request-Headers': 'Cookie',
   },
 });
 
@@ -55,7 +57,8 @@ export const AuthAPI = {
 
 export const CashBookAPI = {
   getCashCard: (date) => instance.get(`/api/cashbook?date=${date}`),
-  getCashDetail: (id) => instance.get(`/api/cashbook/${id}`)
+  getCashDetail: (id) => instance.get(`/api/cashbook/${id}`),
+  postCardAdd: (payload) => instance.post('/api/cashbook/frame', payload)
 }
 
 export const boardAPI = {
