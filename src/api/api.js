@@ -3,8 +3,8 @@ import axios from "axios";
 const instance = axios.create({
   method: "options",
   baseURL: process.env.REACT_APP_SERVER_URL,
+  withCredentials: true,
   headers: {
-    withCredentials: true,
     "Content-Type": `application/json`,
     'Access-Control-Request-Headers': 'Cookie',
   },
