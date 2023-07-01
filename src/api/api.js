@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
+  method: "options",
   baseURL: process.env.REACT_APP_SERVER_URL,
   headers: {
     withCredentials: true,
