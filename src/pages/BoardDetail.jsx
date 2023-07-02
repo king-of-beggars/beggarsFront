@@ -3,10 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { Nav } from "components";
 import { layout, style } from "styles";
-import { BackArrowWhite, BackArrowWGray } from "assets";
+import { BackArrowWhite, BackArrowGray } from "assets";
 import BoardDetailComment from "components/board/BoardDetailComment";
 import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
 import { MENU_LIST } from 'constants';
+import { useQuery } from 'react-query';
+import { boardAPI } from 'api/api';
 
 function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 
@@ -15,6 +17,14 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
 
   const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
   const navigate = useNavigate();
+
+  const {
+    data: receipt,
+    isLoading,
+    isError
+  } = useQuery(["receipt", id], boardAPI.getBoardDetail(id), {
+    onSuccess: (res) => console.log(res)
+  })
 
   // 뒤로 가기
   const onClickBack = () => {
@@ -79,7 +89,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
       backPngTail={isBoasting ? `url(${backgroundBrightTail})` : `url(${backgroundDarkTail})`}
       backPngMiddle={isBoasting ? `url(${backgroundBrightMiddle})` : `url(${backgroundDarkMiddle})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
-        <BackArrowWhite
+        <BackArrowGray
           onClick={onClickBack}
           style={{
             position: "absolute",
