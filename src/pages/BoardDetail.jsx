@@ -104,7 +104,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                 {/* {receipt.cashbookDetail.cashbookName} */}
               </div>
               <div style={{ textAlign: "left" }}>
-                {digit3Comma(receipt.cashbookDetail.cashbookGoalValue)}원
+                {/* {digit3Comma(receipt.cashbookDetail.cashbookGoalValue)}원 */}
               </div>
             </style.ReceiptInnerContainer>
             <style.ReceiptInnerContainer>
