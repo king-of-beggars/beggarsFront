@@ -6,6 +6,7 @@ import { layout, style } from "styles";
 import { BackArrowWhite, BackArrowWGray } from "assets";
 import BoardDetailComment from "components/board/BoardDetailComment";
 import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
+import { MENU_LIST } from 'constants';
 
 function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 
@@ -212,7 +213,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
       </layout.Main>
       {/* 댓글창으로! */}
       <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="main" />
+        <Nav selected={MENU_LIST.board}/>
       </layout.Nav>
     </style.BackgroundPageLayout>
   );

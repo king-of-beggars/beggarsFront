@@ -1,0 +1,1 @@
+export { default as MENU_LIST } from "constants/menu"
