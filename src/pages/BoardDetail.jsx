@@ -121,13 +121,13 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                 style={{ justifyContent: "space-between" }}
               >
                 <div>아주 흥미로운 멘트</div>
-                <div>{receipt.boardId}</div>
+                {/* <div>{receipt.boardId}</div> */}
               </layout.FlexCenterRow100>
               <layout.FlexCenterRow100
                 style={{ justifyContent: "space-between" }}
               >
                 <div>웃기고 싶어요 안 선생님</div>
-                <div>{receipt.boardCreatedAt}</div>
+                {/* <div>{receipt.boardCreatedAt}</div> */}
               </layout.FlexCenterRow100>
             </style.ReceiptInnerContainer>
             <style.ReceiptInnerContainer padding="1em" fontSize="1.2em">
