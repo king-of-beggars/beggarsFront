@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { Nav } from "components";
@@ -22,11 +22,15 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     data: receipt,
     isLoading,
     isError
-  } = useQuery(["receipt", id], boardAPI.getBoardDetail(id), {
+  } = useQuery(["receipt", id], () => boardAPI.getBoardDetail(id), {
     onSuccess: (res) => {
       alert("데이터 get 성공!")
     }
     
+  })
+
+  useEffect(() => {
+
   })
 
   // 뒤로 가기
