@@ -1,1 +1,1 @@
-export { default as MENU_LIST } from "constants/menu"
+export { MENU_LIST } from "constants/menu"
