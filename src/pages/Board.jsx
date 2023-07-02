@@ -134,7 +134,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
                   spend={ card.cashbookId.cashbookNowValue }
                   category={ card.cashbookId.cashbookCategory }
                   title={ card.cashbookId.cashbookName }
-                  ratio={ 0.6 }
+                  ratioStr={ 0.6 }
                   isDefault= { isBoasting }
                   key={ card.cashbookId.boardId }
                   onClick={ cardClickHandler }
