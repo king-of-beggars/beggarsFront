@@ -56,6 +56,8 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
   
   useEffect(() => {
     updateDataState(DATA_RECEIPT, DATA_CASHBOOK, DATA_COMMENTS, DATA_USER)
+    console.log("useEffect 동작!")
+    console.log(isReceipt, isCashbook, isComments, isUser)
   }, [isReceipt, isCashbook, isComments, isUser])
 
   // 뒤로 가기
