@@ -29,7 +29,7 @@ function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
-        <layout.HeaderContent>Profile의 Header 내용</layout.HeaderContent>
+        <layout.HeaderContent>프로필</layout.HeaderContent>
       </layout.Header>
       <layout.Main
         headerHeight={`${headerHeight}px`}
@@ -40,10 +40,10 @@ function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
             style={{ marginTop: "2em", marginBottom: "10em", gap: "1em" }}
           >
             <style.ProfilePicWrap />
-            <div style={{ fontSize: "1.5em" }}>사용자 닉네임 출력</div>
-            <div style={{ fontSize: "1em", color: "#858585" }}>
+            <div style={{ fontSize: "1.5em" }}>{decodeURIComponent(localStorage.getItem("nickname"))}</div>
+            {/* <div style={{ fontSize: "1em", color: "#858585" }}>
               이메일 정보 출력
-            </div>
+            </div> */}
           </layout.FlexCenterColumn100>
           <layout.FlexCenterColumn100 style={{ gap: "1em" }}>
             <style.MidBlackBtn>정보수정</style.MidBlackBtn>
