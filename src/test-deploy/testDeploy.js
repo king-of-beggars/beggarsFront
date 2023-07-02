@@ -1,7 +1,7 @@
 const deployVerification = () => {
     const prevDeploy = localStorage.getItem("curr")
     let currDeploy;
-    if (prevDeploy === undefined) {
+    if (prevDeploy === null) {
         currDeploy = 1
     } else {
         currDeploy = parseInt(prevDeploy) + 1
