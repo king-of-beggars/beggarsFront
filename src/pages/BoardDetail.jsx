@@ -32,15 +32,19 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
       DATA_CASHBOOK = res.cashbookDetail
       DATA_COMMENTS = res.comments
       DATA_USER = res.userId
+      console.log("receipt:::", DATA_RECEIPT)
+      console.log("cashbook:::", DATA_CASHBOOK)
+      console.log("comments:::", DATA_COMMENTS)
+      console.log("user:::", DATA_USER)
     }
   })
 
 
   if (DATA_RECEIPT) {
-    console.log("receipt:::", DATA_RECEIPT)
-    console.log("cashbook:::", DATA_CASHBOOK)
-    console.log("comments:::", DATA_COMMENTS)
-    console.log("user:::", DATA_USER)
+    // console.log("receipt:::", DATA_RECEIPT)
+    // console.log("cashbook:::", DATA_CASHBOOK)
+    // console.log("comments:::", DATA_COMMENTS)
+    // console.log("user:::", DATA_USER)
   }
   
 
