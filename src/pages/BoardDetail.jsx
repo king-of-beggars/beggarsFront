@@ -3,9 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { Nav } from "components";
 import { layout, style } from "styles";
-import { BackArrowWhite, BackArrowGray, background50Head } from "assets";
 import BoardDetailComment from "components/board/BoardDetailComment";
-import { backgroundDarkTop, backgroundDarkMiddle, backgroundDarkTail, background50Head, background50Middle, background50Tail } from 'assets';
+import { BackArrowGray,backgroundDarkTop, backgroundDarkMiddle, backgroundDarkTail, background50Head, background50Middle, background50Tail } from 'assets';
 import { MENU_LIST } from 'constants';
 import { useQuery } from 'react-query';
 import { boardAPI } from 'api/api';
