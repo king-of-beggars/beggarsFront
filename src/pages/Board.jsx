@@ -129,7 +129,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
               console.log(card)
               return (
                 <CardBox 
-                  id={ card.cashbookId.boardId }
+                  id={ card.boardId }
                   budget={ card.cashbookId.cashbookGoalValue }
                   spend={ card.cashbookId.cashbookNowValue }
                   category={ card.cashbookId.cashbookCategory }
