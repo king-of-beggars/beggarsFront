@@ -68,8 +68,9 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
       const newCard = {
         cashCategory: category,
         cashName: subHead,
-        cashListGoalValue: budget,
+        cashListGoalValue: Number(budget.replace(',','')),
       };
+      // console.log(newCard);
       mutationAddCard.mutate(newCard);
       navigate("/cash-book");
     }

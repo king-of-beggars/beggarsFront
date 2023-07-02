@@ -114,7 +114,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
     return <></>;
   }
   const cashbookApiRes = data.data;
-  console.log(cashbookApiRes.length);
+  // console.log(cashbookApiRes.length);
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
