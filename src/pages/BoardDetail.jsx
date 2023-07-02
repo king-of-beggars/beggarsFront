@@ -60,6 +60,10 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     console.log(isReceipt, isCashbook, isComments, isUser)
   }, [isReceipt, isCashbook, isComments, isUser])
 
+  setInterval(() => {
+    console.log(isReceipt, isCashbook, isComments, isUser)
+  }, 2000)
+
   // 뒤로 가기
   const onClickBack = () => {
     navigate(-1);
