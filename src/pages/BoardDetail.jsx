@@ -30,8 +30,8 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
 
   console.log("receipt:::", DATA_RECEIPT)
 
-  // const DATA_CASHBOOK = DATA_RECEIPT.cashbookDetail
-  // console.log("cashbook:::", DATA_CASHBOOK)
+  const DATA_CASHBOOK = DATA_RECEIPT["cashbookDetail"]
+  console.log("cashbook:::", DATA_CASHBOOK)
 
   // const DATA_COMMENTS = DATA_RECEIPT.comments
     // console.log("comments:::", DATA_COMMENTS)
