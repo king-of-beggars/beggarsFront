@@ -43,26 +43,37 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
     };
 
     setCardInfo(newCard);
-    console.log(newCard)
+    // console.log(newCard);
   };
 
   // 뒤로가기
   const navigate = useNavigate();
   const onClickBack = () => {
-    navigate('/cash-book');
+    navigate("/cash-book");
   };
 
   // 저장하기 버튼 클릭
   const mutationAddCard = useMutation(CashBookAPI.postCardAdd, {
     onSuccess: (response) => {
-      navigate('/cash-book') 
+      navigate("/cash-book");
     },
-    onError: () => alert("카드 추가에 실패하였습니다.")
-  })
-  const onClickSave = () => {
+    onError: () => alert("카드 추가에 실패하였습니다."),
+  });
 
-    navigate('/cash-book');
-  }
+  const onClickSave = () => {
+    console.log(!category)
+    if (!category | !budget) {
+      alert("카테고리와 예산을 선택해주세요.")
+    } else {
+      const newCard = {
+        cashCategory: category,
+        cashName: subHead,
+        cashListGoalValue: budget,
+      };
+      mutationAddCard.mutate(newCard);
+      navigate("/cash-book");
+    }
+  };
 
   return (
     <layout.PageLayout isMobile={isMobile}>
@@ -102,7 +113,9 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
             name={"budget"}
             value={budget}
           />
-          <style.CashBookBtn marginTop="50px" onClick={onClickSave}>{"저장"}</style.CashBookBtn>
+          <style.CashBookBtn marginTop="50px" onClick={onClickSave}>
+            {"저장"}
+          </style.CashBookBtn>
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>

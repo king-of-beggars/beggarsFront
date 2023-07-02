@@ -6,7 +6,7 @@ function CashAddSelect({ title, options, placeholder, onChange, name, value }) {
     <style.CashBookCardWrap>
       <style.CashBookHead>{title}</style.CashBookHead>
       <style.CashBookSelect name={name} onChange={onChange} value={value}>
-        <option disabled hidden selected>
+        <option value="" disabled={true}>
           {placeholder}
         </option>
         {options.map((option) => {
