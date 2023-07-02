@@ -23,7 +23,10 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     isLoading,
     isError
   } = useQuery(["receipt", id], boardAPI.getBoardDetail(id), {
-    onSuccess: (res) => console.log(res)
+    onSuccess: (res) => {
+      console.log("receipt:::", res)
+    }
+    
   })
 
   // 뒤로 가기
