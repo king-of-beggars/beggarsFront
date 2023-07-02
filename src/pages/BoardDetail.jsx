@@ -68,7 +68,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     return digit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  if (isReceipt && !!isCashbook && !!isComments && !!isUser) {
+  if (!!isReceipt && !!isCashbook && !!isComments && !!isUser) {
     return (
       <style.BackgroundPageLayout
         screenWidth={`${screenWidth}px`}
@@ -211,6 +211,8 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
         </layout.Nav>
       </style.BackgroundPageLayout>
     );
+  } else {
+    <div>로딩중...</div>
   }
 
 }
