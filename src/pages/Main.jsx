@@ -7,7 +7,7 @@ import { layout } from 'styles';
 import SocialLoginModal from 'components/ui/modal/SocialLoginModal';
 
 function Main({ isMobile, headerHeight, navHeight, mainHeight}) {
-  console.log(document.cookie);
+  // console.log(document.cookie);
   // 닉네임 모달
   const [isSocialLogin, setIsSocialLogin] = useState(false);
   const { search } = useLocation();

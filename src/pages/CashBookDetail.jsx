@@ -79,6 +79,7 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
           <style.CashBookDetailAddBox onClick={showUserModal}>
             <AddDetail />
           </style.CashBookDetailAddBox>
+          { isModalOpen && <ExpendAddModal setClose={closeUserModal}/> }
           <style.CashBookDetailNoneBtn visible={!data.length ? 'visible' : 'hidden'}>무지출 데이 기록 🎉</style.CashBookDetailNoneBtn>
         </layout.MainContent>
       </layout.Main>
