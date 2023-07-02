@@ -95,6 +95,7 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
                   type="text"
                   value={userName}
                   onChange={onChangeInput}
+                  autoComplete='off'
                 />
               </style.LoginInputBox>
               <style.LoginInputBox>
@@ -103,7 +104,8 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
                   name="userPwd"
                   type="text"
                   value={userPwd}
-                  onChange={onChangeInput} 
+                  onChange={onChangeInput}
+                  autoComplete='off'
                 />
               </style.LoginInputBox>
             </layout.LoginInputWrap>
