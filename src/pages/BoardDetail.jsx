@@ -101,23 +101,17 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
           }}
         />
         <layout.HeaderContent style={{ fontSize: "25px" }}>
-          {data.userNickName}
+          {receipt.userId.userNickName}
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main
         headerHeight={`${headerHeight}px`}
         mainHeight={`${mainHeight}px`}
       >
-        <layout.MainContent>
+        <layout.MainContent style={{backgroundColor: `${sVar.white70}`}}>
           {/* 영수증 */}
           <layout.FlexCenterColumn100 style={{ border: "1px solid red" }}>
-            <layout.FlexCenterColumn100
-              style={{
-                padding: "10px",
-                fontSize: "9px",
-                borderBottom: "2px dashed green",
-              }}
-            >
+            <style.ReceiptInnerContainer padding="0.8em" fontSize="0.6em">
               <layout.FlexCenterRow100
                 style={{ justifyContent: "space-between" }}
               >
@@ -128,49 +122,45 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                 style={{ justifyContent: "space-between" }}
               >
                 <div>아주 흥미로운 멘트</div>
-                <div>영수증 발행 번호 랜덤으로?</div>
+                <div>{receipt.boardId}</div>
               </layout.FlexCenterRow100>
               <layout.FlexCenterRow100
                 style={{ justifyContent: "space-between" }}
               >
                 <div>웃기고 싶어요 안 선생님</div>
-                <div>작성 시점 날짜 및 시간</div>
+                <div>{receipt.boardCreatedAt}</div>
               </layout.FlexCenterRow100>
-            </layout.FlexCenterColumn100>
-            <layout.FlexCenter100
-              style={{
-                padding: "15px",
-                fontSize: "20px",
-                borderBottom: "2px dashed green",
-              }}
-            >
-              YY / MM / DD
-            </layout.FlexCenter100>
-            <layout.Flex100
+            </style.ReceiptInnerContainer>
+            <style.ReceiptInnerContainer padding="1em" fontSize="1.2em">
+              {receipt.cashbookDetail.cashbookCreatedAt}
+            </style.ReceiptInnerContainer>
+            <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
+            {/* <layout.Flex100
               style={{
                 padding: "15px",
                 fontSize: "14px",
                 borderBottom: "2px dashed green",
               }}
-            >
+            > */}
               <div style={{ textAlign: "right" }}>
-                {data.cashbookCategory} 예산
+                {receipt.cashbookDetail.cashbookCategory} 예산
               </div>
               <div style={{ flex: "1", textAlign: "center" }}>
-                {data.cashbookName}
+                {receipt.cashbookDetail.cashbookName}
               </div>
               <div style={{ textAlign: "left" }}>
-                {digit3Comma(data.cashbookGoalValue)}원
+                {digit3Comma(receipt.cashbookDetail.cashbookGoalValue)}원
               </div>
-            </layout.Flex100>
-            <layout.FlexCenterColumn100
+            </style.ReceiptInnerContainer>
+            <style.ReceiptInnerContainer>
+            {/* <layout.FlexCenterColumn100
               style={{
                 padding: "10px",
                 fontSize: "14px",
                 borderBottom: "2px dashed green",
               }}
-            >
-              {data.cashbookDetail.map((purchase) => {
+            > */}
+              {receipt.cashbookDetail.detail.map((purchase) => {
                 return (
                   <layout.FlexCenterRow100
                     style={{ justifyContent: "space-between" }}
@@ -181,37 +171,42 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                   </layout.FlexCenterRow100>
                 );
               })}
-            </layout.FlexCenterColumn100>
-            <layout.FlexCenterColumn100
+            </style.ReceiptInnerContainer>
+            {/* <layout.FlexCenterColumn100
               style={{
                 padding: "15px",
                 fontSize: "14px",
                 borderBottom: "2px dashed green",
               }}
-            >
+            > */}
+            <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
               <layout.FlexCenterRow100
                 style={{ justifyContent: "space-between" }}
               >
                 <div>합계</div>
-                <div>{digit3Comma(data.cashbookNowValue)}원</div>
+                <div>{digit3Comma(receipt.cashbookDetail.cashbookNowValue)}원</div>
               </layout.FlexCenterRow100>
-            </layout.FlexCenterColumn100>
-            <layout.FlexCenterColumn100
+            </style.ReceiptInnerContainer>
+            {/* <layout.FlexCenterColumn100
               style={{
                 padding: "15px",
                 fontSize: "14px",
                 borderBottom: "2px dashed green",
               }}
-            >
+            > */}
+            <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
               <layout.FlexCenterRow100
                 style={{ justifyContent: "space-between" }}
               >
                 <div>절약한 금액</div>
                 <div>{digit3Comma(data.cashbookRestValue)}원</div>
               </layout.FlexCenterRow100>
-            </layout.FlexCenterColumn100>
+            </style.ReceiptInnerContainer>
           </layout.FlexCenterColumn100>
           {/* 게시글 -> 추후 개발*/}
+          <style.ReceiptPostContainer>
+            <style.ReceiptPost>{receipt.boardText}</style.ReceiptPost>
+          </style.ReceiptPostContainer>
           {/* 댓글 */}
           <layout.FlexCenterColumn100 style={{ marginTop: "30px" }}>
             <layout.Flex100 style={{paddingLeft:"8px"}}>
