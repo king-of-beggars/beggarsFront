@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { layout, style } from "styles";
 import { Nav, CardBox } from "components";
 import { useQuery, useQueryClient } from "react-query";
-import { mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
+import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
 import instance, { boardAPI } from 'api/api';
+import { useNavigate } from 'react-router-dom'
 
 function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   // card 크기 결정
@@ -15,6 +16,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   const [isBoasting, setIsBoasting] = useState(true)
 
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   // isBoasting 상태에 따라 get 요청이 변경되어야 하는데 react-query의 쿼리문은 훅 안에서 쓰일 수 없으므로 useQuery의 key를 이용해 문제를 해결한다.
   // useQuery의 key가 변경되면 useQuery는 새로운 데이터를 자동으로 가져오므로, useQuery의 key를 isBoasting 상태와 연동시킨다.
   const queryNode = isBoasting
@@ -23,6 +25,10 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
 
   const toggleBtnHandler = () => {
     setIsBoasting(!isBoasting)
+  }
+
+  const cardClickHandler = (id) => {
+    navigate(`board/${id}`)
   }
   
   const backRenderer = (responseType) => { // 내용 로딩이 덜 되었을 때 보여줄 렌더러, 응답에 따라 내용을 다르게 설정하기
@@ -65,6 +71,8 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
       </style.BackgroundPageLayout>
     )
   }
+
+
 
 
   const { 
@@ -129,6 +137,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
                   ratio={ 0.6 }
                   isDefault= { isBoasting }
                   key={ card.cashbookId.boardId }
+                  onClick={ cardClickHandler }
                 />
               )
             })}

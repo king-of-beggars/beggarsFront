@@ -61,7 +61,7 @@ function Router() {
         <Route path="cash-book/edit/:id" element={<CashBookMod isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight}/>} />
         
         <Route path="board" element={<Board isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
-        <Route path="board/:id" element={<BoardDetail isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight}  />}/>
+        <Route path="board/:id" element={<BoardDetail id={id} isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
 
         <Route path="profile" element={<Profile isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />} />
         {/* <Route path="mypage/edit" element={<MyPageEdit />}/> */}
