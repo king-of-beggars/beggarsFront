@@ -50,19 +50,34 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
       console.log("cashbook:::", DATA_CASHBOOK)
       console.log("comments:::", DATA_COMMENTS)
       console.log("user:::", DATA_USER)
-      updateDataState(res, DATA_CASHBOOK, DATA_COMMENTS, DATA_USER)
     }
   })
-  
-  useEffect(() => {
-    updateDataState(DATA_RECEIPT, DATA_CASHBOOK, DATA_COMMENTS, DATA_USER)
-    console.log("useEffect 동작!")
-    console.log(isReceipt, isCashbook, isComments, isUser)
-  }, [isReceipt, isCashbook, isComments, isUser])
 
-  setInterval(() => {
-    console.log(isReceipt, isCashbook, isComments, isUser)
-  }, 2000)
+  const loadingRenderer = () => {
+    return (
+      <style.BackgroundPageLayout
+        screenWidth={`${screenWidth}px`}
+        isMobile={isMobile}
+        backPngTop={isBoasting ? `url(${background50Head})` : `url(${backgroundDarkTop})`}
+        backPngTail={isBoasting ? `url(${background50Tail})` : `url(${backgroundDarkTail})`}
+        backPngMiddle={isBoasting ? `url(${background50Middle})` : `url(${backgroundDarkMiddle})`}>
+        <layout.Header headerHeight={`${headerHeight}px`}>
+        </layout.Header>
+        <layout.Main
+          headerHeight={`${headerHeight}px`}
+          mainHeight={`${mainHeight}px`}
+        >
+          <layout.MainContent>
+            Loading ...
+          </layout.MainContent>
+        </layout.Main>
+        <layout.Nav navHeight={`${navHeight}px`}>
+          <Nav selected={MENU_LIST.board}/>
+        </layout.Nav>
+      </style.BackgroundPageLayout>
+    );
+  }
+
 
   // 뒤로 가기
   const onClickBack = () => {
@@ -74,7 +89,9 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     return digit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  if (!!isReceipt && !!isCashbook && !!isComments && !!isUser) {
+  if (isLoading || isError) {
+    loadingRenderer()
+  } else if (!!isReceipt && !!isCashbook && !!isComments && !!isUser) {
     return (
       <style.BackgroundPageLayout
         screenWidth={`${screenWidth}px`}
@@ -217,10 +234,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
         </layout.Nav>
       </style.BackgroundPageLayout>
     );
-  } else {
-    <div>로딩중...</div>
   }
-
 }
 
 export default BoardDetail;
