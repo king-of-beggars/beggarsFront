@@ -115,17 +115,17 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                 borderBottom: "2px dashed green",
               }}
             > */}
-              {receipt.cashbookDetail.detail.map((purchase) => {
+              {/* {receipt.cashbookDetail.detail.map((purchase) => {
                 return (
                   <layout.FlexCenterRow100
                     style={{ justifyContent: "space-between" }}
                     key={purchase.cashDetailId}
                   >
-                    {/* <div>{purchase.cashDetailText}</div> */}
-                    {/* <div>{digit3Comma(purchase.cashDetailValue)}원</div> */}
+                    <div>{purchase.cashDetailText}</div>
+                    <div>{digit3Comma(purchase.cashDetailValue)}원</div>
                   </layout.FlexCenterRow100>
                 );
-              })}
+              })} */}
             </style.ReceiptInnerContainer>
             {/* <layout.FlexCenterColumn100
               style={{
