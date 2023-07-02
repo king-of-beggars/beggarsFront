@@ -10,6 +10,7 @@ import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgro
 function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 
   const { id } = useParams() // id 패러미터 받아오기
+  console.log("받아온 id:::", id)
 
   const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
   const navigate = useNavigate();

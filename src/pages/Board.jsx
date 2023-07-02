@@ -74,11 +74,6 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
     )
   }
 
-  console.log("이번 배포 적용됐어요!::: 1")
-
-
-
-
   const { 
     data: cardList,
     isLoading,

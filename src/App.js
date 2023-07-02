@@ -11,11 +11,12 @@ import Router from 'router/Router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Test from 'pages/Test';
 import CashBookDetail from 'pages/CashBookDetail';
+import deployVerification from 'test-deploy/testDeploy';
 
 const queryClient = new QueryClient();
 
 function App() {
-
+  deployVerification()
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
