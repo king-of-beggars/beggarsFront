@@ -100,7 +100,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
           }}
         />
         <layout.HeaderContent style={{ fontSize: "25px" }}>
-          {receipt.userId.userNickName}
+          {/* {receipt.userId.userNickName} */}
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main
