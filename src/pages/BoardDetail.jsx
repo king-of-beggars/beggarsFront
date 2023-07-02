@@ -24,13 +24,6 @@ function BoardDetail({
   navHeight,
   mainHeight,
 }) {
-  // 필요한 데이터가 모두 불러와졌는지 파악하는 상태
-  const INIT_DATA_VALUE = false;
-  const [isReceipt, setIsReceipt] = useState(INIT_DATA_VALUE);
-  const [isCashbook, setIsCashbook] = useState(INIT_DATA_VALUE);
-  const [isComments, setIsComments] = useState(INIT_DATA_VALUE);
-  const [isUser, setIsUser] = useState(INIT_DATA_VALUE);
-
   const { id } = useParams(); // id 패러미터 받아오기
   console.log("받아온 id:::", id);
 
@@ -46,53 +39,31 @@ function BoardDetail({
   let DATA_USER;
 
   const {
-    data: DATA_RECEIPT,
+    data: response,
     isLoading,
     isError,
   } = useQuery(["receipt", id], () => boardAPI.getBoardDetail(id), {
     select: (data) => data.data,
-    onSuccess: (res) => {
-      console.log("getRes:::", res);
-      DATA_CASHBOOK = res.cashbookDetail;
-      DATA_COMMENTS = res.comments;
-      DATA_USER = res.userId;
-      console.log("receipt:::", res);
-      console.log("cashbook:::", DATA_CASHBOOK);
-      console.log("comments:::", DATA_COMMENTS);
-      console.log("user:::", DATA_USER);
-    },
+    // onSuccess: (res) => {
+    //   console.log("getRes:::", res);
+    //   DATA_CASHBOOK = res.cashbookDetail;
+    //   DATA_COMMENTS = res.comments;
+    //   DATA_USER = res.userId;
+    //   console.log("receipt:::", res);
+    //   console.log("cashbook:::", DATA_CASHBOOK);
+    //   console.log("comments:::", DATA_COMMENTS);
+    //   console.log("user:::", DATA_USER);
+    // },
   });
 
-  const loadingRenderer = () => {
-    return (
-      <style.BackgroundPageLayout
-        screenWidth={`${screenWidth}px`}
-        isMobile={isMobile}
-        backPngTop={
-          isBoasting ? `url(${background50Head})` : `url(${backgroundDarkTop})`
-        }
-        backPngTail={
-          isBoasting ? `url(${background50Tail})` : `url(${backgroundDarkTail})`
-        }
-        backPngMiddle={
-          isBoasting
-            ? `url(${background50Middle})`
-            : `url(${backgroundDarkMiddle})`
-        }
-      >
-        <layout.Header headerHeight={`${headerHeight}px`}></layout.Header>
-        <layout.Main
-          headerHeight={`${headerHeight}px`}
-          mainHeight={`${mainHeight}px`}
-        >
-          <layout.MainContent>Loading ...</layout.MainContent>
-        </layout.Main>
-        <layout.Nav navHeight={`${navHeight}px`}>
-          <Nav selected={MENU_LIST.board} />
-        </layout.Nav>
-      </style.BackgroundPageLayout>
-    );
-  };
+  useEffect(() => {
+    if (response) {
+      console.log("receipt:::", response);
+      console.log("cashbook:::", response.cashbookDetail);
+      console.log("comments:::", response.comments);
+      console.log("user:::", response.userId);
+    }
+  }, [response]);
 
   // 뒤로 가기
   const onClickBack = () => {
@@ -103,6 +74,14 @@ function BoardDetail({
   const digit3Comma = (digit) => {
     return digit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   };
+
+  if (isLoading) {
+    <div>Loading...</div>
+  }
+
+  if (isError) {
+    <div>Error!</div>
+  }
 
   return (
     <style.BackgroundPageLayout
