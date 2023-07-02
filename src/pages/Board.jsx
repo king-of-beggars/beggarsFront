@@ -28,6 +28,8 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   }
 
   const cardClickHandler = (id) => {
+    console.log(id)
+    console.log("cardClickHandler!")
     navigate(`board/${id}`)
   }
   
@@ -137,7 +139,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
                   ratio={ 0.6 }
                   isDefault= { isBoasting }
                   key={ card.cashbookId.boardId }
-                  onClickHandler={ () => cardClickHandler(card.boardId) }
+                  onClickHandler={ cardClickHandler }
                 />
               )
             })}
