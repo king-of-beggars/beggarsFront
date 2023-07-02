@@ -28,6 +28,8 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     
   })
 
+  console.log("receipt:::", receipt)
+
   // 뒤로 가기
   const onClickBack = () => {
     navigate(-1);
