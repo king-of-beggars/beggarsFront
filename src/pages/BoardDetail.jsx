@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Nav } from "components";
 import { layout, style } from "styles";
@@ -8,6 +8,8 @@ import BoardDetailComment from "components/board/BoardDetailComment";
 import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
 
 function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
+
+  const { id } = useParams() // id 패러미터 받아오기
 
   const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
   const navigate = useNavigate();
