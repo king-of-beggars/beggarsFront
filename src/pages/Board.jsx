@@ -137,7 +137,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
                   ratio={ 0.6 }
                   isDefault= { isBoasting }
                   key={ card.cashbookId.boardId }
-                  onClick={ cardClickHandler }
+                  onClickHandler={ cardClickHandler }
                 />
               )
             })}

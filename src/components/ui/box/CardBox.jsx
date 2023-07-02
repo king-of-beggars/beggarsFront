@@ -2,7 +2,7 @@ import React from 'react'
 import { style, layout } from "styles"
 import { ProgressBarSemiCircle } from "components"
 
-function CardBox({id, onClick, budget, spend, category, title, screenWidth, ratio, isDefault=true}) {
+function CardBox({id, onClickHandler, budget, spend, category, title, screenWidth, ratio, isDefault=true}) {
     const [cardWidthOrigin, cardHeightOrigin] = [301, 356]
     const [screenWidthOrigin, screenHeightOrigin] = [393, 852]
     const cardWidth = screenWidth > 393 ? cardWidthOrigin * ratio : ((screenWidth / screenWidthOrigin) * cardWidthOrigin) * ratio
@@ -13,7 +13,7 @@ function CardBox({id, onClick, budget, spend, category, title, screenWidth, rati
     const [smallCardBtnWidth, smallCardBtnHeight] = [151, 26]
 
   return (
-    <style.CardBoxContainer id={id} onClick={onClick} ratio={ratio} isDefault={isDefault} cardWidth={`${cardWidth}px`} cardHeight={`${cardHeight}px`}>
+    <style.CardBoxContainer id={id} onClick={() => onClickHandler(id)} ratio={ratio} isDefault={isDefault} cardWidth={`${cardWidth}px`} cardHeight={`${cardHeight}px`}>
         {
             !!title ? (
                     <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
