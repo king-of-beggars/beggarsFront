@@ -399,6 +399,7 @@ export const CashBookDetailNoneBtn = styled(layout.FlexCenter)`
   background-image: url(${cashbookNone});
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  visibility: ${props=>props.visible};
 `;
 
 // Cashbook Detail Add Modal 배경 (어둡게)

@@ -67,19 +67,19 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.MainContent>
           <layout.SpendingListWrap>
-            {!data.length ? data.map((expend) => {
+            {!data.length ? <></> : data.map((expend) => {
               return (
                 <CashBookDetailList
                   expendName={expend.cashDetailText}
                   expendMoney={expend.cashDetailValue}
                 />
               );
-            }) : <></>}
+            })}
           </layout.SpendingListWrap>
           <style.CashBookDetailAddBox onClick={showUserModal}>
             <AddDetail />
           </style.CashBookDetailAddBox>
-          <style.CashBookDetailNoneBtn>무지출 데이 기록 🎉</style.CashBookDetailNoneBtn>
+          <style.CashBookDetailNoneBtn visible={!data.length ? 'visible' : 'hidden'}>무지출 데이 기록 🎉</style.CashBookDetailNoneBtn>
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
