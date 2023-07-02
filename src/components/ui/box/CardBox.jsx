@@ -12,7 +12,7 @@ function CardBox({id, onClick, budget, spend, category, title, screenWidth, rati
     const [smallCardBtnWidth, smallCardBtnHeight] = [151, 26]
 
   return (
-    <style.CardBoxContainer id={id} onClick={onClick} ratio={ratio} isDefault={isDefault} cardWidth={`${cardWidth}px`} cardHeight={`${cardHeight}px`}>
+    <style.CardBoxContainer id={id} onClick={onClick} ratio={1} isDefault={isDefault} cardWidth={`${cardWidth}px`} cardHeight={`${cardHeight}px`}>
         {
             !!title ? (
                     <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
