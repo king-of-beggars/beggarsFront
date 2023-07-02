@@ -21,8 +21,9 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
 
   // param이용하여 id 받아와서 지출 내역 받을 것
   const param = useParams();
+  const cardId = param.id;
   
-  // let { data, isLoading, error } = useQuery(['cashDetail'], ()=>CashBookAPI.getCashDetail(param.id));
+  // let { data, isLoading, error } = useQuery(['cashDetail'], ()=>CashBookAPI.getCashDetail(cardId));
   // if (isLoading || error) {
   //   return <></>;
   // }
@@ -79,6 +80,7 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
           <style.CashBookDetailAddBox onClick={showUserModal}>
             <AddDetail />
           </style.CashBookDetailAddBox>
+          { isModalOpen && <ExpendAddModal setClose={closeUserModal} cardId={cardId}/> }
           <style.CashBookDetailNoneBtn visible={!data.length ? 'visible' : 'hidden'}>무지출 데이 기록 🎉</style.CashBookDetailNoneBtn>
         </layout.MainContent>
       </layout.Main>
