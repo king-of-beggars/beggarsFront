@@ -114,12 +114,17 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
     return <></>;
   }
   const cashbookApiRes = data.data;
-  console.log(!cashbookApiRes.length);
+  console.log(cashbookApiRes.length);
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
     navigate(`/cash-book/${id}`);
   };
+
+  // 카드 추가 박스로 이동
+  const onClickAdd = () => {
+    navigate('/cash-book/add')
+  }
 
   return (
     <style.BackgroundPageLayout
@@ -150,39 +155,42 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
               setFocused={setFocused}
             />
           </style.DayPickerWrap>
-          <layout.SwiperWrap
-            cardHeight={`${cardHeight}px`}
-            mainHeight={`${mainHeight}px`}
-            dateBoxHeight={`${dateBoxHeight}px`}
-          >
-            <Swiper
-              modules={[Navigation, Scrollbar, Pagination, A11y]}
-              slidesPerView={slidesPerViewValue}
-              onSlideChange={(swiper) => {
-                console.log("slide change");
-                console.log("activeIndex:::", swiper.activeIndex);
-                setActiveSlide(swiper.activeIndex);
-              }}
-              // scrollbar={{ draggable: true }}
-              onSwiper={(swiper) => {
-                setSwiper(swiper);
-                console.log(swiper);
-              }}
-              direction="vertical"
-              style={{ height: `${mainHeight - dateBoxHeight - 24}px` }}
-              // loop={true} -> loop 속성 줄시 active가 제대로 동작하지 않음
-              pagination={{
-                clickable: "true",
-              }}
+          {!cashbookApiRes.length ? (
+            <layout.FlexCenter>
+              <style.CashBookDummyContainer
+                cardWidth={`${cardWidth}px`}
+                cardHeight={`${cardHeight}px`}
+                style={{ justifyContent: "center" }}
+                onClick={onClickAdd}
+              >클릭하여 카드 추가</style.CashBookDummyContainer>
+            </layout.FlexCenter>
+          ) : (
+            <layout.SwiperWrap
+              cardHeight={`${cardHeight}px`}
+              mainHeight={`${mainHeight}px`}
+              dateBoxHeight={`${dateBoxHeight}px`}
             >
-              {!cashbookApiRes.length ? ( <>hi</>
-                // <style.CashBookDummyContainer
-                //   cardWidth={`${cardWidth}px`}
-                //   cardHeight={`${cardHeight}px`}
-                // >
-                // </style.CashBookDummyContainer>
-              ) : (
-                cashbookApiRes.map((card, idx) => {
+              <Swiper
+                modules={[Navigation, Scrollbar, Pagination, A11y]}
+                slidesPerView={slidesPerViewValue}
+                onSlideChange={(swiper) => {
+                  console.log("slide change");
+                  console.log("activeIndex:::", swiper.activeIndex);
+                  setActiveSlide(swiper.activeIndex);
+                }}
+                // scrollbar={{ draggable: true }}
+                onSwiper={(swiper) => {
+                  setSwiper(swiper);
+                  console.log(swiper);
+                }}
+                direction="vertical"
+                style={{ height: `${mainHeight - dateBoxHeight - 24}px` }}
+                // loop={true} -> loop 속성 줄시 active가 제대로 동작하지 않음
+                pagination={{
+                  clickable: "true",
+                }}
+              >
+                {cashbookApiRes.map((card, idx) => {
                   return (
                     <SwiperSlide
                       key={idx}
@@ -267,10 +275,10 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
                       </Swiper>
                     </SwiperSlide>
                   );
-                })
-              )}
-            </Swiper>
-          </layout.SwiperWrap>
+                })}
+              </Swiper>
+            </layout.SwiperWrap>
+          )}
         </layout.CashBookMainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
