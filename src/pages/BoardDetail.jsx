@@ -86,7 +86,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
             }}
           />
           <layout.HeaderContent style={{ fontSize: "25px" }}>
-            { DATA_USER.usernickName }
+            { DATA_USER.userNickname }
           </layout.HeaderContent>
         </layout.Header>
         <layout.Main
