@@ -7,13 +7,12 @@ import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgro
 import instance, { boardAPI } from 'api/api';
 import { useNavigate } from 'react-router-dom'
 
-function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
+function Board({ isBoasting, setIsBoasting, isMobile, headerHeight, navHeight, mainHeight }) {
   // card 크기 결정
   // const cardWidth = 301 * 0.5
   // const cardHeight = 356 * 0.5
 
   const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
-  const [isBoasting, setIsBoasting] = useState(true)
 
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -28,8 +27,6 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   }
 
   const cardClickHandler = (id) => {
-    console.log(id)
-    console.log("cardClickHandler!")
     navigate(`${id}`)
   }
   

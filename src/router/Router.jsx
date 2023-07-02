@@ -18,6 +18,8 @@ function Router() {
     width: window.innerWidth,
     height: window.innerHeight
   })
+  // 게시판 상태 : 자랑하기(true) or 혼쭐나기(false)
+  const [isBoasting, setIsBoasting] = useState(true)
 
   const handleResize = () => {
     setWindowSize({
@@ -60,8 +62,8 @@ function Router() {
         <Route path="cash-book/add" element={<CashBookAdd isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
         <Route path="cash-book/edit/:id" element={<CashBookMod isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight}/>} />
         
-        <Route path="board" element={<Board isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
-        <Route path="board/:id" element={<BoardDetail isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
+        <Route path="board" element={<Board isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} isBoasting={isBoasting} setIsBoasting={setIsBoasting}/>}/>
+        <Route path="board/:id" element={<BoardDetail isBoasting={isBoasting} isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
 
         <Route path="profile" element={<Profile isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />} />
         {/* <Route path="mypage/edit" element={<MyPageEdit />}/> */}

@@ -7,7 +7,7 @@ import { BackArrowWhite, BackArrowWGray } from "assets";
 import BoardDetailComment from "components/board/BoardDetailComment";
 import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
 
-function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
+function BoardDetail({ isBoasting, isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 
   const { id } = useParams() // id 패러미터 받아오기
   console.log("받아온 id:::", id)
