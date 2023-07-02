@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { Nav } from "components";
 import { layout, style } from "styles";
-import { BackArrowWhite, BackArrowGray } from "assets";
+import { BackArrowWhite, BackArrowGray, background50Head } from "assets";
 import BoardDetailComment from "components/board/BoardDetailComment";
-import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
+import { backgroundDarkTop, backgroundDarkMiddle, backgroundDarkTail, background50Head, background50Middle, background50Tail } from 'assets';
 import { MENU_LIST } from 'constants';
 import { useQuery } from 'react-query';
 import { boardAPI } from 'api/api';
@@ -88,9 +88,9 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={isBoasting ? `url(${backgroundBrightTop})` : `url(${backgroundDarkTop})`}
-      backPngTail={isBoasting ? `url(${backgroundBrightTail})` : `url(${backgroundDarkTail})`}
-      backPngMiddle={isBoasting ? `url(${backgroundBrightMiddle})` : `url(${backgroundDarkMiddle})`}>
+      backPngTop={isBoasting ? `url(${background50Head})` : `url(${backgroundDarkTop})`}
+      backPngTail={isBoasting ? `url(${background50Tail})` : `url(${backgroundDarkTail})`}
+      backPngMiddle={isBoasting ? `url(${background50Middle})` : `url(${backgroundDarkMiddle})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <BackArrowGray
           onClick={onClickBack}
