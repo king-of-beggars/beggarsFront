@@ -24,7 +24,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     isError
   } = useQuery(["receipt", id], boardAPI.getBoardDetail(id), {
     onSuccess: (res) => {
-      console.log("receipt:::", res)
+      alert("데이터 get 성공!")
     }
     
   })
