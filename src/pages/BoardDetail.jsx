@@ -28,13 +28,6 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
   let DATA_COMMENTS
   let DATA_USER
 
-  const updateDataState = (receiptData, cashbookData, commentData, userData) => {
-    if (!!receiptData) { setIsReceipt(true) }
-    if (!!cashbookData) { setIsCashbook(true) }
-    if (!!commentData) { setIsComments(true) }
-    if (!!userData) { setIsUser(true) }
-  }
-
   const {
     data: DATA_RECEIPT,
     isLoading,
@@ -109,7 +102,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
             }}
           />
           <layout.HeaderContent style={{ fontSize: "25px" }}>
-            { DATA_USER.userNickname }
+            { !!DATA_USER.userNickname && DATA_USER.userNickname }
           </layout.HeaderContent>
         </layout.Header>
         <layout.Main
@@ -130,17 +123,17 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                   style={{ justifyContent: "space-between" }}
                 >
                   <div>아주 흥미로운 멘트</div>
-                  <div>{ DATA_RECEIPT.boardId }</div>
+                  <div>{ !!DATA_RECEIPT.boardId && DATA_RECEIPT.boardId }</div>
                 </layout.FlexCenterRow100>
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
                   <div>웃기고 싶어요 안 선생님</div>
-                  <div>{ DATA_RECEIPT.boardCreatedAt }</div>
+                  <div>{ !!DATA_RECEIPT.boardCreatedAt && DATA_RECEIPT.boardCreatedAt }</div>
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer padding="1em" fontSize="1.2em">
-                { DATA_CASHBOOK.cashbookCreatedAt }
+                { !!DATA_CASHBOOK.cashbookCreatedAt && DATA_CASHBOOK.cashbookCreatedAt }
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
               {/* <layout.Flex100
@@ -151,14 +144,14 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                 }}
               > */}
                 <div style={{ textAlign: "right" }}>
-                  { DATA_CASHBOOK.cashbookCategory }
+                  { !!DATA_CASHBOOK.cashbookCategory && DATA_CASHBOOK.cashbookCategory }
                    예산
                 </div>
                 <div style={{ flex: "1", textAlign: "center" }}>
-                  { DATA_CASHBOOK.cashbookName }
+                  { !!DATA_CASHBOOK.cashbookName && DATA_CASHBOOK.cashbookName }
                 </div>
                 <div style={{ textAlign: "left" }}>
-                  { digit3Comma(DATA_CASHBOOK.cashbookGoalValue) }원
+                  { !!DATA_CASHBOOK.cashbookGoalValue && digit3Comma(DATA_CASHBOOK.cashbookGoalValue) }원
                 </div>
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer>
@@ -169,7 +162,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                   borderBottom: "2px dashed green",
                 }}
               > */}
-                { DATA_CASHBOOK.detail.map((purchase) => {
+                { !!DATA_CASHBOOK.detail && DATA_CASHBOOK.detail.map((purchase) => {
                   return (
                     <layout.FlexCenterRow100
                       style={{ justifyContent: "space-between" }}
@@ -193,7 +186,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                   style={{ justifyContent: "space-between" }}
                 >
                   <div>합계</div>
-                  <div>{ digit3Comma(DATA_CASHBOOK.cashbookNowValue) }원</div>
+                  <div>{ !!DATA_CASHBOOK.cashbookNowValue && digit3Comma(DATA_CASHBOOK.cashbookNowValue) }원</div>
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
               {/* <layout.FlexCenterColumn100
@@ -208,19 +201,19 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                   style={{ justifyContent: "space-between" }}
                 >
                   <div>절약한 금액</div>
-                  <div>{ digit3Comma((DATA_CASHBOOK.cashbookGoalValue - DATA_CASHBOOK.cashbookNowValue)) }원</div>
+                  <div>{ !!DATA_CASHBOOK.cashbookGoalValue && digit3Comma((DATA_CASHBOOK.cashbookGoalValue - DATA_CASHBOOK.cashbookNowValue)) }원</div>
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
             </layout.FlexCenterColumn100>
             {/* 게시글 -> 추후 개발*/}
             <style.ReceiptPostContainer>
-              <style.ReceiptPost>{ DATA_RECEIPT.boardText }</style.ReceiptPost>
+              <style.ReceiptPost>{ !!DATA_RECEIPT.boardText && DATA_RECEIPT.boardText }</style.ReceiptPost>
             </style.ReceiptPostContainer>
             {/* 댓글 */}
             <layout.FlexCenterColumn100 style={{ marginTop: "30px" }}>
               <layout.Flex100 style={{paddingLeft:"8px"}}>
                 <div style={{fontSize:"20px"}}>댓글</div>
-                <div style={{fontSize:"10px", margin:"10px"}}>{ DATA_COMMENTS.length }개</div>
+                <div style={{fontSize:"10px", margin:"10px"}}>{ !!DATA_COMMENTS.length && DATA_COMMENTS.length }개</div>
               </layout.Flex100>
               <layout.FlexCenterColumn100 style={{border: "1px solid red", gap:"8px"}}>
                 <BoardDetailComment></BoardDetailComment>
