@@ -145,6 +145,7 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
                   value={nickname}
                   onChange={onChangeInput}
                   placeholder="닉네임 입력"
+                  autoComplete="off"
                 />
                 <button style={{marginBottom: "5px"}} tf={isNickChked} onClick={nickDupleChk}>중복확인</button>
               </style.SignupInputBox>
@@ -163,6 +164,7 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
                   value={id}
                   onChange={onChangeInput}
                   placeholder="아이디 입력"
+                  autoComplete="off"
                 />
                 <button style={{marginBottom: "5px"}} onClick={idDupleChk}>중복확인</button>
               </style.SignupInputBox>
