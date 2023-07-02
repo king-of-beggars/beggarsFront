@@ -24,13 +24,9 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     isError
   } = useQuery(["receipt", id], () => boardAPI.getBoardDetail(id), {
     onSuccess: (res) => {
-      alert("데이터 get 성공!")
+      console.log("getRes:::", res)
     }
     
-  })
-
-  useEffect(() => {
-
   })
 
   // 뒤로 가기
