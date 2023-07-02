@@ -30,7 +30,7 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
   const cardClickHandler = (id) => {
     console.log(id)
     console.log("cardClickHandler!")
-    navigate(`board/${id}`)
+    navigate(`${id}`)
   }
   
   const backRenderer = (responseType) => { // 내용 로딩이 덜 되었을 때 보여줄 렌더러, 응답에 따라 내용을 다르게 설정하기
@@ -73,6 +73,8 @@ function Board({ isMobile, headerHeight, navHeight, mainHeight }) {
       </style.BackgroundPageLayout>
     )
   }
+
+  console.log("이번 배포 적용됐어요!::: 1")
 
 
 
