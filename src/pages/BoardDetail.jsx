@@ -28,12 +28,12 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     }
   })
 
-  const DATA_CASHBOOK = DATA_RECEIPT.cashbookDetail
+  // const DATA_CASHBOOK = DATA_RECEIPT.cashbookDetail
   const DATA_COMMENTS = DATA_RECEIPT.comments
   const DATA_USER = DATA_RECEIPT.userId
 
   console.log("receipt:::", DATA_RECEIPT)
-  console.log("cashbook:::", DATA_CASHBOOK)
+  // console.log("cashbook:::", DATA_CASHBOOK)
   console.log("comments:::", DATA_COMMENTS)
   console.log("user:::", DATA_USER)
 
