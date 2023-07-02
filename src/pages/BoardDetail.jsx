@@ -11,6 +11,13 @@ import * as sVar from "constants/styleVariables"
 
 function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 
+ // 필요한 데이터가 모두 불러와졌는지 파악하는 상태
+  const INIT_DATA_VALUE = false
+  const [isReceipt, setIsReceipt] = useState(INIT_DATA_VALUE)
+  const [isCashbook, setIsCashbook] = useState(INIT_DATA_VALUE)
+  const [isComments, setIsComments] = useState(INIT_DATA_VALUE)
+  const [isUser, setIsUser] = useState(INIT_DATA_VALUE)
+
   const { id } = useParams() // id 패러미터 받아오기
   console.log("받아온 id:::", id)
 
@@ -20,6 +27,13 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
   let DATA_CASHBOOK
   let DATA_COMMENTS
   let DATA_USER
+
+  const updateDataState = (receiptData, cashbookData, commentData, userData) => {
+    if (!!receiptData) { setIsReceipt(true) }
+    if (!!cashbookData) { setIsCashbook(true) }
+    if (!!commentData) { setIsComments(true) }
+    if (!!userData) { setIsUser(true) }
+  }
 
   const {
     data: DATA_RECEIPT,
@@ -36,9 +50,13 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
       console.log("cashbook:::", DATA_CASHBOOK)
       console.log("comments:::", DATA_COMMENTS)
       console.log("user:::", DATA_USER)
+      updateDataState(res, DATA_CASHBOOK, DATA_COMMENTS, DATA_USER)
     }
   })
   
+  useEffect(() => {
+    updateDataState(DATA_RECEIPT, DATA_CASHBOOK, DATA_COMMENTS, DATA_USER)
+  }, [isReceipt, isCashbook, isComments, isUser])
 
   // 뒤로 가기
   const onClickBack = () => {
@@ -50,7 +68,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     return digit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  if (!!DATA_RECEIPT && !!DATA_CASHBOOK && !!DATA_COMMENTS && !!DATA_USER) {
+  if (isReceipt && !!isCashbook && !!isComments && !!isUser) {
     return (
       <style.BackgroundPageLayout
         screenWidth={`${screenWidth}px`}
