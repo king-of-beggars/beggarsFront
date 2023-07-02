@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import { Nav } from "components";
 import { layout, style } from "styles";
 import BoardDetailComment from "components/board/BoardDetailComment";
@@ -8,6 +7,7 @@ import { BackArrowGray,backgroundDarkTop, backgroundDarkMiddle, backgroundDarkTa
 import { MENU_LIST } from 'constants';
 import { useQuery } from 'react-query';
 import { boardAPI } from 'api/api';
+import * as sVar from "constants/styleVariables"
 
 function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 
