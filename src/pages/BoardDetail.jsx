@@ -38,51 +38,6 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     return digit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const data = {
-    userId: 15,
-    userEmail: "wdasd@naver.com",
-    userNickName: "김거지",
-    boardText: "나는 매일 거지네",
-    cashbookId: 5,
-    cashbookCategory: "식비",
-    cashbookName: "간식비",
-    cashbookNowValue: "2000",
-    cashbookRestValue: "1000",
-    cashbookGoalValue: "3000",
-    cashbookCreatedAt: "Date",
-    cashbookDetail: [
-      {
-        cashDetailId: 4,
-        cashDetailText: "도넛",
-        cashDetailValue: 1500,
-      },
-      {
-        cashDetailId: 5,
-        cashDetailText: "야쿠르트",
-        cashDetailValue: 500,
-      },
-    ],
-    boardType: 1,
-    comment: [
-      {
-        userId: 5,
-        userEmail: "sdsfd@naver.com",
-        userNickName: "개방거지",
-        commentText: "ㅋㅋ그러니거지지",
-        likeCount: 4,
-        likeCheck: true,
-      },
-      {
-        userId: 2,
-        userEmail: "sdsfd@naver.com",
-        userNickName: "왕부자",
-        commentText: "걸어가셈",
-        likeCount: 6,
-        likeCheck: false,
-      },
-    ],
-  };
-
   return (
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
@@ -131,7 +86,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
               </layout.FlexCenterRow100>
             </style.ReceiptInnerContainer>
             <style.ReceiptInnerContainer padding="1em" fontSize="1.2em">
-              {receipt.cashbookDetail.cashbookCreatedAt}
+              {/* {receipt.cashbookDetail.cashbookCreatedAt} */}
             </style.ReceiptInnerContainer>
             <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
             {/* <layout.Flex100
@@ -142,10 +97,11 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
               }}
             > */}
               <div style={{ textAlign: "right" }}>
-                {receipt.cashbookDetail.cashbookCategory} 예산
+                {/* {receipt.cashbookDetail.cashbookCategory} */}
+                 예산
               </div>
               <div style={{ flex: "1", textAlign: "center" }}>
-                {receipt.cashbookDetail.cashbookName}
+                {/* {receipt.cashbookDetail.cashbookName} */}
               </div>
               <div style={{ textAlign: "left" }}>
                 {digit3Comma(receipt.cashbookDetail.cashbookGoalValue)}원
@@ -165,8 +121,8 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                     style={{ justifyContent: "space-between" }}
                     key={purchase.cashDetailId}
                   >
-                    <div>{purchase.cashDetailText}</div>
-                    <div>{digit3Comma(purchase.cashDetailValue)}원</div>
+                    {/* <div>{purchase.cashDetailText}</div> */}
+                    {/* <div>{digit3Comma(purchase.cashDetailValue)}원</div> */}
                   </layout.FlexCenterRow100>
                 );
               })}
@@ -183,7 +139,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                 style={{ justifyContent: "space-between" }}
               >
                 <div>합계</div>
-                <div>{digit3Comma(receipt.cashbookDetail.cashbookNowValue)}원</div>
+                {/* <div>{digit3Comma(receipt.cashbookDetail.cashbookNowValue)}원</div> */}
               </layout.FlexCenterRow100>
             </style.ReceiptInnerContainer>
             {/* <layout.FlexCenterColumn100
@@ -204,13 +160,13 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
           </layout.FlexCenterColumn100>
           {/* 게시글 -> 추후 개발*/}
           <style.ReceiptPostContainer>
-            <style.ReceiptPost>{receipt.boardText}</style.ReceiptPost>
+            {/* <style.ReceiptPost>{receipt.boardText}</style.ReceiptPost> */}
           </style.ReceiptPostContainer>
           {/* 댓글 */}
           <layout.FlexCenterColumn100 style={{ marginTop: "30px" }}>
             <layout.Flex100 style={{paddingLeft:"8px"}}>
               <div style={{fontSize:"20px"}}>댓글</div>
-              <div style={{fontSize:"10px", margin:"10px"}}>{data.comment.length}개</div>
+              {/* <div style={{fontSize:"10px", margin:"10px"}}>{data.comment.length}개</div> */}
             </layout.Flex100>
             <layout.FlexCenterColumn100 style={{border: "1px solid red", gap:"8px"}}>
               <BoardDetailComment></BoardDetailComment>
