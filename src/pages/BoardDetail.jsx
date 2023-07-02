@@ -154,7 +154,7 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
                 style={{ justifyContent: "space-between" }}
               >
                 <div>절약한 금액</div>
-                <div>{digit3Comma(data.cashbookRestValue)}원</div>
+                {/* <div>{digit3Comma(data.cashbookRestValue)}원</div> */}
               </layout.FlexCenterRow100>
             </style.ReceiptInnerContainer>
           </layout.FlexCenterColumn100>
