@@ -17,6 +17,10 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
   const screenWidth = isMobile ? parseFloat(localStorage.getItem("screenWidth")) : parseFloat(localStorage.getItem("screenWidth")) > 393 ? 393 : parseFloat(localStorage.getItem("screenWidth"));
   const navigate = useNavigate();
 
+  let DATA_CASHBOOK
+  let DATA_COMMENTS
+  let DATA_USER
+
   const {
     data: DATA_RECEIPT,
     isLoading,
@@ -25,19 +29,20 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     select: (data) => data.data,
     onSuccess: (res) => {
       console.log("getRes:::", res)
+      DATA_CASHBOOK = res.cashbookDetail
+      DATA_COMMENTS = res.comments
+      DATA_USER = res.userId
     }
   })
 
-  console.log("receipt:::", DATA_RECEIPT)
 
-  const DATA_CASHBOOK = DATA_RECEIPT["cashbookDetail"]
-  console.log("cashbook:::", DATA_CASHBOOK)
-
-  // const DATA_COMMENTS = DATA_RECEIPT.comments
-    // console.log("comments:::", DATA_COMMENTS)
-
-  // const DATA_USER = DATA_RECEIPT.userId
-  // console.log("user:::", DATA_USER)
+  if (DATA_RECEIPT) {
+    console.log("receipt:::", DATA_RECEIPT)
+    console.log("cashbook:::", DATA_CASHBOOK)
+    console.log("comments:::", DATA_COMMENTS)
+    console.log("user:::", DATA_USER)
+  }
+  
 
   // 뒤로 가기
   const onClickBack = () => {
