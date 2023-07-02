@@ -22,10 +22,10 @@ function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight
     isLoading,
     isError
   } = useQuery(["receipt", id], () => boardAPI.getBoardDetail(id), {
+    select: (data) => data.data,
     onSuccess: (res) => {
       console.log("getRes:::", res)
     }
-    
   })
 
   console.log("receipt:::", receipt)
