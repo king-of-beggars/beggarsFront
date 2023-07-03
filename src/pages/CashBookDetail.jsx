@@ -38,16 +38,16 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   // console.log(data.length);
   // 여기는 가짜 데이터
   const data = [
-    {
-      cashDetailId: 1,
-      cashDetailText: "육개장",
-      cashDetailValue: 10000,
-    },
-    {
-      cashDetailId: 2,
-      cashDetailText: "부대찌개",
-      cashDetailValue: 8000,
-    },
+    // {
+    //   cashDetailId: 1,
+    //   cashDetailText: "육개장",
+    //   cashDetailValue: 10000,
+    // },
+    // {
+    //   cashDetailId: 2,
+    //   cashDetailText: "부대찌개",
+    //   cashDetailValue: 8000,
+    // },
   ];
 
   
