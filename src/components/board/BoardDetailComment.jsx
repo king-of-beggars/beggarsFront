@@ -12,7 +12,7 @@ function BoardDetailComment({ id, userName, likeCheck, children }) {
 
   return (
     <layout.FlexCenterRow100
-      style={{ padding: "10px", gap: "5px", justifyContent: "space-between" }}
+      style={{ borderRadius: "4px", padding: "10px", gap: "5px", justifyContent: "space-between", backgroundColor: `${sVar.white70}`}}
     >
       <layout.FlexCenter style={{width:"15%", marginRight:"10px"}}> 
         <style.BoardProfilePhoto />
