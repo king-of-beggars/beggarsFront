@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BoardDetailInput, Nav } from "components";
+import { BoardDetailInput, BoardDetailComment } from "components";
 import { layout, style } from "styles";
-import BoardDetailComment from "components/board/BoardDetailComment";
 import {
   BackArrowGray,
   backgroundDarkTop,
@@ -117,9 +116,9 @@ function BoardDetail({
           headerHeight={`${headerHeight}px`}
           mainHeight={`${mainHeight}px`}
         >
-          <layout.MainContent style={{ backgroundColor: `${sVar.white70}` }}>
+          <layout.MainContent>
             {/* 영수증 */}
-            <layout.FlexCenterColumn100 style={{ border: "1px solid red" }}>
+            <layout.FlexCenterColumn100 style={{ backgroundColor: `${sVar.white70}` }}>
               <style.ReceiptInnerContainer padding="0.8em" fontSize="0.6em">
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
@@ -245,10 +244,13 @@ function BoardDetail({
                   {!!response.comments.length && response.comments.length}개
                 </div>
               </layout.Flex100>
-              <layout.FlexCenterColumn100
-                style={{ border: "1px solid red", gap: "8px" }}
-              >
-                <BoardDetailComment></BoardDetailComment>
+              <layout.FlexCenterColumn100>
+                { response.comments.length > 0
+                  && response.comments.map(comment => {
+                    return (<BoardDetailComment key={comment.commentId} id={comment.commentId} userName={comment.userNickName} likeCheck={false}>{comment.commentText}</BoardDetailComment>)
+                  })
+
+                }
               </layout.FlexCenterColumn100>
             </layout.FlexCenterColumn100>
           </layout.MainContent>
