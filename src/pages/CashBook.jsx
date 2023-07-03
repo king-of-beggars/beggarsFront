@@ -231,7 +231,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
                             title={card.cashbookName}
                             screenWidth={screenWidth}
                             ratio={0.9}
-                            onClickCard={() => onClickCard(card.cashbookId)}
+                            onClickHandler={onClickCard}
                             isDefault={true}
                           />
                           {/* <CashBookCard
