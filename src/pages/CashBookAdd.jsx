@@ -53,11 +53,11 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   };
 
   // 저장하기 버튼 클릭
-  const queryClient = new useQueryClient();
+  const queryClient = useQueryClient();
   const mutationAddCard = useMutation(CashBookAPI.postCardAdd, {
-    onSuccess: (response) => {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['cashCard']);
       navigate("/cash-book");
-      queryClient.invalidateQueries('cashCard');
     },
     onError: () => alert("카드 추가에 실패하였습니다."),
   });
