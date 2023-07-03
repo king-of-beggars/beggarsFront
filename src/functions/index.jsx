@@ -1,0 +1,1 @@
+export { default as setKrTime } from "functions/setKrTime"

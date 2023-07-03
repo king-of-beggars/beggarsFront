@@ -6,6 +6,8 @@ export { default as CardBox } from "components/ui/box/CardBox"
 export { default as DayPicker } from "components/cash-book/DayPicker"
 export { default as DayWrapper } from "components/cash-book/DayWrapper"
 export { default as CashBookDetailList } from "components/cash-book/CashBookDetailList";
+export { default as BoardDetailInput } from "components/board/BoardDetailInput"
+export { default as BoardDetailComment } from "components/board/BoardDetailComment"
 
 export { default as ExpendAddModal } from "components/ui/modal/ExpendAddModal";
 

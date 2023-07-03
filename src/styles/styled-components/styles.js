@@ -608,3 +608,20 @@ export const ReceiptPostContainer = styled.div`
 export const ReceiptPost = styled.div`
   padding: 0.8em;
 `
+
+// 20px 아이콘 스타일링입니다.
+export const Comment20 = styled.div`
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+// Board의 comment 아이콘 스타일링입니다.
+export const BoardCommentIcon = styled(Comment20)`
+    background-image: ${props => props.background};
+    &:hover {
+      background-image: ${props => props.changedBackground};
+    }
+`

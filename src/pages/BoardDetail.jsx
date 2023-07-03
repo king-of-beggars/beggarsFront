@@ -248,7 +248,12 @@ function BoardDetail({
               <layout.FlexCenterColumn100
                 style={{ border: "1px solid red", gap: "8px" }}
               >
-                <BoardDetailComment></BoardDetailComment>
+                { response.comments.length > 0
+                  && response.comments.map(comment => {
+                    <BoardDetailComment key={comment.commentId} id={comment.commentId} userName={comment.userNickName} likeCheck={true}>{comment.commentText}</BoardDetailComment>
+                  })
+
+                }
               </layout.FlexCenterColumn100>
             </layout.FlexCenterColumn100>
           </layout.MainContent>
