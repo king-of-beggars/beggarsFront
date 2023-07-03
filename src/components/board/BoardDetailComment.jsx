@@ -24,7 +24,7 @@ function BoardDetailComment({ id, userName, likeCheck, children }) {
       <layout.FlexColumn100  style={{ width: "10%" }}>
         <div>
           // 댓글 삭제 아이콘
-          <style.BoardCommentIcon background={`url(${commentDel})`} changedBackground={`url(${commendDelHover})`}/>
+          <style.BoardCommentIcon background={`url(${commentDel})`} changedBackground={`url(${commentDelHover})`}/>
           // 좋아요 아이콘
           { likeCheck 
             ? <style.BoardCommentIcon onClick={likeHandler} background={`url(${commentFav})`} />
