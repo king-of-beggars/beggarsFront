@@ -402,6 +402,17 @@ export const CashBookDetailNoneBtn = styled(layout.FlexCenter)`
   visibility: ${props=>props.visible};
 `;
 
+// Cashbook 모달 Button
+export const CashBookNoneBtn = styled.button`
+  width: 40%;
+  height: 2.5em;
+  margin-top: 10px;
+  border-radius: 15px;
+  background-color: ${props => props.background};
+  border-color: ${sVar.bookModalNoBtn};
+  color: white;
+`;
+
 // Cashbook Detail Add Modal 배경 (어둡게)
 export const ModalBackground = styled.div`
   position: fixed;

@@ -12,6 +12,9 @@ export const bookDetailBorderColor = `#6c6c6c`;
 export const bookDetailAddBoxBorderColor = '#cccccc';
 export const bookDetailAddBoxColor = `rgba(217, 217, 217, 0.7)`;
 export const bookModalBordorColor = '#9C9C9C';
+export const bookModalYesBtn = '#B9B9B9';
+export const bookModalNoBtn = '#3C3C3C';
+
 
 export const middleYellow = `rgba(255, 190, 130, 1)`
 export const lightYellow = `rgba(255, 255, 243, 1)`
