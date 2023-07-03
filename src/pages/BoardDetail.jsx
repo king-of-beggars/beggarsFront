@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Nav } from "components";
+import { BoardDetailInput, Nav } from "components";
 import { layout, style } from "styles";
 import BoardDetailComment from "components/board/BoardDetailComment";
 import {
@@ -255,7 +255,7 @@ function BoardDetail({
         </layout.Main>
         {/* 댓글창으로! */}
         <layout.Nav navHeight={`${navHeight}px`}>
-          <Nav selected={MENU_LIST.board} />
+          <BoardDetailInput />
         </layout.Nav>
       </style.BackgroundPageLayout>
     );
