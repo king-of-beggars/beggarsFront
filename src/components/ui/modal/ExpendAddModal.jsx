@@ -62,7 +62,7 @@ function ExpendAddModal({ setClose, cardId }) {
   };
 
   return (
-    <style.ModalBackground onClick={setClose}>
+    <style.ModalOverlay onClick={setClose}>
       <style.Modal onClick={(event) => event.stopPropagation()}>
         <layout.FlexCenterRow100 style={{ top: "1em", padding: "1em" }}>
           <BackCramps
@@ -94,7 +94,7 @@ function ExpendAddModal({ setClose, cardId }) {
           </CashBookBtn>
         </layout.FlexCenterColumn>
       </style.Modal>
-    </style.ModalBackground>
+    </style.ModalOverlay>
   );
 }
 

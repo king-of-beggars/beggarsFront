@@ -1,6 +1,7 @@
 import { CashBookAPI } from "api/api";
 import { AddDetail, BackCrampsBlack, EditCard, EditCashbook } from "assets";
 import { CashBookDetailList, ExpendAddModal, Nav } from "components";
+import CashDetailModal from "components/ui/modal/CashDetailModal";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,15 +10,21 @@ import { layout, style } from "styles";
 
 function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   const navigate = useNavigate();
-  // Modal open, close
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // 지출 기록 Modal open, close
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const showAddModal = () => {
+    setIsAddModalOpen(true);
+  };
+  const closeAddModal = () => {
+    setIsAddModalOpen(false);
+  };
 
-  const showUserModal = () => {
-    setIsModalOpen(true);
-  };
-  const closeUserModal = () => {
-    setIsModalOpen(false);
-  };
+  // 무지출 Modal
+  const [isNoneModal, setIsNoneModal] = useState(false);
+  const changeNoneModal = () => {
+    const newIsNone = !isNoneModal;
+    setIsNoneModal(newIsNone);
+  }
 
   // param이용하여 id 받아와서 지출 내역 받을 것
   const param = useParams();
@@ -83,11 +90,12 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
               );
             })}
           </layout.SpendingListWrap>
-          <style.CashBookDetailAddBox onClick={showUserModal}>
+          <style.CashBookDetailAddBox onClick={showAddModal}>
             <AddDetail />
           </style.CashBookDetailAddBox>
-          { isModalOpen && <ExpendAddModal setClose={closeUserModal} cardId={cardId}/> }
-          <style.CashBookDetailNoneBtn visible={!data.length ? 'visible' : 'hidden'}>무지출 데이 기록 🎉</style.CashBookDetailNoneBtn>
+          { isAddModalOpen && <ExpendAddModal setClose={closeAddModal} cardId={cardId}/> }
+          <style.CashBookDetailNoneBtn visible={!data.length ? 'visible' : 'hidden'} onClick={changeNoneModal}>무지출 데이 기록 🎉</style.CashBookDetailNoneBtn>
+          { isNoneModal && <CashDetailModal setClose={changeNoneModal}></CashDetailModal>}
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
