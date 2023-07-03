@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BoardDetailInput, Nav } from "components";
+import { BoardDetailInput, BoardDetailComment } from "components";
 import { layout, style } from "styles";
-import BoardDetailComment from "components/board/BoardDetailComment";
 import {
   BackArrowGray,
   backgroundDarkTop,
