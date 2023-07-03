@@ -1,4 +1,4 @@
-import { commentDel, commentFav, commentFavDefault } from 'assets';
+import { commentDel, commentDelHover, commentFav, commentFavDefault } from 'assets';
 import React from "react";
 
 import { layout, style } from "styles";
