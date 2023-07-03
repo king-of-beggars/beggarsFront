@@ -1,7 +1,7 @@
 import { commentDel, commentDelHover, commentFav, commentFavDefault } from 'assets';
 import React, { useState } from "react";
-
 import { layout, style } from "styles";
+import * as sVar from "constants"
 
 function BoardDetailComment({ id, userName, likeCheck, children }) {
   const [isLiked, setIsLiked] = useState(likeCheck)
