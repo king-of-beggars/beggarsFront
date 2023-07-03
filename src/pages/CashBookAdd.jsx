@@ -5,7 +5,7 @@ import { BackCrampsBlack } from "assets";
 import { layout, style } from "styles";
 import { useNavigate } from "react-router-dom";
 import { categoryList } from "constants/category";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { CashBookAPI } from "api/api";
 
 // const options = [
@@ -53,6 +53,7 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   };
 
   // 저장하기 버튼 클릭
+  const queryClient = useQueryClient();
   const mutationAddCard = useMutation(CashBookAPI.postCardAdd, {
     onSuccess: (response) => {
       navigate("/cash-book");
@@ -72,6 +73,7 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
       };
       // console.log(newCard);
       mutationAddCard.mutate(newCard);
+      queryClient.invalidateQueries({ queryKey: ['cashCard'] });
       navigate("/cash-book");
     }
   };
