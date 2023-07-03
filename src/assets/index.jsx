@@ -41,6 +41,7 @@ export {ReactComponent as EditCard} from "assets/icons/editCard.svg"
 export {ReactComponent as AddDetail} from "assets/icons/addDetail.svg"
 export {ReactComponent as BackArrowWhite} from "assets/icons/backArrowWhite.svg"
 export {ReactComponent as BackArrowGray} from "assets/icons/backArrowGray.svg"
+export {ReactComponent as EditCashbook} from "assets/icons/editCashbook.svg"
 
 // backgrounds
 export { default as mainBackground } from "assets/pixels/backgrounds/mainBackground.png"

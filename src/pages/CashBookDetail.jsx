@@ -1,5 +1,5 @@
 import { CashBookAPI } from "api/api";
-import { AddDetail, BackCrampsBlack, EditCard } from "assets";
+import { AddDetail, BackCrampsBlack, EditCard, EditCashbook } from "assets";
 import { CashBookDetailList, ExpendAddModal, Nav } from "components";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
@@ -50,6 +50,12 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
     navigate(-1);
   };
 
+  // 수정 카드
+  // 쿼리 스트링 수정 필요
+  const onClickEdit = () => {
+    navigate(`/cash-book/edit/${cardId}`)
+  }
+
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
@@ -59,8 +65,8 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
             style={{ position: "absolute", left: "1em", float: "left" }}
           />
           <div style={{ fontSize: "1em" }}>오늘의 {} 지출</div>
-          <EditCard
-            // 수정 페이지로 넘어가도록 수정 필요
+          <EditCashbook
+            onClick={onClickEdit}
             style={{ position: "absolute", right: "1em", float: "right" }}
           />
         </layout.HeaderContent>
