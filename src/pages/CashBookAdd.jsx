@@ -57,6 +57,7 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   const mutationAddCard = useMutation(CashBookAPI.postCardAdd, {
     onSuccess: (response) => {
       navigate("/cash-book");
+      queryClient.invalidateQueries({ queryKey: ['cashCard'] });
     },
     onError: () => alert("카드 추가에 실패하였습니다."),
   });
@@ -73,7 +74,6 @@ function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
       };
       // console.log(newCard);
       mutationAddCard.mutate(newCard);
-      queryClient.invalidateQueries({ queryKey: ['cashCard'] });
       navigate("/cash-book");
     }
   };
