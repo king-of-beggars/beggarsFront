@@ -39,7 +39,8 @@ export const boardAPI = {
       limit: 15,
       page: 1
     }
-  })
+  }),
+  getBoardDetail: async (boardId) => await instance.get(`/api/board/detail/${boardId}`)
 }
 
 export default instance;

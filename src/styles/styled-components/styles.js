@@ -589,4 +589,22 @@ export const BoardBtnBar = styled.div`
   background-size: auto;
   /* z-index: -1; */
   border: none;
-`;
+`
+
+// 영수증 내부의 컨테이너 스타일링입니다.
+export const ReceiptInnerContainer = styled(layout.FlexCenterColumn100)`
+  padding: ${props => props.padding};
+  font-family: "DOSGothic";
+  font-size: ${props => props.fontSize};
+  border-bottom: 2px dashed ${sVar.darkGray};
+`
+
+// 영수증 내부의 게시글 부분 컨테이너 스타일링입니다.
+export const ReceiptPostContainer = styled.div`
+  font-size: 0.8em;
+`
+
+// 영수증 내부의 게시글 스타일링입니다.
+export const ReceiptPost = styled.div`
+  padding: 0.8em;
+`
