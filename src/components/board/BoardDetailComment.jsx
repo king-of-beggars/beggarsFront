@@ -1,10 +1,10 @@
 import { commentDel, commentDelHover, commentFav, commentFavDefault } from 'assets';
-import React from "react";
+import React, { useState } from "react";
 
 import { layout, style } from "styles";
 
 function BoardDetailComment({ id, userName, likeCheck, children }) {
-  const [isLiked, setIsLiked] = setIsLiked(likeCheck)
+  const [isLiked, setIsLiked] = useState(likeCheck)
 
   const likeHandler = () => {
     setIsLiked(!isLiked)
