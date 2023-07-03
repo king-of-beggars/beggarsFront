@@ -31,7 +31,6 @@ function BoardDetailComment({ id, userName, likeCheck, children }) {
             : <style.BoardCommentIcon onClick={likeHandler} background={`url(${commentFavDefault})`} />
           }
         </div>
-        <div>럽</div>
       </layout.FlexColumn100>
     </layout.FlexCenterRow100>
   );

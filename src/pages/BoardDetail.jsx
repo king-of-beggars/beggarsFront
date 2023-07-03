@@ -244,12 +244,10 @@ function BoardDetail({
                   {!!response.comments.length && response.comments.length}개
                 </div>
               </layout.Flex100>
-              <layout.FlexCenterColumn100
-                style={{ border: "1px solid red", gap: "8px" }}
-              >
+              <layout.FlexCenterColumn100>
                 { response.comments.length > 0
                   && response.comments.map(comment => {
-                    <BoardDetailComment key={comment.commentId} id={comment.commentId} userName={comment.userNickName} likeCheck={true}>{comment.commentText}</BoardDetailComment>
+                    return (<BoardDetailComment key={comment.commentId} id={comment.commentId} userName={comment.userNickName} likeCheck={true}>{comment.commentText}</BoardDetailComment>)
                   })
 
                 }
