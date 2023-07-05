@@ -3,7 +3,7 @@ import { AddDetail, BackCrampsBlack, EditCard, EditCashbook } from "assets";
 import { CashBookDetailList, ExpendAddModal, Nav } from "components";
 import CashDetailModal from "components/ui/modal/CashDetailModal";
 import React, { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { layout, style } from "styles";
@@ -24,33 +24,37 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   const changeNoneModal = () => {
     const newIsNone = !isNoneModal;
     setIsNoneModal(newIsNone);
-  }
+  };
 
   // param이용하여 id 받아와서 지출 내역 받을 것
   const param = useParams();
   const cardId = param.id;
-  
-  // let { data, isLoading, error } = useQuery(['cashDetail'], ()=>CashBookAPI.getCashDetail(cardId));
-  // if (isLoading || error) {
-  //   return <></>;
-  // }
-  // data = data.data
-  // console.log(data.length);
-  // 여기는 가짜 데이터
-  const data = [
-    // {
-    //   cashDetailId: 1,
-    //   cashDetailText: "육개장",
-    //   cashDetailValue: 10000,
-    // },
-    // {
-    //   cashDetailId: 2,
-    //   cashDetailText: "부대찌개",
-    //   cashDetailValue: 8000,
-    // },
-  ];
 
-  
+  let { data, isLoading, error } = useQuery(["cashDetail"], () =>
+    CashBookAPI.getCashDetail(cardId)
+  );
+  if (isLoading || error) {
+    return <></>;
+  }
+  // data = data.data
+  // if (data.consumption) {
+  //   data = [];
+  // }
+  console.log(data);
+  // 여기는 가짜 데이터
+  // const data = [
+  //   // {
+  //   //   cashDetailId: 1,
+  //   //   cashDetailText: "육개장",
+  //   //   cashDetailValue: 10000,
+  //   // },
+  //   // {
+  //   //   cashDetailId: 2,
+  //   //   cashDetailText: "부대찌개",
+  //   //   cashDetailValue: 8000,
+  //   // },
+  // ];
+
   // 뒤로가기
   // query string 으로 수정할 것
   const onClickBack = () => {
@@ -60,8 +64,14 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 수정 카드
   // 쿼리 스트링 수정 필요
   const onClickEdit = () => {
-    navigate(`/cash-book/edit/${cardId}`)
-  }
+    const sendInfo = {
+      category: data.cashbookCategory,
+      name: data.cashbookName,
+    };
+    const queryStr = new URLSearchParams(sendInfo).toString();
+    // alert(`/cash-book/edit/${cardId}?${queryStr}`);
+    navigate(`/cash-book/edit/${cardId}?${queryStr}`)
+  };
 
   return (
     <layout.PageLayout isMobile={isMobile}>
@@ -78,24 +88,40 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
           />
         </layout.HeaderContent>
       </layout.Header>
-      <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
+      <layout.Main
+        headerHeight={`${headerHeight}px`}
+        mainHeight={`${mainHeight}px`}
+      >
         <layout.MainContent>
           <layout.SpendingListWrap>
-            {!data.length ? <></> : data.map((expend) => {
-              return (
-                <CashBookDetailList
-                  expendName={expend.cashDetailText}
-                  expendMoney={expend.cashDetailValue}
-                />
-              );
-            })}
+            {!data.length ? (
+              <></>
+            ) : (
+              data.map((expend) => {
+                return (
+                  <CashBookDetailList
+                    expendName={expend.cashDetailText}
+                    expendMoney={expend.cashDetailValue}
+                  />
+                );
+              })
+            )}
           </layout.SpendingListWrap>
           <style.CashBookDetailAddBox onClick={showAddModal}>
             <AddDetail />
           </style.CashBookDetailAddBox>
-          { isAddModalOpen && <ExpendAddModal setClose={closeAddModal} cardId={cardId}/> }
-          <style.CashBookDetailNoneBtn visible={!data.length ? 'visible' : 'hidden'} onClick={changeNoneModal}>무지출 데이 기록 🎉</style.CashBookDetailNoneBtn>
-          { isNoneModal && <CashDetailModal setClose={changeNoneModal}></CashDetailModal>}
+          {isAddModalOpen && (
+            <ExpendAddModal setClose={closeAddModal} cardId={cardId} />
+          )}
+          <style.CashBookDetailNoneBtn
+            visible={!data.length ? "visible" : "hidden"}
+            onClick={changeNoneModal}
+          >
+            무지출 데이 기록 🎉
+          </style.CashBookDetailNoneBtn>
+          {isNoneModal && (
+            <CashDetailModal setClose={changeNoneModal}></CashDetailModal>
+          )}
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>

@@ -1,8 +1,9 @@
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import './App.css';
 import { layout, style } from 'styles';
 import GlobalStyle from 'styles/globalStyle';
 import Router from 'router/Router';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();
 // const AppContext = React.createContext();
