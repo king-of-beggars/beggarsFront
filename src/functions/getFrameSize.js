@@ -7,3 +7,5 @@ function getFrameSize() {
         return { frameWidth: parseFloat(frameWidth), frameHeight: parseFloat(frameHeight)}
     }
 }
+
+export default getFrameSize
