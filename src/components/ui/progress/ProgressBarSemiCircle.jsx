@@ -57,7 +57,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
         return () => {
           semiCircle.destroy();
         };
-        }, [isDefault]);
+        }, [isDefault, budget, spend,]);
 
         return <div ref={progressBarRef} />;
       };
