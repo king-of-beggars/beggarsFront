@@ -11,8 +11,10 @@ import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
 import CashBookMod from "pages/CashBookMod";
 import BoardDetail from "pages/BoardDetail";
+import { setFrameSize } from 'functions';
 
-function Router() {
+function Router() {  
+  setFrameSize();
   // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
