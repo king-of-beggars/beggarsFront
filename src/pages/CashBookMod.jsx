@@ -1,21 +1,30 @@
-import React, { useState } from 'react'
-import { layout, style } from 'styles';
-import { BackCrampsBlack, } from "assets";
-import { Nav, CashBookInput, CashAddSelect } from "components";
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import queryString from "query-string";
 
-const options = [
-  { value: "식비", name: "식비" },
-  { value: "교통비", name: "교통비" },
-  { value: "여가비", name: "여가비" },
-];
+import { layout, style } from "styles";
+import { BackCrampsBlack } from "assets";
+import { Nav, CashBookInput, CashAddSelect } from "components";
+import { categoryList } from "constants/category";
 
 function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
+  // 카테고리 정보
+  const options = categoryList;
+
+  // 쿼리스트링 정보 받아오기
+  const { search } = useLocation();
+  let searchCondition = queryString.parse(search);
+  // console.log(searchCondition);
+
+  // param이용하여 id 받아와서 지출 내역 받을 것
+  const param = useParams();
+  const cardId = param.id;
+
   // 카드 정보 state
   // 기존의 정보로 수정 필요
   const [cardInfo, setCardInfo] = useState({
-    category: "",
-    subHead: "",
+    category: searchCondition.category,
+    subHead: searchCondition.name,
     budget: "",
   });
   const { category, subHead, budget } = cardInfo;
@@ -38,7 +47,7 @@ function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
     };
 
     setCardInfo(newCard);
-    console.log(newCard)
+    console.log(newCard);
   };
 
   // 뒤로가기
@@ -49,9 +58,14 @@ function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
 
   // 저장하기 버튼 클릭
   const onClickSave = () => {
-
+    const newCard = {
+      cashCategory: category,
+      cashName: subHead,
+      cashListGoalValue: Number(budget.replace(',','')),
+    };
+    alert('카드 수정이 완료되셨습니다.');
     navigate(-1);
-  }
+  };
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
@@ -63,7 +77,10 @@ function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
           <div style={{ fontSize: "1em" }}>카드 수정</div>
         </layout.HeaderContent>
       </layout.Header>
-      <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
+      <layout.Main
+        headerHeight={`${headerHeight}px`}
+        mainHeight={`${mainHeight}px`}
+      >
         <layout.MainContent>
           <CashAddSelect
             title={"카테고리"}
@@ -87,7 +104,9 @@ function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
             name={"budget"}
             value={budget}
           />
-          <style.CashBookBtn marginTop="50px" onClick={onClickSave}>{"저장"}</style.CashBookBtn>
+          <style.CashBookBtn marginTop="50px" onClick={onClickSave}>
+            {"저장"}
+          </style.CashBookBtn>
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
@@ -97,4 +116,4 @@ function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
   );
 }
 
-export default CashBookMod
+export default CashBookMod;

@@ -24,7 +24,8 @@ export const CashBookAPI = {
   getCashCard: (date) => instance.get(`/api/cashbook?date=${date}`),
   getCashDetail: (id) => instance.get(`/api/cashbook/${id}`),
   postCardAdd: (payload) => instance.post('/api/cashbook/frame', payload),
-  postCashDetailAdd: (id, payload) => instance.post(`/api/cashbook/${id}`, payload)
+  postCashDetailAdd: ({cardId, newDetail}) => instance.post(`/api/cashbook/${cardId}`, newDetail),
+  postCashEdit: ({cardId, newCard}) => instance.post(`/api/cashbook/frame/${cardId}`, newCard)
 }
 
 export const boardAPI = {

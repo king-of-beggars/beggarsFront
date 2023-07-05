@@ -7,7 +7,7 @@ import { BackCramps } from "assets";
 import CashBookInput from "components/ui/input/CashBookInput";
 import { CashBookBtn } from "styles/styled-components/styles";
 import { CashBookAPI } from "api/api";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 function ExpendAddModal({ setClose, cardId }) {
   const navigate = useNavigate();
@@ -18,6 +18,29 @@ function ExpendAddModal({ setClose, cardId }) {
     expendPrice: INIT_INPUT_VALUE,
   });
   const { expendName, expendPrice } = expendInfo;
+
+  // 상세 사항 추가 post
+  const queryClient = useQueryClient();
+  const mutationAddDetail = useMutation(CashBookAPI.postCashDetailAdd, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["cashDetail"]);
+      setClose();
+    },
+    onError: () => alert("상세 내역 추가에 실패하였습니다."),
+  });
+
+  const onSaveDetail = () => {
+    if (!expendName | !expendPrice) {
+      alert("지출 항목과 금액을 입력해주세요.");
+    } else {
+      const newDetail = {
+        cashDetailText:expendName,
+        cashDetailValue: Number(expendPrice.replace(",", "")),
+      };
+      // console.log(newDetail);
+      mutationAddDetail.mutate({cardId, newDetail});
+    }
+  };
 
   // onChange 적용 함수
   const onChangeInput = (changeObj) => {
@@ -37,28 +60,7 @@ function ExpendAddModal({ setClose, cardId }) {
     };
 
     setExpendInfo(newExpend);
-    console.log(newExpend)
-  };
-
-  // 지출 상세 내역 저장
-  const mutation = useMutation(CashBookAPI.postCashDetailAdd, {
-    onSuccess: (response) => {
-      navigate(`/cash-book/${cardId}`);
-    },
-    onError: () => alert("지출 내역 저장에 실패했습니다."),
-  });
-
-  const onClickSave = () => {
-    if (!expendName | !expendPrice) {
-      alert("지출 상세 내역을 모두 입력해주세요.");
-    } else {
-      const newExpend = {
-        cashDetailText: expendName,
-        cashDetailValue: Number(expendPrice.replace(",", "")),
-      };
-      // alert(newExpend.cashDetailText);
-      mutation.mutate(cardId, newExpend)
-    }
+    console.log(newExpend);
   };
 
   return (
@@ -89,7 +91,7 @@ function ExpendAddModal({ setClose, cardId }) {
             value={expendPrice}
             onChange={onChangeInput}
           />
-          <CashBookBtn marginTop="10px" onClick={onClickSave}>
+          <CashBookBtn marginTop="10px" onClick={onSaveDetail}>
             저장
           </CashBookBtn>
         </layout.FlexCenterColumn>
