@@ -638,3 +638,12 @@ export const BoardCommentIcon = styled(Comment20)`
       background-image: ${props => props.changedBackground};
     }
 `
+
+// Svg 아이콘에 hover 이펙트가 있는 경우 사용하는 스타일링
+export const HoverSvgIcon = styled.svg`
+  fill: currentColor;
+  transition: color 0.3s;
+  &:hover {
+    color: black;
+  }
+`

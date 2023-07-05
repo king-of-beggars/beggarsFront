@@ -35,10 +35,10 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
               // bar.animate(graphValue / 100)
               bar.text.style.color = "tomato";
               bar.path.setAttribute('stroke', "tomato");
-              { isDefault ? bar.trail.setAttribute("stroke", `${sVar.middleYellow}`) : bar.trail.setAttribute("stroke", `${sVar.textGray}`) }
+              isDefault ? bar.trail.setAttribute("stroke", `${sVar.middleYellow}`) : bar.trail.setAttribute("stroke", `${sVar.textGray}`)
             } else {
               bar.setText(`${value}%`);
-              { isDefault ? bar.text.style.color = `${sVar.middleYellow}` : bar.text.style.color = "#ffffff" }
+              isDefault ? bar.text.style.color = `${sVar.middleYellow}` : bar.text.style.color = "#ffffff"
             }
           //   bar.text.style.color = `${sVar.middleYellow}`;
           },
@@ -57,7 +57,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
         return () => {
           semiCircle.destroy();
         };
-        }, [isDefault, budget, spend,]);
+        }, [isDefault, spend, budget]);
 
         return <div ref={progressBarRef} />;
       };

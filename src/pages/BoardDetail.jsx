@@ -104,7 +104,7 @@ function BoardDetail({
             onClick={onClickBack}
             style={{
               position: "absolute",
-              left: "1em",
+              left: "2.4em",
               top: "2em",
             }}
           />
@@ -142,8 +142,9 @@ function BoardDetail({
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer padding="1em" fontSize="1.2em">
+                { console.log(response.cashbookDetail.cashbookCreatedAt.split("T"))}
                 {!!response.cashbookDetail.cashbookCreatedAt &&
-                  response.cashbookDetail.cashbookCreatedAt}
+                  response.cashbookDetail.cashbookCreatedAt.split("T")[0].split("-").join(" / ")}
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
                 {/* <layout.Flex100
@@ -244,12 +245,12 @@ function BoardDetail({
                   {!!response.comments.length && response.comments.length}개
                 </div>
               </layout.Flex100>
-              <layout.FlexCenterColumn100>
+              <layout.FlexCenterColumn100 style={{gap: "5px"}}>
                 { response.comments.length > 0
                   && response.comments.map(comment => {
-                    return (<BoardDetailComment key={comment.commentId} id={comment.commentId} userName={comment.userNickName} likeCheck={false}>{comment.commentText}</BoardDetailComment>)
+                    console.log("comment:::", comment)
+                    return (<BoardDetailComment isBoasting={isBoasting} key={comment.commentId} id={comment.commentId} userName={comment.userId.userNickname} likeCount={comment.likeCount} likeCheck={false}>{comment.commentText}</BoardDetailComment>)
                   })
-
                 }
               </layout.FlexCenterColumn100>
             </layout.FlexCenterColumn100>

@@ -33,3 +33,4 @@ export const trusyBlue = `rgba(126, 198, 204, 1)`;
 export const nightyBlue = `rgba(0, 75, 143, 1)`;
 
 export const white70 = `rgba(255, 255, 255, 0.7)`;
+export const white50 = `rgba(255, 255, 255, 0.5)`;
