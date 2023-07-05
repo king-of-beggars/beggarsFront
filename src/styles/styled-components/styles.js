@@ -632,6 +632,8 @@ export const Comment20 = styled.div`
 // Board의 comment 아이콘 스타일링입니다.
 export const BoardCommentIcon = styled(Comment20)`
     background-image: ${props => props.background};
+    background-position: center;
+    background-repeat: no-repeat;
     &:hover {
       background-image: ${props => props.changedBackground};
     }
