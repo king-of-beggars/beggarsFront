@@ -13,16 +13,38 @@ import Test from 'pages/Test';
 import CashBookDetail from 'pages/CashBookDetail';
 
 const queryClient = new QueryClient();
+// const AppContext = React.createContext();
+
+// const contextValue = {
+//   frameSize: {
+//     width: 393,
+//     height: 852
+//   },
+//   boardBtnActivate: {
+//     width: 160,
+//     height: 38
+//   },
+//   boardBtnSleep: {
+//     width: 154,
+//     height: 36
+//   },
+//   boardBtnBar: {
+//     width: 307,
+//     height: 36
+//   },
+//   frameRatio: 852 / 393,
+// }
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       {/* <Test /> */}
-      <layout.FlexCenterColumn>
-        <Router />
-      </layout.FlexCenterColumn>
-          
+      {/* <AppContext.Provider value={contextValue}> */}
+        <layout.FlexCenterColumn>
+          <Router />
+        </layout.FlexCenterColumn>
+      {/* </AppContext.Provider>     */}
     </QueryClientProvider>
 
 

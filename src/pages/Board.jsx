@@ -58,9 +58,9 @@ function Board({ isBoasting, setIsBoasting, isMobile, headerHeight, navHeight, m
         <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
           <layout.MainContent>
             { /* 아래로 response type에 따른 backRenderer 호출 조건 변경 추가 예정 */ }
-            { responseType === "" 
-              ? null
-              : null
+            { responseType === "loading" 
+              ? <div>loading...</div>
+              : <div>error!</div>
             }
           </layout.MainContent>
         </layout.Main>
@@ -88,9 +88,9 @@ function Board({ isBoasting, setIsBoasting, isMobile, headerHeight, navHeight, m
   })
 
   if (isLoading) {
-    return <div>로딩중!</div>
+    return backRenderer("loading")
   } else if (isError) {
-    return <div>에러!</div>
+    return backRenderer("error")
   }
 
   return (
