@@ -18,3 +18,5 @@ export { default as CashAddSelect } from "components/ui/select-box/CashAddSelect
 
 export { default as ProgressBarSemiCircle } from "components/ui/progress/ProgressBarSemiCircle"
 export { default as ProgressBarTmp } from "components/ui/progress/ProgressBarTmp"
+
+export { default as CommentFavDefaultLight } from "components/ui/button/CommentFavDefaultLight"

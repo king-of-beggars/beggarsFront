@@ -40,9 +40,9 @@ function Router() {
     }
   }, [])
 
-  const headerHeight = Math.ceil(windowSize.height * 0.15) > 92 ? 92 : Math.ceil(windowSize.height * 0.15)
-  const navHeight = Math.ceil(windowSize.height * 0.1) > 95 ? 95 : Math.ceil(windowSize.height * 0.1)
-  const mainHeight = Math.ceil(windowSize.height - (headerHeight + navHeight))
+  const headerHeight = Math.ceil((windowSize.height) * 0.15) > 92 ? 92 : Math.ceil((windowSize.height) * 0.15)
+  const navHeight = Math.ceil((windowSize.height) * 0.1) > 95 ? 95 : Math.ceil((windowSize.height) * 0.1)
+  const mainHeight = Math.ceil((windowSize.height) - (headerHeight + navHeight))
 
   const isMobile = /Mobi/i.test(window.navigator.userAgent)
   console.log(isMobile)

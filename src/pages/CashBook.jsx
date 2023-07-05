@@ -13,6 +13,12 @@ import {
   mainBackgroundTail,
   mainBackgroundTop,
 } from "assets";
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
 import { CashBookAPI } from "api/api";
 import { useNavigate } from "react-router-dom";
 
