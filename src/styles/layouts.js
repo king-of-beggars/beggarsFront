@@ -65,7 +65,7 @@ export const Header = styled(FlexCenter)`
     position: fixed;
     top: 0;
     width: inherit;
-    margin-top: 53px;
+    /* margin-top: 53px; */
 `
 
 export const HeaderContent = styled.div`
