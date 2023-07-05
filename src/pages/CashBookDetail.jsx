@@ -30,25 +30,28 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   const param = useParams();
   const cardId = param.id;
   
-  // let { data, isLoading, error } = useQuery(['cashDetail'], ()=>CashBookAPI.getCashDetail(cardId));
-  // if (isLoading || error) {
-  //   return <></>;
-  // }
-  // data = data.data
-  // console.log(data.length);
+  let { data, isLoading, error } = useQuery(['cashDetail'], ()=>CashBookAPI.getCashDetail(cardId));
+  if (isLoading || error) {
+    return <></>;
+  }
+  data = data.data
+  if (data.consumption) {
+    data = [];
+  }
+  console.log(data);
   // 여기는 가짜 데이터
-  const data = [
-    // {
-    //   cashDetailId: 1,
-    //   cashDetailText: "육개장",
-    //   cashDetailValue: 10000,
-    // },
-    // {
-    //   cashDetailId: 2,
-    //   cashDetailText: "부대찌개",
-    //   cashDetailValue: 8000,
-    // },
-  ];
+  // const data = [
+  //   // {
+  //   //   cashDetailId: 1,
+  //   //   cashDetailText: "육개장",
+  //   //   cashDetailValue: 10000,
+  //   // },
+  //   // {
+  //   //   cashDetailId: 2,
+  //   //   cashDetailText: "부대찌개",
+  //   //   cashDetailValue: 8000,
+  //   // },
+  // ];
 
   
   // 뒤로가기

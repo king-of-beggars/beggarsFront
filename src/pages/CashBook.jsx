@@ -107,14 +107,17 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const [focused, setFocused] = useState(false);
 
   // 가계부 data
-  const { data, isLoading, error } = useQuery(["cashCard"], () =>
-    CashBookAPI.getCashCard(selectDate.format("YYYY-MM-DD"))
-  );
+  const queryNode = { queryKey: [`cashCard${selectDate.format("YYYY-MM-DD")}`], queryFn: ()=>CashBookAPI.getCashCard(selectDate.format("YYYY-MM-DD"))}
+
+  const { data, isLoading, error } = useQuery(queryNode);
+  // const { data, isLoading, error } = useQuery(["cashCard"], () =>
+  //   CashBookAPI.getCashCard(selectDate.format("YYYY-MM-DD"))
+  // );
   if (isLoading || error) {
     return <></>;
   }
   const cashbookApiRes = data.data;
-  // console.log(cashbookApiRes.length);
+  console.log(cashbookApiRes);
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
