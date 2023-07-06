@@ -20,3 +20,5 @@ export { default as ProgressBarSemiCircle } from "components/ui/progress/Progres
 export { default as ProgressBarTmp } from "components/ui/progress/ProgressBarTmp"
 
 export { default as CommentFavDefaultLight } from "components/ui/button/CommentFavDefaultLight"
+
+export { GlobalVariableProvider, useGlobalVariables } from "components/provider/GlobalVariableProvider"

@@ -60,7 +60,7 @@ export const PageLayout = styled.div`
 
 `
 
-export const Header = styled(FlexCenter)`
+export const Header = styled(FlexCenterColumn)`
     height: ${props => props.headerHeight};
     position: fixed;
     top: 0;
@@ -70,7 +70,7 @@ export const Header = styled(FlexCenter)`
 
 export const HeaderContent = styled.div`
     width: 85%;
-    height: inherit;
+    height: calc(100% - 53px);
     display: flex;
     align-items: center;
     justify-content: center;

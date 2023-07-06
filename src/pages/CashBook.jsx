@@ -3,6 +3,8 @@ import { useQuery } from "react-query";
 import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { CashBookAPI } from "api/api";
+import { useNavigate } from "react-router-dom";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -17,14 +19,10 @@ import {
   mainBackgroundTail,
   mainBackgroundTop,
 } from "assets";
+import { useGlobalVariables } from 'components';
+import { getDateBoxSize } from 'functions/getAssetSize';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 
-import { CashBookAPI } from "api/api";
-import { useNavigate } from "react-router-dom";
 
 // dummy data
 // const cashbookApiRes = {
@@ -64,7 +62,21 @@ import { useNavigate } from "react-router-dom";
 //   ],
 // };
 
-function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
+function CashBook() {
+// function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
+  const {
+      windowSize,
+      frameSize,
+      isMobile,
+      headerHeight,
+      navHeight,
+      mainHeight,
+      screenWidth,
+      cashbookDateBox,
+      boardBtnSleep,
+      cashbookCard,
+    } = useGlobalVariables();
+  console.log('CashBook rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
   const navigate = useNavigate();
   // // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
   // const [windowSize, setWindowSize] = useState({
@@ -86,22 +98,24 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   //     window.removeEventListener("resize", handleResize)
   //   }
   // }, [])
-  const screenWidth = isMobile
-    ? parseFloat(localStorage.getItem("screenWidth"))
-    : parseFloat(localStorage.getItem("screenWidth")) > 393
-    ? 393
-    : parseFloat(localStorage.getItem("screenWidth"));
+  // const screenWidth = isMobile
+  //   ? parseFloat(localStorage.getItem("screenWidth"))
+  //   : parseFloat(localStorage.getItem("screenWidth")) > 393
+  //   ? 393
+  //   : parseFloat(localStorage.getItem("screenWidth"));
 
   // datepicker 박스 크기 결정
-  const dateBoxWidth =
-    isMobile || screenWidth < 500
-      ? ((screenWidth * 155) / 393) * 0.65
-      : ((500 * 155) / 393) * 0.65;
-  const dateBoxHeight = dateBoxWidth * (36 / 155);
+  // const dateBoxWidth =
+  //   isMobile || screenWidth < 500
+  //     ? ((screenWidth * 155) / 393) * 0.65
+  //     : ((500 * 155) / 393) * 0.65;
+  // const dateBoxHeight = dateBoxWidth * (36 / 155);
+  const { dateBoxWidth, dateBoxHeight } = getDateBoxSize(isMobile, frameSize, screenWidth, cashbookDateBox, boardBtnSleep)
+  const CARD_RATIO = 0.9
 
   // card 크기 결정
-  const cardWidth = 301 * 0.9;
-  const cardHeight = 356 * 0.9;
+  const cardWidth = cashbookCard.width * CARD_RATIO
+  const cardHeight = cashbookCard.height * CARD_RATIO
 
   // slidesPerView에 들어갈 카드 수
   let slidesPerViewValue =
@@ -148,6 +162,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
       backPngTail={`url(${mainBackgroundTail})`}
     >
       <layout.Header headerHeight={`${headerHeight}px`}>
+        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
           <style.CashBookHeader>가계부</style.CashBookHeader>
         </layout.HeaderContent>
@@ -243,7 +258,7 @@ function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
                             category={card.cashbookCategory}
                             title={card.cashbookName}
                             screenWidth={screenWidth}
-                            ratio={0.9}
+                            ratio={CARD_RATIO}
                             onClickHandler={onClickCard}
                             isDefault={true}
                           />

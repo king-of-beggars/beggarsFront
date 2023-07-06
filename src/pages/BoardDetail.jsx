@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "react-query";
+
 import { BoardDetailInput, BoardDetailComment } from "components";
 import { layout, style } from "styles";
 import {
@@ -11,26 +13,24 @@ import {
   background50Middle,
   background50Tail,
 } from "assets";
-import { MENU_LIST } from "constants";
-import { useQuery } from "react-query";
 import { boardAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
+import { useGlobalVariables } from 'components';
 
-function BoardDetail({
-  isMobile,
-  isBoasting,
-  headerHeight,
-  navHeight,
-  mainHeight,
-}) {
+// function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
+function BoardDetail({ isBoasting }) {
+  // 만들어둔 context 사용하기
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  console.log('BoardDetail rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth)
+
   const { id } = useParams(); // id 패러미터 받아오기
   console.log("받아온 id:::", id);
 
-  const screenWidth = isMobile
-    ? parseFloat(localStorage.getItem("screenWidth"))
-    : parseFloat(localStorage.getItem("screenWidth")) > 393
-    ? 393
-    : parseFloat(localStorage.getItem("screenWidth"));
+  // const screenWidth = isMobile
+  //   ? parseFloat(localStorage.getItem("screenWidth"))
+  //   : parseFloat(localStorage.getItem("screenWidth")) > 393
+  //   ? 393
+  //   : parseFloat(localStorage.getItem("screenWidth"));
   const navigate = useNavigate();
 
   // let DATA_CASHBOOK;
@@ -100,6 +100,7 @@ function BoardDetail({
         }
       >
         <layout.Header headerHeight={`${headerHeight}px`}>
+          <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
           <BackArrowGray
             onClick={onClickBack}
             style={{
