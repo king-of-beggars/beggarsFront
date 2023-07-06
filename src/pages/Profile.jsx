@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
 import { layout, style } from "styles";
-import { BackCramps } from "assets";
 import { Nav } from "components";
 import { AuthAPI } from "api/api";
+import { useGlobalVariables } from 'components';
 
-function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
+// function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
+function Profile() {
+  // 만들어둔 context 사용하기
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  console.log('Profile rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
   const navigate = useNavigate();
 
   const mutationLogout = useMutation(AuthAPI.postLogout, {
@@ -29,6 +33,7 @@ function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
+        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>프로필</layout.HeaderContent>
       </layout.Header>
       <layout.Main

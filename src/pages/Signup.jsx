@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
+
 import { layout, style } from "styles";
 import { AuthAPI } from "api/api";
-import { useNavigate } from "react-router-dom";
 import { BackCramps } from 'assets';
 import * as sVar from "constants/styleVariables"
 import { usePassword, useNickname, useId } from 'hooks';
+import { useGlobalVariables } from 'components';
 
 const INIT_INPUT_VALUE = ""
 
-function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
+// function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
+function Signup() {
+  // 만들어둔 context 사용하기
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  console.log('Signup rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+
+  // nav가 없는 페이지인 경우 header를 줄이고 main을 늘려주기
+  const noNavHeaderHeight = headerHeight - 50
+  const noNavMainHeight = mainHeight + navHeight + 50
+
   const navigate = useNavigate();
 
   const [password, setPassword, isValid] = usePassword(INIT_INPUT_VALUE)
@@ -125,7 +136,8 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
 
   return (
     <layout.PageLayout isMobile={isMobile}>
-      <layout.Header headerHeight={`${headerHeight}px`}>
+      <layout.Header headerHeight={`${noNavHeaderHeight}px`}>
+        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
           <BackCramps
               onClick={onClickBack}
@@ -133,7 +145,7 @@ function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
           />
         </layout.HeaderContent>
       </layout.Header>
-      <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
+      <layout.Main headerHeight={`${noNavHeaderHeight}px`} mainHeight={`${noNavMainHeight}px`}>
         <layout.MainContent>
           <layout.LoginWrap>
             <style.JoinHeader>회원가입</style.JoinHeader>

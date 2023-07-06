@@ -6,8 +6,14 @@ import { layout, style } from "styles";
 import { BackCrampsBlack } from "assets";
 import { Nav, CashBookInput, CashAddSelect } from "components";
 import { categoryList } from "constants/category";
+import { useGlobalVariables } from 'components';
 
-function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
+// function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
+function CashBookMod() {
+  // 만들어둔 context 사용하기
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  console.log('CashBookMod rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+
   // 카테고리 정보
   const options = categoryList;
 
@@ -69,6 +75,7 @@ function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
+        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
           <BackCrampsBlack
             onClick={onClickBack}

@@ -1,14 +1,20 @@
-import { CashBookAPI } from "api/api";
-import { AddDetail, BackCrampsBlack, EditCard, EditCashbook } from "assets";
-import { CashBookDetailList, ExpendAddModal, Nav } from "components";
-import CashDetailModal from "components/ui/modal/CashDetailModal";
 import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { CashBookAPI } from "api/api";
+import { AddDetail, BackCrampsBlack, EditCard, EditCashbook } from "assets";
+import { CashBookDetailList, ExpendAddModal, Nav } from "components";
+import CashDetailModal from "components/ui/modal/CashDetailModal";
 import { layout, style } from "styles";
+import { useGlobalVariables } from 'components';
 
-function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
+function CashBookDetail() {
+// function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
+  // 만들어둔 context 사용하기
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  console.log('CashBookDetail rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+
   const navigate = useNavigate();
   // 지출 기록 Modal open, close
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -76,6 +82,7 @@ function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   return (
     <layout.PageLayout isMobile={isMobile}>
       <layout.Header headerHeight={`${headerHeight}px`}>
+        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
           <BackCrampsBlack
             onClick={onClickBack}

@@ -1,12 +1,23 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { layout, style } from 'styles'
-import { BigBlackBtn, LoginInputBox } from 'styles/styled-components/styles'
-import { BackCramps } from 'assets'
 import { useMutation } from 'react-query'
-import { AuthAPI } from 'api/api'
 
-function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
+import { layout, style } from 'styles'
+import { BackCramps } from 'assets'
+import { AuthAPI } from 'api/api'
+import { useGlobalVariables } from 'components'
+
+// function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
+function Login() {
+  // 만들어둔 context 사용하기
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  console.log('Login rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+
+  // nav가 없는 페이지인 경우 header를 줄이고 main을 늘려주기
+  const noNavHeaderHeight = headerHeight - 50
+  const noNavMainHeight = mainHeight + navHeight + 50
+
+
   const INIT_INPUT_VALUE = ""
   const navigate = useNavigate();
 
@@ -74,7 +85,8 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
 
   return (
     <layout.PageLayout isMobile={isMobile}>
-      <layout.Header headerHeight={`${headerHeight}px`}>
+      <layout.Header headerHeight={`${noNavHeaderHeight}px`}>
+        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
         <BackCramps
             onClick={onClickBack}
@@ -82,7 +94,7 @@ function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
           />
         </layout.HeaderContent>
       </layout.Header>
-      <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
+      <layout.Main headerHeight={`${noNavHeaderHeight}px`} mainHeight={`${noNavMainHeight}px`}>
         <layout.MainContent>
           <layout.LoginWrap>
             <style.LoginLogoWrap></style.LoginLogoWrap>
