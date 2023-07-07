@@ -42,7 +42,7 @@ function BoardDetail({ isBoasting }) {
     isLoading,
     isError,
   } = useQuery(["receipt", id], () => boardAPI.getBoardDetail(id), {
-    select: (data) => data.data,
+    select: (data) => data.data.data,
     // onSuccess: (res) => {
     //   console.log("getRes:::", res);
     //   DATA_CASHBOOK = res.cashbookDetail;

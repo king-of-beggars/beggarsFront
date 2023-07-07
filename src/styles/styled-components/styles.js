@@ -647,3 +647,11 @@ export const HoverSvgIcon = styled.svg`
     color: black;
   }
 `
+
+// BoardCommentLikes의 likeCount 표시해주는 div
+export const LikeCounts = styled.div`
+  font-size: 12px;
+  position: absolute;
+  bottom: 0;
+  color: ${props => props.isGray ? `${sVar.commentGray}` : "black"};
+`
