@@ -46,10 +46,7 @@ export { ReactComponent as CommentDelLight } from "assets/icons/commentDelLight.
 export { ReactComponent as CommentFav } from "assets/icons/commentFav.svg"
 export { ReactComponent as CommentFavDefaultDark } from "assets/icons/commentFavDefaultDark.svg"
 export { ReactComponent as CommentFavDefaultLight } from "assets/icons/commentFavDefaultLight.svg"
-// export { default as commentDel } from "assets/icons/commentDel.png"
-// export { default as commentFavDefault } from "assets/icons/commentFavDefault.png"
-// export { default as commentDelHover } from "assets/icons/commentDelHover.png"
-// export { default as commentFav } from "assets/icons/commentFav.png"
+export { ReactComponent as CommentSubmit } from "assets/icons/commentSubmit.svg"
 export {ReactComponent as EditCashbook} from "assets/icons/editCashbook.svg"
 
 // backgrounds

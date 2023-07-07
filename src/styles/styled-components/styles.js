@@ -20,6 +20,7 @@ import {
 import { SwiperSlide } from "swiper/react";
 import { layout } from "styles";
 import * as sVar from "constants/styleVariables.js";
+import { FlexCenter } from 'styles/layouts';
 
 export const CanvasContainer = styled.div`
   width: 98vw;
@@ -618,6 +619,7 @@ export const ReceiptPostContainer = styled.div`
 // 영수증 내부의 게시글 스타일링입니다.
 export const ReceiptPost = styled.div`
   padding: 0.8em;
+  font-size: 16px;
 `
 
 // 20px 아이콘 스타일링입니다.
@@ -654,4 +656,36 @@ export const LikeCounts = styled.div`
   position: absolute;
   bottom: 0;
   color: ${props => props.isGray ? `${sVar.commentGray}` : "black"};
+`
+
+// BoardDetail의 input 컨테이너
+export const BoardDetailInputContainer = styled(layout.FlexDefault)`
+  width: 90%;
+  height: 50px;
+  box-shadow: 0 0 0 1px ${sVar.commentGray} inset;
+  border-radius: 5px;
+  background-color: ${sVar.commentGray50};
+`
+
+// BoardDetail의 input - 왼쪽의 실제 input 자리
+export const BoardDetailInputLeft = styled.input`
+  width: 85%;
+  height: inherit;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  &:focus {
+    outline: none;
+  }
+`
+
+// BoardDetail의 input - 오른쪽의 icon 자리
+export const BoardDetailInputIcon = styled(FlexCenter)`
+  width: 15%;
+  max-width: 15%;
+  height: inherit;
+  border: none;
+  &:focus {
+    outline: none;
+  }
 `
