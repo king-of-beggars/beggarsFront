@@ -11,9 +11,9 @@ const GlobalVariableContext = createContext({
     },
     isMobile: /Mobi/i.test(window.navigator.userAgent),
     // headerHeight: Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2),
-    // navHeight: Math.ceil(window.innerHeight * 0.1) > 110 ? 110 : Math.ceil(window.innerHeight * 0.1),
+    navHeight: Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12),
     // mainHeight: Math.ceil(window.innerHeight) - ((Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2)) + (Math.ceil(window.innerHeight * 0.1) > 110 ? 110 : Math.ceil(window.innerHeight * 0.1))),
-    mainHeight: window.innerHeight - (contextValue.navHeight + contextValue.headerHeight),
+    mainHeight: window.innerHeight - (Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12) + contextValue.headerHeight),
     screenWidth: /Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
                 ? window.innerWidth // 그냥 window width 사용하기
                 : window.innerWidth > 393 // mobile이 아니고 width가 393보다 크면
@@ -35,9 +35,9 @@ export const GlobalVariableProvider = ({ children }) => {
 
     // useMemo를 이용해 조건부로 계산을 스킵할 값들
     // const headerHeight = useMemo(() => Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2), [windowSize])
-    // const navHeight = useMemo(() => Math.ceil(window.innerHeight * 0.1) > 110 ? 110 : Math.ceil(window.innerHeight * 0.1), [windowSize])
+    const navHeight = useMemo(() => Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12), [windowSize])
     // const mainHeight = useMemo(() => window.innerHeight - (headerHeight + navHeight), [windowSize])
-    const mainHeight = useMemo(() => window.innerHeight - (contextValue.navHeight + contextValue.headerHeight), [windowSize])
+    const mainHeight = useMemo(() => window.innerHeight - (navHeight + contextValue.headerHeight), [windowSize])
     const screenWidth = useMemo(() =>  {
         if (/Mobi/i.test(window.navigator.userAgent)) {
             return window.innerWidth
@@ -74,7 +74,7 @@ export const GlobalVariableProvider = ({ children }) => {
     }, [])
 
     // const value = { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth, ...contextValue }
-    const value = { windowSize, isMobile, mainHeight, screenWidth, ...contextValue }
+    const value = { windowSize, isMobile, mainHeight, navHeight, screenWidth, ...contextValue }
 
     return (
         <GlobalVariableContext.Provider value={value}>

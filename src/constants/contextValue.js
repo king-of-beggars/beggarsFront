@@ -3,7 +3,7 @@ export const contextValue = {
         width: 393,
         height: 852
     },
-    navHeight: 110,
+    // navHeight: 110,
     headerHeight: 140,
     profileIcon: {
         width: 160,

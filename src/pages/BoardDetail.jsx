@@ -20,9 +20,12 @@ import { useGlobalVariables } from 'components';
 // function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 function BoardDetail({ isBoasting }) {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
-  console.log('BoardDetail rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth)
+  const { windowSize, isMobile, headerHeight, screenWidth } = useGlobalVariables();
+  console.log('BoardDetail rendered:', windowSize, isMobile, headerHeight, screenWidth)
 
+  const navHeight = 110
+  const mainHeight = windowSize.height - (navHeight + headerHeight)
+  
   const { id } = useParams(); // id 패러미터 받아오기
   console.log("받아온 id:::", id);
 
@@ -233,7 +236,7 @@ function BoardDetail({ isBoasting }) {
           </layout.MainContent>
         </layout.Main>
         {/* 댓글창으로! */}
-        <layout.Nav navHeight={`${navHeight}px`}>
+        <layout.Nav navHeight={`${navHeight}px`} style={{display:"flex", alignItems:"center", justifyContent: "center", padding: "0"}}>
           <BoardDetailInput />
         </layout.Nav>
       </style.BackgroundPageLayout>
