@@ -40,7 +40,7 @@ export const GlobalVariableProvider = ({ children }) => {
         if (/Mobi/i.test(window.navigator.userAgent)) {
             return window.innerWidth
         } else {
-            if (window.innerWidth < 393) {
+            if (window.innerWidth > 393) {
                 return 393
             } else {
                 return window.innerWidth
