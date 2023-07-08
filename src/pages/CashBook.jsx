@@ -5,23 +5,27 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { CashBookAPI } from "api/api";
 import { useNavigate } from "react-router-dom";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 import { layout, style } from "styles";
-import { DayPicker, Nav, CashBookCard, CardBox } from "components";
+import {
+  DayPicker,
+  Nav,
+  CashBookCard,
+  CardBox,
+  WriteReceipt,
+} from "components";
 import "styles/css/customSwiper.css";
 import {
   mainBackgroundMiddle,
   mainBackgroundTail,
   mainBackgroundTop,
 } from "assets";
-import { useGlobalVariables } from 'components';
-import { getDateBoxSize } from 'functions/getAssetSize';
-
-
+import { useGlobalVariables } from "components";
+import { getDateBoxSize } from "functions/getAssetSize";
 
 // dummy data
 // const cashbookApiRes = {
@@ -62,20 +66,27 @@ import { getDateBoxSize } from 'functions/getAssetSize';
 // };
 
 function CashBook() {
-// function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
+  // function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const {
-      windowSize,
-      frameSize,
-      isMobile,
-      headerHeight,
-      navHeight,
-      mainHeight,
-      screenWidth,
-      cashbookDateBox,
-      boardBtnSleep,
-      cashbookCard,
-    } = useGlobalVariables();
-  console.log('CashBook rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+    windowSize,
+    frameSize,
+    isMobile,
+    headerHeight,
+    navHeight,
+    mainHeight,
+    screenWidth,
+    cashbookDateBox,
+    boardBtnSleep,
+    cashbookCard,
+  } = useGlobalVariables();
+  console.log(
+    "CashBook rendered:",
+    windowSize,
+    isMobile,
+    headerHeight,
+    navHeight,
+    mainHeight
+  );
   const navigate = useNavigate();
   // // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
   // const [windowSize, setWindowSize] = useState({
@@ -109,12 +120,18 @@ function CashBook() {
   //     ? ((screenWidth * 155) / 393) * 0.65
   //     : ((500 * 155) / 393) * 0.65;
   // const dateBoxHeight = dateBoxWidth * (36 / 155);
-  const { dateBoxWidth, dateBoxHeight } = getDateBoxSize(isMobile, frameSize, screenWidth, cashbookDateBox, boardBtnSleep)
-  const CARD_RATIO = 0.9
+  const { dateBoxWidth, dateBoxHeight } = getDateBoxSize(
+    isMobile,
+    frameSize,
+    screenWidth,
+    cashbookDateBox,
+    boardBtnSleep
+  );
+  const CARD_RATIO = 0.9;
 
   // card 크기 결정
-  const cardWidth = cashbookCard.width * CARD_RATIO
-  const cardHeight = cashbookCard.height * CARD_RATIO
+  const cardWidth = cashbookCard.width * CARD_RATIO;
+  const cardHeight = cashbookCard.height * CARD_RATIO;
 
   // slidesPerView에 들어갈 카드 수
   let slidesPerViewValue =
@@ -129,8 +146,20 @@ function CashBook() {
   const [selectDate, setSelectDate] = useState(moment);
   const [focused, setFocused] = useState(false);
 
+  // 게시글 작성 Modal
+  const [isWriteModal, setIsWriteModal] = useState(false);
+  const changeWriteModal = (event) => {
+    event.stopPropagation();
+
+    const newIsWrite = !isWriteModal;
+    setIsWriteModal(newIsWrite);
+  };
+
   // 가계부 data
-  const queryNode = { queryKey: [`cashCard${selectDate.format("YYYY-MM-DD")}`], queryFn: ()=>CashBookAPI.getCashCard(selectDate.format("YYYY-MM-DD"))}
+  const queryNode = {
+    queryKey: [`cashCard${selectDate.format("YYYY-MM-DD")}`],
+    queryFn: () => CashBookAPI.getCashCard(selectDate.format("YYYY-MM-DD")),
+  };
 
   const { data, isLoading, error } = useQuery(queryNode);
   if (isLoading || error) {
@@ -146,8 +175,8 @@ function CashBook() {
 
   // 카드 추가 박스로 이동
   const onClickAdd = () => {
-    navigate('/cash-book/add')
-  }
+    navigate("/cash-book/add");
+  };
 
   return (
     <style.BackgroundPageLayout
@@ -158,7 +187,10 @@ function CashBook() {
       backPngTail={`url(${mainBackgroundTail})`}
     >
       <layout.Header headerHeight={`${headerHeight}px`}>
-        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
+        <div
+          className="statusBarHeight"
+          style={{ width: "inherit", height: "50px" }}
+        ></div>
         <layout.HeaderContent>
           <style.CashBookHeader>가계부</style.CashBookHeader>
         </layout.HeaderContent>
@@ -186,7 +218,9 @@ function CashBook() {
                 cardHeight={`${cardHeight}px`}
                 style={{ justifyContent: "center" }}
                 onClick={onClickAdd}
-              >클릭하여 카드 추가</style.CashBookDummyContainer>
+              >
+                클릭하여 카드 추가
+              </style.CashBookDummyContainer>
             </layout.FlexCenter>
           ) : (
             <layout.SwiperWrap
@@ -216,49 +250,51 @@ function CashBook() {
               >
                 {cashbookApiRes.map((card, idx) => {
                   return (
-                    <SwiperSlide
-                      key={idx}
-                      style={{
-                        height: `${cardHeight + 20}px`,
-                        width: `100%`,
-                        marginLeft: "4%",
-                      }}
-                    >
-                      {" "}
-                      {/* height를 CashBookCard와 동일하게 주어야 함*/}
-                      {console.log("isActiveSlide:::", idx === activeSlide)}
-                      <Swiper
-                        key={activeSlide}
-                        modules={[Navigation, Pagination, Scrollbar, A11y]}
-                        slidesPerView={1.3}
-                        centeredSlides={true}
-                        direction="horizontal"
-                        touchMoveStopPropagation={false}
-                        allowSlideNext={idx === activeSlide}
-                        allowSlidePrev={idx === activeSlide}
-                        allowTouchMove={idx === activeSlide}
+                    <>
+                      <SwiperSlide
+                        key={idx}
                         style={{
-                          height: `${mainHeight - dateBoxHeight - 24}px`,
-                        }}
-                        onTouchMove={(swiper) => {
-                          if (swiper.touches.diff < -90) {
-                            window.location.href = "/cash-book/add";
-                          }
+                          height: `${cardHeight + 20}px`,
+                          width: `100%`,
+                          marginLeft: "4%",
                         }}
                       >
-                        <SwiperSlide>
-                          <CardBox
-                            id={card.cashbookId}
-                            budget={card.cashbookGoalValue}
-                            spend={card.cashbookNowValue}
-                            category={card.cashbookCategory}
-                            title={card.cashbookName}
-                            screenWidth={screenWidth}
-                            ratio={CARD_RATIO}
-                            onClickHandler={onClickCard}
-                            isDefault={true}
-                          />
-                          {/* <CashBookCard
+                        {" "}
+                        {/* height를 CashBookCard와 동일하게 주어야 함*/}
+                        {console.log("isActiveSlide:::", idx === activeSlide)}
+                        <Swiper
+                          key={activeSlide}
+                          modules={[Navigation, Pagination, Scrollbar, A11y]}
+                          slidesPerView={1.3}
+                          centeredSlides={true}
+                          direction="horizontal"
+                          touchMoveStopPropagation={false}
+                          allowSlideNext={idx === activeSlide}
+                          allowSlidePrev={idx === activeSlide}
+                          allowTouchMove={idx === activeSlide}
+                          style={{
+                            height: `${mainHeight - dateBoxHeight - 24}px`,
+                          }}
+                          onTouchMove={(swiper) => {
+                            if (swiper.touches.diff < -90) {
+                              window.location.href = "/cash-book/add";
+                            }
+                          }}
+                        >
+                          <SwiperSlide>
+                            <CardBox
+                              id={card.cashbookId}
+                              budget={card.cashbookGoalValue}
+                              spend={card.cashbookNowValue}
+                              category={card.cashbookCategory}
+                              title={card.cashbookName}
+                              screenWidth={screenWidth}
+                              ratio={CARD_RATIO}
+                              onClickHandler={onClickCard}
+                              changeWriteModal={changeWriteModal}
+                              isDefault={true}
+                            />
+                            {/* <CashBookCard
                                 id={card.id}
                                 budget={card.cashbookGoalValue}
                                 spend={card.cashbookNowValue}
@@ -268,40 +304,46 @@ function CashBook() {
                                 cardHeight={`${cardHeight}px`}
                                 index={idx}
                               /> */}
-                        </SwiperSlide>
-                        <SwiperSlide>
-                          {idx === activeSlide ? (
-                            <style.CashBookDummyContainer
-                              cardWidth={`${cardWidth}px`}
-                              cardHeight={`${cardHeight}px`}
-                            >
-                              <style.CashBookAddExplain
+                          </SwiperSlide>
+                          <SwiperSlide>
+                            {idx === activeSlide ? (
+                              <style.CashBookDummyContainer
                                 cardWidth={`${cardWidth}px`}
                                 cardHeight={`${cardHeight}px`}
                               >
-                                왼쪽으로 스와이프하여
-                                <br />
-                                카드 추가
-                              </style.CashBookAddExplain>
-                            </style.CashBookDummyContainer>
-                          ) : (
-                            <div
-                              style={{
-                                width: `${cardWidth}px`,
-                                height: `${cardHeight}px`,
-                                background: "transparent",
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                            ></div>
-                          )}
-                        </SwiperSlide>
-                      </Swiper>
-                    </SwiperSlide>
+                                <style.CashBookAddExplain
+                                  cardWidth={`${cardWidth}px`}
+                                  cardHeight={`${cardHeight}px`}
+                                >
+                                  왼쪽으로 스와이프하여
+                                  <br />
+                                  카드 추가
+                                </style.CashBookAddExplain>
+                              </style.CashBookDummyContainer>
+                            ) : (
+                              <div
+                                style={{
+                                  width: `${cardWidth}px`,
+                                  height: `${cardHeight}px`,
+                                  background: "transparent",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              ></div>
+                            )}
+                          </SwiperSlide>
+                        </Swiper>
+                      </SwiperSlide>
+                    </>
                   );
                 })}
               </Swiper>
             </layout.SwiperWrap>
+          )}
+          {isWriteModal && (
+            <WriteReceipt setClose={changeWriteModal}>
+              자랑하러 가기
+            </WriteReceipt>
           )}
         </layout.CashBookMainContent>
       </layout.Main>

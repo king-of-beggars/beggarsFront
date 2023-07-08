@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { style, layout } from "styles";
-import { ProgressBarSemiCircle } from "components";
+import { ProgressBarSemiCircle, WriteReceipt } from "components";
 import { EditCashbook } from "assets";
 
 function CardBox({
@@ -14,6 +14,7 @@ function CardBox({
   title,
   screenWidth,
   ratio,
+  changeWriteModal,
   isDefault = true,
 }) {
   const [cardWidthOrigin, cardHeightOrigin] = [301, 356];
@@ -39,13 +40,6 @@ function CardBox({
     };
     const queryStr = new URLSearchParams(sendInfo).toString();
     navigate(`/cash-book/edit/${id}?${queryStr}`);
-  };
-
-  // 게시글 작성 Modal
-  const [isWriteModal, setIsWriteModal] = useState(false);
-  const changeWriteModal = () => {
-    const newIsWrite = !isWriteModal;
-    setIsWriteModal(newIsWrite);
   };
 
   return (
@@ -115,6 +109,7 @@ function CardBox({
           isDefault={isDefault}
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
+          onClick={changeWriteModal}
         >
           {spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"}
         </style.CardBtn>
