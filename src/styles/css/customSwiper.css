@@ -10,3 +10,7 @@
     /* position: fixed; */
     left: 30px !important;
 }
+
+.swiper-pagination-vertical.swiper-pagination-bullets, .swiper-vertical>.swiper-pagination-bullets {
+    z-index: 0;
+}
