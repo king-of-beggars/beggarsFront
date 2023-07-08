@@ -63,7 +63,7 @@ export { ReactComponent as CommentFav } from "assets/icons/commentFav.svg"
 export { ReactComponent as CommentFavDefaultDark } from "assets/icons/commentFavDefaultDark.svg"
 export { ReactComponent as CommentFavDefaultLight } from "assets/icons/commentFavDefaultLight.svg"
 export { ReactComponent as CommentSubmit } from "assets/icons/commentSubmit.svg"
-export {ReactComponent as EditCashbook} from "assets/icons/editCashbook.svg"
+export {ReactComponent as EditCashbook} from "assets/icons/editCashbookDot.svg"
 
 // backgrounds
 export { default as mainBackground } from "assets/pixels/backgrounds/mainBackground.png"

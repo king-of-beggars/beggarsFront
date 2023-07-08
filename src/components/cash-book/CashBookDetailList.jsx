@@ -5,7 +5,7 @@ import { style } from "styles";
 import { DeleteDetail } from "assets";
 import { CashBookAPI } from "api/api";
 import { CashDetailModal } from "components";
-import { deleteDetailment } from "constants/comment";
+import { deleteDetailMent } from "constants/comment";
 
 function CashBookDetailList({ expendName, expendMoney, cashDetailId }) {
   // 지출 항목 삭제
@@ -32,7 +32,7 @@ function CashBookDetailList({ expendName, expendMoney, cashDetailId }) {
   return (
     <style.CashBookDetailBox>
       <DeleteDetail style={{marginLeft:"1em", width:"8%"}} onClick={changeDeleteModal}/>
-      { isDeleteModal && (<CashDetailModal setClose={changeDeleteModal} onClickHandler={onClickDelete}>{deleteDetailment}</CashDetailModal> )}
+      { isDeleteModal && (<CashDetailModal setClose={changeDeleteModal} onClickHandler={onClickDelete}>{deleteDetailMent}</CashDetailModal> )}
       <div style={{width:"64%", marginLeft:"1em"}}>{expendName}</div>
       <div style={{width:"28%", display: "flex", justifyContent: "flex-end", marginRight:"1.5em"}}>{expendMoney}원</div>
     </style.CashBookDetailBox>
