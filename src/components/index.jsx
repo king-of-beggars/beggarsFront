@@ -8,6 +8,7 @@ export { default as DayWrapper } from "components/cash-book/DayWrapper"
 export { default as CashBookDetailList } from "components/cash-book/CashBookDetailList";
 
 export { default as ExpendAddModal } from "components/ui/modal/ExpendAddModal";
+export { default as CashDetailModal} from "components/ui/modal/CashDetailModal";
 
 export { default as BoardCard } from "components/board/BoardCard"
 export { default as BoardDetailInput } from "components/board/BoardDetailInput"

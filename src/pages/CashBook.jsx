@@ -14,7 +14,7 @@ import { layout, style } from "styles";
 import { DayPicker, Nav, CashBookCard, CardBox } from "components";
 import "styles/css/customSwiper.css";
 import {
-  mainBackground,
+  // mainBackground,
   mainBackgroundMiddle,
   mainBackgroundTail,
   mainBackgroundTop,
@@ -134,14 +134,11 @@ function CashBook() {
   const queryNode = { queryKey: [`cashCard${selectDate.format("YYYY-MM-DD")}`], queryFn: ()=>CashBookAPI.getCashCard(selectDate.format("YYYY-MM-DD"))}
 
   const { data, isLoading, error } = useQuery(queryNode);
-  // const { data, isLoading, error } = useQuery(["cashCard"], () =>
-  //   CashBookAPI.getCashCard(selectDate.format("YYYY-MM-DD"))
-  // );
   if (isLoading || error) {
     return <></>;
   }
-  const cashbookApiRes = data.data;
-  console.log(cashbookApiRes);
+  const cashbookApiRes = data.data.data;
+  // console.log(cashbookApiRes);
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {

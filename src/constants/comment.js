@@ -1,0 +1,1 @@
+export const deleteDetailment = "지출 기록을\n삭제하시겠습니까?";
