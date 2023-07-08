@@ -6,6 +6,7 @@ import { DeleteDetail } from "assets";
 import { CashBookAPI } from "api/api";
 import { CashDetailModal, AutoResizedText } from "components";
 import { deleteDetailMent } from "constants/comment";
+import { commaOnThree } from 'functions';
 
 function CashBookDetailList({ cashDetailId, expendName, expendMoney }) {
   // 지출 항목 삭제
