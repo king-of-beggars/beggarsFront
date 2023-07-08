@@ -374,13 +374,33 @@ export const CashBookBtn = styled.button`
 `;
 
 // Cashbook Detail Box
-export const CashBookDetailBox = styled(layout.FlexCenter)`
-  width: inherit;
-  height: 4em;
-  background-color: white;
+export const CashBookDetailBox = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 6.5fr 2.5fr;
+  width: 100%;
+  min-height: 75px;
+  background-color: rgba(255, 255, 255, 0.7);
   border: 2px solid ${sVar.bookDetailBorderColor};
   border-radius: 0.5em;
+  font-family: "DOSGothic";
 `;
+
+// Cashbook Detail Textbox
+export const CashBookDetailTextBox = styled(layout.FlexDefault)`
+  width: 100%;
+  padding: 10px;
+  margin-left: 10px;
+  align-items: center;
+  overflow-wrap: break-word;
+  word-break: break-all;
+`
+
+// Cashbook Detail numbox
+export const CashBookDetailNumBox = styled(layout.FlexDefault)`
+  margin-right: 20px;
+  align-items: center;
+  justify-content: flex-end;
+`
 
 // Cashbook Detail Add Box
 export const CashBookDetailAddBox = styled(layout.FlexCenter)`

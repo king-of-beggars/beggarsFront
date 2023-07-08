@@ -1,5 +1,6 @@
 export { default as DefaultBtn } from "components/ui/button/DefaultBtn";
 export { default as Nav } from "components/common/Navigation";
+export { default as AutoResizedText } from "components/common/AutoResizedText"
 
 export { default as CashBookCard } from "components/cash-book/CashBookCard" // 추후 CardBox로 대체
 export { default as CardBox } from "components/ui/box/CardBox"
