@@ -12,6 +12,8 @@ export { default as ExpendAddModal } from "components/ui/modal/ExpendAddModal";
 export { default as BoardCard } from "components/board/BoardCard"
 export { default as BoardDetailInput } from "components/board/BoardDetailInput"
 export { default as BoardDetailComment } from "components/board/BoardDetailComment"
+export { default as BoardCommentLikes } from "components/ui/button/BoardCommentLikes"
+// export { default as BoardDetailInput } from "components/ui/input/BoardDetailInput"
 
 export { default as CashBookInput } from "components/ui/input/CashBookInput";
 export { default as CashAddSelect } from "components/ui/select-box/CashAddSelect";
@@ -19,6 +21,6 @@ export { default as CashAddSelect } from "components/ui/select-box/CashAddSelect
 export { default as ProgressBarSemiCircle } from "components/ui/progress/ProgressBarSemiCircle"
 export { default as ProgressBarTmp } from "components/ui/progress/ProgressBarTmp"
 
-export { default as CommentFavDefaultLight } from "components/ui/button/CommentFavDefaultLight"
+// export { default as CommentFavDefaultLight } from "components/ui/button/CommentFavDefaultLight"
 
 export { GlobalVariableProvider, useGlobalVariables } from "components/provider/GlobalVariableProvider"

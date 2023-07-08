@@ -28,8 +28,8 @@ function Board({ isBoasting, setIsBoasting }) {
   // isBoasting 상태에 따라 get 요청이 변경되어야 하는데 react-query의 쿼리문은 훅 안에서 쓰일 수 없으므로 useQuery의 key를 이용해 문제를 해결한다.
   // useQuery의 key가 변경되면 useQuery는 새로운 데이터를 자동으로 가져오므로, useQuery의 key를 isBoasting 상태와 연동시킨다.
   const queryNode = isBoasting
-                    ? { queryKey: ["boastList"], queryFn: boardAPI.getBoastList, select: data => data.data }
-                    : { queryKey: ["scoldedList"], queryFn: boardAPI.getScoldedList, select: data => data.data }
+                    ? { queryKey: ["boastList"], queryFn: boardAPI.getBoastList, select: data => data.data.data }
+                    : { queryKey: ["scoldedList"], queryFn: boardAPI.getScoldedList, select: data => data.data.data }
 
   const toggleBtnHandler = () => {
     setIsBoasting(!isBoasting)
@@ -97,8 +97,7 @@ function Board({ isBoasting, setIsBoasting }) {
           { !!cardList ? 
             <layout.Grid2Row>
               { console.log("cardList:::", cardList)}
-              { cardList.length !== 0 && cardList.map(card => {
-                console.log(card)
+              { cardList.length > 0 && cardList.map(card => {
                 return (
                   <CardBox 
                     id={ card.boardId }
@@ -108,7 +107,7 @@ function Board({ isBoasting, setIsBoasting }) {
                     title={ card.cashbookId.cashbookName }
                     ratio={ CARD_RATIO }
                     isDefault= { isBoasting }
-                    key={ card.cashbookId.boardId }
+                    key={ card.boardId }
                     onClickHandler={ cardClickHandler }
                   />
                 )

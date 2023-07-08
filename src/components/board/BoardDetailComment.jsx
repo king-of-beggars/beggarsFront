@@ -1,8 +1,8 @@
-import { CommentDelDark, CommentDelLight, CommentFav, CommentFavDefaultDark, commentDelHover, commentFavDefault } from 'assets';
-import { CommentFavDefaultLight } from 'components';
+import { CommentDelDark, CommentDelLight, CommentFav, CommentFavDefaultDark, CommentFavDefaultLight, commentDelHover, commentFavDefault } from 'assets';
 import React, { useState } from "react";
 import { layout, style } from "styles";
 import * as sVar from "constants/styleVariables"
+import { BoardCommentLikes } from 'components';
 
 function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, children }) {
   const [isLiked, setIsLiked] = useState(likeCheck)
@@ -32,13 +32,7 @@ function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, ch
             : <CommentDelDark />
           }
           {/* // 좋아요 아이콘 */}
-          {
-            likeCheck
-            ? <CommentFav />
-            : isBoasting
-              ? null
-              : <CommentFavDefaultDark />
-          }
+          <BoardCommentLikes isBoasting={isBoasting} isLiked={isLiked} likeCount={likeCount}/>
           {/* { likeCheck 
             ? <style.BoardCommentIcon onClick={likeHandler} background={`url(${CommentFav})`} />
             : <style.BoardCommentIcon onClick={likeHandler} background={`url(${commentFavDefault})`} />

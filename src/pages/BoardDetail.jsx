@@ -20,9 +20,12 @@ import { useGlobalVariables } from 'components';
 // function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 function BoardDetail({ isBoasting }) {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
-  console.log('BoardDetail rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth)
+  const { windowSize, isMobile, headerHeight, screenWidth } = useGlobalVariables();
+  console.log('BoardDetail rendered:', windowSize, isMobile, headerHeight, screenWidth)
 
+  const navHeight = 110
+  const mainHeight = windowSize.height - (navHeight + headerHeight)
+  
   const { id } = useParams(); // id 패러미터 받아오기
   console.log("받아온 id:::", id);
 
@@ -42,7 +45,7 @@ function BoardDetail({ isBoasting }) {
     isLoading,
     isError,
   } = useQuery(["receipt", id], () => boardAPI.getBoardDetail(id), {
-    select: (data) => data.data,
+    select: (data) => data.data.data,
     // onSuccess: (res) => {
     //   console.log("getRes:::", res);
     //   DATA_CASHBOOK = res.cashbookDetail;
@@ -101,15 +104,11 @@ function BoardDetail({ isBoasting }) {
       >
         <layout.Header headerHeight={`${headerHeight}px`}>
           <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
-          <BackArrowGray
-            onClick={onClickBack}
-            style={{
-              position: "absolute",
-              left: "2.4em",
-              top: "2em",
-            }}
-          />
-          <layout.HeaderContent style={{ fontSize: "25px" }}>
+          <layout.HeaderContent style={{ fontSize: "25px", backgroundColor: `${sVar.white70}` }}>
+            <BackArrowGray
+              onClick={onClickBack}
+              style={{position: "absolute", left: "10%", top: "60%"}}
+            />
             {!!response.userId.userNickname && response.userId.userNickname}
           </layout.HeaderContent>
         </layout.Header>
@@ -120,7 +119,7 @@ function BoardDetail({ isBoasting }) {
           <layout.MainContent>
             {/* 영수증 */}
             <layout.FlexCenterColumn100 style={{ backgroundColor: `${sVar.white70}` }}>
-              <style.ReceiptInnerContainer padding="0.8em" fontSize="0.6em">
+              <style.ReceiptInnerContainer padding="0.8em" fontSize="0.6em" style={{gap: "0.5em"}}>
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
@@ -147,14 +146,7 @@ function BoardDetail({ isBoasting }) {
                 {!!response.cashbookDetail.cashbookCreatedAt &&
                   response.cashbookDetail.cashbookCreatedAt.split("T")[0].split("-").join(" / ")}
               </style.ReceiptInnerContainer>
-              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
-                {/* <layout.Flex100
-                  style={{
-                    padding: "15px",
-                    fontSize: "14px",
-                    borderBottom: "2px dashed green",
-                  }}
-                > */}
+              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em" style={{display: "flex", flexDirection: "row"}}>
                 <div style={{ textAlign: "right" }}>
                   {!!response.cashbookDetail.cashbookCategory &&
                     response.cashbookDetail.cashbookCategory}
@@ -169,14 +161,7 @@ function BoardDetail({ isBoasting }) {
                   원
                 </div>
               </style.ReceiptInnerContainer>
-              <style.ReceiptInnerContainer>
-                {/* <layout.FlexCenterColumn100
-                  style={{
-                    padding: "10px",
-                    fontSize: "14px",
-                    borderBottom: "2px dashed green",
-                  }}
-                > */}
+              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
                 {!!response.cashbookDetail.detail &&
                   response.cashbookDetail.detail.map((purchase) => {
                     return (
@@ -190,13 +175,6 @@ function BoardDetail({ isBoasting }) {
                     );
                   })}
               </style.ReceiptInnerContainer>
-              {/* <layout.FlexCenterColumn100
-                  style={{
-                    padding: "15px",
-                    fontSize: "14px",
-                    borderBottom: "2px dashed green",
-                  }}
-                > */}
               <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
@@ -258,7 +236,7 @@ function BoardDetail({ isBoasting }) {
           </layout.MainContent>
         </layout.Main>
         {/* 댓글창으로! */}
-        <layout.Nav navHeight={`${navHeight}px`}>
+        <layout.Nav navHeight={`${navHeight}px`} style={{display:"flex", alignItems:"center", justifyContent: "center", padding: "0"}}>
           <BoardDetailInput />
         </layout.Nav>
       </style.BackgroundPageLayout>
