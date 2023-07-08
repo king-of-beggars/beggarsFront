@@ -4,7 +4,7 @@ export const contextValue = {
         height: 852
     },
     // navHeight: 110,
-    headerHeight: 140,
+    headerHeight: 120,
     profileIcon: {
         width: 160,
         height: 160
