@@ -539,6 +539,8 @@ export const ModalDefault = styled(layout.FlexCenterColumn)`
   padding: 50px;
   border-radius: 10px;
   z-index: 21;
+  gap: 5px;
+  span {font-size: 1.2em;}
 `;
 
 // 모달 제목 스타일링입니다.

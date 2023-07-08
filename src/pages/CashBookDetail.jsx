@@ -7,13 +7,26 @@ import { AddDetail, BackCrampsBlack, EditCard, EditCashbook } from "assets";
 import { CashBookDetailList, ExpendAddModal, Nav } from "components";
 import CashDetailModal from "components/ui/modal/CashDetailModal";
 import { layout, style } from "styles";
-import { useGlobalVariables } from 'components';
+import { useGlobalVariables } from "components";
+import {
+  backgroundBrightMiddle,
+  backgroundBrightTail,
+  backgroundBrightTop,
+} from "assets";
 
 function CashBookDetail() {
-// function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
+  // function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
-  console.log('CashBookDetail rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } =
+    useGlobalVariables();
+  console.log(
+    "CashBookDetail rendered:",
+    windowSize,
+    isMobile,
+    headerHeight,
+    navHeight,
+    mainHeight
+  );
 
   const navigate = useNavigate();
   // 지출 기록 Modal open, close
@@ -36,17 +49,25 @@ function CashBookDetail() {
   const param = useParams();
   const cardId = param.id;
 
-  let { data, isLoading, error } = useQuery(["cashDetail"], () =>
-    CashBookAPI.getCashDetail(cardId)
+  let { data, isLoading, error } = useQuery(["cashDetail"], () => CashBookAPI.getCashDetail(cardId), {
+    select: data => data.data.data
+  }
   );
   if (isLoading || error) {
     return <></>;
   }
-  // data = data.data
+  // data = data.data.data
   // if (data.consumption) {
   //   data = [];
   // }
-  console.log(data);
+
+  let detail = [];
+  console.log(data)
+
+  if (!!data.detail) {
+    detail = data.detail;
+  }
+  // console.log(data);
   // 여기는 가짜 데이터
   // const data = [
   //   // {
@@ -76,65 +97,76 @@ function CashBookDetail() {
     };
     const queryStr = new URLSearchParams(sendInfo).toString();
     // alert(`/cash-book/edit/${cardId}?${queryStr}`);
-    navigate(`/cash-book/edit/${cardId}?${queryStr}`)
+    navigate(`/cash-book/edit/${cardId}?${queryStr}`);
   };
 
   return (
-    <layout.PageLayout isMobile={isMobile}>
-      <layout.Header headerHeight={`${headerHeight}px`}>
-        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
-        <layout.HeaderContent>
-          <BackCrampsBlack
-            onClick={onClickBack}
-            style={{ position: "absolute", left: "1em", float: "left" }}
-          />
-          <div style={{ fontSize: "1em" }}>오늘의 {} 지출</div>
-          <EditCashbook
-            onClick={onClickEdit}
-            style={{ position: "absolute", right: "1em", float: "right" }}
-          />
-        </layout.HeaderContent>
-      </layout.Header>
-      <layout.Main
-        headerHeight={`${headerHeight}px`}
-        mainHeight={`${mainHeight}px`}
-      >
-        <layout.MainContent>
-          <layout.SpendingListWrap>
-            {!data.length ? (
-              <></>
-            ) : (
-              data.map((expend) => {
-                return (
-                  <CashBookDetailList
-                    expendName={expend.cashDetailText}
-                    expendMoney={expend.cashDetailValue}
-                  />
-                );
-              })
+    <style.BackgroundPageLayout
+      screenWidth={`${screenWidth}px`}
+      isMobile={isMobile}
+      backPngTop={`url(${backgroundBrightTop})`}
+      backPngMiddle={`url(${backgroundBrightMiddle})`}
+      backPngTail={`url(${backgroundBrightTail})`}
+    >
+      <layout.PageLayout isMobile={isMobile}>
+        <layout.Header headerHeight={`${headerHeight}px`}>
+          <div
+            className="statusBarHeight"
+            style={{ width: "inherit", height: "50px" }}
+          ></div>
+          <layout.HeaderContent>
+            <BackCrampsBlack
+              onClick={onClickBack}
+              style={{ position: "absolute", left: "1em", float: "left" }}
+            />
+            <div style={{ fontSize: "1em" }}>오늘의 {!!data.cashbookName ? data.cashbookName : data.cashbookCategory} 지출</div>
+            <EditCashbook
+              onClick={onClickEdit}
+              style={{ position: "absolute", right: "1em", float: "right" }}
+            />
+          </layout.HeaderContent>
+        </layout.Header>
+        <layout.Main
+          headerHeight={`${headerHeight}px`}
+          mainHeight={`${mainHeight}px`}
+        >
+          <layout.MainContent>
+            <layout.SpendingListWrap>
+              {!detail.length ? (
+                <></>
+              ) : (
+                detail.map((expend) => {
+                  return (
+                    <CashBookDetailList
+                      expendName={expend.cashDetailText}
+                      expendMoney={expend.cashDetailValue}
+                    />
+                  );
+                })
+              )}
+            </layout.SpendingListWrap>
+            <style.CashBookDetailAddBox onClick={showAddModal}>
+              <AddDetail />
+            </style.CashBookDetailAddBox>
+            {isAddModalOpen && (
+              <ExpendAddModal setClose={closeAddModal} cardId={cardId} />
             )}
-          </layout.SpendingListWrap>
-          <style.CashBookDetailAddBox onClick={showAddModal}>
-            <AddDetail />
-          </style.CashBookDetailAddBox>
-          {isAddModalOpen && (
-            <ExpendAddModal setClose={closeAddModal} cardId={cardId} />
-          )}
-          <style.CashBookDetailNoneBtn
-            visible={!data.length ? "visible" : "hidden"}
-            onClick={changeNoneModal}
-          >
-            무지출 데이 기록 🎉
-          </style.CashBookDetailNoneBtn>
-          {isNoneModal && (
-            <CashDetailModal setClose={changeNoneModal}></CashDetailModal>
-          )}
-        </layout.MainContent>
-      </layout.Main>
-      <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="money" />
-      </layout.Nav>
-    </layout.PageLayout>
+            <style.CashBookDetailNoneBtn
+              visible={!detail.length ? "visible" : "hidden"}
+              onClick={changeNoneModal}
+            >
+              무지출 데이 기록 🎉
+            </style.CashBookDetailNoneBtn>
+            {isNoneModal && (
+              <CashDetailModal setClose={changeNoneModal}></CashDetailModal>
+            )}
+          </layout.MainContent>
+        </layout.Main>
+        <layout.Nav navHeight={`${navHeight}px`}>
+          <Nav selected="money" />
+        </layout.Nav>
+      </layout.PageLayout>
+    </style.BackgroundPageLayout>
   );
 }
 
