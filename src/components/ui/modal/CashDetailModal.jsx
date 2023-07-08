@@ -17,7 +17,7 @@ function CashDetailModal({ setClose, typeModal, onClickHandler, children }) {
   // })
   return (
     <style.ModalOverlay onClick={setClose}>
-      <style.ModalDefault style={{width: "90%"}}>
+      <style.ModalDefault style={{width: "90%"}} onClick={(event) => event.stopPropagation()}>
         {children.map((ment)=><span>{ment}</span>)}
         <layout.FlexCenterRow100>
         <style.CashBookNoneBtn background={sVar.bookModalYesBtn} onClick={onClickHandler}>예</style.CashBookNoneBtn>

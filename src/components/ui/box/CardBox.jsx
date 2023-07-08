@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { style, layout } from "styles";
@@ -31,7 +31,6 @@ function CardBox({
   const navigate = useNavigate();
 
   // 수정 카드
-  // 쿼리 스트링 수정 필요
   const onClickEdit = (event) => {
     event.stopPropagation();
     const sendInfo = {
@@ -39,11 +38,14 @@ function CardBox({
       name: title,
     };
     const queryStr = new URLSearchParams(sendInfo).toString();
-    // alert(`/cash-book/edit/${cardId}?${queryStr}`);
     navigate(`/cash-book/edit/${id}?${queryStr}`);
-    // if (event.target.className === "edit-cash") {
-      
-    // }
+  };
+
+  // 게시글 작성 Modal
+  const [isWriteModal, setIsWriteModal] = useState(false);
+  const changeWriteModal = () => {
+    const newIsWrite = !isWriteModal;
+    setIsWriteModal(newIsWrite);
   };
 
   return (

@@ -14,7 +14,6 @@ import { layout, style } from "styles";
 import { DayPicker, Nav, CashBookCard, CardBox } from "components";
 import "styles/css/customSwiper.css";
 import {
-  // mainBackground,
   mainBackgroundMiddle,
   mainBackgroundTail,
   mainBackgroundTop,
@@ -260,15 +259,15 @@ function CashBook() {
                             isDefault={true}
                           />
                           {/* <CashBookCard
-                                        id={card.id}
-                                        budget={card.cashbookGoalValue}
-                                        spend={card.cashbookNowValue}
-                                        category={card.cashbookCategory}
-                                        title={card.cashbookName}
-                                        cardWidth={`${cardWidth}px`}
-                                        cardHeight={`${cardHeight}px`}
-                                        index={idx}
-                                    /> */}
+                                id={card.id}
+                                budget={card.cashbookGoalValue}
+                                spend={card.cashbookNowValue}
+                                category={card.cashbookCategory}
+                                title={card.cashbookName}
+                                cardWidth={`${cardWidth}px`}
+                                cardHeight={`${cardHeight}px`}
+                                index={idx}
+                              /> */}
                         </SwiperSlide>
                         <SwiperSlide>
                           {idx === activeSlide ? (
