@@ -7,19 +7,19 @@ import { CashBookAPI } from "api/api";
 import { CashDetailModal } from "components";
 import { deleteDetailment } from "constants/comment";
 
-function CashBookDetailList({ expendName, expendMoney }) {
+function CashBookDetailList({ expendName, expendMoney, cashDetailId }) {
   // 지출 항목 삭제
   const queryClient = useQueryClient();
-  const mutationDeleteDetail = useMutation(CashBookAPI.putCashNone, {
+  const mutationDeleteDetail = useMutation(CashBookAPI.deleteCashDetail, {
     onSuccess: () => {
       queryClient.invalidateQueries(['cashDetail']);
-      // navigate("/cash-book");
+      changeDeleteModal();
     },
     onError: () => alert("상세 항목 삭제에 실패하였습니다."),
   });
 
   const onClickDelete = () => {
-    // mutationDeleteDetail.mutate(newCard);
+    mutationDeleteDetail.mutate(cashDetailId);
   }
 
   // 삭제 Modal

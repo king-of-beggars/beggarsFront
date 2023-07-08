@@ -138,6 +138,8 @@ function CashBookDetail() {
                 detail.map((expend) => {
                   return (
                     <CashBookDetailList
+                      key={expend.cashDetailId}
+                      cashDetailId={expend.cashDetailId}
                       expendName={expend.cashDetailText}
                       expendMoney={expend.cashDetailValue}
                     />
