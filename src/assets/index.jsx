@@ -2,6 +2,22 @@
 export { default as btn } from "assets/pixels/testButtons/redButton01.png";
 export { default as pressedBtn } from "assets/pixels/testButtons/redButton02.png";
 
+// pixels > main
+export { default as mainExpBox } from "assets/pixels/main/mainExpBox.png"
+export { default as mainJourneyBox } from "assets/pixels/main/mainJourneyBox.png"
+export { default as mainJourneyTitle } from "assets/pixels/main/mainJourneyTitle.png"
+export { default as mainLogoOutline } from "assets/pixels/main/mainLogoOutline.png"
+export { default as mainLogoSmooth } from "assets/pixels/main/mainLogoSmooth.png"
+export { default as mainRecordCard } from "assets/pixels/main/mainRecordCard.png"
+export { default as mainTagNegative } from "assets/pixels/main/mainTagNegative.png"
+export { default as mainTagPositive } from "assets/pixels/main/mainTagPositive.png"
+export { default as mainToggleBar } from "assets/pixels/main/mainToggleBar.png"
+export { default as mainToggleBtn } from "assets/pixels/main/mainToggleBtn.png"
+export { default as mainWeatherNormal } from "assets/pixels/main/mainWeatherNormal.png"
+export { default as mainWeatherRainy } from "assets/pixels/main/mainWeatherRainy.png"
+export { default as mainWeatherSunny } from "assets/pixels/main/mainWeatherSunny.png"
+export { default as mainWeatherThunder } from "assets/pixels/main/mainWeatherThunder.png"
+
 // pixels > cashbook
 export { default as cashbookDateBox } from "assets/pixels/cashbook/cashbookDateBox.png"
 export { default as cashbookNone } from "assets/pixels/cashbook/cashbookNone.png"

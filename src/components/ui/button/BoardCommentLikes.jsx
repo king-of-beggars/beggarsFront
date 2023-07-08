@@ -2,15 +2,15 @@ import React from 'react'
 import { CommentFav, CommentFavDefaultDark, CommentFavDefaultLight } from 'assets'
 import { layout, style } from 'styles'
 
-function BoardCommentLikes({ isBoasting, isLiked, likeCount }) {
+function BoardCommentLikes({ isBoasting, isLiked, likeCount, likeHandler }) {
     console.log("likeCount:::", likeCount)
   return (
     <layout.FlexCenterColumn style={{position: "relative"}}>
         { isLiked
-            ? <CommentFav />
+            ? <CommentFav onClick={likeHandler}/>
             : isBoasting
-                ? <CommentFavDefaultLight />
-                : <CommentFavDefaultDark />
+                ? <CommentFavDefaultLight onClick={likeHandler}/>
+                : <CommentFavDefaultDark onClick={likeHandler}/>
         }
         <style.LikeCounts isGray={likeCount === 0}>
             {likeCount}

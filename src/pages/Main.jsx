@@ -4,8 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { Nav } from "components";
 import { layout } from 'styles';
-import SocialLoginModal from 'components/ui/modal/SocialLoginModal';
-import { useGlobalVariables } from 'components';
+import { useGlobalVariables, SocialLoginModal } from 'components';
 
 // function Main({ isMobile, headerHeight, navHeight, mainHeight}) {
   function Main() {
@@ -16,9 +15,6 @@ import { useGlobalVariables } from 'components';
   // 닉네임 모달
   const [isSocialLogin, setIsSocialLogin] = useState(false);
   const { search } = useLocation();
-
-
- 
 
   useEffect(() => {
     let loginSuccess = queryString.parse(search);

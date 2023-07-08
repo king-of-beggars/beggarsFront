@@ -32,7 +32,7 @@ function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, ch
             : <CommentDelDark />
           }
           {/* // 좋아요 아이콘 */}
-          <BoardCommentLikes isBoasting={isBoasting} isLiked={isLiked} likeCount={likeCount}/>
+          <BoardCommentLikes isBoasting={isBoasting} isLiked={isLiked} likeCount={likeCount} likeHandler={likeHandler}/>
           {/* { likeCheck 
             ? <style.BoardCommentIcon onClick={likeHandler} background={`url(${CommentFav})`} />
             : <style.BoardCommentIcon onClick={likeHandler} background={`url(${commentFavDefault})`} />

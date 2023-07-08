@@ -1,14 +1,22 @@
 export const contextValue = {
+    // 기준 프레임 사이즈 (figma, iphone 14 pro)
     frameSize: {
         width: 393,
         height: 852
     },
+    frameRatio: 852 / 393,
+
+    // layout ::: nav, header
     // navHeight: 110,
     headerHeight: 120,
+
+    // profile
     profileIcon: {
         width: 160,
         height: 160
     },
+
+    // board
     boardCard: {
         width: 165,
         height: 195
@@ -25,7 +33,9 @@ export const contextValue = {
         width: 307,
         height: 36
     },
-    mainThinBox: {
+
+    // main
+    mainExpBox: {
         width: 355,
         height: 48
     },
@@ -41,6 +51,29 @@ export const contextValue = {
         width: 355,
         height: 182
     },
+    mainWeather: {
+        width: 160,
+        height: 160
+    },
+    mainLogo: {
+        width: 160,
+        height: 160
+    },
+    mainTag: {
+        width: 66,
+        height: 21
+    },
+    mainToggleBar: {
+        width: 120,
+        height: 34
+    },
+    mainToggleBtn: {
+        width: 63,
+        height: 37
+    },
+
+
+    // cashbook
     cashbookDateBox: {
         width: 155,
         height: 36
@@ -57,5 +90,5 @@ export const contextValue = {
         width: 274,
         height: 46
     },
-    frameRatio: 852 / 393,
+
 }
