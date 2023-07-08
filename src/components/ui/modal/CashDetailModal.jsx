@@ -18,7 +18,7 @@ function CashDetailModal({ setClose, typeModal, mutation, children }) {
   return (
     <style.ModalOverlay onClick={setClose}>
       <style.ModalDefault style={{width: "90%"}}>
-        <span>{children}</span>
+        {children.map((ment)=><span>{ment}</span>)}
         <layout.FlexCenterRow100>
         <style.CashBookNoneBtn background={sVar.bookModalYesBtn}>예</style.CashBookNoneBtn>
         <style.CashBookNoneBtn background={sVar.bookModalNoBtn}>아니오</style.CashBookNoneBtn>
