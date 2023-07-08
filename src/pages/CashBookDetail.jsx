@@ -13,12 +13,19 @@ import {
   backgroundBrightTail,
   backgroundBrightTop,
 } from "assets";
+import { noneAddMent } from "constants/comment";
 
 function CashBookDetail() {
   // function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } =
-    useGlobalVariables();
+  const {
+    windowSize,
+    isMobile,
+    headerHeight,
+    navHeight,
+    mainHeight,
+    screenWidth,
+  } = useGlobalVariables();
   console.log(
     "CashBookDetail rendered:",
     windowSize,
@@ -49,25 +56,50 @@ function CashBookDetail() {
   const param = useParams();
   const cardId = param.id;
 
-  let { data, isLoading, error } = useQuery(["cashDetail"], () => CashBookAPI.getCashDetail(cardId), {
-    select: data => data.data.data
+  // 무지출 API 적용
+  const queryClient = useQueryClient();
+  const mutationNone = useMutation(CashBookAPI.putCashNone, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["cashDetail"]);
+      changeNoneModal();
+    },
+    onError: () => alert("상세 항목 삭제에 실패하였습니다."),
+  });
+
+  const onClickNone = () => {
+    console.log(cardId);
+    mutationNone.mutate({cardId});
   }
+
+  // 상세 내역 받아오기
+  let { data, isLoading, error } = useQuery(
+    ["cashDetail"],
+    () => CashBookAPI.getCashDetail(cardId),
+    {
+      select: (data) => data.data.data,
+    }
   );
   if (isLoading || error) {
     return <></>;
   }
-  // data = data.data.data
-  // if (data.consumption) {
-  //   data = [];
-  // }
+  console.log(data);
 
   let detail = [];
-  console.log(data)
-
-  if (!!data.detail) {
+  let result = true;
+  if (!!data.result) {
+    result = data.result.consumption;
+    // result = false;
+    if (!result) {
+      detail.push({
+        cashDetailId: 0,
+        cashDetailText: "무지출 데이 >__<!",
+        cashDetailValue: 0,
+      });
+    }
+  } else {
     detail = data.detail;
   }
-  // console.log(data);
+  console.log(detail);
   // 여기는 가짜 데이터
   // const data = [
   //   // {
@@ -119,11 +151,15 @@ function CashBookDetail() {
               onClick={onClickBack}
               style={{ position: "absolute", left: "1em", float: "left" }}
             />
-            <div style={{ fontSize: "1em" }}>오늘의 {!!data.cashbookName ? data.cashbookName : data.cashbookCategory} 지출</div>
-            <EditCashbook
+            <div style={{ fontSize: "1em" }}>
+              오늘의{" "}
+              {!!data.cashbookName ? data.cashbookName : data.cashbookCategory}{" "}
+              지출
+            </div>
+            {/* <EditCashbook
               onClick={onClickEdit}
               style={{ position: "absolute", right: "1em", float: "right" }}
-            />
+            /> */}
           </layout.HeaderContent>
         </layout.Header>
         <layout.Main
@@ -138,6 +174,8 @@ function CashBookDetail() {
                 detail.map((expend) => {
                   return (
                     <CashBookDetailList
+                      key={expend.cashDetailId}
+                      cashDetailId={expend.cashDetailId}
                       expendName={expend.cashDetailText}
                       expendMoney={expend.cashDetailValue}
                     />
@@ -145,7 +183,10 @@ function CashBookDetail() {
                 })
               )}
             </layout.SpendingListWrap>
-            <style.CashBookDetailAddBox onClick={showAddModal}>
+            <style.CashBookDetailAddBox
+              onClick={showAddModal}
+              style={!result ? { display: "none" } : {}}
+            >
               <AddDetail />
             </style.CashBookDetailAddBox>
             {isAddModalOpen && (
@@ -158,7 +199,9 @@ function CashBookDetail() {
               무지출 데이 기록 🎉
             </style.CashBookDetailNoneBtn>
             {isNoneModal && (
-              <CashDetailModal setClose={changeNoneModal}></CashDetailModal>
+              <CashDetailModal setClose={changeNoneModal} onClickHandler={onClickNone}>
+                {noneAddMent}
+              </CashDetailModal>
             )}
           </layout.MainContent>
         </layout.Main>

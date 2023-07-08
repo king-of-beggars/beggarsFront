@@ -6,13 +6,26 @@ import { layout, style } from "styles";
 import { BackCrampsBlack } from "assets";
 import { Nav, CashBookInput, CashAddSelect } from "components";
 import { categoryList } from "constants/category";
-import { useGlobalVariables } from 'components';
+import { useGlobalVariables } from "components";
+import {
+  backgroundBrightMiddle,
+  backgroundBrightTail,
+  backgroundBrightTop,
+} from "assets";
 
 // function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
 function CashBookMod() {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
-  console.log('CashBookMod rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } =
+    useGlobalVariables();
+  console.log(
+    "CashBookMod rendered:",
+    windowSize,
+    isMobile,
+    headerHeight,
+    navHeight,
+    mainHeight
+  );
 
   // 카테고리 정보
   const options = categoryList;
@@ -67,59 +80,71 @@ function CashBookMod() {
     const newCard = {
       cashCategory: category,
       cashName: subHead,
-      cashListGoalValue: Number(budget.replace(',','')),
+      cashListGoalValue: Number(budget.replace(",", "")),
     };
-    alert('카드 수정이 완료되셨습니다.');
+    alert("카드 수정이 완료되셨습니다.");
     navigate(-1);
   };
+  
   return (
-    <layout.PageLayout isMobile={isMobile}>
-      <layout.Header headerHeight={`${headerHeight}px`}>
-        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
-        <layout.HeaderContent>
-          <BackCrampsBlack
-            onClick={onClickBack}
-            style={{ position: "absolute", left: "1em", float: "left" }}
-          />
-          <div style={{ fontSize: "1em" }}>카드 수정</div>
-        </layout.HeaderContent>
-      </layout.Header>
-      <layout.Main
-        headerHeight={`${headerHeight}px`}
-        mainHeight={`${mainHeight}px`}
-      >
-        <layout.MainContent>
-          <CashAddSelect
-            title={"카테고리"}
-            options={options}
-            placeholder={"카테고리 선택"}
-            onChange={onChangeInput}
-            name={"category"}
-            value={category}
-          />
-          <CashBookInput
-            title={"소제목"}
-            placeholder={"소제목을 입력해주세요.(선택)"}
-            onChange={onChangeInput}
-            name={"subHead"}
-            value={subHead}
-          />
-          <CashBookInput
-            title={"예산"}
-            placeholder={"일 별 목표 예산을 입력해주세요."}
-            onChange={onChangeInput}
-            name={"budget"}
-            value={budget}
-          />
-          <style.CashBookBtn marginTop="50px" onClick={onClickSave}>
-            {"저장"}
-          </style.CashBookBtn>
-        </layout.MainContent>
-      </layout.Main>
-      <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="money" />
-      </layout.Nav>
-    </layout.PageLayout>
+    <style.BackgroundPageLayout
+      screenWidth={`${screenWidth}px`}
+      isMobile={isMobile}
+      backPngTop={`url(${backgroundBrightTop})`}
+      backPngMiddle={`url(${backgroundBrightMiddle})`}
+      backPngTail={`url(${backgroundBrightTail})`}
+    >
+      <layout.PageLayout isMobile={isMobile}>
+        <layout.Header headerHeight={`${headerHeight}px`}>
+          <div
+            className="statusBarHeight"
+            style={{ width: "inherit", height: "50px" }}
+          ></div>
+          <layout.HeaderContent>
+            <BackCrampsBlack
+              onClick={onClickBack}
+              style={{ position: "absolute", left: "1em", float: "left" }}
+            />
+            <div style={{ fontSize: "1em" }}>카드 수정</div>
+          </layout.HeaderContent>
+        </layout.Header>
+        <layout.Main
+          headerHeight={`${headerHeight}px`}
+          mainHeight={`${mainHeight}px`}
+        >
+          <layout.MainContent>
+            <CashAddSelect
+              title={"카테고리"}
+              options={options}
+              placeholder={"카테고리 선택"}
+              onChange={onChangeInput}
+              name={"category"}
+              value={category}
+            />
+            <CashBookInput
+              title={"소제목"}
+              placeholder={"소제목을 입력해주세요.(선택)"}
+              onChange={onChangeInput}
+              name={"subHead"}
+              value={subHead}
+            />
+            <CashBookInput
+              title={"예산"}
+              placeholder={"일 별 목표 예산을 입력해주세요."}
+              onChange={onChangeInput}
+              name={"budget"}
+              value={budget}
+            />
+            <style.CashBookBtn marginTop="50px" onClick={onClickSave}>
+              {"저장"}
+            </style.CashBookBtn>
+          </layout.MainContent>
+        </layout.Main>
+        <layout.Nav navHeight={`${navHeight}px`}>
+          <Nav selected="money" />
+        </layout.Nav>
+      </layout.PageLayout>
+    </style.BackgroundPageLayout>
   );
 }
 

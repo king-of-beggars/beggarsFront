@@ -4,23 +4,22 @@ import { useMutation, useQueryClient } from "react-query";
 import { layout, style } from "styles";
 import { DeleteDetail } from "assets";
 import { CashBookAPI } from "api/api";
-import { AutoResizedText, CashDetailModal } from "components";
-import { deleteDetailment } from "constants/comment";
-import { commaOnThree } from 'functions';
+import { CashDetailModal, AutoResizedText } from "components";
+import { deleteDetailMent } from "constants/comment";
 
 function CashBookDetailList({ cashDetailId, expendName, expendMoney }) {
   // 지출 항목 삭제
   const queryClient = useQueryClient();
-  const mutationDeleteDetail = useMutation(CashBookAPI.putCashNone, {
+  const mutationDeleteDetail = useMutation(CashBookAPI.deleteCashDetail, {
     onSuccess: () => {
       queryClient.invalidateQueries(['cashDetail']);
-      // navigate("/cash-book");
+      changeDeleteModal();
     },
     onError: () => alert("상세 항목 삭제에 실패하였습니다."),
   });
 
   const onClickDelete = () => {
-    // mutationDeleteDetail.mutate(newCard);
+    mutationDeleteDetail.mutate(cashDetailId);
   }
 
   // 삭제 Modal
@@ -37,7 +36,7 @@ function CashBookDetailList({ cashDetailId, expendName, expendMoney }) {
     <style.CashBookDetailBox>
       <layout.FlexCenter100>
         <DeleteDetail style={{marginLeft:"1em"}} onClick={changeDeleteModal}/>
-        { isDeleteModal && (<CashDetailModal setClose={changeDeleteModal} onClickHandler={onClickDelete}>{deleteDetailment}</CashDetailModal> )}
+        { isDeleteModal && (<CashDetailModal setClose={changeDeleteModal} onClickHandler={onClickDelete}>{deleteDetailMent}</CashDetailModal> )}
       </layout.FlexCenter100>
       <style.CashBookDetailTextBox>{expendName}</style.CashBookDetailTextBox>
       { cashDetailId !== 0 
