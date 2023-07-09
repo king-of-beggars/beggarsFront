@@ -20,7 +20,12 @@ export { default as BoardDetailComment } from "components/board/BoardDetailComme
 export { default as BoardCommentLikes } from "components/ui/button/BoardCommentLikes"
 // export { default as BoardDetailInput } from "components/ui/input/BoardDetailInput"
 
-export { default as CashBookInput } from "components/ui/input/CashBookInput";
+// input
+export { default as CashBookInput } from "components/ui/input/CashBookInput"; // 추후 LabledInput으로 모두 교체할 예정
+export { default as LabeledInput } from "components/ui/input/LabledInput";
+export { default as LabeledTextarea } from "components/ui/input/LabledTextarea";
+
+// select
 export { default as CashAddSelect } from "components/ui/select-box/CashAddSelect";
 
 export { default as ProgressBarSemiCircle } from "components/ui/progress/ProgressBarSemiCircle"

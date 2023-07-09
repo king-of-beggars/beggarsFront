@@ -26,6 +26,7 @@ function CardBox({
   console.log("cardWidth:::", cardWidth);
   const cardHeight = cardWidth * (cardHeightOrigin / cardWidthOrigin);
 
+  const [isBoasting, setIsBoasting] = useState(budget-spend >= 0)
   const [bigCardBtnWidth, bigCardBtnHeight] = [274, 46];
   const [smallCardBtnWidth, smallCardBtnHeight] = [151, 26];
 

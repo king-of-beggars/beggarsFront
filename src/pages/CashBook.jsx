@@ -27,44 +27,6 @@ import {
 import { useGlobalVariables } from "components";
 import { getDateBoxSize } from "functions/getAssetSize";
 
-// dummy data
-// const cashbookApiRes = {
-//   data: [
-//     {
-//       id: 0,
-//       cashbookCategory: "식비",
-//       cashbookName: "아침",
-//       cashbookNowValue: 4000,
-//       cashbookGoalValue: 8000,
-//       cashbookOrder: 0,
-//     },
-//     {
-//       id: 1,
-//       cashbookCategory: "식비",
-//       cashbookName: "점심",
-//       cashbookNowValue: 12000,
-//       cashbookGoalValue: 15000,
-//       cashbookOrder: 1,
-//     },
-//     {
-//       id: 2,
-//       cashbookCategory: "식비",
-//       cashbookName: "저녁",
-//       cashbookNowValue: 0,
-//       cashbookGoalValue: 12000,
-//       cashbookOrder: 2,
-//     },
-//     {
-//       id: 3,
-//       cashbookCategory: "간식비 / 카페",
-//       cashbookName: "",
-//       cashbookNowValue: 6000,
-//       cashbookGoalValue: 5000,
-//       cashbookOrder: 3,
-//     },
-//   ],
-// };
-
 function CashBook() {
   // function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const {
@@ -146,11 +108,14 @@ function CashBook() {
   const [selectDate, setSelectDate] = useState(moment);
   const [focused, setFocused] = useState(false);
 
+
   // 게시글 작성 Modal
   const [isWriteModal, setIsWriteModal] = useState(false);
+  const [isBoasting, setIsBoasting] = useState(null)
   const changeWriteModal = (event) => {
     event.stopPropagation();
 
+    event.target.innerText === "자랑하러 가기" ? setIsBoasting(true) : setIsBoasting(false)
     const newIsWrite = !isWriteModal;
     setIsWriteModal(newIsWrite);
   };
@@ -342,7 +307,7 @@ function CashBook() {
           )}
           {isWriteModal && (
             <WriteReceipt setClose={changeWriteModal}>
-              자랑하러 가기
+              { isBoasting ? "자랑하러 가기" : "혼쭐나러 가기"}
             </WriteReceipt>
           )}
         </layout.CashBookMainContent>

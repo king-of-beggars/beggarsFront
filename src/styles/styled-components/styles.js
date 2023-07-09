@@ -263,7 +263,7 @@ export const CardBtn = styled.button`
   color: ${(props) => (props.isDefault ? `${sVar.lightYellow}` : "white")};
   border: none;
   outline: none;
-  margin-top: calc(${(props) => props.ratio} * 1em);
+  margin-top: calc(${(props) => props.ratio} * 1.5em);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -361,6 +361,20 @@ export const CashBookInput = styled.input`
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   outline: none;
   font-size: 0.8em;
+`;
+
+// Cashbook modal textarea
+export const CashBookTextarea = styled.textarea`
+  padding: 10px;
+  width: 75%;
+  border-radius: 0px 0.8em 0.8em 0px;
+  border-top: 2px solid ${sVar.bookSelectInputborderColor};
+  border-right: 2px solid ${sVar.bookSelectInputborderColor};
+  border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
+  outline: none;
+  font-size: 0.8em;
+  line-height: 140%;
+  resize: none;
 `;
 
 // Cashbook Button
@@ -556,7 +570,7 @@ export const ModalDefault = styled(layout.FlexCenterColumn)`
   min-width: 320px;
   max-width: 400px;
   background: white;
-  padding: 50px;
+  padding: 30px;
   border-radius: 10px;
   z-index: 21;
   gap: 5px;

@@ -6,8 +6,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
     const progressBarRef = useRef(null)
 
     useEffect(() => {
-        const graphValue = (Math.round((spend / budget) * 10)) / 10 * 100
-        console.log("origin:::", Math.round((spend / budget) * 10) / 10)
+        const graphValue = (Math.round(((spend / budget) * 100) * 10)) / 10
         const semiCircle = new ProgressBar.SemiCircle(progressBarRef.current, {
           strokeWidth: 6,
           color: `${sVar.textGray}`,
@@ -32,6 +31,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
               bar.text.style.color = `${sVar.lightGray}`;
             } else if (value > 100 ){
               bar.setText(`${value}%`);
+              // bar.setText(`+${Math.round((value - 100) * 10) / 10}%`);
               // bar.animate(graphValue / 100)
               bar.text.style.color = "tomato";
               bar.path.setAttribute('stroke', "tomato");
