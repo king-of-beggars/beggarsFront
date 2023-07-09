@@ -74,6 +74,7 @@ export const HeaderContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 25px;
 `
 
 export const Nav = styled.nav`
@@ -98,6 +99,7 @@ export const MainContent = styled.div`
     width: 85%;
     height: inherit;
     overflow-y: scroll;
+    margin-top: 20px;
 `
 
 export const CashBookMainContent = styled.div`

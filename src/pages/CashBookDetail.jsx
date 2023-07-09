@@ -13,7 +13,7 @@ import {
   backgroundBrightTail,
   backgroundBrightTop,
 } from "assets";
-import { noneAddMent } from "constants/comment";
+import { commentZeroSpend } from 'constants';
 
 function CashBookDetail() {
   // function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
@@ -200,7 +200,7 @@ function CashBookDetail() {
             </style.CashBookDetailNoneBtn>
             {isNoneModal && (
               <CashDetailModal setClose={changeNoneModal} onClickHandler={onClickNone}>
-                {noneAddMent}
+                {commentZeroSpend}
               </CashDetailModal>
             )}
           </layout.MainContent>

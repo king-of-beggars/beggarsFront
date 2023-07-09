@@ -5,7 +5,7 @@ import { layout, style } from "styles";
 import { DeleteDetail } from "assets";
 import { CashBookAPI } from "api/api";
 import { CashDetailModal, AutoResizedText } from "components";
-import { deleteDetailMent } from "constants/comment";
+import { commentDetailDelete } from 'constants';
 import { commaOnThree } from 'functions';
 
 function CashBookDetailList({ cashDetailId, expendName, expendMoney }) {
@@ -37,7 +37,7 @@ function CashBookDetailList({ cashDetailId, expendName, expendMoney }) {
     <style.CashBookDetailBox>
       <layout.FlexCenter100>
         <DeleteDetail style={{marginLeft:"1em"}} onClick={changeDeleteModal}/>
-        { isDeleteModal && (<CashDetailModal setClose={changeDeleteModal} onClickHandler={onClickDelete}>{deleteDetailMent}</CashDetailModal> )}
+        { isDeleteModal && (<CashDetailModal setClose={changeDeleteModal} onClickHandler={onClickDelete}>{commentDetailDelete}</CashDetailModal> )}
       </layout.FlexCenter100>
       <style.CashBookDetailTextBox>{expendName}</style.CashBookDetailTextBox>
       { cashDetailId !== 0 
