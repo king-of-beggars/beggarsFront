@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 
 import { style, layout } from "styles";
 import { BackCramps } from "assets";
 import CashBookInput from "components/ui/input/CashBookInput";
 import { CashBookBtn } from "styles/styled-components/styles";
 import { CashBookAPI } from "api/api";
-import { useMutation, useQueryClient } from "react-query";
 
 function ExpendAddModal({ setClose, cardId }) {
   const navigate = useNavigate();
@@ -66,7 +65,7 @@ function ExpendAddModal({ setClose, cardId }) {
   return (
     <style.ModalOverlay onClick={setClose}>
       <style.Modal onClick={(event) => event.stopPropagation()}>
-        <layout.FlexCenterRow100 style={{ top: "1em", padding: "1em" }}>
+        <layout.FlexCenterRow100 style={{ top: "1em", padding: "1em", marginTop: "1em" }}>
           <BackCramps
             onClick={setClose}
             style={{ position: "absolute", left: "1em", float: "left" }}
@@ -82,6 +81,7 @@ function ExpendAddModal({ setClose, cardId }) {
             type="text"
             value={expendName}
             onChange={onChangeInput}
+            height="3em"
           />
           <CashBookInput
             title={"가격"}
@@ -90,6 +90,7 @@ function ExpendAddModal({ setClose, cardId }) {
             type="text"
             value={expendPrice}
             onChange={onChangeInput}
+            height="3em"
           />
           <CashBookBtn marginTop="10px" onClick={onSaveDetail}>
             저장

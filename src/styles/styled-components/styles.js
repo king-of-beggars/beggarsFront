@@ -314,10 +314,10 @@ export const CustomedSwiperSlide = styled(SwiperSlide)`
   width: 100%;
 `;
 
-// Cashbook 카드 추가 & 지출 추가 화면 input, select box 공통 프레임
+// Cashbook 카드 추가 & 지출 추가 & 게시글 작성 화면 input, select box 공통 프레임
 export const CashBookCardWrap = styled(layout.FlexCenterRow)`
   width: 100%;
-  height: 3em;
+  height: ${props => props.height};
   margin-bottom: 1em;
 
   /* border: 1px solid ${sVar.bookSelectInputborderColor}; */

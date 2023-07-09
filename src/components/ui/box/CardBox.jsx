@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { style, layout } from "styles";
-import { ProgressBarSemiCircle } from "components";
+import { ProgressBarSemiCircle, WriteReceipt } from "components";
 import { EditCashbook } from "assets";
 
 function CardBox({
@@ -14,6 +14,7 @@ function CardBox({
   title,
   screenWidth,
   ratio,
+  changeWriteModal,
   isDefault = true,
 }) {
   const [cardWidthOrigin, cardHeightOrigin] = [301, 356];
@@ -31,7 +32,6 @@ function CardBox({
   const navigate = useNavigate();
 
   // 수정 카드
-  // 쿼리 스트링 수정 필요
   const onClickEdit = (event) => {
     event.stopPropagation();
     const sendInfo = {
@@ -39,11 +39,7 @@ function CardBox({
       name: title,
     };
     const queryStr = new URLSearchParams(sendInfo).toString();
-    // alert(`/cash-book/edit/${cardId}?${queryStr}`);
     navigate(`/cash-book/edit/${id}?${queryStr}`);
-    // if (event.target.className === "edit-cash") {
-      
-    // }
   };
 
   return (
@@ -113,6 +109,7 @@ function CardBox({
           isDefault={isDefault}
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
+          onClick={changeWriteModal}
         >
           {spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"}
         </style.CardBtn>

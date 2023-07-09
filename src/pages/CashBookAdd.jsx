@@ -8,17 +8,17 @@ import { categoryList } from "constants/category";
 import { useMutation, useQueryClient } from "react-query";
 import { CashBookAPI } from "api/api";
 import { useGlobalVariables } from 'components';
+import {
+  backgroundBrightMiddle,
+  backgroundBrightTail,
+  backgroundBrightTop,
+} from "assets";
 
-// const options = [
-//   { value: "식비", name: "식비" },
-//   { value: "교통비", name: "교통비" },
-//   { value: "여가비", name: "여가비" },
-// ];
 
 function CashBookAdd() {
 // function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
   console.log('CashBookAdd rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // 카테고리 정보
@@ -85,7 +85,13 @@ function CashBookAdd() {
   };
 
   return (
-    <layout.PageLayout isMobile={isMobile}>
+    <style.BackgroundPageLayout
+      screenWidth={`${screenWidth}px`}
+      isMobile={isMobile}
+      backPngTop={`url(${backgroundBrightTop})`}
+      backPngMiddle={`url(${backgroundBrightMiddle})`}
+      backPngTail={`url(${backgroundBrightTail})`}
+    >
       <layout.Header headerHeight={`${headerHeight}px`}>
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
@@ -131,7 +137,7 @@ function CashBookAdd() {
       <layout.Nav navHeight={`${navHeight}px`}>
         <Nav selected="money" />
       </layout.Nav>
-    </layout.PageLayout>
+    </style.BackgroundPageLayout>
   );
 }
 
