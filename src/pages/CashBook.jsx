@@ -120,6 +120,7 @@ function CashBook() {
     event.target.innerText === "자랑하러 가기" ? setIsBoasting(true) : setIsBoasting(false)
     const newIsWrite = !isWriteModal;
     setIsWriteModal(newIsWrite);
+
   };
 
   const setClose = () => {
