@@ -1,24 +1,26 @@
-import { BackCramps } from "assets";
+ import { BackCramps } from "assets";
 import React from "react";
 
 import { style, layout } from "styles";
-import CashBookInput from "components/ui/input/CashBookInput";
+import { CashBookBtn } from 'styles/styled-components/styles';
+import { LabeledInput, LabeledTextarea } from "components"
 
 function WriteReceipt({ setClose, children }) {
+  const comment = children === "자랑하러 가기" ? "자랑하기" : "혼쭐나기"
   return (
     <style.ModalOverlay onClick={setClose}>
-      <style.ModalDefault
+      <style.ModalDefault style={{width: "90%", gap: "30px"}}
         onClick={(event) => event.stopPropagation()}
       >
-        <layout.FlexCenterRow100 style={{ top: "1em", padding: "1em" }}>
+        <layout.FlexCenter100 style={{ position: "relative" }}>
           <BackCramps
             onClick={setClose}
-            style={{ position: "absolute", left: "1em", float: "left" }}
+            style={{ position: "absolute", left: "0" }}
           />
           <div style={{ fontSize: "25px" }}>{children}</div>
-        </layout.FlexCenterRow100>
-        <layout.FlexCenterColumn style={{ margin: "20px" }}>
-            <CashBookInput
+        </layout.FlexCenter100>
+        <layout.FlexCenterColumn100 style={{fontFamily: "DOSGothic"}}>
+            <LabeledInput
                 title={"제목"}
                 placeholder={"제목을 입력해주세요."}
                 name="title"
@@ -27,16 +29,16 @@ function WriteReceipt({ setClose, children }) {
                 // onChange={onChangeInput}
                 height="3em"
             />
-            <CashBookInput
+            <LabeledTextarea
                 title={"코멘트"}
                 placeholder={"내용을 입력해주세요."}
-                name="title"
-                type="text"
+                name="comment"
                 // value={expendName}
                 // onChange={onChangeInput}
-                height="5em"
+                height="150px"
             />
-        </layout.FlexCenterColumn>
+            <CashBookBtn style={{fontFamily: "DOSMyungjo", marginTop: "10px"}}>{comment}</CashBookBtn> 
+        </layout.FlexCenterColumn100>
       </style.ModalDefault>
     </style.ModalOverlay>
   );
