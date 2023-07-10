@@ -3,12 +3,18 @@ import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 
 import { layout, style } from 'styles';
-import { commentMainTitle, commentDayAfter } from 'constants';
+import { commentDayAfter } from 'constants';
 import { useGlobalVariables, SocialLoginModal, Nav } from 'components';
-import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail } from 'assets';
+import { chkLoggedIn } from "functions"
+import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, MainTitleLogo, MainLogoText } from 'assets';
 
 // function Main({ isMobile, headerHeight, navHeight, mainHeight}) {
   function Main() {
+    // 로그인 체크
+    //// 로그인 여부에 따라 렌더링 다른 페이지 : main, 가계부, 게시판의 일부
+    const isLoggedIn = chkLoggedIn()
+    console.log("login:::", isLoggedIn)
+
     const INIT_LOG_VALUE = false
     // 만들어둔 context 사용하기
     const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
@@ -18,9 +24,6 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
   const { search } = useLocation();
 
-  // 로그인 여부 관리하는 상태 필요, context로 관리할지 생각해봐야함...
-  //// 로그인 여부에 따라 렌더링 다른 페이지 : main, 가계부, 게시판의 일부
-  const [isLoggedin, setIsLoggedIn] = useState(INIT_LOG_VALUE)
 
   useEffect(() => {
     let loginSuccess = queryString.parse(search);
@@ -45,18 +48,18 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
           <layout.FlexCenter100>
-            <span>{commentMainTitle}</span>
+            <MainLogoText />
           </layout.FlexCenter100>
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.MainContent>
           <layout.FlexCenterColumn100>
-            {// journey 섹션
+            {/* {// journey 섹션
               isLoggedin
               ? null
               : null
-            }
+            } */}
             {// recordCard 섹션, isLoggedIn이 true일 때 정보와 상세를 나누는 state 필요
 
             }
