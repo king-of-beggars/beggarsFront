@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { layout, style } from 'styles';
 import { commentDayAfter } from 'constants';
 import { useGlobalVariables, SocialLoginModal, Nav } from 'components';
-import { chkLoggedIn } from "functions"
+import { chkLoggedIn, getAssetSize } from "functions"
 import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, MainTitleLogo, MainLogoText } from 'assets';
 
 // function Main({ isMobile, headerHeight, navHeight, mainHeight}) {
@@ -17,7 +17,7 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
 
     const INIT_LOG_VALUE = false
     // 만들어둔 context 사용하기
-    const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+    const { frameSize, windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth, mainExpBox, mainRecordCard, mainJourneyTitle, mainJourneyBox, mainWeather, mainTag, mainToggleBar, mainToggleBtn } = useGlobalVariables();
     console.log('Main rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
   // console.log(document.cookie);
   // 닉네임 모달
@@ -35,7 +35,8 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
     }
   }, [])
   
-
+  // get asset sizes
+  const [expBoxSize, setExpBoxSize] = useState(getAssetSize(frameSize, screenWidth, mainExpBox))
   return (
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
@@ -55,11 +56,11 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.MainContent>
           <layout.FlexCenterColumn100>
-            {/* {// journey 섹션
-              isLoggedin
+            {// journey 섹션
+              isLoggedIn
               ? null
               : null
-            } */}
+            }
             {// recordCard 섹션, isLoggedIn이 true일 때 정보와 상세를 나누는 state 필요
 
             }
