@@ -63,11 +63,10 @@ function CashBookDetail() {
       queryClient.invalidateQueries(["cashDetail"]);
       changeNoneModal();
     },
-    onError: () => alert("상세 항목 삭제에 실패하였습니다."),
+    onError: () => alert("무지출 등록을 실패하였습니다."),
   });
 
   const onClickNone = () => {
-    console.log(cardId);
     mutationNone.mutate({cardId});
   }
 
@@ -118,18 +117,6 @@ function CashBookDetail() {
   // query string 으로 수정할 것
   const onClickBack = () => {
     navigate(-1);
-  };
-
-  // 수정 카드
-  // 쿼리 스트링 수정 필요
-  const onClickEdit = () => {
-    const sendInfo = {
-      category: data.cashbookCategory,
-      name: data.cashbookName,
-    };
-    const queryStr = new URLSearchParams(sendInfo).toString();
-    // alert(`/cash-book/edit/${cardId}?${queryStr}`);
-    navigate(`/cash-book/edit/${cardId}?${queryStr}`);
   };
 
   return (
