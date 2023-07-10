@@ -1,11 +1,12 @@
-import { Nav, CashBookInput, CashAddSelect } from "components";
 import React, { useState } from "react";
-import { BackCrampsBlack } from "assets";
-
-import { layout, style } from "styles";
 import { useNavigate } from "react-router-dom";
-import { categoryList } from "constants/category";
 import { useMutation, useQueryClient } from "react-query";
+import moment from "moment";
+
+import { Nav, CashBookInput, CashAddSelect } from "components";
+import { BackCrampsBlack } from "assets";
+import { layout, style } from "styles";
+import { categoryList } from "constants/category";
 import { CashBookAPI } from "api/api";
 import { useGlobalVariables } from 'components';
 import {
@@ -13,6 +14,7 @@ import {
   backgroundBrightTail,
   backgroundBrightTop,
 } from "assets";
+
 
 
 function CashBookAdd() {
@@ -62,7 +64,7 @@ function CashBookAdd() {
   const queryClient = useQueryClient();
   const mutationAddCard = useMutation(CashBookAPI.postCardAdd, {
     onSuccess: () => {
-      queryClient.invalidateQueries(['cashCard']);
+      queryClient.invalidateQueries([`cashCard${moment().format("YYYY-MM-DD")}`]);
       navigate("/cash-book");
     },
     onError: () => alert("카드 추가에 실패하였습니다."),

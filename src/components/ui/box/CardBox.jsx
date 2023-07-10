@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { style, layout } from "styles";
 import { ProgressBarSemiCircle, WriteReceipt } from "components";
 import { EditCashbook } from "assets";
+import { commaOnThree } from "functions";
 
 function CardBox({
   id,
@@ -66,7 +67,7 @@ function CardBox({
           </style.Card2ndCategoryText>
           <style.CardDivision ratio={ratio} isDefault={isDefault} />
           <style.CardBudgetText ratio={ratio} isDefault={isDefault}>
-            매일 {budget}원
+            매일 {commaOnThree(budget)}원
           </style.CardBudgetText>
         </style.CardCategoryContainer>
       ) : (
@@ -80,7 +81,7 @@ function CardBox({
           </style.Card2ndCategoryText>
           <style.CardDivision ratio={ratio} isDefault={isDefault} />
           <style.CardBudgetText ratio={ratio} isDefault={isDefault}>
-            매일 {budget}원
+            매일 {commaOnThree(budget)}원
           </style.CardBudgetText>
         </style.CardCategoryContainer>
       )}
@@ -94,7 +95,7 @@ function CardBox({
       </style.CardProgressBarContainer>
       {!!isDefault && ratio >= 0.9 ? (
         <style.CardSpendText ratio={ratio} isDefault={isDefault}>
-          {spend}원 사용
+          {commaOnThree(spend)}원 사용
         </style.CardSpendText>
       ) : (
         <style.CardSpendText
