@@ -7,7 +7,7 @@ import { CashBookAPI } from "api/api";
 
 function CashDetailModal({ setClose, typeModal, onClickHandler, children }) {
   // 예 눌렀을 때 변경사항
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   // const mutationNone = useMutation(CashBookAPI.putCashNone, {
   //   onSuccess: () => {
   //     queryClient.invalidateQueries(['cashCard']);
@@ -21,7 +21,7 @@ function CashDetailModal({ setClose, typeModal, onClickHandler, children }) {
         {children.map((ment)=><span>{ment}</span>)}
         <layout.FlexCenterRow100>
         <style.CashBookNoneBtn background={sVar.bookModalYesBtn} onClick={onClickHandler}>예</style.CashBookNoneBtn>
-        <style.CashBookNoneBtn background={sVar.bookModalNoBtn}>아니오</style.CashBookNoneBtn>
+        <style.CashBookNoneBtn background={sVar.bookModalNoBtn} onClick={setClose}>아니오</style.CashBookNoneBtn>
         </layout.FlexCenterRow100>
       </style.ModalDefault>
     </style.ModalOverlay>

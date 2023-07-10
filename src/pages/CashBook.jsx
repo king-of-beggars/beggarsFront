@@ -122,6 +122,10 @@ function CashBook() {
     setIsWriteModal(newIsWrite);
   };
 
+  const setClose = () => {
+    setIsWriteModal(false);
+  }
+
   // 가계부 data
   const queryNode = {
     queryKey: [`cashCard${selectDate.format("YYYY-MM-DD")}`],
@@ -320,7 +324,7 @@ function CashBook() {
             </layout.SwiperWrap>
           )}
           {isWriteModal && (
-            <WriteReceipt setClose={changeWriteModal} cardId={clickedModal}>
+            <WriteReceipt setClose={setClose} cardId={clickedModal}>
               { isBoasting ? "자랑하러 가기" : "혼쭐나러 가기"}
             </WriteReceipt>
           )}

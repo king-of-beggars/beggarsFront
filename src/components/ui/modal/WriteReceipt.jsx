@@ -79,7 +79,7 @@ function WriteReceipt({ setClose, cardId, children }) {
                 onChange={onChangeInput}
                 height="150px"
             />
-            <CashBookBtn style={{fontFamily: "DOSMyungjo", marginTop: "10px"}} onClick={onClickSave}>{comment}</CashBookBtn> 
+            <CashBookBtn style={{fontFamily: "DOSMyungjo", marginTop: "10px"}} onClick={onClickSave} name="book">{comment}</CashBookBtn> 
         </layout.FlexCenterColumn100>
       </style.ModalDefault>
     </style.ModalOverlay>
