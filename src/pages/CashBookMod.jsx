@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import queryString from "query-string";
+import moment from "moment";
+import { useMutation, useQueryClient } from "react-query";
 
 import { layout, style } from "styles";
 import { BackCrampsBlack } from "assets";
@@ -12,6 +14,8 @@ import {
   backgroundBrightTail,
   backgroundBrightTop,
 } from "assets";
+import { CashBookAPI } from "api/api";
+
 
 // function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
 function CashBookMod() {
@@ -75,15 +79,27 @@ function CashBookMod() {
     navigate(-1);
   };
 
+  // 카드 수정 API
+  const queryClient = useQueryClient();
+  const mutationEditCard = useMutation(CashBookAPI.postCashEdit, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([`cashCard${moment().format("YYYY-MM-DD")}`]);
+      navigate("/cash-book");
+    },
+    onError: () => alert("카드 수정을 실패했습니다."),
+  });
+
   // 저장하기 버튼 클릭
   const onClickSave = () => {
-    const newCard = {
+    const editCard = {
       cashCategory: category,
       cashName: subHead,
       cashListGoalValue: Number(budget.replace(",", "")),
     };
+
+    mutationEditCard.mutate({cardId, editCard});
     alert("카드 수정이 완료되셨습니다.");
-    navigate(-1);
+    navigate("/cash-book");
   };
   
   return (

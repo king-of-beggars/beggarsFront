@@ -25,9 +25,10 @@ export const CashBookAPI = {
   getCashDetail: (id) => instance.get(`/api/cashbook/${id}`),
   postCardAdd: (payload) => instance.post('/api/cashbook/frame', payload),
   postCashDetailAdd: ({cardId, newDetail}) => instance.post(`/api/cashbook/${cardId}`, newDetail),
-  postCashEdit: ({cardId, newCard}) => instance.put(`/api/cashbook/frame/${cardId}`, newCard),
+  postCashEdit: ({cardId, editCard}) => instance.put(`/api/cashbook/frame/${cardId}`, editCard),
   putCashNone: ({cardId}) => instance.put(`/api/cashbook/${cardId}`),
-  deleteCashDetail: (cashDetailId) => instance.delete(`/api/cashbook/${cashDetailId}`)
+  deleteCashDetail: (cashDetailId) => instance.delete(`/api/cashbook/${cashDetailId}`),
+  postCardBoard: ({cardId, newBoard}) => instance.post(`api/board/${cardId}`, newBoard)
 }
 
 export const boardAPI = {

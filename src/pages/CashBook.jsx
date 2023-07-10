@@ -112,9 +112,11 @@ function CashBook() {
   // 게시글 작성 Modal
   const [isWriteModal, setIsWriteModal] = useState(false);
   const [isBoasting, setIsBoasting] = useState(null)
+  const [clickedModal, setClickModal] = useState(0);
+
   const changeWriteModal = (event) => {
     event.stopPropagation();
-
+    setClickModal(event.target.id);
     event.target.innerText === "자랑하러 가기" ? setIsBoasting(true) : setIsBoasting(false)
     const newIsWrite = !isWriteModal;
     setIsWriteModal(newIsWrite);
@@ -242,7 +244,19 @@ function CashBook() {
                           }}
                           onTouchMove={(swiper) => {
                             if (swiper.touches.diff < -90) {
+                              // 카드가 5개 이상일 때 swiper 비활성화
+                              // 수정 필요
                               window.location.href = "/cash-book/add";
+                              // if (cashbookApiRes.length >= 5) {
+                              //   swiper.slideTo(0,0);
+                              //   swiper.disable();
+                              //   alert("카드는 5개까지 가질 수 있습니다.");
+                              //   // setTimeout(() => {
+                              //   //   swiper.enable();
+                              //   // }, 0);
+                              // } else {
+                                
+                              // }
                             }
                           }}
                         >
@@ -306,7 +320,7 @@ function CashBook() {
             </layout.SwiperWrap>
           )}
           {isWriteModal && (
-            <WriteReceipt setClose={changeWriteModal}>
+            <WriteReceipt setClose={changeWriteModal} cardId={clickedModal}>
               { isBoasting ? "자랑하러 가기" : "혼쭐나러 가기"}
             </WriteReceipt>
           )}
