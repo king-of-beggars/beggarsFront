@@ -1,6 +1,4 @@
 // main
-//// 메인 제목
-export const commentMainTitle = "내일은 거지왕";
 //// day 기록 표시
 export const commentDayAfter = ["road to 거지왕에 합류한지", "일 째!"]
 
