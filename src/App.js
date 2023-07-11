@@ -9,7 +9,7 @@ import { GlobalVariableProvider } from 'components';
 
 const queryClient = new QueryClient();
 
-function App({ globals }) {
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />

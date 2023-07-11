@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import { layout, style } from 'styles';
 import { commentDayAfter } from 'constants';
-import { useGlobalVariables, SocialLoginModal, Nav } from 'components';
+import { useGlobalVariables, useMainAssetContext, SocialLoginModal, Nav } from 'components';
 import { chkLoggedIn, getAssetSize } from "functions"
 import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, MainTitleLogo, MainLogoText } from 'assets';
 
@@ -17,8 +17,10 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
 
     const INIT_LOG_VALUE = false
     // 만들어둔 context 사용하기
-    const { frameSize, windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth, mainExpBox, mainRecordCard, mainJourneyTitle, mainJourneyBox, mainWeather, mainTag, mainToggleBar, mainToggleBtn } = useGlobalVariables();
-    console.log('Main rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+    // const { frameSize, windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth, mainExpBox, mainRecordCard, mainJourneyTitle, mainJourneyBox, mainWeather, mainTag, mainToggleBar, mainToggleBtn } = useGlobalVariables();
+    const { frameSize, windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables()
+    // get asset sizes
+    const { mainExpBox, mainRecordCard, mainJourneyTitle, mainJourneyBox, mainWeather, mainLogo, mainTag, mainToggleBar, mainToggleBtn} = useMainAssetContext()
   // console.log(document.cookie);
   // 닉네임 모달
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
@@ -34,9 +36,7 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
       setIsSocialLogin(true)
     }
   }, [])
-  
-  // get asset sizes
-  const [expBoxSize, setExpBoxSize] = useState(getAssetSize(frameSize, screenWidth, mainExpBox))
+
   return (
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
