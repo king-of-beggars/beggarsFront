@@ -24,6 +24,7 @@ export const MainAssetProvider = ({ children }) => {
   })
   const recalculateAssetSizes = () => {
     console.log("recalculating....")
+    console.log("recal / screenWidth:::", screenWidth)
     setMainAssetSizes({
       mainExpBox: getAssetSize(frameSize, screenWidth, mainExpBox),
       mainRecordCard: getAssetSize(frameSize, screenWidth, mainRecordCard),
@@ -43,12 +44,14 @@ export const MainAssetProvider = ({ children }) => {
     console.log("mainAssetProvider: screenWidth changed:::", screenWidth)
     const handleResize = debounce(_ => {
       recalculateAssetSizes()
+
     }, 400)
-    window.addEventListener("resize", handleResize)
+    handleResize()
+    // window.addEventListener("resize", handleResize)
    
-    return () => {
-      window.removeEventListener("resize", handleResize)
-    }
+    // return () => {
+    //   window.removeEventListener("resize", handleResize)
+    // }
 
   }, [screenWidth])
 

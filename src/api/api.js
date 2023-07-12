@@ -20,6 +20,10 @@ export const AuthAPI = {
   postLogout: () => instance.post("/api/user/logout")
 };
 
+export const mainAPI = {
+  getMainData: () => instance.get("/api/cashbook/main"),
+}
+
 export const CashBookAPI = {
   getCashCard: (date) => instance.get(`/api/cashbook?date=${date}`),
   getCashDetail: (id) => instance.get(`/api/cashbook/${id}`),

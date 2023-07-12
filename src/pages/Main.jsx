@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
+import { useQuery, useQueryClient } from "react-query";
 
 import { layout, style } from 'styles';
 import { commentDayAfter } from 'constants';
-import { useGlobalVariables, useMainAssetContext, SocialLoginModal, Nav } from 'components';
+import { useGlobalVariables, useMainAssetContext, SocialLoginModal, Nav, MainExp } from 'components';
 import { chkLoggedIn, getAssetSize } from "functions"
 import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, MainTitleLogo, MainLogoText } from 'assets';
+import { mainAPI } from "api/api"
 
 // function Main({ isMobile, headerHeight, navHeight, mainHeight}) {
   function Main() {
@@ -21,10 +23,26 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
     const { frameSize, windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables()
     // get asset sizes
     const { mainExpBox, mainRecordCard, mainJourneyTitle, mainJourneyBox, mainWeather, mainLogo, mainTag, mainToggleBar, mainToggleBtn} = useMainAssetContext()
+    console.log("mainExpBox:::", mainExpBox)
   // console.log(document.cookie);
   // 닉네임 모달
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
   const { search } = useLocation();
+  
+
+  // 만약 로그인된 상태이면 렌더링할 데이터 받아오기
+  const queryClient = useQueryClient();
+  const { data, isLoading, isError } = useQuery(["mainData"], mainAPI.getMainData, {
+    select: (data) => data.data.data,
+    enabled: isLoggedIn,
+    onError: () => {
+      console.log("MainAPI.getMainData::: get error");
+    },
+    onSuccess: () => {
+      console.log("MainAPI.getMainData::: get success");
+      console.log("mainData:::", data)
+    }
+  })
 
 
   useEffect(() => {
@@ -37,6 +55,7 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
     }
   }, [])
 
+  // useEffect(() => {window.dispatchEvent(new CustomEvent('resize'))}, [])
   return (
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
@@ -56,11 +75,16 @@ import { mainLogoSmooth, mainBackgroundTop, mainBackgroundMiddle, mainBackground
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.MainContent>
           <layout.FlexCenterColumn100>
-            {// journey 섹션
-              isLoggedIn
-              ? null
-              : null
-            }
+            <MainExp 
+              userName={isLoggedIn ? decodeURIComponent(localStorage.getItem("nickname")) : "행복한 바다사자"}
+              dayCount={
+                isLoading || isError
+                ? 80
+                : data.signupDay
+              }
+              width={mainExpBox.width}
+              height={mainExpBox.height}>
+            </MainExp>
             {// recordCard 섹션, isLoggedIn이 true일 때 정보와 상세를 나누는 state 필요
 
             }

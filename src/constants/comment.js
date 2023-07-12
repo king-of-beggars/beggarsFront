@@ -1,6 +1,6 @@
 // main
 //// day 기록 표시
-export const commentDayAfter = ["road to 거지왕에 합류한지", "일 째!"]
+export const commentDayAfter = ["님이 road to 거지왕에 합류한지", "일 째!"]
 
 
 
