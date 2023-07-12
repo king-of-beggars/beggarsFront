@@ -47,10 +47,12 @@ function CardBox({
   };
 
   // 게시글 이동
-  // const onClickGoBoard = () => {
-  //   navigate(``)
-  //   writeCheck
-  // }
+  const onClickGoBoard = (event) => {
+    event.stopPropagation();
+    const isBoasting = budget>spend
+    // console.log("단이가 바라는 isBoasting :::",isBoasting);
+    navigate(`/board/${writeCheck}`, {state:{isBoasting}});
+  }
 
   return (
     <style.CardBoxContainer
@@ -120,7 +122,8 @@ function CardBox({
           isWrite={writeCheck == 0 ? false : true}
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
-          onClick={changeWriteModal}
+          onClick={writeCheck == 0 ? changeWriteModal : onClickGoBoard}
+          // onClick={changeWriteModal}
           disabled={spend===0}
         >
           {writeCheck == 0 ? spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"
