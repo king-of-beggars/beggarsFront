@@ -16,6 +16,7 @@ function CardBox({
   screenWidth,
   ratio,
   changeWriteModal,
+  writeCheck,
   isDefault = true,
 }) {
   const [cardWidthOrigin, cardHeightOrigin] = [301, 356];
@@ -95,7 +96,7 @@ function CardBox({
       </style.CardProgressBarContainer>
       {!!isDefault && ratio >= 0.9 ? (
         <style.CardSpendText ratio={ratio} isDefault={isDefault}>
-          {commaOnThree(spend)}원 사용
+          {spend === null ? "무지출 데이!!" : commaOnThree(spend) + "원 사용"}
         </style.CardSpendText>
       ) : (
         <style.CardSpendText
@@ -109,11 +110,14 @@ function CardBox({
           ratio={ratio}
           id={id}
           isDefault={isDefault}
+          isWrite={writeCheck == 0 ? false : true}
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
           onClick={changeWriteModal}
+          disabled={spend===0}
         >
-          {spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"}
+          {writeCheck == 0 ? spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"
+                           : "벽보보러 가시게"}
         </style.CardBtn>
       ) : (
         <style.CardBtn
