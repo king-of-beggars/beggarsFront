@@ -49,9 +49,9 @@ function CardBox({
   // 게시글 이동
   const onClickGoBoard = (event) => {
     event.stopPropagation();
-    const isBoasting = budget>spend
+    // const isBoasting = budget>spend
     // console.log("단이가 바라는 isBoasting :::",isBoasting);
-    navigate(`/board/${writeCheck}`, {state:{isBoasting}});
+    navigate(`/board/${writeCheck}`, {state:{isBoasting:isBoasting}});
   }
 
   return (
