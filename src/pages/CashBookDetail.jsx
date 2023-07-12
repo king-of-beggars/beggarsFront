@@ -98,7 +98,7 @@ function CashBookDetail() {
   } else {
     detail = data.detail;
   }
-  console.log(detail);
+  // console.log(detail);
   // 여기는 가짜 데이터
   // const data = [
   //   // {
@@ -162,6 +162,7 @@ function CashBookDetail() {
                   return (
                     <CashBookDetailList
                       key={expend.cashDetailId}
+                      cardId={cardId}
                       cashDetailId={expend.cashDetailId}
                       expendName={expend.cashDetailText}
                       expendMoney={expend.cashDetailValue}

@@ -5,6 +5,7 @@ import { style, layout } from "styles";
 import { ProgressBarSemiCircle, WriteReceipt } from "components";
 import { EditCashbook } from "assets";
 import { commaOnThree } from "functions";
+import { commentGoBoard } from "constants/comment";
 
 function CardBox({
   id,
@@ -16,6 +17,7 @@ function CardBox({
   screenWidth,
   ratio,
   changeWriteModal,
+  writeCheck,
   isDefault = true,
 }) {
   const [cardWidthOrigin, cardHeightOrigin] = [301, 356];
@@ -43,6 +45,14 @@ function CardBox({
     const queryStr = new URLSearchParams(sendInfo).toString();
     navigate(`/cash-book/edit/${id}?${queryStr}`);
   };
+
+  // 게시글 이동
+  const onClickGoBoard = (event) => {
+    event.stopPropagation();
+    const isBoasting = budget>spend
+    // console.log("단이가 바라는 isBoasting :::",isBoasting);
+    navigate(`/board/${writeCheck}`, {state:{isBoasting}});
+  }
 
   return (
     <style.CardBoxContainer
@@ -95,7 +105,7 @@ function CardBox({
       </style.CardProgressBarContainer>
       {!!isDefault && ratio >= 0.9 ? (
         <style.CardSpendText ratio={ratio} isDefault={isDefault}>
-          {commaOnThree(spend)}원 사용
+          {spend === null ? "무지출 데이!!" : commaOnThree(spend) + "원 사용"}
         </style.CardSpendText>
       ) : (
         <style.CardSpendText
@@ -109,11 +119,15 @@ function CardBox({
           ratio={ratio}
           id={id}
           isDefault={isDefault}
+          isWrite={writeCheck == 0 ? false : true}
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
-          onClick={changeWriteModal}
+          onClick={writeCheck == 0 ? changeWriteModal : onClickGoBoard}
+          // onClick={changeWriteModal}
+          disabled={spend===0}
         >
-          {spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"}
+          {writeCheck == 0 ? spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"
+                           : commentGoBoard}
         </style.CardBtn>
       ) : (
         <style.CardBtn
