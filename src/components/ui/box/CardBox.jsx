@@ -5,6 +5,7 @@ import { style, layout } from "styles";
 import { ProgressBarSemiCircle, WriteReceipt } from "components";
 import { EditCashbook } from "assets";
 import { commaOnThree } from "functions";
+import { commentGoBoard } from "constants/comment";
 
 function CardBox({
   id,
@@ -117,7 +118,7 @@ function CardBox({
           disabled={spend===0}
         >
           {writeCheck == 0 ? spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"
-                           : "벽보보러 가시게"}
+                           : commentGoBoard}
         </style.CardBtn>
       ) : (
         <style.CardBtn
