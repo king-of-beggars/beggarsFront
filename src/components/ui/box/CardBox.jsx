@@ -46,6 +46,12 @@ function CardBox({
     navigate(`/cash-book/edit/${id}?${queryStr}`);
   };
 
+  // 게시글 이동
+  // const onClickGoBoard = () => {
+  //   navigate(``)
+  //   writeCheck
+  // }
+
   return (
     <style.CardBoxContainer
       id={id}

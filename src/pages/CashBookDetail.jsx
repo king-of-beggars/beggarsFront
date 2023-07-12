@@ -162,6 +162,7 @@ function CashBookDetail() {
                   return (
                     <CashBookDetailList
                       key={expend.cashDetailId}
+                      cardId={cardId}
                       cashDetailId={expend.cashDetailId}
                       expendName={expend.cashDetailText}
                       expendMoney={expend.cashDetailValue}
