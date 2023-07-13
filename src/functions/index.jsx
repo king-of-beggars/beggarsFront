@@ -1,7 +1,5 @@
 export { default as setKrTime } from "functions/setKrTime"
-export { default as setFrameSize } from "functions/setFrameSize"
-export { default as getFrameSize } from "functions/getFrameSize"
 export { default as debounce } from "functions/debounce"
-export { getAssetSize } from "functions/getAssetSize"
+export { getDateBoxSize, getAssetSize } from "functions/getAssetSize"
 export { default as commaOnThree } from "functions/commaOnThree"
 export { default as chkLoggedIn } from "functions/chkLoggedIn"

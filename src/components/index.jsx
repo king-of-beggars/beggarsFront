@@ -10,6 +10,7 @@ export { default as CashBookDetailList } from "components/cash-book/CashBookDeta
 
 // main
 export { default as MainExp } from "components/main/MainExp";
+export { default as MainRecordCard } from "components/main/MainRecordCard";
 
 // modal
 export { default as ExpendAddModal } from "components/ui/modal/ExpendAddModal";

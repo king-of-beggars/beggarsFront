@@ -17,7 +17,8 @@ import {
   boardBtnBar,
   cashbookNone,
   mainExpBox,
-  cardBtnPost
+  cardBtnPost,
+  mainRecordCard,
 } from "assets";
 import { SwiperSlide } from "swiper/react";
 import { layout } from "styles";
@@ -737,7 +738,22 @@ export const MainExpBox = styled.div`
   height: ${props => props.height};
   display: flex;
   align-items: center;
-  padding: 5px 20px;
+  padding: calc(${props => props.ratio} * 5px) calc(${props => props.ratio} * 20px);
+  background-size: ${props => props.width} ${props => props.height};
+  background-repeat: no-repeat;
+  font-family: "DOSGothic";
+  font-size: calc(${props => props.ratio} * 0.5em);
+`
+
+// Main의 RecordCard 컨테이너
+export const MainRecordCardBox = styled.div`
+  background-image: url(${mainRecordCard});
+  width: ${props => props.width};
+  height: ${props => props.height};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
   background-size: ${props => props.width} ${props => props.height};
   background-repeat: no-repeat;
 `
