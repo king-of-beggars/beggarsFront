@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "pages/Login";
 import Signup from "pages/Signup";
-import Main from "pages/Main";
+import Main, { MainFetcher } from "pages/Main";
 import Profile from "pages/Profile";
 import CashBook from "pages/CashBook";
 import Board from "pages/Board";
@@ -53,9 +53,9 @@ function Router() {
       <Routes>
         // main
         <Route path="/" element={
-          <MainAssetProvider>
+          <MainFetcher>
             <Main/>
-          </MainAssetProvider>
+          </MainFetcher>
         } />
         
 

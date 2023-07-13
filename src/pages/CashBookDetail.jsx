@@ -16,7 +16,6 @@ import {
 import { commentZeroSpend } from 'constants';
 
 function CashBookDetail() {
-  // function CashBookDetail({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 만들어둔 context 사용하기
   const {
     windowSize,
@@ -76,6 +75,9 @@ function CashBookDetail() {
     () => CashBookAPI.getCashDetail(cardId),
     {
       select: (data) => data.data.data,
+      onSuccess: (data) => {
+        console.log("cashbookDetail:::", data);
+      }
     }
   );
   if (isLoading || error) {

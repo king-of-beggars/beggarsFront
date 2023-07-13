@@ -47,12 +47,6 @@ export const MainAssetProvider = ({ children }) => {
 
     }, 400)
     handleResize()
-    // window.addEventListener("resize", handleResize)
-   
-    // return () => {
-    //   window.removeEventListener("resize", handleResize)
-    // }
-
   }, [screenWidth])
 
   return (
