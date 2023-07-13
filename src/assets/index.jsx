@@ -29,6 +29,7 @@ export { default as cardBgYellow } from "assets/pixels/card/cardBgYellow.png"
 export { default as cardBtnYellow } from "assets/pixels/card/cardBtnYellow.png"
 export { default as cardBtnBoardYellow } from "assets/pixels/card/cardBtnBoardYellow.png"
 export { default as cardBtnBoardBlack } from "assets/pixels/card/cardBtnBoardBlack.png"
+export { default as cardBtnPost } from "assets/pixels/card/cardBtnPost.svg"
 
 // pixels > profile
 export { default as mainLineLogo } from "assets/pixels/profile/mainLineLogo.png"

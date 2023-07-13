@@ -8,8 +8,9 @@ import { CashDetailModal, AutoResizedText } from "components";
 import { commentDetailDelete } from 'constants';
 import { commaOnThree } from 'functions';
 
-function CashBookDetailList({ cashDetailId, expendName, expendMoney }) {
-  // 지출 항목 삭제
+function CashBookDetailList({ cardId, cashDetailId, expendName, expendMoney }) {
+  console.log(cardId);
+  // 지출 항목 삭제 API
   const queryClient = useQueryClient();
   const mutationDeleteDetail = useMutation(CashBookAPI.deleteCashDetail, {
     onSuccess: () => {
@@ -19,8 +20,21 @@ function CashBookDetailList({ cashDetailId, expendName, expendMoney }) {
     onError: () => alert("상세 항목 삭제에 실패하였습니다."),
   });
 
+  // 무지출 전환 API
+  const mutationNone = useMutation(CashBookAPI.putCashNone, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['cashDetail']);
+      changeDeleteModal();
+    },
+    onError: () => alert("상세 항목 삭제에 실패하였습니다."),
+  });
+
   const onClickDelete = () => {
-    mutationDeleteDetail.mutate(cashDetailId);
+    if (expendMoney === 0) {
+      mutationNone.mutate({cardId});
+    } else {
+      mutationDeleteDetail.mutate(cashDetailId);
+    }
   }
 
   // 삭제 Modal

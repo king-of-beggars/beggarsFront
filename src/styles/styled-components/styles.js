@@ -17,6 +17,7 @@ import {
   boardBtnBar,
   cashbookNone,
   mainExpBox,
+  cardBtnPost
 } from "assets";
 import { SwiperSlide } from "swiper/react";
 import { layout } from "styles";
@@ -239,13 +240,15 @@ export const CardBudgetText = styled.div`
 export const CardProgressBarContainer = styled.div`
   width: calc(${(props) => props.ratio} * 9em);
   height: calc(${(props) => props.ratio} * 3em);
-  margin: calc(${(props) => props.ratio} * 0.8em);
+  margin-top: calc(${(props) => props.ratio} * 0.5em);
+  margin-bottom: calc(${(props) => props.ratio} * 0.9em);
+  /* margin: calc(${(props) => props.ratio} * 0.8em); */
 `;
 
 // Card 내 예산 사용량 스타일링입니다.
 export const CardSpendText = styled.div`
   color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
-  margin-top: calc(${(props) => props.ratio} * 1em);
+  margin-top: calc(${(props) => props.ratio} * 1.1em);
   font-size: calc(${(props) => props.ratio} * 1em);
 `;
 
@@ -253,7 +256,7 @@ export const CardSpendText = styled.div`
 export const CardBtn = styled.button`
   background-image: ${(props) =>
     props.isDefault
-      ? `url(${cardBtnBoardYellow})`
+      ? props.isWrite ? `url(${cardBtnPost})` : `url(${cardBtnBoardYellow})`
       : `url(${cardBtnBoardBlack})`};
   background-size: 100% 100%;
   background-repeat: no-repeat;

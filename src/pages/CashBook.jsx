@@ -138,7 +138,7 @@ function CashBook() {
     return <></>;
   }
   const cashbookApiRes = data.data.data;
-  // console.log(cashbookApiRes);
+  console.log(cashbookApiRes);
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
@@ -276,6 +276,7 @@ function CashBook() {
                               ratio={CARD_RATIO}
                               onClickHandler={onClickCard}
                               changeWriteModal={changeWriteModal}
+                              writeCheck={card.writeCheck}
                               isDefault={true}
                             />
                             {/* <CashBookCard

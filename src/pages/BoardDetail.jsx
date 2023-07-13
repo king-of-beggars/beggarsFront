@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 
 import { BoardDetailInput, BoardDetailComment } from "components";
@@ -19,6 +19,10 @@ import { useGlobalVariables } from 'components';
 
 // function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 function BoardDetail({ isBoasting }) {
+  const {state} = useLocation();
+  if (!!state) {
+    isBoasting = state.isBoasting;
+  }
   // 만들어둔 context 사용하기
   const { windowSize, isMobile, headerHeight, screenWidth } = useGlobalVariables();
   console.log('BoardDetail rendered:', windowSize, isMobile, headerHeight, screenWidth)
