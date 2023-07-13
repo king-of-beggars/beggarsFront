@@ -8,7 +8,7 @@ class AutoResizedText extends React.Component {
       return (
         <Textfit
           mode="single"
-          max={500}
+          max={100}
           forceSingleModeWidth={true}>
           { children }
         </Textfit>

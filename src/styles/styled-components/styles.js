@@ -16,6 +16,7 @@ import {
   boardBtnRight,
   boardBtnBar,
   cashbookNone,
+  mainExpBox,
   cardBtnPost
 } from "assets";
 import { SwiperSlide } from "swiper/react";
@@ -727,4 +728,16 @@ export const BoardDetailInputIcon = styled(FlexCenter)`
   &:focus {
     outline: none;
   }
+`
+
+// Main의 expBox 컨테이너
+export const MainExpBox = styled.div`
+  background-image: url(${mainExpBox});
+  width: ${props => props.width};
+  height: ${props => props.height};
+  display: flex;
+  align-items: center;
+  padding: 5px 20px;
+  background-size: ${props => props.width} ${props => props.height};
+  background-repeat: no-repeat;
 `

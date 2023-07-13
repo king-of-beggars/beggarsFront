@@ -11,6 +11,7 @@ import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
 import CashBookMod from "pages/CashBookMod";
 import BoardDetail from "pages/BoardDetail";
+import { MainAssetProvider } from 'components';
 import { setFrameSize } from 'functions';
 import { layout } from "styles"
 
@@ -51,7 +52,12 @@ function Router() {
     <BrowserRouter>
       <Routes>
         // main
-        <Route path="/" element={<Main/>} />
+        <Route path="/" element={
+          <MainAssetProvider>
+            <Main/>
+          </MainAssetProvider>
+        } />
+        
 
         // related to cashbook
         <Route path="cash-book" element={<CashBook/>} />

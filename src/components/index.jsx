@@ -8,6 +8,9 @@ export { default as DayPicker } from "components/cash-book/DayPicker"
 export { default as DayWrapper } from "components/cash-book/DayWrapper"
 export { default as CashBookDetailList } from "components/cash-book/CashBookDetailList";
 
+// main
+export { default as MainExp } from "components/main/MainExp";
+
 // modal
 export { default as ExpendAddModal } from "components/ui/modal/ExpendAddModal";
 export { default as CashDetailModal } from "components/ui/modal/CashDetailModal";
@@ -34,3 +37,5 @@ export { default as ProgressBarTmp } from "components/ui/progress/ProgressBarTmp
 // export { default as CommentFavDefaultLight } from "components/ui/button/CommentFavDefaultLight"
 
 export { GlobalVariableProvider, useGlobalVariables } from "components/provider/GlobalVariableProvider"
+
+export { MainAssetProvider, useMainAssetContext } from "components/provider/MainAssetProvider"

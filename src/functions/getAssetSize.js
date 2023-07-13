@@ -26,12 +26,17 @@ export function getMainExpBoxSize(frameSize, screenWidth, mainExpBox) {
 
 // 메인 ::: 기본 카드(mainRecordCard) 크기 결정
 export function getAssetSize(frameSizeObj, screenWidth, assetSizeObj) {
-    if (frameSizeObj.width >= screenWidth) {
+    if (frameSizeObj.width <= screenWidth) {
         return assetSizeObj
     } else {
-        const ratio = frameSizeObj.width / screenWidth
-        const width = ratio * assetSizeObj.width
-        const height = ratio * assetSizeObj.height
+        console.log(frameSizeObj.width)
+        // const ratio = Math.ceil(frameSizeObj.width / screenWidth)
+        const ratio = screenWidth / frameSizeObj.width
+        console.log(ratio)
+        const width = Math.ceil(ratio * assetSizeObj.width)
+        const height = Math.ceil(ratio * assetSizeObj.height)
+        // test code
+        // console.log("will return:::", {width, height})
         return { width, height }
     }
 }

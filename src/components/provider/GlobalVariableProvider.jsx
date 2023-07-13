@@ -49,7 +49,6 @@ export const GlobalVariableProvider = ({ children }) => {
             }   
         }
     }, [windowSize, isMobile])
-
     useEffect(() => {
         // resize 될 때마다 변경되는 요소 업데이트
         // debouce 적용하여 400ms마다 한번씩 resize 업데이트
@@ -63,7 +62,7 @@ export const GlobalVariableProvider = ({ children }) => {
             setWindowSize(newWindowSize)
             setIsMobile(newIsMobile)
             // test code
-            console.log('Window resized:', newWindowSize, newIsMobile) 
+            // console.log('Window resized:', newWindowSize, newIsMobile) 
         }, 400)
 
         window.addEventListener("resize", handleResize);
