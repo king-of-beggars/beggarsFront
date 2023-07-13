@@ -29,7 +29,10 @@ export function getAssetSize(frameSizeObj, screenWidth, assetSizeObj) {
     if (frameSizeObj.width <= screenWidth) {
         return assetSizeObj
     } else {
-        const ratio = Math.ceil(frameSizeObj.width / screenWidth)
+        console.log(frameSizeObj.width)
+        // const ratio = Math.ceil(frameSizeObj.width / screenWidth)
+        const ratio = screenWidth / frameSizeObj.width
+        console.log(ratio)
         const width = Math.ceil(ratio * assetSizeObj.width)
         const height = Math.ceil(ratio * assetSizeObj.height)
         // test code

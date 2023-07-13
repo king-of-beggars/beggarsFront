@@ -53,7 +53,7 @@ import { mainAPI } from "api/api"
       console.log(loginSuccess)
       setIsSocialLogin(true)
     }
-  }, [])
+  }, [search])
 
   // useEffect(() => {window.dispatchEvent(new CustomEvent('resize'))}, [])
   return (
