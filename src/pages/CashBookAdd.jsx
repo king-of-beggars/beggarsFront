@@ -123,6 +123,7 @@ function CashBookAdd() {
             onChange={onChangeInput}
             name={"subHead"}
             value={subHead}
+            maxLen={15}
           />
           <CashBookInput
             title={"예산"}

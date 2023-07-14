@@ -2,7 +2,7 @@ import React from "react";
 import { style } from "styles";
 {
 }
-function CashBookInput({ title, placeholder, onChange, name, value, height }) {
+function CashBookInput({ title, placeholder, onChange, name, value, height, maxLen }) {
   return (
     <style.CashBookCardWrap height={height}>
       <style.CashBookHead>{title}</style.CashBookHead>
@@ -11,6 +11,7 @@ function CashBookInput({ title, placeholder, onChange, name, value, height }) {
         onChange={onChange}
         name={name}
         value={value}
+        maxLength={maxLen}
       />
     </style.CashBookCardWrap>
   );

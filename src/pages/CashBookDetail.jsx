@@ -14,7 +14,6 @@ import {
   backgroundBrightTop,
 } from "assets";
 import { commentZeroSpend } from "constants";
-import { Textfit } from "react-textfit";
 import { AutoTextSize } from "auto-text-size";
 
 function CashBookDetail() {
