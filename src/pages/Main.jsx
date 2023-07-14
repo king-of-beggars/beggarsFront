@@ -89,7 +89,7 @@ export function MainFetcher({ children }) {
         <layout.MainContent>
           <layout.FlexCenterColumn100>
             <layout.FlexCenterColumn100 style={{gap: "5px"}}>
-              <MainExp dayCount={data.signupDay} />
+              <MainExp dayCount={null} />
               <MainRecordCard data={data}/>
             </layout.FlexCenterColumn100>
 

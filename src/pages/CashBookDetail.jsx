@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { CashBookAPI } from "api/api";
-import { AddDetail, BackCrampsBlack, EditCard, EditCashbook } from "assets";
+import { AddDetail, BackCrampsBlack } from "assets";
 import { CashBookDetailList, ExpendAddModal, Nav } from "components";
 import CashDetailModal from "components/ui/modal/CashDetailModal";
 import { layout, style } from "styles";
@@ -18,7 +18,7 @@ import { commentZeroSpend } from 'constants';
 function CashBookDetail() {
   // 만들어둔 context 사용하기
   const {
-    windowSize,
+    // windowSize,
     isMobile,
     headerHeight,
     navHeight,
@@ -66,7 +66,7 @@ function CashBookDetail() {
     ["cashDetail"],
     () => CashBookAPI.getCashDetail(cardId),
     {
-      select: (data) => data.data.data,
+      select: (data) => data.data.data.result,
       onSuccess: (data) => {
         console.log("cashbookDetail:::", data);
       }
@@ -75,14 +75,13 @@ function CashBookDetail() {
   if (isLoading || error) {
     return <></>;
   }
-  console.log(data);
+  console.log(!data.detail);
 
   let detail = [];
   let result = true;
-  if (!!data.result) {
-    console.log(data.result)
+  if (Object.keys(data).includes('consumption')) {
     // result = data.result.detail.cashDetailValue;
-    // result = false;
+    result = data.consumption;
     if (!result) {
       detail.push({
         cashDetailId: 0,
