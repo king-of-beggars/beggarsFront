@@ -15,6 +15,8 @@ export { default as MainRecordCardTag } from "components/main/MainRecordCardTag"
 export { default as MainRecordComment } from "components/main/MainRecordComment";
 export { default as MainWeather } from "components/main/MainWeather";
 export { default as MainRecordStatus } from "components/main/MainRecordStatus";
+export { default as MainToggle } from "components/main/MainToggle";
+export { default as MainJourney } from "components/main/MainJourney";
 
 // modal
 export { default as ExpendAddModal } from "components/ui/modal/ExpendAddModal";

@@ -26,6 +26,7 @@ export const borderGray = `rgba(89, 89, 89, 1)`;
 export const textGray30 = `rgba(133, 133, 133, 0.3)`
 export const lightGray = `rgba(233, 233, 233, 1)` // #E9E9E9
 export const darkGray = `rgba(60, 60, 60, 1)` // #3c3c3c
+export const mainBorderGray = `rgba(169, 169, 169, 1)` // a9a9a9
 
 export const falsyRed = `rgba(255, 137, 137, 1)`; //FF8989
 export const trusyBlue = `rgba(126, 198, 204, 1)`;

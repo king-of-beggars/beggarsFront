@@ -1,7 +1,7 @@
 import React from "react";
 
 import { getAssetSize, getKrDate } from "functions";
-import { useGlobalVariables, MainRecordCardTag, MainRecordComment, MainWeather, MainRecordStatus } from "components";
+import { useGlobalVariables, MainRecordCardTag, MainRecordComment, MainWeather, MainRecordStatus, MainToggle } from "components";
 import { layout, style } from "styles";
 
 
@@ -45,22 +45,24 @@ function MainRecordCard({ isToggleOnLeft, data }) {
 
   const isSaved = data.total.cashbookGoalValue - data.total.cashbookNowValue <= 0
   const weatherCode = getWeatherCode()
-  
+
   return (
     <style.MainRecordCardBox width={`${width}px`} height={`${height}px`} ratio={ratio}>
-      <layout.FlexColumn100 style={{gap: "5px"}}>
-        <MainRecordCardTag isSaved={isSaved} />
-        <MainRecordComment isSaved={isSaved} ratio={ratio} />
+      <layout.FlexColumn100 style={{gap: "5px", marginBottom: "20px"}}>
+        <MainRecordCardTag weatherCode={weatherCode} />
+        <MainRecordComment weatherCode={weatherCode} ratio={ratio} />
       </layout.FlexColumn100>
-      <layout.FlexCenterRow>
+      <layout.Grid2Row style={{gridTemplateColumns: "1fr 2fr"}}>
         <MainWeather weatherCode={weatherCode} />
-        <MainRecordStatus isSaved={isSaved} budget={data.total.cashbookGoalValue} spend={data.total.cashbookNowValue}/>
-      </layout.FlexCenterRow>
-
-
-
+        <MainRecordStatus ratio={ratio} isSaved={isSaved} budget={data.total.cashbookGoalValue} spend={data.total.cashbookNowValue}/>
+      </layout.Grid2Row>
+      {/* <layout.FlexCenter> */}
+      <MainToggle isToggleOnLeft={isToggleOnLeft}/>
+      {/* </layout.FlexCenter> */}
     </style.MainRecordCardBox>
   )
+
+
 }
 
 export default MainRecordCard;

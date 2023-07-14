@@ -24,7 +24,9 @@ import {
   mainWeatherNormal,
   mainWeatherSunny,
   mainWeatherRainy,
-  mainWeatherThunder
+  mainWeatherThunder,
+  mainToggleBar,
+  mainToggleBtn
 } from "assets";
 import { SwiperSlide } from "swiper/react";
 import { layout } from "styles";
@@ -765,10 +767,10 @@ export const MainRecordCardBox = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
   background-size: ${props => props.width} ${props => props.height};
   background-repeat: no-repeat;
-  padding: 20px;
+  padding: 25px 20px;
+  position: relative;
 `
 
 // Main의 RecordCard 속 태그 부분
@@ -781,14 +783,16 @@ export const MainRecordCardTagBox = styled.div`
   justify-content: center;
   background-size: ${props => props.width} ${props => props.height};
   background-repeat: no-repeat;
-  font-size: calc(${props => props.ratio} * 0.8em);
+  font-size: calc(${props => props.ratio} * 16px);
   font-family: "DOSGothic";
 `
 
 // Main의 RecordCard 태그 아래 코멘트
 export const MainRecordCardComment = styled.div`
   width: 100%;
-  font-size: calc(${props => props.ratio} * 25px * ${defaultFontRatio});
+  font-size: calc(${props => props.ratio} * 25px);
+  word-break: keep-all;
+  overflow-wrap: break-word;
 `
 
 // Main의 날씨 렌더링 박스
@@ -808,9 +812,69 @@ export const MainBudgetBox = styled(FlexCenter)`
 
 `
 
+// Main 날짜 렌더링 박스
+export const MainRecordDateBox = styled.div`
+  font-size: calc(${props => props.ratio} * 16px);
+`
+
+// Main 요일 렌더링 박스
+export const MainRecordDayBox = styled.div`
+  font-size: calc(${props => props.ratio} * 12px);
+  font-family: "DOSGothic";
+`
+
 // 디바이더 (선)
 export const Divider = styled.div`
-  width: inherit;
+  width: 100%;
   border-bottom: 1px solid ${props => props.color};
 `
 
+// Main의 RecordCard 하단 토글 컨테이너
+export const MainToggleBar = styled.div`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  background-image: url(${mainToggleBar});
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  background-size: 100% 100%; 
+  background-repeat: no-repeat;
+  /* z-index: -1; */
+  border: none;
+  position: absolute;
+  bottom: calc(25px * ${props => props.ratio});
+`
+
+// 게시판 비활성화 버튼 렌더링
+export const MainToggleBtnSleep = styled.button`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  background: transparent;
+  /* background-image: ${(props) =>
+    props.isBoasting ? `url(${boardBtnRight})` : `url(${boardBtnLeft})`}; */
+  /* background-color: ${sVar.darkGray}; */
+  border: none;
+  font-family: "DOSGothic";
+  font-size: calc(${props => props.ratio} * 0.75rem);
+  &:focus {
+    outline: none;
+  }
+`;
+
+// 게시판 활성화 버튼 렌더링
+export const MainToggleBtnActivate = styled.button`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  background-image: url(${mainToggleBtn});
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: none;
+  /* z-index: 1; */
+  font-family: "DOSGothic";
+  font-size: calc(${props => props.ratio} * 0.75rem);
+  &:focus {
+    outline: none;
+  }
+`;

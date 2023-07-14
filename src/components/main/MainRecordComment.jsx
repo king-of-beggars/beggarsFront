@@ -4,8 +4,8 @@ import { getRandomComment } from 'functions'
 import { style } from 'styles'
 import { positiveComments, negativeComments } from "constants"
 
-function MainRecordComment({ isSaved, ratio }) {
-  const overallComment = getRandomComment(isSaved ? positiveComments : negativeComments)
+function MainRecordComment({ weatherCode, ratio }) {
+  const overallComment = getRandomComment(weatherCode > 0 ? positiveComments : negativeComments)
   return (
     <style.MainRecordCardComment ratio={ratio}>
       {overallComment}
