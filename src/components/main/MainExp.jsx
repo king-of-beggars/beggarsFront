@@ -18,12 +18,12 @@ function MainExp({ dayCount }) {
 
   return (
     <style.MainExpBox width={`${width}px`} height={`${height}px`} ratio={ratio}>
-      {comment}
-        {/* <div style={{width: `${width * 0.8}px`, fontFamily: "DOSGothic"}}>
+      {/* {comment} */}
+        <div style={{width: `${width * 0.8}px`, fontFamily: "DOSGothic"}}>
             <Textfit mode="single">
                 {comment}
             </Textfit>
-        </div> */}
+        </div>
     </style.MainExpBox>
   )
 }

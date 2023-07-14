@@ -2827,6 +2827,11 @@ at-least-node@^1.0.0:
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
+auto-text-size@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/auto-text-size/-/auto-text-size-0.2.2.tgz#6dba3676d18cb9c1e61cc10c7b12a6bedc86042b"
+  integrity sha512-V8dUUB9HKW2AY6rjLsk5xZdmZsNLjMAs15Wu849OnH9MfZ/BMn4Ruk3TpY1aMz0mlYuOD0AdljRBtpKR5OzxkQ==
+
 autoprefixer@^10.4.13:
   version "10.4.14"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-10.4.14.tgz#e28d49902f8e759dd25b153264e862df2705f79d"

@@ -13,7 +13,9 @@ import {
   backgroundBrightTail,
   backgroundBrightTop,
 } from "assets";
-import { commentZeroSpend } from 'constants';
+import { commentZeroSpend } from "constants";
+import { Textfit } from "react-textfit";
+import { AutoTextSize } from "auto-text-size";
 
 function CashBookDetail() {
   // 만들어둔 context 사용하기
@@ -58,8 +60,8 @@ function CashBookDetail() {
   });
 
   const onClickNone = () => {
-    mutationNone.mutate({cardId});
-  }
+    mutationNone.mutate({ cardId });
+  };
 
   // 상세 내역 받아오기
   let { data, isLoading, error } = useQuery(
@@ -69,7 +71,7 @@ function CashBookDetail() {
       select: (data) => data.data.data.result,
       onSuccess: (data) => {
         console.log("cashbookDetail:::", data);
-      }
+      },
     }
   );
   if (isLoading || error) {
@@ -79,7 +81,7 @@ function CashBookDetail() {
 
   let detail = [];
   let result = true;
-  if (Object.keys(data).includes('consumption')) {
+  if (Object.keys(data).includes("consumption")) {
     // result = data.result.detail.cashDetailValue;
     result = data.consumption;
     if (!result) {
@@ -132,10 +134,21 @@ function CashBookDetail() {
               onClick={onClickBack}
               style={{ position: "absolute", left: "1em", float: "left" }}
             />
-            <div style={{ fontSize: "1em" }}>
+            {/* <div style={{ fontSize: "1em" }}>
               오늘의{" "}
               {!!data.cashbookName ? data.cashbookName : data.cashbookCategory}{" "}
               지출
+            </div> */}
+            <div style={{ width:"80%", display: "flex", justifyContent:"center", alignItems:"center" }}>
+              <AutoTextSize mode="multiline"
+                minFontSizePx={1}
+                maxFontSizePx={24}>
+                오늘의{" "}
+                {!!data.cashbookName
+                  ? data.cashbookName
+                  : data.cashbookCategory}{" "}
+                지출
+              </AutoTextSize>
             </div>
             {/* <EditCashbook
               onClick={onClickEdit}
@@ -182,7 +195,10 @@ function CashBookDetail() {
               무지출 데이 기록 🎉
             </style.CashBookDetailNoneBtn>
             {isNoneModal && (
-              <CashDetailModal setClose={changeNoneModal} onClickHandler={onClickNone}>
+              <CashDetailModal
+                setClose={changeNoneModal}
+                onClickHandler={onClickNone}
+              >
                 {commentZeroSpend}
               </CashDetailModal>
             )}
