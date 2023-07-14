@@ -25,14 +25,6 @@ function CashBookDetail() {
     mainHeight,
     screenWidth,
   } = useGlobalVariables();
-  console.log(
-    "CashBookDetail rendered:",
-    windowSize,
-    isMobile,
-    headerHeight,
-    navHeight,
-    mainHeight
-  );
 
   const navigate = useNavigate();
   // 지출 기록 Modal open, close
@@ -88,7 +80,8 @@ function CashBookDetail() {
   let detail = [];
   let result = true;
   if (!!data.result) {
-    result = data.result.consumption;
+    console.log(data.result)
+    // result = data.result.detail.cashDetailValue;
     // result = false;
     if (!result) {
       detail.push({
@@ -161,6 +154,7 @@ function CashBookDetail() {
                 <></>
               ) : (
                 detail.map((expend) => {
+                  console.log("expend:::", expend);
                   return (
                     <CashBookDetailList
                       key={expend.cashDetailId}

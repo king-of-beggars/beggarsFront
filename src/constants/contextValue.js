@@ -60,7 +60,7 @@ export const contextValue = {
         height: 160
     },
     mainTag: {
-        width: 66,
+        width: 52,
         height: 21
     },
     mainToggleBar: {
