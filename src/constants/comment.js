@@ -29,3 +29,9 @@ export const commentDetailDelete = ["진정으로 ", "이 기록을 지울텐가
 export const commentZeroSpend = ["무지출 데이라고...?", "ㅅ,,사실인가?!"];
 //// 게시글 이동 멘트
 export const commentGoBoard = "벽보보러 가시게"
+//// 추가 회색 박스 멘트
+export const commentGrayAdd = ["왼쪽으로 밀어서", "장부 추가"]
+export const commentGrayNope = ["장부는 5개까지만", "만들 수 있소!"]
+export const commentGray = (isOver) => {
+    return isOver ? (<>장부는 5개까지만<br />만들 수 있소</>) : (<>왼쪽으로 밀어서<br/> 장부 추가</>)
+}

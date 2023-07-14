@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,7 +14,6 @@ import { layout, style } from "styles";
 import {
   DayPicker,
   Nav,
-  CashBookCard,
   CardBox,
   WriteReceipt,
 } from "components";
@@ -26,6 +25,8 @@ import {
 } from "assets";
 import { useGlobalVariables } from "components";
 import { getDateBoxSize } from "functions/getAssetSize";
+import { commentGray } from "constants/comment";
+// import { commentGray } from "constants/styleVariables";
 
 function CashBook() {
   // function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
@@ -139,6 +140,7 @@ function CashBook() {
   }
   const cashbookApiRes = data.data.data;
   console.log(cashbookApiRes);
+  const grayMent = commentGray(cashbookApiRes.length >= 5);
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
@@ -248,10 +250,18 @@ function CashBook() {
                             height: `${mainHeight - dateBoxHeight - 24}px`,
                           }}
                           onTouchMove={(swiper) => {
+                            // // 카드가 5개 이상일 때 swiper 비활성화
+                            // if (cashbookApiRes.length >= 5) {
+                            //   alert('하루에 벽보는 5개만 붙히도록 하거라.');
+                            //   swiper.disable();
+                            // } 
                             if (swiper.touches.diff < -90) {
-                              // 카드가 5개 이상일 때 swiper 비활성화
-                              // 수정 필요
-                              window.location.href = "/cash-book/add";
+                              if (cashbookApiRes.length < 5) {
+                                window.location.href = "/cash-book/add";
+                              } else {
+                                window.location.href = "/cash-book";
+                              }
+                              
                               // if (cashbookApiRes.length >= 5) {
                               //   swiper.slideTo(0,0);
                               //   swiper.disable();
@@ -300,9 +310,7 @@ function CashBook() {
                                   cardWidth={`${cardWidth}px`}
                                   cardHeight={`${cardHeight}px`}
                                 >
-                                  왼쪽으로 스와이프하여
-                                  <br />
-                                  카드 추가
+                                  {grayMent}
                                 </style.CashBookAddExplain>
                               </style.CashBookDummyContainer>
                             ) : (

@@ -320,8 +320,12 @@ export const CashBookAddExplain = styled(layout.FlexCenter)`
   width: calc(${(props) => props.cardWidth} * 0.2);
   height: calc(${(props) => props.cardWidth} * 0.8);
   writing-mode: vertical-lr;
+  text-orientation: upright;
   text-align: center;
   line-height: 150%;
+  span{
+    writing-mode: horizontal-tb;
+  }
 `;
 
 export const CustomedSwiperSlide = styled(SwiperSlide)`
