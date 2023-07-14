@@ -1,7 +1,6 @@
 import React from "react";
 import { style } from "styles";
-{
-}
+
 function CashBookInput({ title, placeholder, onChange, name, value, height, maxLen }) {
   return (
     <style.CashBookCardWrap height={height}>
