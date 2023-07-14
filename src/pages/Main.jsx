@@ -19,12 +19,13 @@ const isLoggedIn = chkLoggedIn()
 export function MainFetcher({ children }) {
   // get 요청
   const { data, isLoading, isError } = useQuery(["mainData"], mainAPI.getMainData, {
+    retry: 10,
     enabled: isLoggedIn, // 로그인 되었을 때에만 데이터 받아오기
     select: (data) => data.data.data,
-    onError: () => {
-      console.log('MainAPI.getMainData::: get error')
+    onError: (error) => {
+      console.log('MainAPI.getMainData::: get error : ', error)
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       console.log('MainAPI.getMainData::: get success')
       console.log('mainData:::', data)
     },
@@ -32,9 +33,9 @@ export function MainFetcher({ children }) {
 
   // isLoading과 isError에서 렌더링 다르게 해주기 => 리턴할 것 및 ui 컴포넌트쪽에서 받아 렌더 처리할 로직 필요
   if (isLoading) {
-    console.log(isLoading)
+    return <></>
   } else if (isError) {
-    console.log(isError)
+    return <></>
   }
 
   // 기존 react element를 복제하여 새로운 props와 자식으로 복제된 엘리먼트를 반환.
@@ -50,6 +51,8 @@ export function MainFetcher({ children }) {
   function Main({ data }) {
   // 닉네임 모달
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
+  // Record Card 내 토글 버튼 state
+  const [isToggleOnLeft, setIsToggleOnLeft] = useState(INIT_LOG_VALUE);
   const { search } = useLocation();
   
   // get globalVariables
@@ -86,8 +89,8 @@ export function MainFetcher({ children }) {
         <layout.MainContent>
           <layout.FlexCenterColumn100>
             <layout.FlexCenterColumn100 style={{gap: "5px"}}>
-              <MainExp dayCount={null} />
-              <MainRecordCard />
+              <MainExp dayCount={data.signupDay} />
+              <MainRecordCard data={data}/>
             </layout.FlexCenterColumn100>
 
             { // 여정 일지 섹션

@@ -4,6 +4,8 @@ export
     {
         commentDayAfter,
         commentDetailDelete,
-        commentZeroSpend
+        commentZeroSpend,
+        positiveComments,
+        negativeComments
     }
     from "constants/comment"

@@ -19,11 +19,19 @@ import {
   mainExpBox,
   cardBtnPost,
   mainRecordCard,
+  mainTagPositive,
+  mainTagNegative,
+  mainWeatherNormal,
+  mainWeatherSunny,
+  mainWeatherRainy,
+  mainWeatherThunder
 } from "assets";
 import { SwiperSlide } from "swiper/react";
 import { layout } from "styles";
 import * as sVar from "constants/styleVariables.js";
 import { FlexCenter } from 'styles/layouts';
+
+const defaultFontRatio = 0.8
 
 export const CanvasContainer = styled.div`
   width: 98vw;
@@ -756,4 +764,49 @@ export const MainRecordCardBox = styled.div`
   padding: 10px;
   background-size: ${props => props.width} ${props => props.height};
   background-repeat: no-repeat;
+  padding: 20px;
 `
+
+// Main의 RecordCard 속 태그 부분
+export const MainRecordCardTagBox = styled.div`
+  background-image: ${props => props.isSaved ? `url(${mainTagPositive})` : `url(${mainTagNegative})`};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: ${props => props.width} ${props => props.height};
+  background-repeat: no-repeat;
+  font-size: calc(${props => props.ratio} * 0.8em);
+  font-family: "DOSGothic";
+`
+
+// Main의 RecordCard 태그 아래 코멘트
+export const MainRecordCardComment = styled.div`
+  width: 100%;
+  font-size: calc(${props => props.ratio} * 25px * ${defaultFontRatio});
+`
+
+// Main의 날씨 렌더링 박스
+export const MainWeatherBox = styled(FlexCenter)`
+  background-image: ${props => props.weatherCode === 2 ? `url(${mainWeatherSunny})`
+                                : props.weatherCode === 1 ? `url(${mainWeatherNormal})`
+                                : props.weatherCode === 0 ? `url(${mainWeatherRainy})`
+                                : `url(${mainWeatherThunder})`};
+  background-size: ${props => props.width} ${props => props.height};
+  background-repeat: no-repeat;
+  width: ${props => props.width};
+  height: ${props => props.height};
+`
+
+// Main의 예산 및 소비 렌더링 박스
+export const MainBudgetBox = styled(FlexCenter)`
+
+`
+
+// 디바이더 (선)
+export const Divider = styled.div`
+  width: inherit;
+  border-bottom: 1px solid ${props => props.color};
+`
+

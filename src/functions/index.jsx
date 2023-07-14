@@ -1,5 +1,6 @@
-export { default as setKrTime } from "functions/setKrTime"
+export { default as getKrDate } from "functions/getKrDate"
 export { default as debounce } from "functions/debounce"
 export { getDateBoxSize, getAssetSize } from "functions/getAssetSize"
 export { default as commaOnThree } from "functions/commaOnThree"
 export { default as chkLoggedIn } from "functions/chkLoggedIn"
+export { default as getRandomComment } from "functions/getRandomComment"
