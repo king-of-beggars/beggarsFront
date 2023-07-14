@@ -23,3 +23,6 @@ export const commentGoBoard = "벽보보러 가시게"
 //// 추가 회색 박스 멘트
 export const commentGrayAdd = ["왼쪽으로 밀어서", "장부 추가"]
 export const commentGrayNope = ["장부는 5개까지만", "만들 수 있소!"]
+export const commentGray = (isOver) => {
+    return isOver ? (<>장부는 5개까지만<br />만들 수 있소</>) : (<>왼쪽으로 밀어서<br/> 장부 추가</>)
+}

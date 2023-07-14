@@ -25,7 +25,8 @@ import {
 } from "assets";
 import { useGlobalVariables } from "components";
 import { getDateBoxSize } from "functions/getAssetSize";
-import { commentGrayAdd, commentGrayNope } from "constants/comment";
+import { commentGray } from "constants/comment";
+// import { commentGray } from "constants/styleVariables";
 
 function CashBook() {
   // function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
@@ -139,7 +140,7 @@ function CashBook() {
   }
   const cashbookApiRes = data.data.data;
   console.log(cashbookApiRes);
-  const grayMent = cashbookApiRes.length < 5 ? commentGrayAdd : commentGrayNope;
+  const grayMent = commentGray(cashbookApiRes.length >= 5);
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
@@ -309,9 +310,7 @@ function CashBook() {
                                   cardWidth={`${cardWidth}px`}
                                   cardHeight={`${cardHeight}px`}
                                 >
-                                  {grayMent[0]}
-                                  <br />
-                                  {grayMent[1]}
+                                  {grayMent}
                                 </style.CashBookAddExplain>
                               </style.CashBookDummyContainer>
                             ) : (
