@@ -6,7 +6,7 @@ import { useQuery, useQueryClient } from "react-query";
 import { chkLoggedIn } from "functions"
 import { mainAPI } from "api/api"
 import { layout, style } from 'styles';
-import { useGlobalVariables, useMainAssetContext, SocialLoginModal, Nav, MainExp, MainRecordCard } from 'components';
+import { useGlobalVariables, useMainAssetContext, SocialLoginModal, Nav, MainExp, MainRecordCard, MainJourney } from 'components';
 import { mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail, MainLogoText } from 'assets';
 
 // 컴포넌트 안에 들어있지 않아도 되는 요소, 다른 함수 등 여러 곳에서 쓰일 수 있도록 바깥에 변수 선언
@@ -49,10 +49,11 @@ export function MainFetcher({ children }) {
   )}
 
   function Main({ data }) {
+    console.log("mainData:::", data)
   // 닉네임 모달
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
   // Record Card 내 토글 버튼 state
-  const [isToggleOnLeft, setIsToggleOnLeft] = useState(INIT_LOG_VALUE);
+  const [isToggleOnLeft, setIsToggleOnLeft] = useState(true);
   const { search } = useLocation();
   
   // get globalVariables
@@ -90,12 +91,11 @@ export function MainFetcher({ children }) {
           <layout.FlexCenterColumn100>
             <layout.FlexCenterColumn100 style={{gap: "5px"}}>
               <MainExp dayCount={data.signupDay} />
-              <MainRecordCard data={data}/>
+              <MainRecordCard data={data} isToggleOnLeft={isToggleOnLeft}/>
             </layout.FlexCenterColumn100>
-
-            { // 여정 일지 섹션
-
-            }
+            <layout.FlexCenterColumn100>
+              <MainJourney />
+            </layout.FlexCenterColumn100>
           </layout.FlexCenterColumn100>
 
         </layout.MainContent>
