@@ -57,7 +57,7 @@ function CashBookAdd() {
   // 뒤로가기
   const navigate = useNavigate();
   const onClickBack = () => {
-    navigate("/cash-book");
+    navigate(-1);
   };
 
   // 저장하기 버튼 클릭

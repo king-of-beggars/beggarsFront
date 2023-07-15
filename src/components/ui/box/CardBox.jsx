@@ -64,17 +64,23 @@ function CardBox({
       cardWidth={`${cardWidth}px`}
       cardHeight={`${cardHeight}px`}
     >
-      <DeleteCard
-        id={id}
-        style={{ position: "absolute", left: "1em", top: "1em" }}
-        onClick={changeDeleteModal}
-        visibility={writeCheck===undefined ? "hidden" : "visible"}
-      />
-      <EditCashbook
-        onClick={onClickEdit}
-        style={{ position: "absolute", right: "2.5em", top: "1em" }}
-        visibility={writeCheck===undefined ? "hidden" : "visible"}
-      />
+      <layout.FlexCenterRow100 style={{ justifyContent: "space-between"}}>
+        <div>
+        <DeleteCard
+          id={id}
+          onClick={changeDeleteModal}
+          visibility={writeCheck===undefined ? "hidden" : "visible"}
+        />
+        </div>
+        <div>
+        <EditCashbook
+          onClick={onClickEdit}
+          visibility={writeCheck===undefined ? "hidden" : "visible"}
+        />
+        </div>
+        
+      </layout.FlexCenterRow100>
+      
       {!!title ? (
         <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
           <style.Card1stCategoryText ratio={ratio} isDefault={isDefault}>

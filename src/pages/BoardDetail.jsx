@@ -215,7 +215,7 @@ function BoardDetail({ isBoasting }) {
               </style.ReceiptInnerContainer>
             </layout.FlexCenterColumn100>
             {/* 게시글 -> 추후 개발*/}
-            <style.ReceiptPostContainer>
+            <style.ReceiptPostContainer style={{ backgroundColor: `${sVar.white70}` }}>
               <style.ReceiptPost>
                 {!!response.boardText && response.boardText}
               </style.ReceiptPost>
@@ -241,7 +241,7 @@ function BoardDetail({ isBoasting }) {
         </layout.Main>
         {/* 댓글창으로! */}
         <layout.Nav navHeight={`${navHeight}px`} style={{display:"flex", alignItems:"center", justifyContent: "center", padding: "0"}}>
-          <BoardDetailInput />
+          <BoardDetailInput boardId={id}/>
         </layout.Nav>
       </style.BackgroundPageLayout>
     );

@@ -4,7 +4,7 @@ import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
 import { CashBookAPI } from "api/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -27,6 +27,7 @@ import {
 import { useGlobalVariables } from "components";
 import { getDateBoxSize } from "functions/getAssetSize";
 import { commentDeleteCard, commentGray } from "constants/comment";
+import { useEffect } from "react";
 // import { commentGray } from "constants/styleVariables";
 
 function CashBook() {
@@ -107,9 +108,14 @@ function CashBook() {
   const [swiper, setSwiper] = useState(null);
 
   // 가계부 date
-  const [selectDate, setSelectDate] = useState(moment);
+  const param = useParams();
+  const [selectDate, setSelectDate] = useState(moment(param.date));
   const [focused, setFocused] = useState(false);
 
+  useEffect(()=>{
+    navigate(`/cash-book/${selectDate.format('YYYY-MM-DD')}`)
+  }, [selectDate])
+  
   // 게시글 작성 Modal
   const [isWriteModal, setIsWriteModal] = useState(false);
   const [isBoasting, setIsBoasting] = useState(null);
@@ -145,14 +151,18 @@ function CashBook() {
   // 카드 삭제 API
   const mutationDeleteCard = useMutation(CashBookAPI.deleteCard, {
     onSuccess: () => {
-      alert(`${clickedModal} 장부 삭제가 완료되셨습니다.`);
+      alert(`장부 삭제가 완료되셨습니다.`);
       window.location.href = "/cash-book";
     },
     onError: () => alert("장부 삭제를 실패했습니다."),
   });
 
   const onClickDeleteBtn = () => {
-    mutationDeleteCard.mutate(clickedModal);
+    if (!!clickedModal) {
+      mutationDeleteCard.mutate(clickedModal);
+    } else {
+      alert("장부 삭제를 실패했습니다.");
+    }
   }
 
   // 가계부 data
@@ -171,7 +181,7 @@ function CashBook() {
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
-    navigate(`/cash-book/${id}`);
+    navigate(`/cash-book/${selectDate.format('YYYY-MM-DD')}/${id}`);
   };
 
   // 카드 추가 박스로 이동

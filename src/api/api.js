@@ -49,7 +49,8 @@ export const boardAPI = {
       page: 1
     }
   }),
-  getBoardDetail: async (boardId) => await instance.get(`/api/board/detail/${boardId}`)
+  getBoardDetail: async (boardId) => await instance.get(`/api/board/detail/${boardId}`),
+  postBoardComment : ({boardId, newInput}) => instance.post(`/api/board/${boardId}/comment`, newInput)
 }
 
 export default instance;
