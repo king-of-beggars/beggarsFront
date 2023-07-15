@@ -6,11 +6,18 @@ import { layout, } from 'styles';
 import GlobalStyle from 'styles/globalStyle';
 import Router from 'router/Router';
 import { GlobalVariableProvider } from 'components';
+import { MainFailCoin, MainGoldCoin, MainSilverCoin } from 'assets';
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
+    // <>
+    //   <MainFailCoin />
+    //   <MainGoldCoin />
+    //   <MainSilverCoin />
+    // </>
+
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <GlobalVariableProvider>

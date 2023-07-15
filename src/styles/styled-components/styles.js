@@ -26,7 +26,9 @@ import {
   mainWeatherRainy,
   mainWeatherThunder,
   mainToggleBar,
-  mainToggleBtn
+  mainToggleBtn,
+  mainJourneyTitle,
+  mainJourneyBox
 } from "assets";
 import { SwiperSlide } from "swiper/react";
 import { layout } from "styles";
@@ -901,8 +903,70 @@ export const MainRecordCardResultRow = styled.div`
   margin-top: 8px;
 `
 
-
 // Main의 그래프 아래 섹션 컨테이너
 export const MainGraphSection = styled.div`
   font-size: calc(${props => props.ratio} * 14px);
+`
+
+// Main Journey 제목 컨테이너
+export const MainJourneyTitleBox = styled.div`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${mainJourneyTitle});
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: none;
+  /* z-index: 1; */
+  font-family: "DOSGothic";
+  font-size: calc(${props => props.ratio} * 16px);
+  &:focus {
+    outline: none;
+  }
+`
+
+// Main Journey streak 컨테이너
+export const MainJourneyStreakBox = styled.div`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  background-image: url(${mainJourneyBox});
+  background-color: transparent;
+  background-size: 100% 100%;
+  padding: calc(${props => props.ratio} * 1.12rem) calc(${props => props.ratio} * 1.41rem) calc(${props => props.ratio} * 1.4rem) calc(${props => props.ratio} * 1.41rem) ;
+  background-repeat: no-repeat;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-size: calc(${props => props.ratio} * 16px);
+  &:focus {
+    outline: none;
+  }
+`
+
+// Main Journey streak의 row box
+export const MainJourneyStreakRowBox = styled.div`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 4fr 5fr;
+  grid-column-gap: calc(${props => props.ratio} * 1.06rem);
+  grid-row-gap: calc(${props => props.ratio} * 0.19rem);
+`
+
+// Main Journey streak의 streak 컨테이너
+export const MainJourneyStreak = styled.div`
+  width: ${props => props.width};
+  height: ${props => props.height};
+  border-radius: calc(${props => props.ratio} * 0.625rem);
+  background-color: #eee;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

@@ -51,6 +51,15 @@ export const contextValue = {
         width: 355,
         height: 182
     },
+    mainJourneyBoxRow: {
+        width: 298,
+        height: 53
+    },
+    // mainJourneyBoxRowMargin: 14,
+    mainJourneyRoundBox: {
+        width: 28,
+        height: 28
+    },
     mainWeather: {
         width: 160,
         height: 160
