@@ -54,6 +54,7 @@ export function MainFetcher({ children }) {
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
   // Record Card 내 토글 버튼 state
   const [isToggleOnLeft, setIsToggleOnLeft] = useState(true);
+
   const { search } = useLocation();
   
   // get globalVariables
@@ -91,7 +92,7 @@ export function MainFetcher({ children }) {
           <layout.FlexCenterColumn100>
             <layout.FlexCenterColumn100 style={{gap: "5px"}}>
               <MainExp dayCount={data.signupDay} />
-              <MainRecordCard data={data} isToggleOnLeft={isToggleOnLeft}/>
+              <MainRecordCard data={data} isToggleOnLeft={isToggleOnLeft} toggleSetter={setIsToggleOnLeft}/>
             </layout.FlexCenterColumn100>
             <layout.FlexCenterColumn100>
               <MainJourney />

@@ -38,8 +38,8 @@ export { default as LabeledTextarea } from "components/ui/input/LabledTextarea";
 // select
 export { default as CashAddSelect } from "components/ui/select-box/CashAddSelect";
 
-export { default as ProgressBarSemiCircle } from "components/ui/progress/ProgressBarSemiCircle"
-export { default as ProgressBarTmp } from "components/ui/progress/ProgressBarTmp"
+export { default as ProgressBarSemiCircle } from "components/ui/graph/ProgressBarSemiCircle"
+export { default as ProgressBarTmp } from "components/ui/graph/ProgressBarTmp"
 
 // export { default as CommentFavDefaultLight } from "components/ui/button/CommentFavDefaultLight"
 

@@ -4,7 +4,7 @@ import { getAssetSize } from 'functions'
 import { useGlobalVariables } from 'components'
 import { style } from 'styles'
 
-function MainToggle({ isToggleOnLeft }) {
+function MainToggle({ isToggleOnLeft, toggleSetter }) {
   const { frameSize, screenWidth, mainToggleBar, mainToggleBtn } = useGlobalVariables();
   const { width: barWidth, height: barHeight } = getAssetSize(frameSize, screenWidth, mainToggleBar);
   const { width: btnWidth, height: btnHeight } = getAssetSize(frameSize, screenWidth, mainToggleBtn);
@@ -16,11 +16,11 @@ function MainToggle({ isToggleOnLeft }) {
         {isToggleOnLeft ?
         <>
             <style.MainToggleBtnActivate width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>정보</style.MainToggleBtnActivate> 
-            <style.MainToggleBtnSleep width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>상세</style.MainToggleBtnSleep> 
+            <style.MainToggleBtnSleep onClick={() => toggleSetter(false)} width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>상세</style.MainToggleBtnSleep> 
         </>
         :
         <>
-            <style.MainToggleBtnSleep width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>정보</style.MainToggleBtnSleep>
+            <style.MainToggleBtnSleep onClick={() => toggleSetter(true)} width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>정보</style.MainToggleBtnSleep>
             <style.MainToggleBtnActivate width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>상세</style.MainToggleBtnActivate>
         </>
  
