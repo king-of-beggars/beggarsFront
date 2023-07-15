@@ -38,6 +38,7 @@
 - swiper
 - 캘린더 : react-dates
 - 가계부 및 게시판 차트 : ProgressBar.js
+- 메인 바 그래프 : nivo
 - 글자 렌더링 : auto-text-size
 
 ## 3. 폴더구조

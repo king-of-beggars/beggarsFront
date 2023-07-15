@@ -48,7 +48,7 @@ export function MainFetcher({ children }) {
     </>
   )}
 
-  function Main({ data }) {
+function Main({ data }) {
     console.log("mainData:::", data)
   // 닉네임 모달
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
@@ -90,15 +90,16 @@ export function MainFetcher({ children }) {
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.MainContent>
           <layout.FlexCenterColumn100>
+            { /* 메인: 가입한지 n일 & 레코드 카드 */}
             <layout.FlexCenterColumn100 style={{gap: "5px"}}>
               <MainExp dayCount={data.signupDay} />
               <MainRecordCard data={data} isToggleOnLeft={isToggleOnLeft} toggleSetter={setIsToggleOnLeft}/>
             </layout.FlexCenterColumn100>
+            { /* 메인: 여정 streak */}
             <layout.FlexCenterColumn100>
               <MainJourney />
             </layout.FlexCenterColumn100>
           </layout.FlexCenterColumn100>
-
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
