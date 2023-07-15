@@ -145,14 +145,18 @@ function CashBook() {
   // 카드 삭제 API
   const mutationDeleteCard = useMutation(CashBookAPI.deleteCard, {
     onSuccess: () => {
-      alert(`${clickedModal} 장부 삭제가 완료되셨습니다.`);
+      alert(`장부 삭제가 완료되셨습니다.`);
       window.location.href = "/cash-book";
     },
     onError: () => alert("장부 삭제를 실패했습니다."),
   });
 
   const onClickDeleteBtn = () => {
-    mutationDeleteCard.mutate(clickedModal);
+    if (!!clickedModal) {
+      mutationDeleteCard.mutate(clickedModal);
+    } else {
+      alert("장부 삭제를 실패했습니다.");
+    }
   }
 
   // 가계부 data
