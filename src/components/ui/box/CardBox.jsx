@@ -65,23 +65,24 @@ function CardBox({
       cardWidth={`${cardWidth}px`}
       cardHeight={`${cardHeight}px`}
     >
-      <layout.FlexCenterRow100 style={{ justifyContent: "space-between"}}>
-        <div>
-        <DeleteCard
-          id={id}
-          onClick={changeDeleteModal}
-          visibility={writeCheck===undefined ? "hidden" : "visible"}
-        />
-        </div>
-        <div>
-        <EditCashbook
-          onClick={onClickEdit}
-          visibility={writeCheck===undefined ? "hidden" : "visible"}
-        />
-        </div>
-        
-      </layout.FlexCenterRow100>
-      
+      {writeCheck === undefined ? (
+        <></>
+      ) : (
+        <layout.FlexCenterRow100 style={{ justifyContent: "space-between" }}>
+          <div>
+            <DeleteCard
+              id={id}
+              onClick={changeDeleteModal}
+            />
+          </div>
+          <div>
+            <EditCashbook
+              onClick={onClickEdit}
+            />
+          </div>
+        </layout.FlexCenterRow100>
+      )}
+
       {!!title ? (
         <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
           <style.Card1stCategoryText ratio={ratio} isDefault={isDefault}>
@@ -138,7 +139,7 @@ function CardBox({
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
           onClick={writeCheck === 0 ? changeWriteModal : onClickGoBoard}
-          disabled={spend === 0 | isDiffDate}
+          disabled={(spend === 0) | isDiffDate}
         >
           {writeCheck === 0
             ? spend > budget
