@@ -443,6 +443,7 @@ export const CashBookDetailAddBox = styled(layout.FlexCenter)`
   border: 2px dashed ${sVar.bookDetailAddBoxBorderColor};
   border-radius: 0.5em;
   margin-top: 0.4em;
+  visibility: ${props=>props.visible};
 `;
 
 // Cashbook Detail 무지출 버튼

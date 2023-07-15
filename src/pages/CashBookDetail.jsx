@@ -76,7 +76,7 @@ function CashBookDetail() {
   if (isLoading || error) {
     return <></>;
   }
-  console.log(!data.detail);
+  console.log("writecheck", !!data.writeCheck);
 
   let detail = [];
   let result = true;
@@ -181,6 +181,7 @@ function CashBookDetail() {
             <style.CashBookDetailAddBox
               onClick={showAddModal}
               style={!result ? { display: "none" } : {}}
+              visible={!!data.writeCheck ? "hidden" : "visible"}
             >
               <AddDetail />
             </style.CashBookDetailAddBox>

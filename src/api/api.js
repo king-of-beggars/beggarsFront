@@ -28,6 +28,7 @@ export const CashBookAPI = {
   getCashCard: (date) => instance.get(`/api/cashbook?date=${date}`),
   getCashDetail: (id) => instance.get(`/api/cashbook/${id}`),
   postCardAdd: (payload) => instance.post('/api/cashbook/frame', payload),
+  deleteCard: (cardId) => instance.delete(`/api/cashbook/frame/${cardId}`),
   postCashDetailAdd: ({cardId, newDetail}) => instance.post(`/api/cashbook/${cardId}`, newDetail),
   postCashEdit: ({cardId, editCard}) => instance.put(`/api/cashbook/frame/${cardId}`, editCard),
   putCashNone: ({cardId}) => instance.put(`/api/cashbook/${cardId}`),
