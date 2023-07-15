@@ -19,6 +19,7 @@ function CardBox({
   changeWriteModal,
   changeDeleteModal,
   writeCheck,
+  isDiffDate = false,
   isDefault = true,
 }) {
   // console.log(id, " ::: ", writeCheck)
@@ -137,7 +138,7 @@ function CardBox({
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
           onClick={writeCheck === 0 ? changeWriteModal : onClickGoBoard}
-          disabled={spend === 0}
+          disabled={spend === 0 | isDiffDate}
         >
           {writeCheck === 0
             ? spend > budget

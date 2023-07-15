@@ -111,6 +111,7 @@ function CashBook() {
   const param = useParams();
   const [selectDate, setSelectDate] = useState(moment(param.date));
   const [focused, setFocused] = useState(false);
+  const isDiffDate = moment().diff(moment(selectDate),'days') >= 2;
 
   useEffect(()=>{
     navigate(`/cash-book/${selectDate.format('YYYY-MM-DD')}`)
@@ -309,6 +310,7 @@ function CashBook() {
                               changeWriteModal={changeWriteModal}
                               changeDeleteModal={changeDeleteModal}
                               writeCheck={card.writeCheck}
+                              isDiffDate={isDiffDate}
                               isDefault={true}
                             />
                             {/* <CashBookCard
