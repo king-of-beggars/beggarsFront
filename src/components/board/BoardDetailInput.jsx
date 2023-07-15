@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query';
 
 import { style } from "styles"
 import { CommentSubmit } from 'assets'
-import { useMutation, useQueryClient } from 'react-query';
 import { boardAPI } from 'api/api';
 
-function BoardDetailInput({boardId}) {
+function BoardDetailInput({boardId, userId}) {
   // 댓글 state
   const [comment, setComment] = useState('');
 
@@ -35,7 +35,7 @@ function BoardDetailInput({boardId}) {
     <style.NavWrap style={{height: "auto", bottom: "auto"}}>
       <style.BoardDetailInputContainer>
           <style.BoardDetailInputLeft 
-            placeholder={"조언을 해주게."}
+            placeholder={!!localStorage.getItem("userId") ===  userId ? "첨언을 해보게." : "조언을 해주게."}
             onChange={onChangeComment}
             value={comment}
           />

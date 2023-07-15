@@ -56,8 +56,8 @@ function DayPicker({selectDate, setSelectDate, focused, setFocused}) {
         id="your_unique_id"
         displayFormat="YYYY-MM-DD"
         keepOpenOnDateSelect={false}
-        isOutsideRange={()=>false}
-        // isOutsideRange={day => !isInclusivelyAfterDay(day, moment())}
+        // isOutsideRange={()=>false}
+        isOutsideRange={day => day.isAfter(moment())}
         autoFocus
         noBorder
         // verticalSpacing={0}

@@ -241,7 +241,7 @@ function BoardDetail({ isBoasting }) {
         </layout.Main>
         {/* 댓글창으로! */}
         <layout.Nav navHeight={`${navHeight}px`} style={{display:"flex", alignItems:"center", justifyContent: "center", padding: "0"}}>
-          <BoardDetailInput boardId={id}/>
+          <BoardDetailInput boardId={id} userId={response.userId.userId}/>
         </layout.Nav>
       </style.BackgroundPageLayout>
     );
