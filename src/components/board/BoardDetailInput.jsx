@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
+import { useMutation, useQueryClient } from 'react-query';
 
 import { style } from "styles"
 import { CommentSubmit } from 'assets'
-import { useMutation, useQueryClient } from 'react-query';
 import { boardAPI } from 'api/api';
 
 function BoardDetailInput({boardId, userId}) {
