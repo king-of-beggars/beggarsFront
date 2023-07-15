@@ -808,11 +808,6 @@ export const MainWeatherBox = styled(FlexCenter)`
   height: ${props => props.height};
 `
 
-// Main의 예산 및 소비 렌더링 박스
-export const MainBudgetBox = styled(FlexCenter)`
-
-`
-
 // Main 날짜 렌더링 박스
 export const MainRecordDateBox = styled.div`
   font-size: calc(${props => props.ratio} * 16px);
