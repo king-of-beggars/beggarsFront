@@ -828,7 +828,7 @@ export const MainRecordDayBox = styled.div`
 // 디바이더 (선)
 export const Divider = styled.div`
   width: 100%;
-  border-bottom: 1px solid ${props => props.color};
+  border-bottom: ${props=> props.borderSize} solid ${props => props.color};
 `
 
 // Main의 RecordCard 하단 토글 컨테이너
@@ -904,4 +904,10 @@ export const MainRecordCardResultRow = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 8px;
+`
+
+
+// Main의 그래프 아래 섹션 컨테이너
+export const MainGraphSection = styled.div`
+  font-size: calc(${props => props.ratio} * 14px);
 `

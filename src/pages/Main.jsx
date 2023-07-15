@@ -48,7 +48,7 @@ export function MainFetcher({ children }) {
     </>
   )}
 
-  function Main({ data }) {
+function Main({ data }) {
     console.log("mainData:::", data)
   // 닉네임 모달
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
