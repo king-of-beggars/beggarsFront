@@ -821,6 +821,7 @@ export const MainRecordDateBox = styled.div`
 export const MainRecordDayBox = styled.div`
   font-size: calc(${props => props.ratio} * 12px);
   font-family: "DOSGothic";
+  margin-bottom: 1px;
 `
 
 // 디바이더 (선)
@@ -878,3 +879,28 @@ export const MainToggleBtnActivate = styled.button`
     outline: none;
   }
 `;
+
+// Main의 RecordCard 예산 행 컨테이너
+export const MainRecordCardTextRow = styled.div`
+  padding: 0 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .text {
+    font-size: calc(${props => props.ratio} * 12px);
+  }
+  .expense {
+    font-size: calc(${props => props.ratio} * 20px);
+  }
+`
+
+// Main의 RecordCard 지출 결과 행 컨테이너
+export const MainRecordCardResultRow = styled.div`
+  width: 100%;
+  font-size: calc(${props => props.ratio} * 25px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+`
