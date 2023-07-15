@@ -6,9 +6,6 @@ import { ProgressBarSemiCircle } from "components";
 import { DeleteCard, EditCashbook } from "assets";
 import { commaOnThree } from "functions";
 import { commentGoBoard } from "constants/comment";
-import { useMutation, useQueryClient } from "react-query";
-import { CashBookAPI } from "api/api";
-import moment from "moment";
 
 function CardBox({
   id,
@@ -24,6 +21,7 @@ function CardBox({
   writeCheck,
   isDefault = true,
 }) {
+  // console.log(id, " ::: ", writeCheck)
   const [cardWidthOrigin, cardHeightOrigin] = [301, 356];
   const [screenWidthOrigin, screenHeightOrigin] = [393, 852];
   const cardWidth =
@@ -39,11 +37,6 @@ function CardBox({
   const [smallCardBtnWidth, smallCardBtnHeight] = [151, 26];
 
   const navigate = useNavigate();
-
-  // 카드 삭제
-  const onClickDelete = (event) => {
-    event.stopPropagation();
-  };
 
   // 카드 수정
   const onClickEdit = (event) => {
@@ -75,10 +68,12 @@ function CardBox({
         id={id}
         style={{ position: "absolute", left: "1em", top: "1em" }}
         onClick={changeDeleteModal}
+        visibility={writeCheck===undefined ? "hidden" : "visible"}
       />
       <EditCashbook
         onClick={onClickEdit}
         style={{ position: "absolute", right: "2.5em", top: "1em" }}
+        visibility={writeCheck===undefined ? "hidden" : "visible"}
       />
       {!!title ? (
         <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>

@@ -51,7 +51,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        // main
+        {/* main */}
         <Route path="/" element={
           <MainFetcher>
             <Main/>
@@ -59,21 +59,21 @@ function Router() {
         } />
         
 
-        // related to cashbook
+        {/* related to cashbook */}
         <Route path="cash-book" element={<CashBook/>} />
         <Route path="cash-book/add" element={<CashBookAdd/>}/>
         <Route path="cash-book/:id" element={<CashBookDetail/>} /> 
         <Route path="cash-book/edit/:id" element={<CashBookMod/>} />
 
-        // related to board
+        {/* related to board */}
         <Route path="board" element={<Board isBoasting={isBoasting} setIsBoasting={setIsBoasting}/>}/>
         <Route path="board/:id" element={<BoardDetail isBoasting={isBoasting}/>}/>
 
-        // related to auth
+        {/* related to auth */}
         <Route path="login" element={<Login/>} />
         <Route path="signup" element={<Signup/>} />
 
-        // related to user
+        {/* related to user */}
         <Route path="profile" element={<Profile/>} />
 
         {/* <Route path="/" element={
