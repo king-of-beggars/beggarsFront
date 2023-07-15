@@ -38,7 +38,7 @@
 - swiper
 - 캘린더 : react-dates
 - 가계부 및 게시판 차트 : ProgressBar.js
-- 글자 렌더링 : react-textfit (적용 예정)
+- 글자 렌더링 : auto-text-size
 
 ## 3. 폴더구조
 - api

@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { style, layout } from "styles";
-import { ProgressBarSemiCircle, WriteReceipt } from "components";
-import { EditCashbook } from "assets";
+import { ProgressBarSemiCircle } from "components";
+import { DeleteCard, EditCashbook } from "assets";
 import { commaOnThree } from "functions";
 import { commentGoBoard } from "constants/comment";
+import { useMutation, useQueryClient } from "react-query";
+import { CashBookAPI } from "api/api";
+import moment from "moment";
 
 function CardBox({
   id,
@@ -17,6 +20,7 @@ function CardBox({
   screenWidth,
   ratio,
   changeWriteModal,
+  changeDeleteModal,
   writeCheck,
   isDefault = true,
 }) {
@@ -29,13 +33,19 @@ function CardBox({
   console.log("cardWidth:::", cardWidth);
   const cardHeight = cardWidth * (cardHeightOrigin / cardWidthOrigin);
 
-  const [isBoasting, setIsBoasting] = useState(budget-spend >= 0)
+  const isBoasting = budget - spend >= 0;
+  // const [isBoasting, setIsBoasting] = useState(budget-spend >= 0)
   const [bigCardBtnWidth, bigCardBtnHeight] = [274, 46];
   const [smallCardBtnWidth, smallCardBtnHeight] = [151, 26];
 
   const navigate = useNavigate();
 
-  // 수정 카드
+  // 카드 삭제
+  const onClickDelete = (event) => {
+    event.stopPropagation();
+  };
+
+  // 카드 수정
   const onClickEdit = (event) => {
     event.stopPropagation();
     const sendInfo = {
@@ -49,10 +59,8 @@ function CardBox({
   // 게시글 이동
   const onClickGoBoard = (event) => {
     event.stopPropagation();
-    // const isBoasting = budget>spend
-    // console.log("단이가 바라는 isBoasting :::",isBoasting);
-    navigate(`/board/${writeCheck}`, {state:{isBoasting:isBoasting}});
-  }
+    navigate(`/board/${writeCheck}`, { state: { isBoasting: isBoasting } });
+  };
 
   return (
     <style.CardBoxContainer
@@ -63,9 +71,14 @@ function CardBox({
       cardWidth={`${cardWidth}px`}
       cardHeight={`${cardHeight}px`}
     >
+      <DeleteCard
+        id={id}
+        style={{ position: "absolute", left: "1em", top: "1em" }}
+        onClick={changeDeleteModal}
+      />
       <EditCashbook
         onClick={onClickEdit}
-        style={{ position: "absolute", right: "2.5em", top:"1em" }}
+        style={{ position: "absolute", right: "2.5em", top: "1em" }}
       />
       {!!title ? (
         <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
@@ -119,15 +132,17 @@ function CardBox({
           ratio={ratio}
           id={id}
           isDefault={isDefault}
-          isWrite={writeCheck == 0 ? false : true}
+          isWrite={writeCheck === 0 ? false : true}
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
-          onClick={writeCheck == 0 ? changeWriteModal : onClickGoBoard}
-          // onClick={changeWriteModal}
-          disabled={spend===0}
+          onClick={writeCheck === 0 ? changeWriteModal : onClickGoBoard}
+          disabled={spend === 0}
         >
-          {writeCheck == 0 ? spend > budget ? "혼쭐나러 가기" : "자랑하러 가기"
-                           : commentGoBoard}
+          {writeCheck === 0
+            ? spend > budget
+              ? "혼쭐나러 가기"
+              : "자랑하러 가기"
+            : commentGoBoard}
         </style.CardBtn>
       ) : (
         <style.CardBtn
@@ -137,9 +152,7 @@ function CardBox({
           btnWidth={`${smallCardBtnWidth * (ratio + 0.2)}px`}
           btnHeight={`${smallCardBtnHeight * (ratio + 0.2)}px`}
         >
-          {spend > budget
-            ? `${spend - budget}원 초과`
-            : `${budget - spend}원 절약`}
+          {isBoasting ? `${budget - spend}원 절약` : `${spend - budget}원 초과`}
         </style.CardBtn>
       )}
     </style.CardBoxContainer>
