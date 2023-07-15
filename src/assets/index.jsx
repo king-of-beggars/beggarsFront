@@ -67,6 +67,9 @@ export { ReactComponent as CommentSubmit } from "assets/icons/commentSubmit.svg"
 export { ReactComponent as EditCashbook } from "assets/icons/editCashbookDot.svg";
 export { ReactComponent as MainLogoText } from "assets/icons/mainLogoText.svg";
 export { ReactComponent as DeleteCard } from "assets/icons/deleteCard.svg";
+export { ReactComponent as MainFailCoin } from "assets/icons/mainFailCoin.svg";
+export { ReactComponent as MainSilverCoin } from "assets/icons/mainSilverCoin.svg";
+export { ReactComponent as MainGoldCoin } from "assets/icons/mainGoldCoin.svg";
 
 // backgrounds
 export { default as mainBackground } from "assets/pixels/backgrounds/mainBackground.png";
