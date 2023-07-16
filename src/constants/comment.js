@@ -35,3 +35,8 @@ export const commentGray = (isOver) => {
 }
 //// 카드 삭제 멘트
 export const commentDeleteCard = ["이 장부를 정말로", "지워버릴 텐가?"]
+
+
+// board
+//// 로그인 유도 멘트
+export const commentBoardLogin = ["진정으로", "우리와 함께 하겠는가?"]

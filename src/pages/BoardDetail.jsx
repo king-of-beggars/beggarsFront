@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 
-import { BoardDetailInput, BoardDetailComment } from "components";
+import {
+  BoardDetailInput,
+  BoardDetailComment,
+  CashDetailModal,
+} from "components";
 import { layout, style } from "styles";
 import {
   BackArrowGray,
@@ -15,23 +19,31 @@ import {
 } from "assets";
 import { boardAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
-import { useGlobalVariables } from 'components';
+import { useGlobalVariables } from "components";
+import { commentBoardLogin } from "constants/comment";
 
 // function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 function BoardDetail({ isBoasting }) {
-  const {state} = useLocation();
+  const { state } = useLocation();
   if (!!state) {
     isBoasting = state.isBoasting;
   }
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, screenWidth } = useGlobalVariables();
-  console.log('BoardDetail rendered:', windowSize, isMobile, headerHeight, screenWidth)
+  const { windowSize, isMobile, headerHeight, screenWidth } =
+    useGlobalVariables();
+  console.log(
+    "BoardDetail rendered:",
+    windowSize,
+    isMobile,
+    headerHeight,
+    screenWidth
+  );
 
-  const navHeight = 110
-  const mainHeight = windowSize.height - (navHeight + headerHeight)
-  
-  const { id } = useParams(); // id 패러미터 받아오기
-  console.log("받아온 id:::", id);
+  const navHeight = 110;
+  const mainHeight = windowSize.height - (navHeight + headerHeight);
+
+  const { id } = useParams(); // boardid 패러미터 받아오기
+  // console.log("받아온 id:::", id);
 
   // const screenWidth = isMobile
   //   ? parseFloat(localStorage.getItem("screenWidth"))
@@ -71,6 +83,19 @@ function BoardDetail({ isBoasting }) {
     }
   }, [response]);
 
+  // 비로그인 시 로그인 유도 Modal
+  const [isLoginModal, setIsLoginModal] = useState(false);
+
+  const changeLoginModal = () => {
+    alert("ho");
+    const newIsLogin = !isLoginModal;
+    setIsLoginModal(newIsLogin);
+  };
+  
+  const onClickInput = () => {
+    navigate("/login");
+  };
+
   // 뒤로 가기
   const onClickBack = () => {
     navigate(-1);
@@ -82,11 +107,11 @@ function BoardDetail({ isBoasting }) {
   };
 
   if (isLoading) {
-    <div>Loading...</div>
+    <div>Loading...</div>;
   }
 
   if (isError) {
-    <div>Error!</div>
+    <div>Error!</div>;
   }
 
   if (response) {
@@ -107,11 +132,16 @@ function BoardDetail({ isBoasting }) {
         }
       >
         <layout.Header headerHeight={`${headerHeight}px`}>
-          <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
-          <layout.HeaderContent style={{ fontSize: "25px", backgroundColor: `${sVar.white70}` }}>
+          <div
+            className="statusBarHeight"
+            style={{ width: "inherit", height: "50px" }}
+          ></div>
+          <layout.HeaderContent
+            style={{ fontSize: "25px", backgroundColor: `${sVar.white70}` }}
+          >
             <BackArrowGray
               onClick={onClickBack}
-              style={{position: "absolute", left: "10%", top: "60%"}}
+              style={{ position: "absolute", left: "10%", top: "60%" }}
             />
             {!!response.userId.userNickname && response.userId.userNickname}
           </layout.HeaderContent>
@@ -122,8 +152,14 @@ function BoardDetail({ isBoasting }) {
         >
           <layout.MainContent>
             {/* 영수증 */}
-            <layout.FlexCenterColumn100 style={{ backgroundColor: `${sVar.white70}` }}>
-              <style.ReceiptInnerContainer padding="0.8em" fontSize="0.6em" style={{gap: "0.5em"}}>
+            <layout.FlexCenterColumn100
+              style={{ backgroundColor: `${sVar.white70}` }}
+            >
+              <style.ReceiptInnerContainer
+                padding="0.8em"
+                fontSize="0.6em"
+                style={{ gap: "0.5em" }}
+              >
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
@@ -146,18 +182,28 @@ function BoardDetail({ isBoasting }) {
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer padding="1em" fontSize="1.2em">
-                { console.log(response.cashbookDetail.cashbookCreatedAt.split("T"))}
+                {console.log(
+                  response.cashbookDetail.cashbookCreatedAt.split("T")
+                )}
                 {!!response.cashbookDetail.cashbookCreatedAt &&
-                  response.cashbookDetail.cashbookCreatedAt.split("T")[0].split("-").join(" / ")}
+                  response.cashbookDetail.cashbookCreatedAt
+                    .split("T")[0]
+                    .split("-")
+                    .join(" / ")}
               </style.ReceiptInnerContainer>
-              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em" style={{display: "flex", flexDirection: "row"}}>
+              <style.ReceiptInnerContainer
+                padding="1em"
+                fontSize="0.9em"
+                style={{ display: "flex", flexDirection: "row" }}
+              >
                 <div style={{ textAlign: "right" }}>
                   {!!response.cashbookDetail.cashbookCategory &&
                     response.cashbookDetail.cashbookCategory}
                   예산
                 </div>
                 <div style={{ flex: "1", textAlign: "center" }}>
-                  {!!response.cashbookDetail.cashbookName && response.cashbookDetail.cashbookName}
+                  {!!response.cashbookDetail.cashbookName &&
+                    response.cashbookDetail.cashbookName}
                 </div>
                 <div style={{ textAlign: "left" }}>
                   {!!response.cashbookDetail.cashbookGoalValue &&
@@ -215,7 +261,9 @@ function BoardDetail({ isBoasting }) {
               </style.ReceiptInnerContainer>
             </layout.FlexCenterColumn100>
             {/* 게시글 -> 추후 개발*/}
-            <style.ReceiptPostContainer style={{ backgroundColor: `${sVar.white70}` }}>
+            <style.ReceiptPostContainer
+              style={{ backgroundColor: `${sVar.white70}` }}
+            >
               <style.ReceiptPost>
                 {!!response.boardText && response.boardText}
               </style.ReceiptPost>
@@ -228,27 +276,57 @@ function BoardDetail({ isBoasting }) {
                   {!!response.comments.length && response.comments.length}개
                 </div>
               </layout.Flex100>
-              <layout.FlexCenterColumn100 style={{gap: "5px"}}>
-                { response.comments.length > 0
-                  && response.comments.map(comment => {
-                    console.log("comment:::", comment)
-                    return (<BoardDetailComment isBoasting={isBoasting} key={comment.commentId} id={comment.commentId} userName={comment.userId.userNickname} likeCount={comment.likeCount} likeCheck={false}>{comment.commentText}</BoardDetailComment>)
-                  })
-                }
+              <layout.FlexCenterColumn100 style={{ gap: "5px" }}>
+                {response.comments.length > 0 &&
+                  response.comments.map((comment) => {
+                    console.log("comment:::", comment);
+                    return (
+                      <BoardDetailComment
+                        boardId={id}
+                        isBoasting={isBoasting}
+                        key={comment.commentId}
+                        id={comment.commentId}
+                        userName={comment.userId.userNickname}
+                        likeCount={comment.likeCount}
+                        likeCheck={false}
+                      >
+                        {comment.commentText}
+                      </BoardDetailComment>
+                    );
+                  })}
               </layout.FlexCenterColumn100>
             </layout.FlexCenterColumn100>
           </layout.MainContent>
         </layout.Main>
         {/* 댓글창으로! */}
-        <layout.Nav navHeight={`${navHeight}px`} style={{display:"flex", alignItems:"center", justifyContent: "center", padding: "0"}}>
-          <BoardDetailInput boardId={id} userId={response.userId.userId}/>
+        <layout.Nav
+          navHeight={`${navHeight}px`}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0",
+          }}
+        >
+          <BoardDetailInput
+            boardId={id}
+            userId={response.userId.userId}
+            changeLoginModal={changeLoginModal}
+          />
         </layout.Nav>
+        {isLoginModal && (
+          <CashDetailModal
+            setClose={changeLoginModal}
+            onClickHandler={onClickInput}
+          >
+            {commentBoardLogin}
+          </CashDetailModal>
+        )}
       </style.BackgroundPageLayout>
     );
   }
 
-  return <div>아무 것도 아닌 경우!</div>
-
+  return <div>아무 것도 아닌 경우!</div>;
 }
 
 export default BoardDetail;
