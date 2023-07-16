@@ -26,7 +26,7 @@ import {
   mainBackgroundTop,
 } from "assets";
 import { getDateBoxSize } from "functions/getAssetSize";
-import { commentDeleteCard, commentGray } from "constants/comment";
+import { commentDataNone, commentDeleteCard, commentGray } from "constants/comment";
 import { useEffect } from "react";
 // import { commentGray } from "constants/styleVariables";
 
@@ -165,6 +165,23 @@ function CashBook() {
       alert("장부 삭제를 실패했습니다.");
     }
   }
+
+  // 가계부 데이터 없을 때 Modal
+  const [isDataNoneModal, setIsDataNoneModal] = useState(false);
+  const changeDataNoneModal = (event) => {
+    event.stopPropagation();
+    setClickModal(event.target.id);
+
+    const newIsDataNoneModal = !isDataNoneModal;
+    setIsDataNoneModal(newIsDataNoneModal);
+  };
+  const setDataNoneClose = () => {
+    setIsDataNoneModal(false);
+  };
+  const onClickDataNone = () => {
+    navigate(`/cash-book/${selectDate.format('YYYY-MM-DD')}/${clickedModal}`);
+    // setIsDataNoneModal(false);
+  };
 
   // 가계부 data
   const queryNode = {
@@ -309,6 +326,7 @@ function CashBook() {
                               onClickHandler={onClickCard}
                               changeWriteModal={changeWriteModal}
                               changeDeleteModal={changeDeleteModal}
+                              changeDataNoneModal={changeDataNoneModal}
                               writeCheck={card.writeCheck}
                               isDiffDate={isDiffDate}
                               isDefault={true}
@@ -368,6 +386,14 @@ function CashBook() {
               onClickHandler={onClickDeleteBtn}
             >
               {commentDeleteCard}
+            </CashDetailModal>
+          )}
+          {isDataNoneModal && (
+            <CashDetailModal
+              setClose={setDataNoneClose}
+              onClickHandler={onClickDataNone}
+            >
+              {commentDataNone}
             </CashDetailModal>
           )}
         </layout.CashBookMainContent>

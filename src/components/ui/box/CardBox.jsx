@@ -18,6 +18,7 @@ function CardBox({
   ratio,
   changeWriteModal,
   changeDeleteModal,
+  changeDataNoneModal,
   writeCheck,
   isDiffDate = false,
   isDefault = true,
@@ -138,8 +139,8 @@ function CardBox({
           isWrite={writeCheck === 0 ? false : true}
           btnWidth={`${bigCardBtnWidth * ratio}px`}
           btnHeight={`${bigCardBtnHeight * ratio}px`}
-          onClick={writeCheck === 0 ? changeWriteModal : onClickGoBoard}
-          disabled={(spend === 0) | isDiffDate}
+          onClick={writeCheck === 0 ? spend === 0 ? changeDataNoneModal:changeWriteModal : onClickGoBoard}
+          // disabled={(spend === 0) | isDiffDate}
         >
           {writeCheck === 0
             ? spend > budget
