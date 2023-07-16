@@ -17,7 +17,8 @@ export const AuthAPI = {
   postSignUp: (payload) => instance.post("/api/user/signup", payload),
   postLogIn: (payload) => instance.post("/api/user/login", payload),
   postNickSocial: (payload) => instance.post("/api/user/signup/social", payload),
-  postLogout: () => instance.post("/api/user/logout")
+  postLogout: () => instance.post("/api/user/logout"),
+  getSocialUser: () => instance.get("/api/user/login/getInfo")
 };
 
 export const mainAPI = {
