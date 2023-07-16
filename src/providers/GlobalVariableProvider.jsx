@@ -10,15 +10,80 @@ const GlobalVariableContext = createContext({
         height: window.innerHeight
     },
     isMobile: /Mobi/i.test(window.navigator.userAgent),
-    // headerHeight: Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2),
-    navHeight: Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12),
-    // mainHeight: Math.ceil(window.innerHeight) - ((Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2)) + (Math.ceil(window.innerHeight * 0.1) > 110 ? 110 : Math.ceil(window.innerHeight * 0.1))),
-    mainHeight: window.innerHeight - (Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12) + contextValue.headerHeight),
     screenWidth: /Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
                 ? window.innerWidth // 그냥 window width 사용하기
-                : window.innerWidth > 393 // mobile이 아니고 width가 393보다 크면
-                    ? 393 // 393으로 크기 고정
+                : window.innerWidth > contextValue.frameSize.width // mobile이 아니고 width가 393보다 크면
+                    ? contextValue.frameSize.width // 393으로 크기 고정
                     : window.innerWidth, // 아니면 더 작은 화면 크기 사용하기
+    // screenWidth: /Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //         ? window.innerWidth // 그냥 window width 사용하기
+    //         : 500,
+    // widthRatio: /Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //             ? window.innerWidth / contextValue.frameSize.width
+    //             : window.innerWidth > contextValue.frameSize.width
+    //                 ? 1 
+    //                 : window.innerWidth / contextValue.frameSize.width,
+    widthRatio: window.innerWidth >= contextValue.frameSize.width
+                ? 1
+                : window.innerWidth / contextValue.frameSize.width,
+    // headerHeight: (/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //                 ? window.innerWidth / contextValue.frameSize.width
+    //                 : window.innerWidth > contextValue.frameSize.width
+    //                     ? 1 
+    //                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight,
+    headerHeight: (window.innerWidth >= contextValue.frameSize.width
+                    ? 1
+                    : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight,
+    // navHeight: (/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //             ? window.innerWidth / contextValue.frameSize.width
+    //             : window.innerWidth > contextValue.frameSize.width
+    //                 ? 1 
+    //                 : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight,
+    navHeight: (window.innerWidth >= contextValue.frameSize.width
+                ? 1
+                : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight,
+    // mainHeight: window.innerHeight - (
+    //             ((/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //                 ? window.innerWidth / contextValue.frameSize.width
+    //                 : window.innerWidth > contextValue.frameSize.width
+    //                     ? 1 
+    //                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight)
+    //             +
+    //             ((/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //                 ? window.innerWidth / contextValue.frameSize.width
+    //                 : window.innerWidth > contextValue.frameSize.width
+    //                     ? 1 
+    //                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
+    //             ),
+    mainHeight: window.innerHeight - (
+                    ((window.innerWidth >= contextValue.frameSize.width
+                        ? 1
+                        : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight)
+                    +
+                    ((window.innerWidth >= contextValue.frameSize.width
+                        ? 1
+                        : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
+                ),
+    // headerHeight: window.innerHeight >= contextValue.frameSize.height
+    //                 ? contextValue.frameHeaderHeight
+    //                 : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameHeaderHeight),
+    // navHeight: window.innerHeight >= contextValue.frameNavHeight
+    //             ? contextValue.frameNavHeight
+    //             : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameNavHeight),
+    // mainHeight: window.innerHeight - (
+    //     window.innerHeight >= contextValue.frameNavHeight
+    //         ? contextValue.frameNavHeight
+    //         : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameNavHeight) 
+    //     + 
+    //     window.innerHeight >= contextValue.frameNavHeight
+    //         ? contextValue.frameNavHeight
+    //         : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameNavHeight)
+    //     ),
+    // headerHeight: Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2),
+    // navHeight: Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12),
+    // mainHeight: Math.ceil(window.innerHeight) - ((Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2)) + (Math.ceil(window.innerHeight * 0.1) > 110 ? 110 : Math.ceil(window.innerHeight * 0.1))),
+    // mainHeight: window.innerHeight - (Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12) + contextValue.headerHeight),
+
     ...contextValue
 })
 
@@ -35,18 +100,89 @@ export const GlobalVariableProvider = ({ children }) => {
 
     // useMemo를 이용해 조건부로 계산을 스킵할 값들
     // const headerHeight = useMemo(() => Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2), [windowSize])
-    const navHeight = useMemo(() => Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12), [windowSize])
+    // const navHeight = useMemo(() => Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12), [windowSize])
     // const mainHeight = useMemo(() => window.innerHeight - (headerHeight + navHeight), [windowSize])
-    const mainHeight = useMemo(() => window.innerHeight - (navHeight + contextValue.headerHeight), [windowSize])
+    // const headerHeight = useMemo(() => window.innerHeight >= contextValue.frameSize.height
+    //                                 ? contextValue.frameHeaderHeight
+    //                                 : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameHeaderHeight)
+    //                                 , [windowSize])
+    // const navHeight = useMemo(() => window.innerHeight >= contextValue.frameNavHeight
+    //                                 ? contextValue.frameNavHeight
+    //                                 : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameNavHeight)
+    //                                 , [windowSize])
+    // const mainHeight = useMemo(() => window.innerHeight - (
+    //                                     window.innerHeight >= contextValue.frameNavHeight
+    //                                         ? contextValue.frameNavHeight
+    //                                         : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameNavHeight) 
+    //                                     + 
+    //                                     window.innerHeight >= contextValue.frameNavHeight
+    //                                         ? contextValue.frameNavHeight
+    //                                         : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameNavHeight)
+    //                                     ), [windowSize])
+    // const headerHeight = useMemo(() => 
+    //                         (/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //                                     ? window.innerWidth / contextValue.frameSize.width
+    //                                     : window.innerWidth > contextValue.frameSize.width
+    //                                         ? 1 
+    //                                         : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight
+    //                     , [windowSize])
+    // const navHeight = useMemo(() => 
+    //                         (/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //                                     ? window.innerWidth / contextValue.frameSize.width
+    //                                     : window.innerWidth > contextValue.frameSize.width
+    //                                         ? 1 
+    //                                         : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight
+    //                     , [windowSize])
+    // const mainHeight = useMemo(() => 
+    //                         window.innerHeight - (
+    //                             ((/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //                                 ? window.innerWidth / contextValue.frameSize.width
+    //                                 : window.innerWidth > contextValue.frameSize.width
+    //                                     ? 1 
+    //                                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight)
+    //                             +
+    //                             ((/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
+    //                                 ? window.innerWidth / contextValue.frameSize.width
+    //                                 : window.innerWidth > contextValue.frameSize.width
+    //                                     ? 1 
+    //                                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
+    //                             )
+    //                     , [windowSize])
+    const widthRatio = useMemo(() => window.innerWidth >= contextValue.frameSize.width
+                                ? 1
+                                : window.innerWidth / contextValue.frameSize.width
+                        , [windowSize])
+    const headerHeight = useMemo(() =>
+                            (window.innerWidth >= contextValue.frameSize.width
+                                ? 1
+                                : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight
+                        , [windowSize])
+    const navHeight = useMemo(() =>
+                            (window.innerWidth >= contextValue.frameSize.width
+                                ? 1
+                                : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight
+                        , [windowSize])
+    const mainHeight = useMemo(() =>
+                            window.innerHeight - (
+                                ((window.innerWidth >= contextValue.frameSize.width
+                                    ? 1
+                                    : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight)
+                                +
+                                ((window.innerWidth >= contextValue.frameSize.width
+                                    ? 1
+                                    : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
+                            )
+                        , [windowSize])                           
     const screenWidth = useMemo(() =>  {
         if (/Mobi/i.test(window.navigator.userAgent)) {
             return window.innerWidth
         } else {
-            if (window.innerWidth > 393) {
-                return 393
-            } else {
-                return window.innerWidth
-            }   
+            return 500
+            // if (window.innerWidth > 393) {
+            //     return 393
+            // } else {
+            //     return window.innerWidth
+            // }   
         }
     }, [windowSize, isMobile])
     useEffect(() => {
@@ -73,7 +209,7 @@ export const GlobalVariableProvider = ({ children }) => {
     }, [])
 
     // const value = { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth, ...contextValue }
-    const value = { windowSize, isMobile, mainHeight, navHeight, screenWidth, ...contextValue }
+    const value = { windowSize, isMobile, widthRatio, headerHeight, mainHeight, navHeight, screenWidth, ...contextValue }
 
     return (
         <GlobalVariableContext.Provider value={value}>

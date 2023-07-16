@@ -116,9 +116,16 @@ function Main({ data }) {
 
   return (
     isLoggedIn || isSocialLogin ? (
-      <>
-        {mainRenderer("login", data, states)}
-      </>
+      !!data.signupDay ? (
+        <>
+          {mainRenderer("login", data, states)}
+        </>
+      ) : (
+        <>
+          {mainRenderer("loading", mainDummyData)}
+        </>
+      )
+
     ) : (
       <>
         {mainRenderer("default", mainDummyData)}

@@ -14,7 +14,7 @@ import {
   backgroundDarkTop,
   backgroundDarkMiddle,
   backgroundDarkTail,
-  background50Head,
+  background50Top,
   background50Middle,
   background50Tail,
 } from "assets";
@@ -120,7 +120,7 @@ function BoardDetail({ isBoasting }) {
         screenWidth={`${screenWidth}px`}
         isMobile={isMobile}
         backPngTop={
-          isBoasting ? `url(${background50Head})` : `url(${backgroundDarkTop})`
+          isBoasting ? `url(${background50Top})` : `url(${backgroundDarkTop})`
         }
         backPngTail={
           isBoasting ? `url(${background50Tail})` : `url(${backgroundDarkTail})`

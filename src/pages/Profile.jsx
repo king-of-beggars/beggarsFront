@@ -6,7 +6,7 @@ import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import { Nav } from "components";
 import { AuthAPI } from "api/api";
-import { background50Head, background50Middle, background50Tail } from "assets";
+import { background50Top, background50Middle, background50Tail } from "assets";
 
 // function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
 function Profile() {
@@ -35,7 +35,7 @@ function Profile() {
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={`url(${background50Head})`}
+      backPngTop={`url(${background50Top})`}
       backPngMiddle={`url(${background50Middle})`}
       backPngTail={`url(${background50Tail})`}
     >

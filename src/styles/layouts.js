@@ -81,7 +81,7 @@ export const Nav = styled.nav`
     height: ${props => props.navHeight};
     position: fixed;
     width: inherit;
-    padding: 1em 0;
+    /* padding: calc(${props => props.ratio} * 17px) calc(${props => props.ratio} * 43px) calc(${props => props.ratio} * 25px) calc(${props => props.ratio} * 43px); */
 `
 
 export const Main = styled.main`
