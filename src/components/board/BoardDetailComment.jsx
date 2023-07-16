@@ -11,10 +11,19 @@ import { boardAPI } from 'api/api';
 function BoardDetailComment({ id, boardId, isBoasting, userName, likeCheck, likeCount, children }) {
   // 좋아요 버튼 handler
   const [isLiked, setIsLiked] = useState(likeCheck)
-
   const likeHandler = () => {
-    setIsLiked(!isLiked)
+    mutationLike.mutate(id);
+    // setIsLiked(!isLiked)
   }
+
+  // 좋아요 API
+  const mutationLike = useMutation(boardAPI.postLikeComment, {
+    onSuccess: () => {
+      setIsLiked(!isLiked)
+      queryClient.invalidateQueries(["receipt", boardId]);
+    },
+    onError: () => alert("좋아요 변환에 실패하였습니다."),
+  })
 
   // console.log("", id, boardId)
 
@@ -23,7 +32,6 @@ function BoardDetailComment({ id, boardId, isBoasting, userName, likeCheck, like
   const mutationDeleteComment = useMutation(boardAPI.deleteBoardComment, {
     onSuccess: () => {
       queryClient.invalidateQueries(["receipt", boardId]);
-      // navigate("/cash-book");
     },
     onError: () => alert("댓글 삭제에 실패하였습니다."),
   })
