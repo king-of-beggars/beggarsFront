@@ -163,22 +163,30 @@ export const MidBlackBtn = styled.button`
 // Nav바 컨테이너
 export const NavWrap = styled(layout.FlexCenterEven100)`
   position: absolute;
-  height: calc(${props => props.ratio} * 2.94rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* height: calc(${props => props.ratio} * 2.94rem); */
   bottom: 0;
   z-index: 1;
   background: white;
   height: 100%;
   font-size: calc(${props => props.ratio} * 1.125rem);
-  padding: calc(${props => props.ratio} * 1.06rem) calc(${props => props.ratio} * 2.69rem) calc(${props => props.ratio} * 1.56rem) calc(${props => props.ratio} * 2.69rem);
+  padding: calc(${props => props.ratio} * 17px) calc(${props => props.ratio} * 43px) calc(${props => props.ratio} * 25px) calc(${props => props.ratio} * 43px);
+  /* padding: calc(${props => props.ratio} * 1.06rem) calc(${props => props.ratio} * 2.69rem) calc(${props => props.ratio} * 1.56rem) calc(${props => props.ratio} * 2.69rem); */
 `;
 
 export const NavBtn = styled.button`
+  display: flex;
+  justify-content: center;
   color: ${(props) => (props.isSelected ? `${sVar.navBlack}` : `${sVar.navGray}`)};
-  width: calc(${props => props.ratio} * 2.94rem);
-  height: calc(${props => props.ratio} * 2.94rem);
+  width: calc(${props => props.ratio} * 47px);
+  height: calc(${props => props.ratio} * 47px);
+  font-size: calc(${props => props.ratio} * 18px);
   outline: none;
   background: transparent;
   border: none;
+  white-space: nowrap;
   &:focus {
     outline: none;
   }

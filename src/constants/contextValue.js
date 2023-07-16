@@ -5,10 +5,12 @@ export const contextValue = {
         height: 852
     },
     frameRatio: 852 / 393,
+    frameHeaderHeight: 168,
+    frameNavHeight: 89,
 
     // layout ::: nav, header
     // navHeight: 110,
-    headerHeight: 120,
+    // headerHeight: 120,
 
     // profile
     profileIcon: {

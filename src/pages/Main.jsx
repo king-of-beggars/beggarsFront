@@ -90,7 +90,6 @@ function Main({ data }) {
     if (!isLoggedIn) { // 아직 로그인되지 않은 경우에 소셜 로그인인지 탐색하기
       let loginSuccess = queryString.parse(search);
       console.log("parseLoginSuccess:::",loginSuccess)
-      console.log("cookie:::", document.cookie)
       loginSuccess = Object.keys(loginSuccess).length === 0 ? true : JSON.parse(loginSuccess.loginSuccess)
   
       if (!loginSuccess){
@@ -104,9 +103,16 @@ function Main({ data }) {
 
   return (
     isLoggedIn || isSocialLogin ? (
-      <>
-        {mainRenderer("login", data, states)}
-      </>
+      !!data.signupDay ? (
+        <>
+          {mainRenderer("login", data, states)}
+        </>
+      ) : (
+        <>
+          {mainRenderer("loading", mainDummyData)}
+        </>
+      )
+
     ) : (
       <>
         {mainRenderer("default", mainDummyData)}

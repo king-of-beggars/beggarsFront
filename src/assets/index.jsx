@@ -83,7 +83,7 @@ export { default as backgroundBrightTail } from "assets/pixels/backgrounds/backg
 export { default as backgroundDarkTop } from "assets/pixels/backgrounds/backgroundDarkTop.png";
 export { default as backgroundDarkMiddle } from "assets/pixels/backgrounds/backgroundDarkMiddle.png";
 export { default as backgroundDarkTail } from "assets/pixels/backgrounds/backgroundDarkTail.png";
-export { default as background50Head } from "assets/pixels/backgrounds/background50Head.png";
+export { default as background50Top } from "assets/pixels/backgrounds/background50Top.png";
 export { default as background50Middle } from "assets/pixels/backgrounds/background50Middle.png";
 export { default as background50Tail } from "assets/pixels/backgrounds/background50Tail.png";
 
