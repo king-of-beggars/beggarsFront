@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import { useQuery, useQueryClient } from "react-query";
 
 import { layout, style } from "styles";
-import { Nav, CardBox } from "components";
+import { Nav, CardBox, useGlobalVariables } from "components";
 import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
 import { boardAPI } from 'api/api';
-import { useGlobalVariables } from 'components';
 
 
 // function Board({ isBoasting, setIsBoasting, isMobile, headerHeight, navHeight, mainHeight }) {
@@ -22,7 +21,7 @@ function Board({ isBoasting, setIsBoasting }) {
   // const cardWidth = 301 * 0.5
   // const cardHeight = 356 * 0.5
 
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   // isBoasting 상태에 따라 get 요청이 변경되어야 하는데 react-query의 쿼리문은 훅 안에서 쓰일 수 없으므로 useQuery의 key를 이용해 문제를 해결한다.

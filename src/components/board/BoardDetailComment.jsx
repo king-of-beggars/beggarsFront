@@ -40,7 +40,7 @@ function BoardDetailComment({ id, boardId, isBoasting, userName, likeCheck, like
   const onClickDeleteComment = () => {
     mutationDeleteComment.mutate({boardId, commentId:id});
   }
-  
+
   // console.log("userName:::", userName)
   // console.log("local ::: ", decodeURIComponent(localStorage.getItem("nickname")))
   return (

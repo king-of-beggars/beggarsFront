@@ -714,6 +714,7 @@ export const LikeCounts = styled.div`
   position: absolute;
   bottom: 0;
   color: ${props => props.isGray ? `${sVar.commentGray}` : "black"};
+  visibility: ${props => props.visibility};
 `
 
 // BoardDetail의 input 컨테이너
@@ -727,6 +728,18 @@ export const BoardDetailInputContainer = styled(layout.FlexDefault)`
 
 // BoardDetail의 input - 왼쪽의 실제 input 자리
 export const BoardDetailInputLeft = styled.input`
+  width: 85%;
+  height: inherit;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  &:focus {
+    outline: none;
+  }
+`
+
+// BoardDetail의 input - 왼쪽의 실제 input 자리(비로그인)
+export const BoardDetailBtnLeft = styled.button`
   width: 85%;
   height: inherit;
   border: none;
