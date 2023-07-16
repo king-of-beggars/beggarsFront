@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 
+import { useGlobalVariables } from "providers"
 import {
   BoardDetailInput,
   BoardDetailComment,
@@ -19,7 +20,6 @@ import {
 } from "assets";
 import { boardAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
-import { useGlobalVariables } from "components";
 import { commentBoardLogin } from "constants/comment";
 
 // function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {

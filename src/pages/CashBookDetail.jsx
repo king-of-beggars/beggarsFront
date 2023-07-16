@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { useGlobalVariables } from "providers"
 import { CashBookAPI } from "api/api";
 import { AddDetail, BackCrampsBlack } from "assets";
 import { CashBookDetailList, ExpendAddModal, Nav } from "components";
 import CashDetailModal from "components/ui/modal/CashDetailModal";
 import { layout, style } from "styles";
-import { useGlobalVariables } from "components";
 import {
   backgroundBrightMiddle,
   backgroundBrightTail,

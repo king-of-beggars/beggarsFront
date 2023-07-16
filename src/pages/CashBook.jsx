@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
+import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import {
   DayPicker,
@@ -24,7 +25,6 @@ import {
   mainBackgroundTail,
   mainBackgroundTop,
 } from "assets";
-import { useGlobalVariables } from "components";
 import { getDateBoxSize } from "functions/getAssetSize";
 import { commentDeleteCard, commentGray } from "constants/comment";
 import { useEffect } from "react";

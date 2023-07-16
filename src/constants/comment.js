@@ -1,3 +1,11 @@
+// common
+//// 비로그인시 노출할 코멘트
+export const ifNotLoggedIn = "여기는 로그인이 필요하다네!"
+//// 데이터 로딩중에 노출할 코멘트
+export const ifLoading = "데이터를 받아오는 중"
+//// 데이터 로딩 실패시 노출할 코멘트
+export const ifError = "데이터를 받아오는데 실패했다네..."
+
 // main
 //// day 기록 표시
 export const commentDayAfter = ["님이 road to 거지왕에 합류한지", "일 째!"]
@@ -19,8 +27,6 @@ export const negativeComments = [
     "이러다가는 정말 탈탈 다 털리겠어...",
     "괜찮네. 오늘부터 굶으면 되지, 안 그런가?",
 ]
-
-
 
 // cashbook
 //// 지출 기록 삭제 멘트

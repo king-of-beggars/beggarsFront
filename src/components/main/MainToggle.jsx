@@ -1,10 +1,10 @@
 import React from 'react'
 
 import { getAssetSize } from 'functions'
-import { useGlobalVariables } from 'components'
+import { useGlobalVariables } from "providers"
 import { style } from 'styles'
 
-function MainToggle({ isToggleOnLeft, toggleSetter }) {
+function MainToggle({ isLoggedIn, isToggleOnLeft, toggleSetter }) {
   const { frameSize, screenWidth, mainToggleBar, mainToggleBtn } = useGlobalVariables();
   const { width: barWidth, height: barHeight } = getAssetSize(frameSize, screenWidth, mainToggleBar);
   const { width: btnWidth, height: btnHeight } = getAssetSize(frameSize, screenWidth, mainToggleBtn);
@@ -16,7 +16,7 @@ function MainToggle({ isToggleOnLeft, toggleSetter }) {
         {isToggleOnLeft ?
         <>
             <style.MainToggleBtnActivate width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>정보</style.MainToggleBtnActivate> 
-            <style.MainToggleBtnSleep onClick={() => toggleSetter(false)} width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>상세</style.MainToggleBtnSleep> 
+            <style.MainToggleBtnSleep { ...isLoggedIn ? {} : {disabled: true} } onClick={() => toggleSetter(false)} width={`${btnWidth}px`} height={`${btnHeight}px`} ratio={ratio}>상세</style.MainToggleBtnSleep> 
         </>
         :
         <>
