@@ -163,11 +163,26 @@ export const MidBlackBtn = styled.button`
 // Nav바 컨테이너
 export const NavWrap = styled(layout.FlexCenterEven100)`
   position: absolute;
+  height: calc(${props => props.ratio} * 2.94rem);
   bottom: 0;
   z-index: 1;
   background: white;
   height: 100%;
+  font-size: calc(${props => props.ratio} * 1.125rem);
+  padding: calc(${props => props.ratio} * 1.06rem) calc(${props => props.ratio} * 2.69rem) calc(${props => props.ratio} * 1.56rem) calc(${props => props.ratio} * 2.69rem);
 `;
+
+export const NavBtn = styled.button`
+  color: ${(props) => (props.isSelected ? `${sVar.navBlack}` : `${sVar.navGray}`)};
+  width: calc(${props => props.ratio} * 2.94rem);
+  height: calc(${props => props.ratio} * 2.94rem);
+  outline: none;
+  background: transparent;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+`
 
 export const CashBookHeader = styled(layout.FlexCenter)`
   height: inherit;

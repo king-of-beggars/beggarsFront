@@ -7,7 +7,8 @@ import { layout, style } from 'styles';
 // 메인의 공통되는 레이아웃 요소
 const MainLayout = ({children}) => {
     // get globalVariables
-    const { isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+    const { isMobile, frameSize, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+    const ratio = screenWidth / frameSize.width;
 
     return (
         <style.BackgroundPageLayout
@@ -29,7 +30,7 @@ const MainLayout = ({children}) => {
                 {children}
             </layout.Main>
             <layout.Nav navHeight={`${navHeight}px`}>
-                <Nav selected="main" />
+                <Nav selected="main" ratio={ratio} />
             </layout.Nav>
       </style.BackgroundPageLayout>
     )

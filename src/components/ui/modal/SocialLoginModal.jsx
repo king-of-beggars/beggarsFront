@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
+import { saveUserInfo, chkLoggedIn } from 'functions';
 import { style, layout } from "styles";
 import { AuthAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
@@ -9,7 +10,7 @@ import { useNickname} from 'hooks';
 
 const INIT_INPUT_VALUE = ""
 
-function SocialLoginModal({ isSocialLogin, setIsSocialLogin, children }) {
+function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, children }) {
   const navigate = useNavigate();
   const [nickname, setNickname, isNickValid] = useNickname(INIT_INPUT_VALUE);
   const [isNickChked, setIsNickChked] = useState(false);
@@ -43,16 +44,28 @@ function SocialLoginModal({ isSocialLogin, setIsSocialLogin, children }) {
 
   // 여정 시작
   const mutationSignUp = useMutation(AuthAPI.postNickSocial, {
-    onSuccess: () => {
-      alert("회원가입이 완료되었습니다.")
+    onSuccess: (response) => {
+      if (response.status === 201) {
+        alert("회원가입이 완료되었습니다.")
+        setSocialModalOn(false)
+        setIsSocialLogin(true)
+        saveUserInfo(response.headers["userid"], response.headers["usernickname"])
+        console.log("login success:::", chkLoggedIn())
+      }
+      
     },
-    onError: () => alert("회원가입이 실패하였습니다.")
+    onError: (response) => {
+      console.log("error on mutationSignUp:::", response)
+      alert("회원가입이 실패하였습니다.")
+      setSocialModalOn(false)
+      setIsSocialLogin(false)
+    }
   })
 
   const signUpHandler = () => {
     if (isNickChked) {
       const newUser = {
-        userNickName: nickname
+        userNickname: nickname
       }
       mutationSignUp.mutate(newUser)
       
@@ -63,7 +76,7 @@ function SocialLoginModal({ isSocialLogin, setIsSocialLogin, children }) {
   }
 
   return (
-    isSocialLogin && (
+    socialModalOn && (
       <style.ModalOverlay>
         <style.ModalDefault width="80%">
           <style.ModalHeader>{children}</style.ModalHeader>
@@ -100,7 +113,7 @@ function SocialLoginModal({ isSocialLogin, setIsSocialLogin, children }) {
               }}
             >
               <style.SmallBtn
-                onClick={() => setIsSocialLogin(false)}
+                onClick={() => setSocialModalOn(false)}
                 color={sVar.borderGray}
                 backcolor={sVar.backgroundGray}
                 border={sVar.borderGray}

@@ -90,11 +90,12 @@ function Main({ data }) {
     if (!isLoggedIn) { // 아직 로그인되지 않은 경우에 소셜 로그인인지 탐색하기
       let loginSuccess = queryString.parse(search);
       console.log("parseLoginSuccess:::",loginSuccess)
+      console.log("cookie:::", document.cookie)
       loginSuccess = Object.keys(loginSuccess).length === 0 ? true : JSON.parse(loginSuccess.loginSuccess)
   
       if (!loginSuccess){
         console.log(loginSuccess)
-        setIsSocialLogin(true)
+        setSocialModalOn(true)
       }
     }
   }, [search])
@@ -102,14 +103,14 @@ function Main({ data }) {
   console.log('isSocialLogin:::', isSocialLogin)
 
   return (
-    isLoggedIn ? (
+    isLoggedIn || isSocialLogin ? (
       <>
         {mainRenderer("login", data, states)}
       </>
     ) : (
       <>
         {mainRenderer("default", mainDummyData)}
-        { isSocialLogin && <SocialLoginModal isSocialLogin={isSocialLogin} setIsSocialLogin={setIsSocialLogin}>회원가입</SocialLoginModal>}
+        { socialModalOn && <SocialLoginModal socialModalOn={socialModalOn} setSocialModalOn={setSocialModalOn} setIsSocialLogin={setIsSocialLogin}>회원가입</SocialLoginModal>}
       </>
     )
   );
