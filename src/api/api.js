@@ -50,7 +50,8 @@ export const boardAPI = {
     }
   }),
   getBoardDetail: async (boardId) => await instance.get(`/api/board/detail/${boardId}`),
-  postBoardComment : ({boardId, newInput}) => instance.post(`/api/board/${boardId}/comment`, newInput)
+  postBoardComment : ({boardId, newInput}) => instance.post(`/api/board/${boardId}/comment`, newInput),
+  deleteBoardComment : ({boardId, commentId}) => instance.delete(`/api/board/${boardId}/comment/${commentId}`)
 }
 
 export default instance;

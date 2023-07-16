@@ -30,8 +30,8 @@ function BoardDetail({ isBoasting }) {
   const navHeight = 110
   const mainHeight = windowSize.height - (navHeight + headerHeight)
   
-  const { id } = useParams(); // id 패러미터 받아오기
-  console.log("받아온 id:::", id);
+  const { id } = useParams(); // boardid 패러미터 받아오기
+  // console.log("받아온 id:::", id);
 
   // const screenWidth = isMobile
   //   ? parseFloat(localStorage.getItem("screenWidth"))
@@ -232,7 +232,7 @@ function BoardDetail({ isBoasting }) {
                 { response.comments.length > 0
                   && response.comments.map(comment => {
                     console.log("comment:::", comment)
-                    return (<BoardDetailComment isBoasting={isBoasting} key={comment.commentId} id={comment.commentId} userName={comment.userId.userNickname} likeCount={comment.likeCount} likeCheck={false}>{comment.commentText}</BoardDetailComment>)
+                    return (<BoardDetailComment boardId={id} isBoasting={isBoasting} key={comment.commentId} id={comment.commentId} userName={comment.userId.userNickname} likeCount={comment.likeCount} likeCheck={false}>{comment.commentText}</BoardDetailComment>)
                   })
                 }
               </layout.FlexCenterColumn100>

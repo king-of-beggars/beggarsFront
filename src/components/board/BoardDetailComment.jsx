@@ -1,16 +1,38 @@
-import { CommentDelDark, CommentDelLight, CommentFav, CommentFavDefaultDark, CommentFavDefaultLight, commentDelHover, commentFavDefault } from 'assets';
 import React, { useState } from "react";
+import { useMutation, useQueryClient } from 'react-query';
+
+import { CommentDelDark, CommentDelLight, CommentFav, CommentFavDefaultDark, CommentFavDefaultLight, commentDelHover, commentFavDefault } from 'assets';
 import { layout, style } from "styles";
 import * as sVar from "constants/styleVariables"
 import { BoardCommentLikes } from 'components';
+import { boardAPI } from 'api/api';
 
-function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, children }) {
+
+function BoardDetailComment({ id, boardId, isBoasting, userName, likeCheck, likeCount, children }) {
+  // 좋아요 버튼 handler
   const [isLiked, setIsLiked] = useState(likeCheck)
 
   const likeHandler = () => {
     setIsLiked(!isLiked)
   }
 
+  // console.log("", id, boardId)
+
+  // 댓글 삭제 API
+  const queryClient = useQueryClient();
+  const mutationDeleteComment = useMutation(boardAPI.deleteBoardComment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["receipt", boardId]);
+      // navigate("/cash-book");
+    },
+    onError: () => alert("댓글 삭제에 실패하였습니다."),
+  })
+
+  // 댓글 삭제 버튼 handler
+  const onClickDeleteComment = () => {
+    mutationDeleteComment.mutate({boardId, commentId:id});
+  }
+  
   // console.log("userName:::", userName)
   // console.log("local ::: ", decodeURIComponent(localStorage.getItem("nickname")))
   return (
@@ -29,7 +51,9 @@ function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, ch
           {/* // 댓글 삭제 아이콘 */}
           {
             decodeURIComponent(localStorage.getItem("nickname")) === String(userName) ? 
-              isBoasting ? <CommentDelLight /> : <CommentDelDark />
+            <div onClick={onClickDeleteComment}>
+              {isBoasting ? <CommentDelLight /> : <CommentDelDark />}
+            </div>
             : <></>
           }
           {/* // 좋아요 아이콘 */}
