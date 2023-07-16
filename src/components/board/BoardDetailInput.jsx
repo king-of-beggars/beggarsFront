@@ -31,11 +31,12 @@ function BoardDetailInput({boardId, userId}) {
     };
     mutationAddComment.mutate({boardId, newInput})
   }
+  
   return (
     <style.NavWrap style={{height: "auto", bottom: "auto"}}>
       <style.BoardDetailInputContainer>
           <style.BoardDetailInputLeft 
-            placeholder={!!localStorage.getItem("userId") ===  userId ? "첨언을 해보게." : "조언을 해주게."}
+            placeholder={localStorage.getItem("userId") ==  userId ? "첨언을 해보게." : "조언을 해주게."}
             onChange={onChangeComment}
             value={comment}
           />
