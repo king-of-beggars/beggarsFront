@@ -5,13 +5,13 @@ import { useMutation } from 'react-query'
 import { useGlobalVariables } from "providers"
 import { saveUserInfo } from 'functions'
 import { layout, style } from 'styles'
-import { BackCramps } from 'assets'
+import { BackCramps, background30Middle, background30Tail, background30Top, backgroundBrightTop } from 'assets'
 import { AuthAPI } from 'api/api'
 
 // function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
 function Login() {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
   console.log('Login rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // nav가 없는 페이지인 경우 header를 줄이고 main을 늘려주기
@@ -79,7 +79,13 @@ function Login() {
   
 
   return (
-    <layout.PageLayout isMobile={isMobile}>
+    <style.BackgroundPageLayout
+      screenWidth={`${screenWidth}px`}
+      isMobile={isMobile}
+      backPngTop={`url(${background30Top})`}
+      backPngMiddle={`url(${background30Middle})`}
+      backPngTail={`url(${background30Tail})`}
+    >
       <layout.Header headerHeight={`${noNavHeaderHeight}px`}>
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
@@ -127,7 +133,7 @@ function Login() {
           </layout.LoginWrap>
         </layout.MainContent>
       </layout.Main>
-    </layout.PageLayout>
+    </style.BackgroundPageLayout>
 
 
     //     <div style={{position: "absolute", left: "20px", top: "20px"}}> {"<"} </div>

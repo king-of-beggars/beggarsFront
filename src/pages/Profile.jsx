@@ -6,11 +6,12 @@ import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import { Nav } from "components";
 import { AuthAPI } from "api/api";
+import { background50Head, background50Middle, background50Tail } from "assets";
 
 // function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
 function Profile() {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
   console.log('Profile rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
   const navigate = useNavigate();
 
@@ -31,7 +32,13 @@ function Profile() {
   };
 
   return (
-    <layout.PageLayout isMobile={isMobile}>
+    <style.BackgroundPageLayout
+      screenWidth={`${screenWidth}px`}
+      isMobile={isMobile}
+      backPngTop={`url(${background50Head})`}
+      backPngMiddle={`url(${background50Middle})`}
+      backPngTail={`url(${background50Tail})`}
+    >
       <layout.Header headerHeight={`${headerHeight}px`}>
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>프로필</layout.HeaderContent>
@@ -64,7 +71,7 @@ function Profile() {
       <layout.Nav navHeight={`${navHeight}px`}>
         <Nav selected="profile" />
       </layout.Nav>
-    </layout.PageLayout>
+    </style.BackgroundPageLayout>
   );
 }
 
