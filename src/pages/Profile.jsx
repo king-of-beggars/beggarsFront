@@ -15,7 +15,7 @@ function Profile() {
   const navigate = useNavigate();
 
   const mutationLogout = useMutation(AuthAPI.postLogout, {
-    onSuccess: (response) => {
+    onSuccess: () => {
       localStorage.removeItem("userId");
       localStorage.removeItem("nickname");
 

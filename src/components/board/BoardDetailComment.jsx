@@ -1,17 +1,48 @@
-import { CommentDelDark, CommentDelLight, CommentFav, CommentFavDefaultDark, CommentFavDefaultLight, commentDelHover, commentFavDefault } from 'assets';
 import React, { useState } from "react";
+import { useMutation, useQueryClient } from 'react-query';
+
+import { CommentDelDark, CommentDelLight, CommentFav, CommentFavDefaultDark, CommentFavDefaultLight, commentDelHover, commentFavDefault } from 'assets';
 import { layout, style } from "styles";
 import * as sVar from "constants/styleVariables"
 import { BoardCommentLikes } from 'components';
+import { boardAPI } from 'api/api';
 
-function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, children }) {
+
+function BoardDetailComment({ id, boardId, isBoasting, userName, likeCheck, likeCount, children }) {
+  // 좋아요 버튼 handler
   const [isLiked, setIsLiked] = useState(likeCheck)
-
   const likeHandler = () => {
-    setIsLiked(!isLiked)
+    mutationLike.mutate(id);
+    // setIsLiked(!isLiked)
   }
 
-  console.log("userName:::", userName)
+  // 좋아요 API
+  const mutationLike = useMutation(boardAPI.postLikeComment, {
+    onSuccess: () => {
+      setIsLiked(!isLiked)
+      queryClient.invalidateQueries(["receipt", boardId]);
+    },
+    onError: () => alert("좋아요 변환에 실패하였습니다."),
+  })
+
+  // console.log("", id, boardId)
+
+  // 댓글 삭제 API
+  const queryClient = useQueryClient();
+  const mutationDeleteComment = useMutation(boardAPI.deleteBoardComment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["receipt", boardId]);
+    },
+    onError: () => alert("댓글 삭제에 실패하였습니다."),
+  })
+
+  // 댓글 삭제 버튼 handler
+  const onClickDeleteComment = () => {
+    mutationDeleteComment.mutate({boardId, commentId:id});
+  }
+
+  // console.log("userName:::", userName)
+  // console.log("local ::: ", decodeURIComponent(localStorage.getItem("nickname")))
   return (
     <layout.FlexCenterRow100
       style={{ borderRadius: "4px", padding: "13px 10px", gap: "5px", justifyContent: "space-between", backgroundColor: `${sVar.white50}`}}
@@ -27,9 +58,11 @@ function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, ch
         <layout.FlexCenterColumn>
           {/* // 댓글 삭제 아이콘 */}
           {
-            isBoasting
-            ? <CommentDelLight />
-            : <CommentDelDark />
+            decodeURIComponent(localStorage.getItem("nickname")) === String(userName) ? 
+            <div onClick={onClickDeleteComment}>
+              {isBoasting ? <CommentDelLight /> : <CommentDelDark />}
+            </div>
+            : <></>
           }
           {/* // 좋아요 아이콘 */}
           <BoardCommentLikes isBoasting={isBoasting} isLiked={isLiked} likeCount={likeCount} likeHandler={likeHandler}/>
