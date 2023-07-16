@@ -32,11 +32,14 @@ function BoardDetailInput({boardId, userId}) {
     mutationAddComment.mutate({boardId, newInput})
   }
   
+  // console.log("localStorage ::: ", typeof localStorage.getItem("userId"))
+  // console.log("API get ::: ", typeof userId)
+
   return (
     <style.NavWrap style={{height: "auto", bottom: "auto"}}>
       <style.BoardDetailInputContainer>
           <style.BoardDetailInputLeft 
-            placeholder={localStorage.getItem("userId") ==  userId ? "첨언을 해보게." : "조언을 해주게."}
+            placeholder={localStorage.getItem("userId") === String(userId) ? "첨언을 해보게." : "조언을 해주게."}
             onChange={onChangeComment}
             value={comment}
           />

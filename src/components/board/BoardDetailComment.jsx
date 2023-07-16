@@ -11,7 +11,8 @@ function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, ch
     setIsLiked(!isLiked)
   }
 
-  console.log("userName:::", userName)
+  // console.log("userName:::", userName)
+  // console.log("local ::: ", decodeURIComponent(localStorage.getItem("nickname")))
   return (
     <layout.FlexCenterRow100
       style={{ borderRadius: "4px", padding: "13px 10px", gap: "5px", justifyContent: "space-between", backgroundColor: `${sVar.white50}`}}
@@ -27,9 +28,9 @@ function BoardDetailComment({ id, isBoasting, userName, likeCheck, likeCount, ch
         <layout.FlexCenterColumn>
           {/* // 댓글 삭제 아이콘 */}
           {
-            isBoasting
-            ? <CommentDelLight />
-            : <CommentDelDark />
+            decodeURIComponent(localStorage.getItem("nickname")) === String(userName) ? 
+              isBoasting ? <CommentDelLight /> : <CommentDelDark />
+            : <></>
           }
           {/* // 좋아요 아이콘 */}
           <BoardCommentLikes isBoasting={isBoasting} isLiked={isLiked} likeCount={likeCount} likeHandler={likeHandler}/>
