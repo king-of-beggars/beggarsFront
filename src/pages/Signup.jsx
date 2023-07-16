@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import { AuthAPI } from "api/api";
-import { BackCramps } from 'assets';
+import { BackCramps, background30Middle, background30Tail, background30Top } from 'assets';
 import * as sVar from "constants/styleVariables"
 import { usePassword, useNickname, useId } from 'hooks';
 
@@ -14,7 +14,7 @@ const INIT_INPUT_VALUE = ""
 // function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
 function Signup() {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight } = useGlobalVariables();
+  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
   console.log('Signup rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // nav가 없는 페이지인 경우 header를 줄이고 main을 늘려주기
@@ -135,7 +135,13 @@ function Signup() {
   }
 
   return (
-    <layout.PageLayout isMobile={isMobile}>
+    <style.BackgroundPageLayout
+      screenWidth={`${screenWidth}px`}
+      isMobile={isMobile}
+      backPngTop={`url(${background30Top})`}
+      backPngMiddle={`url(${background30Middle})`}
+      backPngTail={`url(${background30Tail})`}
+    >
       <layout.Header headerHeight={`${noNavHeaderHeight}px`}>
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
@@ -213,7 +219,7 @@ function Signup() {
           </layout.LoginWrap>
         </layout.MainContent>
       </layout.Main>
-    </layout.PageLayout>
+    </style.BackgroundPageLayout>
   );
 }
 

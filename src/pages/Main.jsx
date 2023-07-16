@@ -4,9 +4,9 @@ import { useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 
 // import { useGlobalVariables } from "providers"
-import { chkLoggedIn } from "functions"
+import { chkLoggedIn, saveUserInfo } from "functions"
 import { mainRenderer } from 'renderers';
-import { mainAPI } from "api/api"
+import { AuthAPI, mainAPI } from "api/api"
 import { mainDummyData } from 'constants';
 import { SocialLoginModal } from 'components';
 // import { layout, style } from 'styles';
@@ -84,20 +84,33 @@ function Main({ data }) {
   // 렌더러에 내려보낼 state들
   const states = { isToggleOnLeft, setIsToggleOnLeft }
 
+  // 소셜로그인 시 발생하는 query url
+  let queryStr = queryString.parse(search);
 
-  // 만일 socialLogin으로 처음 들어온 유저이면 다음을 처리
+  // 회원가입이 완료된 소셜로그인 유저 정보
+  useQuery(['socialUser'], AuthAPI.getSocialUser, {
+    retry: 10, // 10번까지 재시도
+    enabled: Object.keys(queryStr).length === 0 ? false :JSON.parse(queryStr.loginSuccess), 
+    select: (data) => data.data.data,
+    onError: (error) => {
+      console.log('AuthAPI.getSocialUser::: get error : ', error)
+    },
+    onSuccess: (data) => {
+      saveUserInfo(data.userId, data.userNickname)
+    },
+  })
+
+  // 만일 socialLogin으로 들어온 유저이면 다음을 처리
   useEffect(() => {
     if (!isLoggedIn) { // 아직 로그인되지 않은 경우에 소셜 로그인인지 탐색하기
-      let loginSuccess = queryString.parse(search);
-      console.log("parseLoginSuccess:::",loginSuccess)
-      loginSuccess = Object.keys(loginSuccess).length === 0 ? true : JSON.parse(loginSuccess.loginSuccess)
+      const loginSuccess = Object.keys(queryStr).length === 0 ? true : JSON.parse(queryStr.loginSuccess)
   
       if (!loginSuccess){
         console.log(loginSuccess)
         setSocialModalOn(true)
       }
     }
-  }, [search])
+  }, [isLoggedIn, queryStr, search])
 
   console.log('isSocialLogin:::', isSocialLogin)
 

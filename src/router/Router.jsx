@@ -12,7 +12,7 @@ import CashBookDetail from "pages/CashBookDetail";
 import CashBookMod from "pages/CashBookMod";
 import BoardDetail from "pages/BoardDetail";
 import { MainAssetProvider } from 'components';
-import { setFrameSize } from 'functions';
+import { getKrDate, setFrameSize } from 'functions';
 import { layout } from "styles"
 
 function Router() {  
@@ -47,7 +47,6 @@ function Router() {
   // const mainHeight = Math.ceil((windowSize.height) - (headerHeight + navHeight))
 
   // const isMobile = /Mobi/i.test(window.navigator.userAgent)
-  const today = new Date().toISOString().split('T')[0];
 
   return (
     <BrowserRouter>
@@ -61,7 +60,7 @@ function Router() {
         
 
         {/* related to cashbook */}
-        <Route exact path="/cash-book" element={<Navigate to={`/cash-book/${today}`} replace />} />
+        <Route exact path="/cash-book" element={<Navigate to={`/cash-book/${getKrDate()}`} replace />} />
         <Route path="cash-book/:date" element={<CashBook/>} />
         <Route path="cash-book/add" element={<CashBookAdd/>}/>
         <Route path="cash-book/:date/:id" element={<CashBookDetail/>} /> 

@@ -41,6 +41,8 @@ export const commentGray = (isOver) => {
 }
 //// 카드 삭제 멘트
 export const commentDeleteCard = ["이 장부를 정말로", "지워버릴 텐가?"]
+//// 기록 유도 멘트
+export const commentDataNone = ["장부에 기록을 해야만", "벽보를 붙힐 수 있다네."]
 
 
 // board
