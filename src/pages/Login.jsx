@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
 
+import { useGlobalVariables } from "providers"
 import { layout, style } from 'styles'
 import { BackCramps } from 'assets'
 import { AuthAPI } from 'api/api'
-import { useGlobalVariables } from 'components'
 
 // function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
 function Login() {

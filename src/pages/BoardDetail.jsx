@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 
+import { useGlobalVariables } from "providers"
 import { BoardDetailInput, BoardDetailComment } from "components";
 import { layout, style } from "styles";
 import {
@@ -15,7 +16,6 @@ import {
 } from "assets";
 import { boardAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
-import { useGlobalVariables } from 'components';
 
 // function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 function BoardDetail({ isBoasting }) {

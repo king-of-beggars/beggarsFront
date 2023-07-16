@@ -561,7 +561,7 @@ export const CashbookBtn = styled.button`
   }
 `;
 
-// 백그라운드가 있는 pageLayout 스타일링입니다.
+// 백그라운드가 있는 pageLayout 스타일링입니다. (변경 이전: 보존해주세요..!)
 export const BackgroundPageLayout = styled(layout.PageLayout)`
   background-image: ${(props) => props.backPngTop},
     ${(props) => props.backPngTail}, ${(props) => props.backPngMiddle};
@@ -570,6 +570,26 @@ export const BackgroundPageLayout = styled(layout.PageLayout)`
   background-size: ${(props) => props.screenWidth},
     ${(props) => props.screenWidth}, auto;
 `;
+
+// 백그라운드가 있는 pageLayout 스타일링입니다. (변경 이후: 전체 blur 가능하도록 변경됨)
+// export const BackgroundPageLayout = styled(layout.PageLayout)`
+//   position: relative;
+//   overflow: hidden;
+//   &::before {
+//     content: "";
+//     position: absolute;
+//     top: 0; right: 0; bottom: 0; left: 0;
+//     background-image: ${(props) => props.backPngTop},
+//       ${(props) => props.backPngTail}, ${(props) => props.backPngMiddle};
+//     background-repeat: no-repeat, no-repeat, repeat;
+//     background-position: top, bottom, center;
+//     background-size: ${(props) => props.screenWidth},
+//       ${(props) => props.screenWidth}, auto;
+//     filter: ${(props) => props.blur ? "blur(5px)" : "none"};
+//     z-index: -1;
+//   }
+// `;
+
 
 // modal의 검은 background 속성입니다.
 export const ModalOverlay = styled(layout.FlexCenter)`
@@ -590,7 +610,7 @@ export const ModalDefault = styled(layout.FlexCenterColumn)`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   min-width: 320px;
-  max-width: 400px;
+  max-width: 360px;
   background: white;
   padding: 30px;
   border-radius: 10px;

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
+import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import { AuthAPI } from "api/api";
 import { BackCramps } from 'assets';
 import * as sVar from "constants/styleVariables"
 import { usePassword, useNickname, useId } from 'hooks';
-import { useGlobalVariables } from 'components';
 
 const INIT_INPUT_VALUE = ""
 

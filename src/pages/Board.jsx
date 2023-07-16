@@ -2,11 +2,12 @@ import React from "react";
 import { useNavigate } from 'react-router-dom'
 import { useQuery, useQueryClient } from "react-query";
 
+import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import { Nav, CardBox } from "components";
 import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
 import { boardAPI } from 'api/api';
-import { useGlobalVariables } from 'components';
+
 
 
 // function Board({ isBoasting, setIsBoasting, isMobile, headerHeight, navHeight, mainHeight }) {

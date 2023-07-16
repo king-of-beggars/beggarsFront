@@ -4,11 +4,11 @@ import queryString from "query-string";
 import moment from "moment";
 import { useMutation, useQueryClient } from "react-query";
 
+import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import { BackCrampsBlack } from "assets";
 import { Nav, CashBookInput, CashAddSelect } from "components";
 import { categoryList } from "constants/category";
-import { useGlobalVariables } from "components";
 import {
   backgroundBrightMiddle,
   backgroundBrightTail,

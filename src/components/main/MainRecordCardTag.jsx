@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useGlobalVariables } from 'components';
+import { useGlobalVariables } from "providers"
 import { getAssetSize } from 'functions'
 import { style } from 'styles'
 

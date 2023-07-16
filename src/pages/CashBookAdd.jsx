@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import moment from "moment";
 
+import { useGlobalVariables } from "providers"
 import { Nav, CashBookInput, CashAddSelect } from "components";
 import { BackCrampsBlack } from "assets";
 import { layout, style } from "styles";
 import { categoryList } from "constants/category";
 import { CashBookAPI } from "api/api";
-import { useGlobalVariables } from 'components';
 import {
   backgroundBrightMiddle,
   backgroundBrightTail,

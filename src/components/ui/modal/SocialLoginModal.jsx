@@ -9,11 +9,11 @@ import { useNickname} from 'hooks';
 
 const INIT_INPUT_VALUE = ""
 
-function SocialLoginModal({ children }) {
+function SocialLoginModal({ isSocialLogin, setIsSocialLogin, children }) {
   const navigate = useNavigate();
   const [nickname, setNickname, isNickValid] = useNickname(INIT_INPUT_VALUE);
   const [isNickChked, setIsNickChked] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  // const [isModalOpen, setIsModalOpen] = useState(true);
   
   const onChangeHandler = (event) => {
     setNickname(event.target.value);
@@ -63,7 +63,7 @@ function SocialLoginModal({ children }) {
   }
 
   return (
-    isModalOpen && (
+    isSocialLogin && (
       <style.ModalOverlay>
         <style.ModalDefault width="80%">
           <style.ModalHeader>{children}</style.ModalHeader>
@@ -100,7 +100,7 @@ function SocialLoginModal({ children }) {
               }}
             >
               <style.SmallBtn
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => setIsSocialLogin(false)}
                 color={sVar.borderGray}
                 backcolor={sVar.backgroundGray}
                 border={sVar.borderGray}

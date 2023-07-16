@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Textfit } from 'react-textfit'
 import { getAssetSize } from 'functions'
-import { AutoResizedText, useGlobalVariables } from 'components'
+import { useGlobalVariables } from "providers"
 import { commentDayAfter } from 'constants'
 import { layout, style } from 'styles'
 

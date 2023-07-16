@@ -1,8 +1,8 @@
 import React from "react";
 
-
+import { useGlobalVariables } from "providers"
 import { getAssetSize, getKrDate } from "functions";
-import { useGlobalVariables, MainRecordCardTag, MainRecordComment, MainWeather, MainRecordStatus, MainToggle, Bar } from "components";
+import { MainRecordCardTag, MainRecordComment, MainWeather, MainRecordStatus, MainToggle, Bar } from "components";
 import { layout, style } from "styles";
 
 const sampleData = [
@@ -34,7 +34,7 @@ const sampleData = [
 ]
 
 
-function MainRecordCard({ isToggleOnLeft, toggleSetter, data }) {
+function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
 
   // 마지막 streak를 판별하여 weatherCode를 결정하는 함수
   const getWeatherCode = () => {
@@ -117,7 +117,7 @@ function MainRecordCard({ isToggleOnLeft, toggleSetter, data }) {
       }
 
       {/* <layout.FlexCenter> */}
-      <MainToggle isToggleOnLeft={isToggleOnLeft} toggleSetter={toggleSetter}/>
+      <MainToggle isLoggedIn={isLoggedIn} isToggleOnLeft={isToggleOnLeft} toggleSetter={toggleSetter}/>
       {/* </layout.FlexCenter> */}
     </style.MainRecordCardBox>
   )

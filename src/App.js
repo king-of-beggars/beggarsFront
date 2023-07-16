@@ -1,12 +1,10 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import './App.css';
+import { GlobalVariableProvider } from 'providers';
 import { layout, } from 'styles';
 import GlobalStyle from 'styles/globalStyle';
 import Router from 'router/Router';
-import { GlobalVariableProvider } from 'components';
-import { MainFailCoin, MainGoldCoin, MainSilverCoin } from 'assets';
 
 const queryClient = new QueryClient();
 

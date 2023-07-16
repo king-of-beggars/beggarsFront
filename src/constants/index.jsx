@@ -6,6 +6,13 @@ export
         commentDetailDelete,
         commentZeroSpend,
         positiveComments,
-        negativeComments
+        negativeComments,
+        ifNotLoggedIn,
+        ifLoading,
+        ifError,
     }
     from "constants/comment"
+
+export {
+    mainDummyData,
+} from "constants/dummyData"
