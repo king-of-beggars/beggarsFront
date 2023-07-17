@@ -27,12 +27,16 @@ function ScreenBlur({ comment, children, addComponent=null }) {
   `
   return (
     <>
-      <Comment>{comment}</Comment>
+      <Comment>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+          {comment}
+          {addComponent}
+        </div>
+      </Comment>
       <BackBlur>
         <Vignette />
           {children}
       </BackBlur>
-      {addComponent}
     </>
 
   )

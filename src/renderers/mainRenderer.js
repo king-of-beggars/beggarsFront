@@ -10,7 +10,7 @@ const MainLayout = ({children}) => {
     const { isMobile, widthRatio, frameSize, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
     // const ratio = screenWidth / frameSize.width > 1 ? 1 : screenWidth / frameSize.width;
     // const ratio = widthRatio
-
+    console.log("screenWidth: ", screenWidth)
     console.log("headerHeight: ", headerHeight)
     console.log("navHeight: ", navHeight)
     console.log("mainHeight: ", mainHeight)
