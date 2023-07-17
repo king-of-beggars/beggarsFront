@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, Redirect, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Redirect,
+  Navigate,
+} from "react-router-dom";
 
 import Login from "pages/Login";
 import Signup from "pages/Signup";
@@ -11,11 +17,11 @@ import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
 import CashBookMod from "pages/CashBookMod";
 import BoardDetail from "pages/BoardDetail";
-import { MainAssetProvider } from 'components';
-import { getKrDate, setFrameSize } from 'functions';
-import { layout } from "styles"
+import { MainAssetProvider } from "components";
+import { chkLoggedIn, getKrDate, setFrameSize } from "functions";
+import { layout } from "styles";
 
-function Router() {  
+function Router() {
   // setFrameSize();
   // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
   // const [windowSize, setWindowSize] = useState({
@@ -23,7 +29,7 @@ function Router() {
   //   height: window.innerHeight
   // })
   // 게시판 상태 : 자랑하기(true) or 혼쭐나기(false)
-  const [isBoasting, setIsBoasting] = useState(true)
+  const [isBoasting, setIsBoasting] = useState(true);
 
   // const handleResize = () => {
   //   setWindowSize({
@@ -48,61 +54,91 @@ function Router() {
 
   // const isMobile = /Mobi/i.test(window.navigator.userAgent)
 
+  // 로그인 여부 확인
+  const isLogged = chkLoggedIn();
+
   return (
     <BrowserRouter>
       <Routes>
         {/* main */}
-        <Route path="/" element={
-          <MainFetcher>
-            <Main/>
-          </MainFetcher>
-        } />
-        
+        <Route
+          path="/"
+          element={
+            <MainFetcher>
+              <Main />
+            </MainFetcher>
+          }
+        />
 
         {/* related to cashbook */}
-        <Route exact path="/cash-book" element={<Navigate to={`/cash-book/${getKrDate()}`} replace />} />
-        <Route path="cash-book/:date" element={<CashBook/>} />
-        <Route path="cash-book/add" element={<CashBookAdd/>}/>
-        <Route path="cash-book/:date/:id" element={<CashBookDetail/>} /> 
-        <Route path="cash-book/edit/:id" element={<CashBookMod/>} />
+        <Route
+          exact
+          path="/cash-book"
+          element={<Navigate to={`/cash-book/${getKrDate()}`} replace />}
+        />
+        <Route path="cash-book/:date" element={<CashBook />} />
+        <Route
+          path="cash-book/add"
+          element={
+            <ProtectedRouter isLogged={isLogged}>
+              <CashBookAdd />
+            </ProtectedRouter>
+          }
+        />
+        <Route
+          path="cash-book/:date/:id"
+          element={
+            <ProtectedRouter isLogged={isLogged}>
+              <CashBookDetail />
+            </ProtectedRouter>
+          }
+        />
+        <Route
+          path="cash-book/edit/:id"
+          element={
+            <ProtectedRouter isLogged={isLogged}>
+              <CashBookMod />
+            </ProtectedRouter>
+          }
+        />
 
         {/* related to board */}
-        <Route path="board" element={<Board isBoasting={isBoasting} setIsBoasting={setIsBoasting}/>}/>
-        <Route path="board/:id" element={<BoardDetail isBoasting={isBoasting}/>}/>
+        <Route
+          path="board"
+          element={
+            <Board isBoasting={isBoasting} setIsBoasting={setIsBoasting} />
+          }
+        />
+        <Route
+          path="board/:id"
+          element={<BoardDetail isBoasting={isBoasting} />}
+        />
 
         {/* related to auth */}
-        <Route path="login" element={<Login/>} />
-        <Route path="signup" element={<Signup/>} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
 
         {/* related to user */}
-        <Route path="profile" element={<Profile/>} />
-
-        {/* <Route path="/" element={
-          <layout.FlexCenterColumn>
-            <div>Window width: {windowSize.width}, height: {windowSize.height}</div>
-            <div>Is mobile: {isMobile ? 'Yes' : 'No'}</div>
-            <div>Header height: {headerHeight}</div>
-            <div>Nav height: {navHeight}</div>
-            <div>Main height: {mainHeight}</div>
-          </layout.FlexCenterColumn>
-        } /> */}
-        {/* <Route path="/" element={<Main isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />} />
-        <Route path="login" element={<Login isMobile={isMobile} headerHeight={headerHeight-50} navHeight={0} mainHeight={mainHeight + navHeight + 50} />} />
-        <Route path="signup" element={<Signup isMobile={isMobile} headerHeight={headerHeight-50} navHeight={0} mainHeight={mainHeight + navHeight + 50} />} />
-
-        <Route path="cash-book" element={<CashBook isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />} />
-        <Route path="cash-book/:id" element={<CashBookDetail isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />} /> 
-        <Route path="cash-book/add" element={<CashBookAdd isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
-        <Route path="cash-book/edit/:id" element={<CashBookMod isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight}/>} />
-        
-        <Route path="board" element={<Board isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} isBoasting={isBoasting} setIsBoasting={setIsBoasting}/>}/>
-        <Route path="board/:id" element={<BoardDetail isBoasting={isBoasting} isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />}/>
-
-        <Route path="profile" element={<Profile isMobile={isMobile} headerHeight={headerHeight} navHeight={navHeight} mainHeight={mainHeight} />} /> */}
-        {/* <Route path="mypage/edit" element={<MyPageEdit />}/> */}
+        <Route
+          path="profile"
+          element={
+            <ProtectedRouter isLogged={isLogged}>
+              <Profile />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 }
+
+const ProtectedRouter = ({ isLogged, children }) => {
+  if (isLogged) {
+    return children;
+  } else {
+    // alert("로그인이 필요합니다.");
+    return <Navigate to="/login" replace={true} />;
+  }
+};
 
 export default Router;

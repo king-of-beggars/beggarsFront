@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useQuery } from "react-query";
+import { Navigate } from "react-router-dom";
 
 const instance = axios.create({
   method: "options",
@@ -10,6 +12,41 @@ const instance = axios.create({
   },
 });
 
+// response interceptor
+instance.interceptors.response.use(
+  function (response) {
+    // 2xx 범위에 있는 상태 코드는 이 함수를 트리거
+    // 응답 데이터가 있는 작업 수행
+    return response;
+  },
+  function (error) {
+    // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거
+    // 응답 오류가 있는 작업 수행
+    if (error.response && error.response.status) {
+      switch (error.response.status) {
+        // status code가 401인 경우 acesstoken 발급 API
+        case 401:
+          instance.get("/api/user/refresh");
+          // useGet401();
+          break;
+        // status code가 403인 경우 로그인 화면으로 이동
+        case 403:
+          return <Navigate to={"/login"} replace={true}/>
+        default:
+          return Promise.reject(error);
+      }
+    }
+    
+    return Promise.reject(error);
+  },
+)
+
+// const useGet401 = () => {
+//   console.log("여기가 시작이다!!!!!")
+//   useQuery(['access'], AuthAPI.getAccessToken, {onSuccess: () => {
+//     console.log("Bring access token");
+//   }})
+// }
 
 export const AuthAPI = {
   postNickCheck: (payload) => instance.post("/api/user/nickCheck", payload),
@@ -18,7 +55,8 @@ export const AuthAPI = {
   postLogIn: (payload) => instance.post("/api/user/login", payload),
   postNickSocial: (payload) => instance.post("/api/user/signup/social", payload),
   postLogout: () => instance.post("/api/user/logout"),
-  getSocialUser: () => instance.get("/api/user/login/getInfo")
+  getSocialUser: () => instance.get("/api/user/login/getInfo"),
+  getAccessToken: () => instance.get("/api/user/refresh")
 };
 
 export const mainAPI = {
