@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext, useMemo } from "react"
 
 import { contextValue } from "constants"
-import { debounce } from 'functions'
+import { debounce, getIsMobile, getScreenWidth, getAssetRatio, getNewAssetSize } from 'functions'
 
 // 1. create context
 const GlobalVariableContext = createContext({
@@ -9,12 +9,8 @@ const GlobalVariableContext = createContext({
         width: window.innerWidth,
         height: window.innerHeight
     },
-    isMobile: /Mobi/i.test(window.navigator.userAgent),
-    screenWidth: /Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
-                ? window.innerWidth // 그냥 window width 사용하기
-                : window.innerWidth > contextValue.frameSize.width // mobile이 아니고 width가 393보다 크면
-                    ? contextValue.frameSize.width // 393으로 크기 고정
-                    : window.innerWidth, // 아니면 더 작은 화면 크기 사용하기
+    isMobile: getIsMobile(),
+    screenWidth: getScreenWidth(),
     // screenWidth: /Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
     //         ? window.innerWidth // 그냥 window width 사용하기
     //         : 500,
@@ -23,25 +19,26 @@ const GlobalVariableContext = createContext({
     //             : window.innerWidth > contextValue.frameSize.width
     //                 ? 1 
     //                 : window.innerWidth / contextValue.frameSize.width,
-    widthRatio: window.innerWidth >= contextValue.frameSize.width
-                ? 1
-                : window.innerWidth / contextValue.frameSize.width,
+    widthRatio: getAssetRatio(),
     // headerHeight: (/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
     //                 ? window.innerWidth / contextValue.frameSize.width
     //                 : window.innerWidth > contextValue.frameSize.width
     //                     ? 1 
     //                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight,
-    headerHeight: (window.innerWidth >= contextValue.frameSize.width
-                    ? 1
-                    : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight,
+    headerHeight: getNewAssetSize(contextValue.frameHeaderHeight, getAssetRatio()),
+    // headerHeight: (window.innerWidth >= contextValue.frameSize.width
+    //                 ? 1
+    //                 : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight,
     // navHeight: (/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
     //             ? window.innerWidth / contextValue.frameSize.width
     //             : window.innerWidth > contextValue.frameSize.width
     //                 ? 1 
     //                 : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight,
-    navHeight: (window.innerWidth >= contextValue.frameSize.width
-                ? 1
-                : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight,
+    navHeight: getNewAssetSize(contextValue.frameNavHeight, getAssetRatio()),
+    // navHeight: (window.innerWidth >= contextValue.frameSize.width
+    //             ? 1
+    //             : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight,
+    mainHeight: window.innerHeight - (getNewAssetSize(contextValue.frameHeaderHeight, getAssetRatio()) + getNewAssetSize(contextValue.frameNavHeight, getAssetRatio())),
     // mainHeight: window.innerHeight - (
     //             ((/Mobi/i.test(window.navigator.userAgent) // 만일 mobile이면
     //                 ? window.innerWidth / contextValue.frameSize.width
@@ -55,15 +52,15 @@ const GlobalVariableContext = createContext({
     //                     ? 1 
     //                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
     //             ),
-    mainHeight: window.innerHeight - (
-                    ((window.innerWidth >= contextValue.frameSize.width
-                        ? 1
-                        : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight)
-                    +
-                    ((window.innerWidth >= contextValue.frameSize.width
-                        ? 1
-                        : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
-                ),
+    // mainHeight: window.innerHeight - (
+    //                 ((window.innerWidth >= contextValue.frameSize.width
+    //                     ? 1
+    //                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight)
+    //                 +
+    //                 ((window.innerWidth >= contextValue.frameSize.width
+    //                     ? 1
+    //                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
+    //             ),
     // headerHeight: window.innerHeight >= contextValue.frameSize.height
     //                 ? contextValue.frameHeaderHeight
     //                 : Math.ceil(window.innerHeight / contextValue.frameSize.height * contextValue.frameHeaderHeight),
@@ -97,8 +94,12 @@ export const GlobalVariableProvider = ({ children }) => {
         height: window.innerHeight
     })
     const [isMobile, setIsMobile] = useState(/Mobi/i.test(window.navigator.userAgent))
+    const [widthRatio, setWidthRatio] = useState(getAssetRatio())
 
     // useMemo를 이용해 조건부로 계산을 스킵할 값들
+    const headerHeight = useMemo(() => widthRatio * contextValue.frameHeaderHeight, [windowSize])
+    const navHeight = useMemo(() => widthRatio * contextValue.frameNavHeight, [windowSize])
+    const mainHeight = useMemo(() => windowSize.height - (headerHeight + navHeight), [windowSize])
     // const headerHeight = useMemo(() => Math.ceil(window.innerHeight * 0.2) > 120 ? 120 : Math.ceil(window.innerHeight * 0.2), [windowSize])
     // const navHeight = useMemo(() => Math.ceil(window.innerHeight * 0.12) > 90 ? 90 : Math.ceil(window.innerHeight * 0.12), [windowSize])
     // const mainHeight = useMemo(() => window.innerHeight - (headerHeight + navHeight), [windowSize])
@@ -148,43 +149,45 @@ export const GlobalVariableProvider = ({ children }) => {
     //                                     : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
     //                             )
     //                     , [windowSize])
-    const widthRatio = useMemo(() => window.innerWidth >= contextValue.frameSize.width
-                                ? 1
-                                : window.innerWidth / contextValue.frameSize.width
-                        , [windowSize])
-    const headerHeight = useMemo(() =>
-                            (window.innerWidth >= contextValue.frameSize.width
-                                ? 1
-                                : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight
-                        , [windowSize])
-    const navHeight = useMemo(() =>
-                            (window.innerWidth >= contextValue.frameSize.width
-                                ? 1
-                                : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight
-                        , [windowSize])
-    const mainHeight = useMemo(() =>
-                            window.innerHeight - (
-                                ((window.innerWidth >= contextValue.frameSize.width
-                                    ? 1
-                                    : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight)
-                                +
-                                ((window.innerWidth >= contextValue.frameSize.width
-                                    ? 1
-                                    : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
-                            )
-                        , [windowSize])                           
-    const screenWidth = useMemo(() =>  {
-        if (/Mobi/i.test(window.navigator.userAgent)) {
-            return window.innerWidth
-        } else {
-            return 500
-            // if (window.innerWidth > 393) {
-            //     return 393
-            // } else {
-            //     return window.innerWidth
-            // }   
-        }
-    }, [windowSize, isMobile])
+    // const widthRatio = useMemo(() => getAssetRatio(), [])
+    // const widthRatio = useMemo(() => window.innerWidth >= contextValue.frameSize.width
+    //                             ? 1
+    //                             : window.innerWidth / contextValue.frameSize.width
+    //                     , [windowSize])
+    // const headerHeight = useMemo(() =>
+    //                         (window.innerWidth >= contextValue.frameSize.width
+    //                             ? 1
+    //                             : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight
+    //                     , [windowSize])
+    // const navHeight = useMemo(() =>
+    //                         (window.innerWidth >= contextValue.frameSize.width
+    //                             ? 1
+    //                             : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight
+    //                     , [windowSize])
+    // const mainHeight = useMemo(() =>
+    //                         window.innerHeight - (
+    //                             ((window.innerWidth >= contextValue.frameSize.width
+    //                                 ? 1
+    //                                 : window.innerWidth / contextValue.frameSize.width) * contextValue.frameHeaderHeight)
+    //                             +
+    //                             ((window.innerWidth >= contextValue.frameSize.width
+    //                                 ? 1
+    //                                 : window.innerWidth / contextValue.frameSize.width) * contextValue.frameNavHeight)
+    //                         )
+    //                     , [windowSize])      
+    const screenWidth = useMemo(() => getScreenWidth(), [windowSize, isMobile])                     
+    // const screenWidth = useMemo(() =>  {
+    //     if (/Mobi/i.test(window.navigator.userAgent)) {
+    //         return window.innerWidth
+    //     } else {
+    //         return 500
+    //         // if (window.innerWidth > 393) {
+    //         //     return 393
+    //         // } else {
+    //         //     return window.innerWidth
+    //         // }   
+    //     }
+    // }, [windowSize, isMobile])
     useEffect(() => {
         // resize 될 때마다 변경되는 요소 업데이트
         // debouce 적용하여 400ms마다 한번씩 resize 업데이트
@@ -193,10 +196,12 @@ export const GlobalVariableProvider = ({ children }) => {
                 width: window.innerWidth,
                 height: window.innerHeight
             }
-            const newIsMobile = /Mobi/i.test(window.navigator.userAgent)
+            const newIsMobile = getIsMobile()
+            const newWidthRatio = getAssetRatio()
 
             setWindowSize(newWindowSize)
             setIsMobile(newIsMobile)
+            setWidthRatio(newWidthRatio)
             // test code
             // console.log('Window resized:', newWindowSize, newIsMobile) 
         }, 400)

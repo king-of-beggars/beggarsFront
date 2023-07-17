@@ -25,3 +25,11 @@ export function getAssetSize(frameSizeObj, screenWidth, assetSizeObj) {
         return { width, height }
     }
 }
+
+export function getNewAssetSize(assetSize, ratio) {
+    if (typeof(assetSize) === "object") {
+        return { width: Math.ceil(assetSize.width * ratio), height: Math.ceil(assetSize.height * ratio) }
+    } else if (typeof(assetSize) === "number") {
+        return Math.ceil(assetSize * ratio)
+    }
+}
