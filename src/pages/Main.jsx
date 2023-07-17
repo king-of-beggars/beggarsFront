@@ -38,6 +38,9 @@ export function MainFetcher({ children }) {
       console.log('MainAPI.getMainData::: get success')
       console.log('mainData:::', data)
     },
+    onRetry: (failureCount, error) => {
+      console.log(`MainAPI.getMainData::: retrying (${failureCount}):`, error);
+    }
   })
 
   // isLoading과 isError에서 렌더링 다르게 해주기
