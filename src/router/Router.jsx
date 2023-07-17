@@ -85,8 +85,22 @@ function Router() {
             </ProtectedRouter>
           }
         />
-        <Route path="cash-book/:date/:id" element={<CashBookDetail />} />
-        <Route path="cash-book/edit/:id" element={<CashBookMod />} />
+        <Route
+          path="cash-book/:date/:id"
+          element={
+            <ProtectedRouter isLogged={isLogged}>
+              <CashBookDetail />
+            </ProtectedRouter>
+          }
+        />
+        <Route
+          path="cash-book/edit/:id"
+          element={
+            <ProtectedRouter isLogged={isLogged}>
+              <CashBookMod />
+            </ProtectedRouter>
+          }
+        />
 
         {/* related to board */}
         <Route
@@ -105,7 +119,14 @@ function Router() {
         <Route path="signup" element={<Signup />} />
 
         {/* related to user */}
-        <Route path="profile" element={<Profile />} />
+        <Route
+          path="profile"
+          element={
+            <ProtectedRouter isLogged={isLogged}>
+              <Profile />
+            </ProtectedRouter>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
@@ -115,6 +136,7 @@ const ProtectedRouter = ({ isLogged, children }) => {
   if (isLogged) {
     return children;
   } else {
+    // alert("로그인이 필요합니다.");
     return <Navigate to="/login" replace={true} />;
   }
 };
