@@ -89,6 +89,9 @@ export { default as background50Tail } from "assets/pixels/backgrounds/backgroun
 export { default as background30Top } from "assets/pixels/backgrounds/background30Top.png";
 export { default as background30Middle } from "assets/pixels/backgrounds/background30Middle.png";
 export { default as background30Tail } from "assets/pixels/backgrounds/background30Tail.png";
+export { default as background70Top } from "assets/pixels/backgrounds/background50Top.png";
+export { default as background70Middle } from "assets/pixels/backgrounds/background50Middle.png";
+export { default as background70Tail } from "assets/pixels/backgrounds/background50Tail.png";
 
 // sounds
 export { default as btnClickSound } from "assets/sounds/laserShoot.wav";

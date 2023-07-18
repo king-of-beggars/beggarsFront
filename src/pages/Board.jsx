@@ -4,17 +4,18 @@ import { useQuery, useQueryClient } from "react-query";
 
 import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
-import { Nav, CardBox } from "components";
-import { backgroundBrightTop, backgroundDarkTop, backgroundBrightMiddle, backgroundDarkMiddle, backgroundBrightTail, backgroundDarkTail } from 'assets';
+import { Nav, CardBox, BoardCard } from "components";
+import { background70Top, backgroundDarkTop, background70Middle, backgroundDarkMiddle, background70Tail, backgroundDarkTail } from 'assets';
 import { boardAPI } from 'api/api';
 
 
-
-// function Board({ isBoasting, setIsBoasting, isMobile, headerHeight, navHeight, mainHeight }) {
 function Board({ isBoasting, setIsBoasting }) {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
-  console.log('Board rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth)
+  //// 1. 화면 비율 렌더링에 필요한 요소
+  const { isMobile, widthRatio, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  //// 2. 픽셀아트 적용 에셋
+  const { boardBtnBar, boardBtnActivate, boardBtnSleep, boardCard } = useGlobalVariables();
+  console.log('Board rendered:',isMobile, headerHeight, navHeight, mainHeight, screenWidth)
 
   // cardRatio
   const CARD_RATIO = 0.6
@@ -33,7 +34,9 @@ function Board({ isBoasting, setIsBoasting }) {
                     : { queryKey: ["scoldedList"], queryFn: boardAPI.getScoldedList, select: data => data.data.data }
 
   const toggleBtnHandler = () => {
-    setIsBoasting(!isBoasting)
+    setTimeout(() => {
+      setIsBoasting(!isBoasting);
+    }, 500); // 0.5초의 딜레이
   }
 
   const cardClickHandler = (id) => {
@@ -72,22 +75,22 @@ function Board({ isBoasting, setIsBoasting }) {
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={isBoasting ? `url(${backgroundBrightTop})` : `url(${backgroundDarkTop})`}
-      backPngTail={isBoasting ? `url(${backgroundBrightTail})` : `url(${backgroundDarkTail})`}
-      backPngMiddle={isBoasting ? `url(${backgroundBrightMiddle})` : `url(${backgroundDarkMiddle})`}>
+      backPngTop={isBoasting ? `url(${background70Top})` : `url(${backgroundDarkTop})`}
+      backPngTail={isBoasting ? `url(${background70Tail})` : `url(${backgroundDarkTail})`}
+      backPngMiddle={isBoasting ? `url(${background70Middle})` : `url(${backgroundDarkMiddle})`}>
       <layout.Header headerHeight={`${headerHeight}px`}>
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
         <layout.HeaderContent>
             { isBoasting
               ? (
-                <style.BoardBtnBar>
-                  <style.BoardBtnActivate isBoasting={isBoasting}>자랑하기</style.BoardBtnActivate>
-                  <style.BoardBtnSleep onClick={toggleBtnHandler} isBoasting={isBoasting}>혼쭐나기</style.BoardBtnSleep>
+                <style.BoardBtnBar width={`${boardBtnBar.width}px`} height={`${boardBtnBar.height}px`} ratio={widthRatio}>
+                  <style.BoardBtnActivate width={`${boardBtnActivate.width}px`} height={`${boardBtnActivate.height}px`} ratio={widthRatio} isBoasting={isBoasting}>자랑하기</style.BoardBtnActivate>
+                  <style.BoardBtnSleep width={`${boardBtnSleep.width}px`} height={`${boardBtnSleep.height}px`} ratio={widthRatio} onClick={toggleBtnHandler} isBoasting={isBoasting}>혼쭐나기</style.BoardBtnSleep>
                 </style.BoardBtnBar>
               ) : (
-                <style.BoardBtnBar>
-                  <style.BoardBtnSleep onClick={toggleBtnHandler} isBoasting={isBoasting}>자랑하기</style.BoardBtnSleep>
-                  <style.BoardBtnActivate isBoasting={isBoasting}>혼쭐나기</style.BoardBtnActivate>
+                <style.BoardBtnBar width={`${boardBtnBar.width}px`} height={`${boardBtnBar.height}px`} ratio={widthRatio}>
+                  <style.BoardBtnSleep width={`${boardBtnSleep.width}px`} height={`${boardBtnSleep.height}px`} ratio={widthRatio} onClick={toggleBtnHandler} isBoasting={isBoasting}>자랑하기</style.BoardBtnSleep>
+                  <style.BoardBtnActivate width={`${boardBtnActivate.width}px`} height={`${boardBtnActivate.height}px`} ratio={widthRatio} isBoasting={isBoasting}>혼쭐나기</style.BoardBtnActivate>
                 </style.BoardBtnBar>
               )
             }
@@ -96,22 +99,39 @@ function Board({ isBoasting, setIsBoasting }) {
       <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
         <layout.MainContent>
           { !!cardList ? 
-            <layout.Grid2Row>
+            <layout.Grid2Row ratio={widthRatio}>
               { console.log("cardList:::", cardList)}
+              { console.log("boarCard.width:::", boardCard.width)}
               { cardList.length > 0 && cardList.map(card => {
                 return (
-                  <CardBox 
+                  <BoardCard 
                     id={ card.boardId }
+                    isDefault={ !card.boardTypes}
+                    cardData={card}
                     budget={ card.cashbookId.cashbookGoalValue }
                     spend={ card.cashbookId.cashbookNowValue }
                     category={ card.cashbookId.cashbookCategory }
                     title={ card.cashbookId.cashbookName }
-                    ratio={ CARD_RATIO }
-                    isDefault= { isBoasting }
+                    // isDefault= { isBoasting }
                     key={ card.boardId }
                     onClickHandler={ cardClickHandler }
                   />
                 )
+                // return (
+                //   <CardBox 
+                //     id={ card.boardId }
+                //     width={`${boardCard.width}px`}
+                //     height={`${boardCard.height}px`}
+                //     ratio={ widthRatio * 0.5 }
+                //     budget={ card.cashbookId.cashbookGoalValue }
+                //     spend={ card.cashbookId.cashbookNowValue }
+                //     category={ card.cashbookId.cashbookCategory }
+                //     title={ card.cashbookId.cashbookName }
+                //     isDefault= { isBoasting }
+                //     key={ card.boardId }
+                //     onClickHandler={ cardClickHandler }
+                //   />
+                // )
               })}
             </layout.Grid2Row>
             : isLoading
@@ -122,7 +142,7 @@ function Board({ isBoasting, setIsBoasting }) {
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="board" />
+        <Nav selected="board" ratio={widthRatio}/>
       </layout.Nav>
     </style.BackgroundPageLayout>
   );

@@ -1,41 +1,85 @@
 import "styles/css/progressBar.css"
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
+import { useGlobalVariables } from 'providers';
+import { commaOnThree } from 'functions';
 import { CashbookBtn } from 'styles/styled-components/styles';
 import { ProgressBarSemiCircle } from 'components';
 import { style, layout } from "styles"
 import * as sVar from "constants/styleVariables";;
 
+const getDisplayDate = (dateStr) => dateStr.split("T")[0].slice(2).split("-").join("/");
+const getDisplayBoardName = (boardNameStr) => boardNameStr.length > 7 ? boardNameStr.slice(0, 7) + "..." : boardNameStr;
 
-function BoardCard({ id, index, budget, spend, category, title, ratio }) {
-  const cardWidthOrigin = 301
-  const cardHeightOrigin = 356
 
-  const btnWidth = 274 * 0.8;
-  const btnHeight = 46 * 0.8;
-  console.log(cardWidthOrigin * ratio)
+function BoardCard({id, onClickHandler, isDefault, cardData, writeCheck }) {
+  const { boardCard, widthRatio } = useGlobalVariables();
+  const ratio = widthRatio * 0.96
+  const cardWidth = boardCard.width * ratio
+  const cardHeight = boardCard.height * ratio
+
+  // const isBoasting = budget - spend >= 0;
+  // const [isBoasting, setIsBoasting] = useState(budget-spend >= 0)
+
+  const navigate = useNavigate();
+
+  // 카드 수정
+  // const onClickEdit = (event) => {
+  //   event.stopPropagation();
+  //   const sendInfo = {
+  //     category,
+  //     name: title,
+  //   };
+  //   const queryStr = new URLSearchParams(sendInfo).toString();
+  //   navigate(`/cash-book/edit/${id}?${queryStr}`);
+  // };
+
+  // 게시글 이동
+  // const onClickGoBoard = (event) => {
+  //   event.stopPropagation();
+  //   navigate(`/board/${writeCheck}`, { state: { isBoasting: isDefault } });
+  // };
+
   return (
-    <style.CashBookCardContainer cardWidth={`${cardWidthOrigin * ratio}px`} cardHeight={`${cardHeightOrigin * ratio}px`}>
-      
-      {
-        !!title ? (
-          <style.CashbookCategoryContainer ratio={ratio}>
-            <style.FirstCategoryText ratio={ratio}>{category}</style.FirstCategoryText>
-            <style.SecondCategoryText ratio={ratio}>{title}</style.SecondCategoryText>
-          </style.CashbookCategoryContainer>
-        ) : (
-        <style.CashbookCategoryContainer ratio={ratio}>
-          <style.SecondCategoryText ratio={ratio} style={{margin: `${1.5 * ratio}em 0 ${0.5 * ratio}em 0`}}>{category}</style.SecondCategoryText>
-        </style.CashbookCategoryContainer>
-        ) 
-      }
-      <div style={{fontSize: `${1 * ratio}em`, color:`${sVar.middleYellow}`}}>매일 {budget}원</div>
-      <div id="container" style={{width: `${9 * ratio}em`, height: `${3 * ratio}em`, margin: `${1 * ratio}em`}}>
-        <ProgressBarSemiCircle ratio={ratio} type="semiCircle" spend={spend} budget={budget}/>
-      </div>
-      <div style={{color: `${sVar.middleYellow}`, margin: `${1 * (ratio * 1.8)}em ${1 * (ratio * 1.5)}em`, fontSize: `${1 * ratio}em`}}>{spend}원 사용</div>
-      <CashbookBtn ratio={ratio} btnWidth={`${btnWidth * ratio}px`} btnHeight={`${btnHeight * (ratio * 1.1)}px`}>자세히 보기</CashbookBtn>
-    </style.CashBookCardContainer>
-  )
+    <style.CardBoxContainer
+      id={id}
+      onClick={() => onClickHandler(id)}
+      ratio={ratio}
+      isDefault={isDefault}
+      cardWidth={`${cardWidth}px`}
+      cardHeight={`${cardHeight}px`}
+    >
+      <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
+        <style.Card1stCategoryText fontSize="7.674px" paddingTop="1.1px" paddingBottom="1.1px" paddingLeft="5.5px" paddingRight="5.5px" ratio={ratio} isDefault={isDefault}>
+          {getDisplayDate(cardData.boardCreatedAt)}
+        </style.Card1stCategoryText>
+        <style.Card2ndCategoryText ratio={ratio} fontSize="13.704px" marginBottom="12px" isDefault={isDefault}>
+          {cardData.userId.userNickname}
+        </style.Card2ndCategoryText>
+        <style.CardDivision ratio={ratio} isDefault={isDefault} />
+        <style.CardBudgetText fontSize="12px" ratio={ratio} isDefault={isDefault}>
+          {getDisplayBoardName(cardData.boardName)}
+        </style.CardBudgetText>
+      </style.CardCategoryContainer>
+
+      <style.CardProgressBarContainer width="88px" height="45px" ratio={ratio}>
+        <ProgressBarSemiCircle
+          ratio={ratio}
+          isDefault={isDefault}
+          spend={cardData.cashbookId.cashbookNowValue}
+          budget={cardData.cashbookId.cashbookGoalValue}
+        />
+      </style.CardProgressBarContainer>
+      <style.CardSpendText fontSize="12px" ratio={ratio} isDefault={isDefault}>
+        {isDefault
+          ? cardData.cashbookId.cashbookNowValue === null
+            ? "무지출 데이!!"
+            : commaOnThree(cardData.cashbookId.cashbookNowValue) + "원 절약"
+          : `${commaOnThree(cardData.cashbookId.cashbookNowValue - cardData.cashbookId.cashbookGoalValue)}원 낭비`}
+      </style.CardSpendText>
+    </style.CardBoxContainer>
+  );
 }
 
 export default BoardCard

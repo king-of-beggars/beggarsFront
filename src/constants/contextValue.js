@@ -20,11 +20,11 @@ export const contextValue = {
 
     // board
     boardCard: {
-        width: 165,
-        height: 195
+        width: 163.355,
+        height: 194.601
     },
     boardBtnActivate: {
-        width: 160,
+        width: 168,
         height: 38
     },
     boardBtnSleep: {
