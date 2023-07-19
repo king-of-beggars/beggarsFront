@@ -212,8 +212,8 @@ export const CardBoxContainer = styled.div`
     props.isDefault ? `url(${cardBgYellow})` : `url(${cardBgBlack})`};
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  width: ${(props) => props.cardWidth};
-  height: ${(props) => props.cardHeight};
+  width: calc(${props => props.ratio} * ${props => props.width});
+  height: calc(${props => props.ratio} * ${props => props.height});
   display: flex;
   align-items: center;
   justify-content: center;
@@ -235,11 +235,11 @@ export const CardCategoryContainer = styled.div`
 
 // Card 대분류명으로 들어가는 스타일링입니다.
 export const Card1stCategoryText = styled.div`
-  font-size: calc(${(props) => props.ratio} * 0.9em);
-  padding-top: calc(${(props) => props.ratio} * 0.3em);
-  padding-bottom: calc(${(props) => props.ratio} * 0.3em);
-  padding-left: calc(${(props) => props.ratio} * 0.6em);
-  padding-right: calc(${(props) => props.ratio} * 0.6em);
+  font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
+  padding-left: calc(${(props) => props.ratio} * ${props => props.paddingLeft});
+  padding-right: calc(${(props) => props.ratio} * ${props => props.paddingRight});
+  padding-top: calc(${(props) => props.ratio} * ${props => props.paddingTop});
+  padding-bottom: calc(${(props) => props.ratio} * ${props => props.paddingBottom});
   background-color: ${(props) =>
     props.isDefault ? `${sVar.middleYellow}` : `${sVar.white70}`};
   color: ${(props) =>
@@ -251,9 +251,9 @@ export const Card1stCategoryText = styled.div`
 
 // Card 소분류명으로 들어가는 스타일링입니다.
 export const Card2ndCategoryText = styled.div`
-  font-size: calc(${(props) => props.ratio} * 1.2em);
+  font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
   color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
-  margin-bottom: calc(${(props) => props.ratio} * 0.5em);
+  margin-bottom: calc(${props => props.ratio} * ${props => props.marginBottom});
 `;
 
 // Card에서 중간 border를 넣기 위한 div 스타일링입니다.
@@ -267,17 +267,17 @@ export const CardDivision = styled.div`
 
 // 매일의 예산이 출력되는 div의 스타일링입니다.
 export const CardBudgetText = styled.div`
-  font-size: calc(${(props) => props.ratio} * 1em);
+  font-size: calc(${(props) => props.ratio} * ${props => props.fontSize});
   font-family: "DOSGothic";
   color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
 `;
 
 // Card 내 프로그레스 바 컨테이너의 스타일링입니다.
 export const CardProgressBarContainer = styled.div`
-  width: calc(${(props) => props.ratio} * 9em);
-  height: calc(${(props) => props.ratio} * 3em);
-  margin-top: calc(${(props) => props.ratio} * 0.5em);
-  margin-bottom: calc(${(props) => props.ratio} * 0.9em);
+  width: calc(${(props) => props.ratio} * ${props => props.width});
+  height: calc(${(props) => props.ratio} * ${props => props.height});
+  /* margin-top: calc(${(props) => props.ratio} * 0.5em);
+  margin-bottom: calc(${(props) => props.ratio} * 0.9em); */
   /* margin: calc(${(props) => props.ratio} * 0.8em); */
 `;
 
@@ -285,7 +285,7 @@ export const CardProgressBarContainer = styled.div`
 export const CardSpendText = styled.div`
   color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
   margin-top: calc(${(props) => props.ratio} * 1.1em);
-  font-size: calc(${(props) => props.ratio} * 1em);
+  font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
 `;
 
 // Card 내 버튼 스타일링입니다.
@@ -326,7 +326,7 @@ export const CashBookCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 1em 0.8em;
+  padding: calc(20px * ${(props) => props.ratio}) calc(8px * ${(props) => props.ratio});
 `;
 // 회색 dummyCard의 스타일링입니다.
 export const CashBookDummyContainer = styled.div`
@@ -543,7 +543,7 @@ export const FirstCategoryText = styled.div`
   padding: 0.3em 0.6em;
   background-color: ${sVar.middleYellow};
   color: ${sVar.lightYellow};
-  border-radius: 0.6em;
+  border-radius: calc(54.817px * ${props => props.ratio});
   margin: 0.3em 0;
 `;
 // 가계부 카드 내 소분류명으로 들어가는 스타일링입니다. 소분류명이 없을 때는 대분류가 여기에 들어갑니다.
@@ -592,6 +592,7 @@ export const BackgroundPageLayout = styled(layout.PageLayout)`
   background-position: top, bottom, center;
   background-size: ${(props) => props.screenWidth},
     ${(props) => props.screenWidth}, auto;
+  transition: background 0.4s ease;
 `;
 
 // 백그라운드가 있는 pageLayout 스타일링입니다. (변경 이후: 전체 blur 가능하도록 변경됨)
@@ -658,11 +659,14 @@ export const BoardProfilePhoto = styled.div`
 
 // 게시판 활성화 버튼 렌더링
 export const BoardBtnActivate = styled.button`
-  width: 160px;
-  height: 38px;
+  width: calc(${props => props.ratio} * ${props => props.width});
+  height: calc(${props => props.ratio} * ${props => props.height});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   background-image: url(${boardBtnActivate});
   background-color: transparent;
   border: none;
+  transition: all 0.5s ease;
   &:focus {
     outline: none;
   }
@@ -670,13 +674,14 @@ export const BoardBtnActivate = styled.button`
 
 // 게시판 비활성화 버튼 렌더링
 export const BoardBtnSleep = styled.button`
-  width: 154px;
-  height: 36px;
+  width: calc(${props => props.ratio} * ${props => props.width});
+  height: calc(${props => props.ratio} * ${props => props.height});
   background: transparent;
   /* background-image: ${(props) =>
     props.isBoasting ? `url(${boardBtnRight})` : `url(${boardBtnLeft})`}; */
   /* background-color: ${sVar.darkGray}; */
   border: none;
+  transition: all 0.5s ease;
   &:focus {
     outline: none;
   }
@@ -692,14 +697,15 @@ export const BoardBtnContainer = styled.div`
 `;
 
 export const BoardBtnBar = styled.div`
-  width: 307px;
-  height: 36px;
+  width: calc(${props => props.ratio} * ${props => props.width});
+  height: calc(${props => props.ratio} * ${props => props.height});
   display: flex;
   align-items: center;
   justify-content: center;
   background-image: url(${boardBtnBar});
   background-position: center;
-  background-size: auto;
+  background-size: 100% 100%;
+  font-size: calc(${props => props.ratio} * 16px);
   /* z-index: -1; */
   border: none;
 `

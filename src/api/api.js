@@ -2,6 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { Navigate } from "react-router-dom";
 
+
 const instance = axios.create({
   method: "options",
   baseURL: process.env.REACT_APP_SERVER_URL,
@@ -31,7 +32,9 @@ instance.interceptors.response.use(
           break;
         // status code가 403인 경우 로그인 화면으로 이동
         case 403:
-          return <Navigate to={"/login"} replace={true}/>
+          window.location.href = "/login";
+          break
+          // return <Navigate to={"/login"} replace={true}/>
         default:
           return Promise.reject(error);
       }
@@ -42,7 +45,6 @@ instance.interceptors.response.use(
 )
 
 // const useGet401 = () => {
-//   console.log("여기가 시작이다!!!!!")
 //   useQuery(['access'], AuthAPI.getAccessToken, {onSuccess: () => {
 //     console.log("Bring access token");
 //   }})

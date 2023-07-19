@@ -44,7 +44,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, isDefault }) {
           },
         });
         semiCircle.text.style.fontFamily = '"DOSGothic", Helvetica, sans-serif';
-        semiCircle.text.style.fontSize = `1em`;
+        semiCircle.text.style.fontSize = `20px`;
         
         if (graphValue > 100) {
           console.log(graphValue / 100)

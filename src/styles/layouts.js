@@ -164,7 +164,7 @@ export const SpendingListWrap = styled.div`
 export const Grid2Row = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 0.8em;
+    grid-gap: calc(20px * ${props => props.ratio});
 `
 
 export const Grid1Row = styled.div`
