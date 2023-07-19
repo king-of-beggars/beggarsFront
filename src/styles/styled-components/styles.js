@@ -218,10 +218,10 @@ export const CardBoxContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: calc(${(props) => props.ratio}* 1em);
-  padding-bottom: calc(${(props) => props.ratio} * 1em);
-  padding-left: calc(${(props) => props.ratio} * 0.8em);
-  padding-right: calc(${(props) => props.ratio} * 0.8em);
+  padding-top: calc(${(props) => props.ratio}* ${props => props.paddingTop});
+  padding-bottom: calc(${(props) => props.ratio} * ${props => props.paddingBottom});
+  padding-left: calc(${(props) => props.ratio} * ${props => props.paddingLeft});
+  padding-right: calc(${(props) => props.ratio} * ${props => props.paddingRight});
 `;
 
 // 반응형으로 새로 생성된 Card의 카테고리 컨테이너입니다.
@@ -230,7 +230,8 @@ export const CardCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: calc(${(props) => props.ratio} * 1em);
+  padding-bottom: calc(${(props) => props.ratio} * ${(props) => props.paddingBottom});
+  padding-top: calc(${(props) => props.ratio} * ${(props) => props.paddingTop});
 `;
 
 // Card 대분류명으로 들어가는 스타일링입니다.
@@ -262,7 +263,7 @@ export const CardDivision = styled.div`
   border-bottom: 0.4px solid
     ${(props) =>
       props.isDefault ? `${sVar.middleYellow}` : `${sVar.lightGray}`};
-  margin-bottom: calc(${(props) => props.ratio} * 1em);
+  margin-bottom: calc(${(props) => props.ratio} * ${props => props.marginBottom});
 `;
 
 // 매일의 예산이 출력되는 div의 스타일링입니다.
