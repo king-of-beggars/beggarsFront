@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from "react-query";
 
 import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
-import { Nav, CardBox, BoardCard } from "components";
+import { Nav, BoardCard } from "components";
 import { background70Top, backgroundDarkTop, background70Middle, backgroundDarkMiddle, background70Tail, backgroundDarkTail } from 'assets';
 import { boardAPI } from 'api/api';
 
@@ -17,14 +17,6 @@ function Board({ isBoasting, setIsBoasting }) {
   const { boardBtnBar, boardBtnActivate, boardBtnSleep, boardCard } = useGlobalVariables();
   console.log('Board rendered:',isMobile, headerHeight, navHeight, mainHeight, screenWidth)
 
-  // cardRatio
-  const CARD_RATIO = 0.6
-
-  // card 크기 결정
-  // const cardWidth = 301 * 0.5
-  // const cardHeight = 356 * 0.5
-
-  // const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   // isBoasting 상태에 따라 get 요청이 변경되어야 하는데 react-query의 쿼리문은 훅 안에서 쓰일 수 없으므로 useQuery의 key를 이용해 문제를 해결한다.
@@ -36,7 +28,7 @@ function Board({ isBoasting, setIsBoasting }) {
   const toggleBtnHandler = () => {
     setTimeout(() => {
       setIsBoasting(!isBoasting);
-    }, 500); // 0.5초의 딜레이
+    }, 500); // 전환시 0.5초의 딜레이
   }
 
   const cardClickHandler = (id) => {
@@ -112,7 +104,6 @@ function Board({ isBoasting, setIsBoasting }) {
                     spend={ card.cashbookId.cashbookNowValue }
                     category={ card.cashbookId.cashbookCategory }
                     title={ card.cashbookId.cashbookName }
-                    // isDefault= { isBoasting }
                     key={ card.boardId }
                     onClickHandler={ cardClickHandler }
                   />
