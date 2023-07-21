@@ -109,8 +109,10 @@ export const CashBookMainContent = styled.div`
 
 export const SwiperWrap = styled(FlexCenterRow)`
     width: auto;
-    height: calc(${props => props.mainHeight} - 24px - ${props => props.dateBoxHeight});
-    min-height: calc(${props => props.cardHeight} + 50px);
+    height: calc(${props => props.mainHeight} - ${props => props.dateBoxHeight});
+    min-height: calc(${props => props.cardHeight});
+    /* height: calc(${props => props.mainHeight} - 24px - ${props => props.dateBoxHeight});
+    min-height: calc(${props => props.cardHeight} + 50px); */
     overflow-y: hidden;
     /* height: ${props => props.mainHeight} */
 `

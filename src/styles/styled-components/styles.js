@@ -204,6 +204,7 @@ export const DayPickerWrap = styled(layout.FlexCenter)`
   width: ${(props) => props.dateBoxWidth};
   height: ${(props) => props.dateBoxHeight};
   margin: 0.5em 1em 1em 1em;
+  font-size: calc(18px * ${props => props.ratio});
 `;
 
 // 반응형으로 새로 생성된 CardBox의 컨테이너 스타일링입니다.
@@ -299,8 +300,8 @@ export const CardBtn = styled.button`
   background-repeat: no-repeat;
   background-color: ${(props) =>
     props.isDefault ? `${sVar.lightYellow}` : `${sVar.darkGray}`};
-  width: ${(props) => props.btnWidth};
-  height: ${(props) => props.btnHeight};
+  width: calc(${(props) => props.btnWidth} * ${props => props.ratio});
+  height: calc(${(props) => props.btnHeight} * ${props => props.ratio});
   color: ${(props) => (props.isDefault ? `${sVar.lightYellow}` : "white")};
   border: none;
   outline: none;
@@ -309,7 +310,7 @@ export const CardBtn = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(${(props) => props.ratio} * 1em);
+  font-size: calc(${(props) => props.ratio} * 20px);
 
   &:focus {
     outline: none;

@@ -30,6 +30,8 @@ function CashBookCard({
   const { cashbookCard, cashbookCardBtn } = useGlobalVariables();
   const cardWidth = cashbookCard.width
   const cardHeight = cashbookCard.height
+  const bigCardBtnWidth = cashbookCardBtn.width
+  const bigCardBtnHeight = cashbookCardBtn.height
   console.log("cardWidth:::", cardWidth);
   console.log("cardHeight:::", cardHeight);
    // console.log(id, " ::: ", writeCheck)
@@ -69,6 +71,7 @@ function CashBookCard({
 
    return (
     <style.CardBoxContainer className="cardBoxContainer" paddingTop="13px" paddingBottom="25px" paddingLeft="13px" paddingRight="13px" id={id} width={`${cardWidth}px`} height={`${cardHeight}px`} ratio={widthRatio} isDefault={true} onClick={() => onClickHandler(id)}>
+      { /* delete와 수정 버튼 */ }
       <layout.FlexCenterRow100 style={{ justifyContent: "space-between" }}>
         <DeleteCard
           id={id}
@@ -92,22 +95,50 @@ function CashBookCard({
            </style.CardBudgetText>
          </style.CardCategoryContainer>
        ) : (
-         <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
+         <style.CardCategoryContainer paddingBottom="16.22px" ratio={ratio} isDefault={isDefault}>
            <style.Card2ndCategoryText
            fontSize="25px"
            marginBottom="22px"
              ratio={ratio}
              isDefault={isDefault}
-             style={{ margin: `${1.5 * ratio}em 0 ${0.5 * ratio}em 0` }}
+            //style={{ margin: `${1.5 * ratio}em 0 ${0.5 * ratio}em 0` }}
            >
              {category}
            </style.Card2ndCategoryText>
-           <style.CardDivision ratio={ratio} isDefault={isDefault} />
-           <style.CardBudgetText ratio={ratio} isDefault={isDefault}>
+           <style.CardDivision  marginBottom="16.22px" ratio={ratio} isDefault={isDefault} />
+           <style.CardBudgetText fontSize="16px" ratio={ratio} isDefault={isDefault}>
              매일 {commaOnThree(budget)}원
            </style.CardBudgetText>
          </style.CardCategoryContainer>
        )}
+        <style.CardProgressBarContainer width="161px" height="80.5px" ratio={ratio}>
+          <ProgressBarSemiCircle
+            ratio={ratio}
+            isDefault={isDefault}
+            spend={spend}
+            budget={budget}
+            fontSize="36.485px"
+          />
+        </style.CardProgressBarContainer>
+        <style.CardSpendText fontSize="20px" ratio={ratio} isDefault={isDefault}>
+          {spend === null ? "무지출 데이!!" : commaOnThree(spend) + "원 사용"}
+        </style.CardSpendText>
+        <style.CardBtn
+            ratio={ratio}
+            id={id}
+            isDefault={isDefault}
+            isWrite={writeCheck === 0 ? false : true}
+            btnWidth={`${bigCardBtnWidth}px`}
+            btnHeight={`${bigCardBtnHeight}px`}
+            onClick={writeCheck === 0 ? spend === 0 ? changeDataNoneModal:changeWriteModal : onClickGoBoard}
+            disabled={(spend === 0) | isDiffDate}
+          >
+            {writeCheck === 0
+              ? spend > budget
+                ? "혼쭐나러 가기"
+                : "자랑하러 가기"
+              : commentGoBoard}
+          </style.CardBtn>
     </style.CardBoxContainer>
    )
  

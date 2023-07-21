@@ -70,6 +70,7 @@ function BoardCard({id, onClickHandler, isDefault, cardData, writeCheck }) {
       <style.CardProgressBarContainer width="88px" height="45px" ratio={ratio}>
         <ProgressBarSemiCircle
           ratio={ratio}
+          fontSize="20px"
           isDefault={isDefault}
           spend={cardData.cashbookId.cashbookNowValue}
           budget={cardData.cashbookId.cashbookGoalValue}

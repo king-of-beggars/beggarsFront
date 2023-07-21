@@ -190,6 +190,7 @@ function CashBookMain() {
           <style.DayPickerWrap
             dateBoxWidth={`${dateBoxWidth}px`}
             dateBoxHeight={`${dateBoxHeight}px`}
+            ratio={widthRatio}
           >
             <DayPicker
               selectDate={selectDate}
@@ -211,11 +212,14 @@ function CashBookMain() {
             </layout.FlexCenter>
           ) : (
             <layout.SwiperWrap
+              className="swiperWrap"
               cardHeight={`${cardHeight}px`}
               mainHeight={`${mainHeight}px`}
               dateBoxHeight={`${dateBoxHeight}px`}
             >
               <Swiper
+                className="swiperClassNo1"
+                spaceBetween={60}
                 modules={[Navigation, Scrollbar, Pagination, A11y]}
                 slidesPerView={slidesPerViewValue}
                 onSlideChange={(swiper) => {
@@ -239,12 +243,16 @@ function CashBookMain() {
                   return (
                     <>
                       <SwiperSlide
+                        className='iDontKnow'
                         key={idx}
                         style={{
-                          height: `${cardHeight + 20}px`,
-                          width: `100%`,
-                          marginLeft: "4%",
+                          height: `${cardHeight}px`
                         }}
+                        // style={{
+                        //   height: `${cardHeight * widthRatio}px`,
+                        //   width: `100%`,
+                        //   marginLeft: "4%",
+                        // }}
                       >
                         {" "}
                         {/* height를 CashBookCard와 동일하게 주어야 함*/}
@@ -254,6 +262,7 @@ function CashBookMain() {
                           modules={[Navigation, Pagination, Scrollbar, A11y]}
                           slidesPerView={1.3}
                           centeredSlides={true}
+                          spaceBetween={10 * widthRatio}
                           direction="horizontal"
                           touchMoveStopPropagation={false}
                           allowSlideNext={idx === activeSlide}
@@ -303,12 +312,12 @@ function CashBookMain() {
                           <SwiperSlide>
                             {idx === activeSlide ? (
                               <style.CashBookDummyContainer
-                                cardWidth={`${cardWidth}px`}
-                                cardHeight={`${cardHeight}px`}
+                                cardWidth={`${cardWidth * widthRatio}px`}
+                                cardHeight={`${cardHeight * widthRatio}px`}
                               >
                                 <style.CashBookAddExplain
-                                  cardWidth={`${cardWidth}px`}
-                                  cardHeight={`${cardHeight}px`}
+                                  cardWidth={`${cardWidth * widthRatio}px`}
+                                  cardHeight={`${cardHeight * widthRatio}px`}
                                 >
                                   {grayMent}
                                 </style.CashBookAddExplain>
@@ -316,8 +325,8 @@ function CashBookMain() {
                             ) : (
                               <div
                                 style={{
-                                  width: `${cardWidth}px`,
-                                  height: `${cardHeight}px`,
+                                  width: `${cardWidth * widthRatio}px`,
+                                  height: `${cardHeight * widthRatio}px`,
                                   background: "transparent",
                                   display: "flex",
                                   alignItems: "center",
@@ -357,7 +366,7 @@ function CashBookMain() {
         </layout.CashBookMainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="money" />
+        <Nav selected="money" ratio={widthRatio} />
       </layout.Nav>
     </style.BackgroundPageLayout>
   );
