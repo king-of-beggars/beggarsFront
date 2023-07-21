@@ -74,7 +74,8 @@ export const HeaderContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 25px;
+    font-size: calc(25px * ${props => props.ratio});
+    background-color: ${props => props.background};
 `
 
 export const Nav = styled.nav`
@@ -91,6 +92,7 @@ export const Main = styled.main`
     max-height: ${props => props.mainHeight};
     overflow-y: scroll;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 `
