@@ -49,15 +49,19 @@ function BoardCard({id, onClickHandler, isDefault, cardData, writeCheck }) {
       isDefault={isDefault}
       cardWidth={`${cardWidth}px`}
       cardHeight={`${cardHeight}px`}
+      paddingLeft="7.67px"
+      paddingRight="7.67px"
+      paddingTop="18.64px"
+      paddingBottom="19.6px"
     >
-      <style.CardCategoryContainer ratio={ratio} isDefault={isDefault}>
+      <style.CardCategoryContainer ratio={ratio} paddingBottom="8.89px" isDefault={isDefault}>
         <style.Card1stCategoryText fontSize="7.674px" paddingTop="1.1px" paddingBottom="1.1px" paddingLeft="5.5px" paddingRight="5.5px" ratio={ratio} isDefault={isDefault}>
           {getDisplayDate(cardData.boardCreatedAt)}
         </style.Card1stCategoryText>
         <style.Card2ndCategoryText ratio={ratio} fontSize="13.704px" marginBottom="12px" isDefault={isDefault}>
           {cardData.userId.userNickname}
         </style.Card2ndCategoryText>
-        <style.CardDivision ratio={ratio} isDefault={isDefault} />
+        <style.CardDivision marginBottom="8.89px" ratio={ratio} isDefault={isDefault} />
         <style.CardBudgetText fontSize="12px" ratio={ratio} isDefault={isDefault}>
           {getDisplayBoardName(cardData.boardName)}
         </style.CardBudgetText>
@@ -66,6 +70,7 @@ function BoardCard({id, onClickHandler, isDefault, cardData, writeCheck }) {
       <style.CardProgressBarContainer width="88px" height="45px" ratio={ratio}>
         <ProgressBarSemiCircle
           ratio={ratio}
+          fontSize="20px"
           isDefault={isDefault}
           spend={cardData.cashbookId.cashbookNowValue}
           budget={cardData.cashbookId.cashbookGoalValue}

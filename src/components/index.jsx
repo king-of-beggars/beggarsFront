@@ -3,6 +3,7 @@ export { default as Nav } from "components/common/Navigation";
 export { default as AutoResizedText } from "components/common/AutoResizedText"
 export { default as ScreenBlur } from "components/common/ScreenBlur"
 
+// cashbook
 export { default as CashBookCard } from "components/cash-book/CashBookCard" // 추후 CardBox로 대체
 export { default as CardBox } from "components/ui/box/CardBox"
 export { default as DayPicker } from "components/cash-book/DayPicker"
@@ -24,6 +25,7 @@ export { default as ExpendAddModal } from "components/ui/modal/ExpendAddModal";
 export { default as CashDetailModal } from "components/ui/modal/CashDetailModal";
 export { default as SocialLoginModal } from "components/ui/modal/SocialLoginModal";
 export { default as WriteReceipt } from "components/ui/modal/WriteReceipt";
+export { default as CommentDeleteModal } from "components/ui/modal/CommentDeleteModal";
 
 export { default as BoardCard } from "components/board/BoardCard"
 export { default as BoardDetailInput } from "components/board/BoardDetailInput"

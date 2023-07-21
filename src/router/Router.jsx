@@ -12,6 +12,7 @@ import Signup from "pages/Signup";
 import Main, { MainFetcher } from "pages/Main";
 import Profile from "pages/Profile";
 import CashBook from "pages/CashBook";
+import CashBookMain from 'pages/CashBookMain';
 import Board from "pages/Board";
 import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
@@ -76,7 +77,8 @@ function Router() {
           path="/cash-book"
           element={<Navigate to={`/cash-book/${getKrDate()}`} replace />}
         />
-        <Route path="cash-book/:date" element={<CashBook />} />
+        <Route path="cash-book/:date" element={<CashBookMain />} />
+        {/* <Route path="cash-book/:date" element={<CashBook />} /> */}
         <Route
           path="cash-book/add"
           element={

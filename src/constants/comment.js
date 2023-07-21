@@ -48,3 +48,5 @@ export const commentDataNone = ["장부에 기록을 해야만", "벽보를 붙�
 // board
 //// 로그인 유도 멘트
 export const commentBoardLogin = ["진정으로", "우리와 함께 하겠는가?"]
+//// 댓글 삭제 멘트
+export const commentBoardDelete = ["이 댓글을 정말로", "지워버릴 텐가?"]

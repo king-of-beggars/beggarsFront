@@ -204,6 +204,7 @@ export const DayPickerWrap = styled(layout.FlexCenter)`
   width: ${(props) => props.dateBoxWidth};
   height: ${(props) => props.dateBoxHeight};
   margin: 0.5em 1em 1em 1em;
+  font-size: calc(18px * ${props => props.ratio});
 `;
 
 // 반응형으로 새로 생성된 CardBox의 컨테이너 스타일링입니다.
@@ -218,10 +219,10 @@ export const CardBoxContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: calc(${(props) => props.ratio}* 1em);
-  padding-bottom: calc(${(props) => props.ratio} * 1em);
-  padding-left: calc(${(props) => props.ratio} * 0.8em);
-  padding-right: calc(${(props) => props.ratio} * 0.8em);
+  padding-top: calc(${(props) => props.ratio}* ${props => props.paddingTop});
+  padding-bottom: calc(${(props) => props.ratio} * ${props => props.paddingBottom});
+  padding-left: calc(${(props) => props.ratio} * ${props => props.paddingLeft});
+  padding-right: calc(${(props) => props.ratio} * ${props => props.paddingRight});
 `;
 
 // 반응형으로 새로 생성된 Card의 카테고리 컨테이너입니다.
@@ -230,7 +231,8 @@ export const CardCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: calc(${(props) => props.ratio} * 1em);
+  padding-bottom: calc(${(props) => props.ratio} * ${(props) => props.paddingBottom});
+  padding-top: calc(${(props) => props.ratio} * ${(props) => props.paddingTop});
 `;
 
 // Card 대분류명으로 들어가는 스타일링입니다.
@@ -262,7 +264,7 @@ export const CardDivision = styled.div`
   border-bottom: 0.4px solid
     ${(props) =>
       props.isDefault ? `${sVar.middleYellow}` : `${sVar.lightGray}`};
-  margin-bottom: calc(${(props) => props.ratio} * 1em);
+  margin-bottom: calc(${(props) => props.ratio} * ${props => props.marginBottom});
 `;
 
 // 매일의 예산이 출력되는 div의 스타일링입니다.
@@ -298,8 +300,8 @@ export const CardBtn = styled.button`
   background-repeat: no-repeat;
   background-color: ${(props) =>
     props.isDefault ? `${sVar.lightYellow}` : `${sVar.darkGray}`};
-  width: ${(props) => props.btnWidth};
-  height: ${(props) => props.btnHeight};
+  width: calc(${(props) => props.btnWidth} * ${props => props.ratio});
+  height: calc(${(props) => props.btnHeight} * ${props => props.ratio});
   color: ${(props) => (props.isDefault ? `${sVar.lightYellow}` : "white")};
   border: none;
   outline: none;
@@ -308,7 +310,7 @@ export const CardBtn = styled.button`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(${(props) => props.ratio} * 1em);
+  font-size: calc(${(props) => props.ratio} * 20px);
 
   &:focus {
     outline: none;
@@ -725,8 +727,25 @@ export const ReceiptPostContainer = styled.div`
 
 // 영수증 내부의 게시글 스타일링입니다.
 export const ReceiptPost = styled.div`
-  padding: 0.8em;
-  font-size: 16px;
+  font-family: "DOSGothic";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: calc(${props => props.ratio} * 20px) 0; 
+  font-size: calc(${props => props.ratio} * 12px);
+  gap: calc(${props => props.ratio} * 10px);
+  border-bottom: 2px dashed ${sVar.darkGray};
+`
+
+// 게시글 코멘트 내부의 '메모' 제목 스타일링입니다.
+export const ReceiptMemoTitle = styled.div`
+  color: #fff;
+  padding: calc(2px * ${props => props.ratio}) calc(6px * ${props => props.ratio});
+  gap: calc(10px * ${props => props.ratio});
+  border-radius: calc(100px * ${props => props.ratio});
+  background-color: ${sVar.darkGray};
+  font-size: calc(14px * ${props => props.ratio});
 `
 
 // 20px 아이콘 스타일링입니다.
@@ -1031,4 +1050,13 @@ export const MainJourneyStreak = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+// BoardDetail에 들어가는 NavInput의 container
+export const NavInputContainer = styled.nav`
+    height: ${props => props.navHeight};
+    width: ${props => props.navWidth};
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `

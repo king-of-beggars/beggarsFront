@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-import { useGlobalVariables } from "providers"
+import { useGlobalVariables } from "providers";
 import { layout, style } from "styles";
 import {
   DayPicker,
@@ -18,6 +18,7 @@ import {
   CardBox,
   WriteReceipt,
   CashDetailModal,
+  CashBookCard,
 } from "components";
 import "styles/css/customSwiper.css";
 import {
@@ -26,82 +27,38 @@ import {
   mainBackgroundTop,
 } from "assets";
 import { getDateBoxSize } from "functions/getAssetSize";
-import { commentDataNone, commentDeleteCard, commentGray } from "constants/comment";
+import {
+  commentDataNone,
+  commentDeleteCard,
+  commentGray,
+} from "constants/comment";
 import { useEffect } from "react";
-// import { commentGray } from "constants/styleVariables";
 
-function CashBook() {
-  // function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
-  const {
-    windowSize,
-    frameSize,
-    isMobile,
-    headerHeight,
-    navHeight,
-    mainHeight,
-    screenWidth,
-    cashbookDateBox,
-    boardBtnSleep,
-    cashbookCard,
-    widthRatio
-  } = useGlobalVariables();
-  console.log(
-    "CashBook rendered:",
-    windowSize,
-    isMobile,
-    headerHeight,
-    navHeight,
-    mainHeight
-  );
+function CashBookMain() {
+    // 작성된 context import
+    //// 1. 화면 비율 렌더링에 필요한 요소
+    const { isMobile, widthRatio, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+    //// 2. 픽셀아트 적용 에셋
+    const { cashbookDateBox, cashbookCard } = useGlobalVariables()
+
   const navigate = useNavigate();
-  // // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
-  // const [windowSize, setWindowSize] = useState({
-  //   width: window.innerWidth,
-  //   height: window.innerHeight
-  // })
+  const dateBoxWidth = cashbookDateBox.width * widthRatio
+  const dateBoxHeight = cashbookDateBox.height * widthRatio
 
-  // const handleResize = () => {
-  //   setWindowSize({
-  //     width: window.innerWidth,
-  //     height: window.innerHeight
-  //   })
-  // }
+  const cardHeight = cashbookCard.height * widthRatio
+  const cardWidth = cashbookCard.width * widthRatio
 
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
+  const CARD_RATIO = 0.9
 
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize)
-  //   }
-  // }, [])
-  // const screenWidth = isMobile
-  //   ? parseFloat(localStorage.getItem("screenWidth"))
-  //   : parseFloat(localStorage.getItem("screenWidth")) > 393
-  //   ? 393
-  //   : parseFloat(localStorage.getItem("screenWidth"));
-
-  // datepicker 박스 크기 결정
-  // const dateBoxWidth =
-  //   isMobile || screenWidth < 500
-  //     ? ((screenWidth * 155) / 393) * 0.65
-  //     : ((500 * 155) / 393) * 0.65;
-  // const dateBoxHeight = dateBoxWidth * (36 / 155);
-  const { dateBoxWidth, dateBoxHeight } = getDateBoxSize(
-    isMobile,
-    frameSize,
-    screenWidth,
-    cashbookDateBox,
-    boardBtnSleep
-  );
-  const CARD_RATIO = 0.9;
 
   // card 크기 결정
-  const cardWidth = cashbookCard.width * CARD_RATIO;
-  const cardHeight = cashbookCard.height * CARD_RATIO;
+//   const cardWidth = cashbookCard.width * CARD_RATIO;
+//   const cardHeight = cashbookCard.height * CARD_RATIO;
 
   // slidesPerView에 들어갈 카드 수
   let slidesPerViewValue =
-    Math.round((mainHeight / cardHeight) * 10) / 10 - 0.4;
+    // Math.round((mainHeight / cardHeight) * 10) / 10 - 0.4;
+    Math.round((mainHeight / cardHeight) * 10) / 10
 
   // activeSlide 상태 관리
   const [activeSlide, setActiveSlide] = useState(0);
@@ -112,12 +69,12 @@ function CashBook() {
   const param = useParams();
   const [selectDate, setSelectDate] = useState(moment(param.date));
   const [focused, setFocused] = useState(false);
-  const isDiffDate = moment().diff(moment(selectDate),'days') >= 2;
+  const isDiffDate = moment().diff(moment(selectDate), "days") >= 2;
 
-  useEffect(()=>{
-    navigate(`/cash-book/${selectDate.format('YYYY-MM-DD')}`)
-  }, [selectDate])
-  
+  useEffect(() => {
+    navigate(`/cash-book/${selectDate.format("YYYY-MM-DD")}`);
+  }, [selectDate]);
+
   // 게시글 작성 Modal
   const [isWriteModal, setIsWriteModal] = useState(false);
   const [isBoasting, setIsBoasting] = useState(null);
@@ -165,7 +122,7 @@ function CashBook() {
     } else {
       alert("장부 삭제를 실패했습니다.");
     }
-  }
+  };
 
   // 가계부 데이터 없을 때 Modal
   const [isDataNoneModal, setIsDataNoneModal] = useState(false);
@@ -180,7 +137,7 @@ function CashBook() {
     setIsDataNoneModal(false);
   };
   const onClickDataNone = () => {
-    navigate(`/cash-book/${selectDate.format('YYYY-MM-DD')}/${clickedModal}`);
+    navigate(`/cash-book/${selectDate.format("YYYY-MM-DD")}/${clickedModal}`);
     // setIsDataNoneModal(false);
   };
 
@@ -200,7 +157,7 @@ function CashBook() {
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
-    navigate(`/cash-book/${selectDate.format('YYYY-MM-DD')}/${id}`);
+    navigate(`/cash-book/${selectDate.format("YYYY-MM-DD")}/${id}`);
   };
 
   // 카드 추가 박스로 이동
@@ -221,9 +178,7 @@ function CashBook() {
           className="statusBarHeight"
           style={{ width: "inherit", height: "50px" }}
         ></div>
-        <layout.HeaderContent
-          ratio={widthRatio}  
-        >
+        <layout.HeaderContent>
           <style.CashBookHeader>가계부</style.CashBookHeader>
         </layout.HeaderContent>
       </layout.Header>
@@ -235,6 +190,7 @@ function CashBook() {
           <style.DayPickerWrap
             dateBoxWidth={`${dateBoxWidth}px`}
             dateBoxHeight={`${dateBoxHeight}px`}
+            ratio={widthRatio}
           >
             <DayPicker
               selectDate={selectDate}
@@ -256,11 +212,14 @@ function CashBook() {
             </layout.FlexCenter>
           ) : (
             <layout.SwiperWrap
+              className="swiperWrap"
               cardHeight={`${cardHeight}px`}
               mainHeight={`${mainHeight}px`}
               dateBoxHeight={`${dateBoxHeight}px`}
             >
               <Swiper
+                className="swiperClassNo1"
+                spaceBetween={60}
                 modules={[Navigation, Scrollbar, Pagination, A11y]}
                 slidesPerView={slidesPerViewValue}
                 onSlideChange={(swiper) => {
@@ -284,12 +243,16 @@ function CashBook() {
                   return (
                     <>
                       <SwiperSlide
+                        className='iDontKnow'
                         key={idx}
                         style={{
-                          height: `${cardHeight + 20}px`,
-                          width: `100%`,
-                          marginLeft: "4%",
+                          height: `${cardHeight}px`
                         }}
+                        // style={{
+                        //   height: `${cardHeight * widthRatio}px`,
+                        //   width: `100%`,
+                        //   marginLeft: "4%",
+                        // }}
                       >
                         {" "}
                         {/* height를 CashBookCard와 동일하게 주어야 함*/}
@@ -299,6 +262,7 @@ function CashBook() {
                           modules={[Navigation, Pagination, Scrollbar, A11y]}
                           slidesPerView={1.3}
                           centeredSlides={true}
+                          spaceBetween={10 * widthRatio}
                           direction="horizontal"
                           touchMoveStopPropagation={false}
                           allowSlideNext={idx === activeSlide}
@@ -318,7 +282,7 @@ function CashBook() {
                           }}
                         >
                           <SwiperSlide>
-                            <CardBox
+                            <CashBookCard
                               id={card.cashbookId}
                               budget={card.cashbookGoalValue}
                               spend={card.cashbookNowValue}
@@ -335,25 +299,25 @@ function CashBook() {
                               isDefault={true}
                             />
                             {/* <CashBookCard
-                                id={card.id}
-                                budget={card.cashbookGoalValue}
-                                spend={card.cashbookNowValue}
-                                category={card.cashbookCategory}
-                                title={card.cashbookName}
-                                cardWidth={`${cardWidth}px`}
-                                cardHeight={`${cardHeight}px`}
-                                index={idx}
-                              /> */}
+                                    id={card.id}
+                                    budget={card.cashbookGoalValue}
+                                    spend={card.cashbookNowValue}
+                                    category={card.cashbookCategory}
+                                    title={card.cashbookName}
+                                    cardWidth={`${cardWidth}px`}
+                                    cardHeight={`${cardHeight}px`}
+                                    index={idx}
+                                  /> */}
                           </SwiperSlide>
                           <SwiperSlide>
                             {idx === activeSlide ? (
                               <style.CashBookDummyContainer
-                                cardWidth={`${cardWidth}px`}
-                                cardHeight={`${cardHeight}px`}
+                                cardWidth={`${cardWidth * widthRatio}px`}
+                                cardHeight={`${cardHeight * widthRatio}px`}
                               >
                                 <style.CashBookAddExplain
-                                  cardWidth={`${cardWidth}px`}
-                                  cardHeight={`${cardHeight}px`}
+                                  cardWidth={`${cardWidth * widthRatio}px`}
+                                  cardHeight={`${cardHeight * widthRatio}px`}
                                 >
                                   {grayMent}
                                 </style.CashBookAddExplain>
@@ -361,8 +325,8 @@ function CashBook() {
                             ) : (
                               <div
                                 style={{
-                                  width: `${cardWidth}px`,
-                                  height: `${cardHeight}px`,
+                                  width: `${cardWidth * widthRatio}px`,
+                                  height: `${cardHeight * widthRatio}px`,
                                   background: "transparent",
                                   display: "flex",
                                   alignItems: "center",
@@ -402,10 +366,10 @@ function CashBook() {
         </layout.CashBookMainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="money" />
+        <Nav selected="money" ratio={widthRatio} />
       </layout.Nav>
     </style.BackgroundPageLayout>
   );
 }
 
-export default CashBook;
+export default CashBookMain;

@@ -39,7 +39,7 @@ function BoardDetailInput({ boardId, userId, changeLoginModal }) {
   // console.log("API get ::: ", typeof userId)
 
   return (
-    <style.NavWrap style={{ height: "auto", bottom: "auto" }}>
+    <style.NavWrap style={{ height: "auto", bottom: "auto", justifyContent: "center"}}>
       <style.BoardDetailInputContainer>
         {chkLoggedIn() ? (
           <style.BoardDetailInputLeft

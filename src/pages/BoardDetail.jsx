@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 
 import { useGlobalVariables } from "providers"
+import { commaOnThree } from "functions"
 import {
   BoardDetailInput,
   BoardDetailComment,
   CashDetailModal,
+  CommentDeleteModal,
 } from "components";
 import { layout, style } from "styles";
 import {
@@ -20,7 +22,25 @@ import {
 } from "assets";
 import { boardAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
-import { commentBoardLogin } from "constants/comment";
+import { commentBoardDelete, commentBoardLogin } from "constants/comment";
+
+const INIT_MODAL_STATE = false
+
+// 영수증 상세에서의 날짜 및 시간 display 함수
+//// isDateOnly이면 연-월-일만 출력
+//// dateConnector로 연, 월, 일 사이의 연결 문자를 변경
+const displayCreatedAt = (dateStr, isDateOnly=true, dateConnector="-") => {
+  let [date, time] = dateStr.split("T")
+  if (dateConnector !== "-") {
+    date = date.split("-").join(dateConnector)
+  }
+  if (isDateOnly) { 
+    return date
+  } else {
+    time = time.split(".")[0] 
+    return `${date} ${time}`
+  }
+}
 
 // function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 function BoardDetail({ isBoasting }) {
@@ -29,8 +49,14 @@ function BoardDetail({ isBoasting }) {
     isBoasting = state.isBoasting;
   }
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, screenWidth } =
+  const { windowSize, isMobile, screenWidth, widthRatio } =
     useGlobalVariables();
+  // 다른 페이지와 다른 header높이 및 nav 설정 : 53px, 110px
+  //// 그로 인한 mainHeight 변경
+  const headerHeight = 53
+  const navHeight = 110;
+  const mainHeight = windowSize.height - (navHeight + headerHeight)
+
   console.log(
     "BoardDetail rendered:",
     windowSize,
@@ -38,9 +64,6 @@ function BoardDetail({ isBoasting }) {
     headerHeight,
     screenWidth
   );
-
-  const navHeight = 110;
-  const mainHeight = windowSize.height - (navHeight + headerHeight);
 
   const { id } = useParams(); // boardid 패러미터 받아오기
   // console.log("받아온 id:::", id);
@@ -91,7 +114,6 @@ function BoardDetail({ isBoasting }) {
     const newIsLogin = !isLoginModal;
     setIsLoginModal(newIsLogin);
   };
-  
   const onClickInput = () => {
     navigate("/login");
   };
@@ -102,9 +124,9 @@ function BoardDetail({ isBoasting }) {
   };
 
   // 숫자 콤마 표시
-  const digit3Comma = (digit) => {
-    return digit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  };
+  // const digit3Comma = (digit) => {
+  //   return digit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  // };
 
   if (isLoading) {
     <div>Loading...</div>;
@@ -134,9 +156,10 @@ function BoardDetail({ isBoasting }) {
         <layout.Header headerHeight={`${headerHeight}px`}>
           <div
             className="statusBarHeight"
-            style={{ width: "inherit", height: "50px" }}
+            style={{ width: "inherit", height: "53px" }}
           ></div>
-          <layout.HeaderContent
+          {/* <layout.HeaderContent
+            ratio={widthRatio}
             style={{ fontSize: "25px", backgroundColor: `${sVar.white70}` }}
           >
             <BackArrowGray
@@ -144,7 +167,7 @@ function BoardDetail({ isBoasting }) {
               style={{ position: "absolute", left: "10%", top: "60%" }}
             />
             {!!response.userId.userNickname && response.userId.userNickname}
-          </layout.HeaderContent>
+          </layout.HeaderContent> */}
         </layout.Header>
         <layout.Main
           headerHeight={`${headerHeight}px`}
@@ -152,13 +175,23 @@ function BoardDetail({ isBoasting }) {
         >
           <layout.MainContent>
             {/* 영수증 */}
+            <layout.HeaderContent
+            ratio={widthRatio}
+            style={{ position: "relative", height: "auto", padding: `${25 * widthRatio}px 0`, width: "100%", backgroundColor: `${sVar.white70}` }}
+            >
+              <BackArrowGray
+                onClick={onClickBack}
+                style={{ position: "absolute", left: `${10 * widthRatio}px` }}
+              />
+              {!!response.userId.userNickname && response.userId.userNickname}
+            </layout.HeaderContent>
             <layout.FlexCenterColumn100
               style={{ backgroundColor: `${sVar.white70}` }}
             >
               <style.ReceiptInnerContainer
-                padding="0.8em"
-                fontSize="0.6em"
-                style={{ gap: "0.5em" }}
+                padding={`${11 * widthRatio}px ${13 * widthRatio}px`}
+                fontSize={`${9 * widthRatio}px`}
+                style={{ lineHeight: "130%" }}
               >
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
@@ -177,23 +210,16 @@ function BoardDetail({ isBoasting }) {
                 >
                   <div>웃기고 싶어요 안 선생님</div>
                   <div>
-                    {!!response.boardCreatedAt && response.boardCreatedAt}
+                    {!!response.boardCreatedAt && displayCreatedAt(response.boardCreatedAt, false)}
                   </div>
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
-              <style.ReceiptInnerContainer padding="1em" fontSize="1.2em">
-                {console.log(
-                  response.cashbookDetail.cashbookCreatedAt.split("T")
-                )}
-                {!!response.cashbookDetail.cashbookCreatedAt &&
-                  response.cashbookDetail.cashbookCreatedAt
-                    .split("T")[0]
-                    .split("-")
-                    .join(" / ")}
+              <style.ReceiptInnerContainer padding={`${16 * widthRatio}px`} fontSize={`${20 * widthRatio}px`}>
+                {!!response.cashbookDetail.cashbookCreatedAt && displayCreatedAt(response.cashbookDetail.cashbookCreatedAt, true, " / ")}
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer
-                padding="1em"
-                fontSize="0.9em"
+                padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
+                fontSize={`${14 * widthRatio}px`}
                 style={{ display: "flex", flexDirection: "row" }}
               >
                 <div style={{ textAlign: "right" }}>
@@ -207,11 +233,14 @@ function BoardDetail({ isBoasting }) {
                 </div>
                 <div style={{ textAlign: "left" }}>
                   {!!response.cashbookDetail.cashbookGoalValue &&
-                    digit3Comma(response.cashbookDetail.cashbookGoalValue)}
+                    commaOnThree(response.cashbookDetail.cashbookGoalValue)}
                   원
                 </div>
               </style.ReceiptInnerContainer>
-              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
+              <style.ReceiptInnerContainer
+                padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
+                fontSize={`${14 * widthRatio}px`}
+              >
                 {!!response.cashbookDetail.detail &&
                   response.cashbookDetail.detail.map((purchase) => {
                     return (
@@ -220,19 +249,22 @@ function BoardDetail({ isBoasting }) {
                         key={purchase.cashDetailId}
                       >
                         <div>{purchase.cashDetailText}</div>
-                        <div>{digit3Comma(purchase.cashDetailValue)}원</div>
+                        <div>{commaOnThree(purchase.cashDetailValue)}원</div>
                       </layout.FlexCenterRow100>
                     );
                   })}
               </style.ReceiptInnerContainer>
-              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
+              <style.ReceiptInnerContainer
+                padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
+                fontSize={`${14 * widthRatio}px`}
+              >
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
                   <div>합계</div>
                   <div>
                     {!!response.cashbookDetail.cashbookNowValue &&
-                      digit3Comma(response.cashbookDetail.cashbookNowValue)}
+                      commaOnThree(response.cashbookDetail.cashbookNowValue)}
                     원
                   </div>
                 </layout.FlexCenterRow100>
@@ -244,27 +276,32 @@ function BoardDetail({ isBoasting }) {
                     borderBottom: "2px dashed green",
                   }}
                 > */}
-              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
+              <style.ReceiptInnerContainer
+                padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
+                fontSize={`${14 * widthRatio}px`}
+              >
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
-                  <div>절약한 금액</div>
+                  { console.log("boardType:::", response.boardTypes)}
+                  <div>{!!response.boardTypes ? "낭비한 금액" : "절약한 금액"}</div>
                   <div>
                     {!!response.cashbookDetail.cashbookGoalValue &&
-                      digit3Comma(
-                        response.cashbookDetail.cashbookGoalValue -
-                          response.cashbookDetail.cashbookNowValue
+                      commaOnThree(
+                        Math.abs(response.cashbookDetail.cashbookGoalValue -
+                          response.cashbookDetail.cashbookNowValue)
                       )}
                     원
                   </div>
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
             </layout.FlexCenterColumn100>
-            {/* 게시글 -> 추후 개발*/}
+            {/* 게시글 */}
             <style.ReceiptPostContainer
               style={{ backgroundColor: `${sVar.white70}` }}
             >
-              <style.ReceiptPost>
+              <style.ReceiptPost ratio={widthRatio}>
+                <style.ReceiptMemoTitle ratio={widthRatio}>메모</style.ReceiptMemoTitle>
                 {!!response.boardText && response.boardText}
               </style.ReceiptPost>
             </style.ReceiptPostContainer>
@@ -322,6 +359,16 @@ function BoardDetail({ isBoasting }) {
             {commentBoardLogin}
           </CashDetailModal>
         )}
+        {/* {
+          isDeleteModal && (
+            <CommentDeleteModal
+              setClose={() => setIsDeleteModal(INIT_MODAL_STATE)}
+              onClickHandler={onClickDeleteComment}
+            >
+              {commentBoardDelete}
+            </CommentDeleteModal>
+          )
+        } */}
       </style.BackgroundPageLayout>
     );
   }
