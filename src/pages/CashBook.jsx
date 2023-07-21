@@ -43,6 +43,7 @@ function CashBook() {
     cashbookDateBox,
     boardBtnSleep,
     cashbookCard,
+    widthRatio
   } = useGlobalVariables();
   console.log(
     "CashBook rendered:",
@@ -220,7 +221,9 @@ function CashBook() {
           className="statusBarHeight"
           style={{ width: "inherit", height: "50px" }}
         ></div>
-        <layout.HeaderContent>
+        <layout.HeaderContent
+          ratio={widthRatio}  
+        >
           <style.CashBookHeader>가계부</style.CashBookHeader>
         </layout.HeaderContent>
       </layout.Header>
