@@ -1034,3 +1034,12 @@ export const MainJourneyStreak = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+// BoardDetail에 들어가는 NavInput의 container
+export const NavInputContainer = styled.nav`
+    height: ${props => props.navHeight};
+    width: ${props => props.navWidth};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`

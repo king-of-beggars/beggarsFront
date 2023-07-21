@@ -29,7 +29,7 @@ function BoardDetail({ isBoasting }) {
     isBoasting = state.isBoasting;
   }
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, screenWidth } =
+  const { windowSize, isMobile, headerHeight, screenWidth, widthRatio } =
     useGlobalVariables();
   console.log(
     "BoardDetail rendered:",
