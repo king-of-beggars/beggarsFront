@@ -727,8 +727,25 @@ export const ReceiptPostContainer = styled.div`
 
 // 영수증 내부의 게시글 스타일링입니다.
 export const ReceiptPost = styled.div`
-  padding: 0.8em;
-  font-size: 16px;
+  font-family: "DOSGothic";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: calc(${props => props.ratio} * 20px) 0; 
+  font-size: calc(${props => props.ratio} * 12px);
+  gap: calc(${props => props.ratio} * 10px);
+  border-bottom: 2px dashed ${sVar.darkGray};
+`
+
+// 게시글 코멘트 내부의 '메모' 제목 스타일링입니다.
+export const ReceiptMemoTitle = styled.div`
+  color: #fff;
+  padding: calc(2px * ${props => props.ratio}) calc(6px * ${props => props.ratio});
+  gap: calc(10px * ${props => props.ratio});
+  border-radius: calc(100px * ${props => props.ratio});
+  background-color: ${sVar.darkGray};
+  font-size: calc(14px * ${props => props.ratio});
 `
 
 // 20px 아이콘 스타일링입니다.

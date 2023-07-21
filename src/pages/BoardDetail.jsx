@@ -114,7 +114,6 @@ function BoardDetail({ isBoasting }) {
     const newIsLogin = !isLoginModal;
     setIsLoginModal(newIsLogin);
   };
-  
   const onClickInput = () => {
     navigate("/login");
   };
@@ -284,23 +283,25 @@ function BoardDetail({ isBoasting }) {
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
-                  <div>절약한 금액</div>
+                  { console.log("boardType:::", response.boardTypes)}
+                  <div>{!!response.boardTypes ? "낭비한 금액" : "절약한 금액"}</div>
                   <div>
                     {!!response.cashbookDetail.cashbookGoalValue &&
                       commaOnThree(
-                        response.cashbookDetail.cashbookGoalValue -
-                          response.cashbookDetail.cashbookNowValue
+                        Math.abs(response.cashbookDetail.cashbookGoalValue -
+                          response.cashbookDetail.cashbookNowValue)
                       )}
                     원
                   </div>
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
             </layout.FlexCenterColumn100>
-            {/* 게시글 -> 추후 개발*/}
+            {/* 게시글 */}
             <style.ReceiptPostContainer
               style={{ backgroundColor: `${sVar.white70}` }}
             >
-              <style.ReceiptPost>
+              <style.ReceiptPost ratio={widthRatio}>
+                <style.ReceiptMemoTitle ratio={widthRatio}>메모</style.ReceiptMemoTitle>
                 {!!response.boardText && response.boardText}
               </style.ReceiptPost>
             </style.ReceiptPostContainer>
