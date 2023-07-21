@@ -92,9 +92,9 @@ function Board({ isBoasting, setIsBoasting }) {
         <layout.MainContent>
           { !!cardList ? 
             <layout.Grid2Row ratio={widthRatio}>
-              { console.log("cardList:::", cardList)}
+              { console.log("cardList.boards:::", cardList.boards)}
               { console.log("boarCard.width:::", boardCard.width)}
-              { cardList.length > 0 && cardList.map(card => {
+              { cardList.boards.length > 0 && cardList.boards.map(card => {
                 return (
                   <BoardCard 
                     id={ card.boardId }
