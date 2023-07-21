@@ -10,6 +10,7 @@ export
         ifNotLoggedIn,
         ifLoading,
         ifError,
+        commentBoardDelete,
     }
     from "constants/comment"
 

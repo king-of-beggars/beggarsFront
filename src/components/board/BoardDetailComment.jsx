@@ -4,13 +4,15 @@ import { useMutation, useQueryClient } from 'react-query';
 import { CommentDelDark, CommentDelLight, CommentFav, CommentFavDefaultDark, CommentFavDefaultLight, commentDelHover, commentFavDefault } from 'assets';
 import { layout, style } from "styles";
 import * as sVar from "constants/styleVariables"
-import { BoardCommentLikes } from 'components';
+import { BoardCommentLikes, CommentDeleteModal } from 'components';
+import { commentBoardDelete } from 'constants';
 import { boardAPI } from 'api/api';
 
 
 function BoardDetailComment({ id, boardId, isBoasting, userName, likeCheck, likeCount, children }) {
   // 좋아요 버튼 handler
   const [isLiked, setIsLiked] = useState(likeCheck)
+  const [isDeleteModal, setIsDeleteModal] = useState(false)
   const likeHandler = () => {
     mutationLike.mutate(id);
     // setIsLiked(!isLiked)
@@ -59,7 +61,7 @@ function BoardDetailComment({ id, boardId, isBoasting, userName, likeCheck, like
           {/* // 댓글 삭제 아이콘 */}
           {
             decodeURIComponent(localStorage.getItem("nickname")) === String(userName) ? 
-            <div onClick={onClickDeleteComment}>
+            <div onClick={(() => setIsDeleteModal(!isDeleteModal))}>
               {isBoasting ? <CommentDelLight /> : <CommentDelDark />}
             </div>
             : <></>
@@ -72,6 +74,16 @@ function BoardDetailComment({ id, boardId, isBoasting, userName, likeCheck, like
           } */}
         </layout.FlexCenterColumn>
       </layout.FlexColumn100>
+      {
+          isDeleteModal && (
+            <CommentDeleteModal
+              setClose={() => setIsDeleteModal(false)}
+              onClickHandler={onClickDeleteComment}
+            >
+              {commentBoardDelete}
+            </CommentDeleteModal>
+          )
+        }
     </layout.FlexCenterRow100>
   );
 }

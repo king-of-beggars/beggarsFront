@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 
 import { useGlobalVariables } from "providers"
 import { commaOnThree } from "functions"
@@ -8,6 +8,7 @@ import {
   BoardDetailInput,
   BoardDetailComment,
   CashDetailModal,
+  CommentDeleteModal,
 } from "components";
 import { layout, style } from "styles";
 import {
@@ -21,7 +22,9 @@ import {
 } from "assets";
 import { boardAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
-import { commentBoardLogin } from "constants/comment";
+import { commentBoardDelete, commentBoardLogin } from "constants/comment";
+
+const INIT_MODAL_STATE = false
 
 // 영수증 상세에서의 날짜 및 시간 display 함수
 //// isDateOnly이면 연-월-일만 출력
@@ -252,7 +255,10 @@ function BoardDetail({ isBoasting }) {
                     );
                   })}
               </style.ReceiptInnerContainer>
-              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
+              <style.ReceiptInnerContainer
+                padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
+                fontSize={`${14 * widthRatio}px`}
+              >
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
@@ -271,7 +277,10 @@ function BoardDetail({ isBoasting }) {
                     borderBottom: "2px dashed green",
                   }}
                 > */}
-              <style.ReceiptInnerContainer padding="1em" fontSize="0.9em">
+              <style.ReceiptInnerContainer
+                padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
+                fontSize={`${14 * widthRatio}px`}
+              >
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
@@ -349,6 +358,16 @@ function BoardDetail({ isBoasting }) {
             {commentBoardLogin}
           </CashDetailModal>
         )}
+        {/* {
+          isDeleteModal && (
+            <CommentDeleteModal
+              setClose={() => setIsDeleteModal(INIT_MODAL_STATE)}
+              onClickHandler={onClickDeleteComment}
+            >
+              {commentBoardDelete}
+            </CommentDeleteModal>
+          )
+        } */}
       </style.BackgroundPageLayout>
     );
   }
