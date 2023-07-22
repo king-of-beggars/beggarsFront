@@ -92,6 +92,21 @@ export { default as background30Tail } from "assets/pixels/backgrounds/backgroun
 export { default as background70Top } from "assets/pixels/backgrounds/background50Top.png";
 export { default as background70Middle } from "assets/pixels/backgrounds/background50Middle.png";
 export { default as background70Tail } from "assets/pixels/backgrounds/background50Tail.png";
+export { default as bgCloud20 } from "assets/pixels/backgrounds/bgCloud20.png";
+export { default as bgCloud50 } from "assets/pixels/backgrounds/bgCloud50.png";
+export { default as bgCloud70 } from "assets/pixels/backgrounds/bgCloud70.png";
+export { default as bgCloud100 } from "assets/pixels/backgrounds/bgCloud100.png";
+export { default as bgDarkCloud } from "assets/pixels/backgrounds/bgDarkCloud.png";
+export { default as bgDarkMountain } from "assets/pixels/backgrounds/bgDarkMountain.png";
+export { default as bgDarkSky } from "assets/pixels/backgrounds/bgDarkSky.png";
+export { default as bgMountain20 } from "assets/pixels/backgrounds/bgMountain20.png";
+export { default as bgMountain50 } from "assets/pixels/backgrounds/bgMountain50.png";
+export { default as bgMountain70 } from "assets/pixels/backgrounds/bgMountain70.png";
+export { default as bgMountain100 } from "assets/pixels/backgrounds/bgMountain100.png";
+export { default as bgSky20 } from "assets/pixels/backgrounds/bgSky20.png";
+export { default as bgSky50 } from "assets/pixels/backgrounds/bgSky50.png";
+export { default as bgSky70 } from "assets/pixels/backgrounds/bgSky70.png";
+export { default as bgSky100 } from "assets/pixels/backgrounds/bgSky100.png";
 
 // sounds
 export { default as btnClickSound } from "assets/sounds/laserShoot.wav";
