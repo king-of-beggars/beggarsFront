@@ -4,27 +4,12 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 
 import { useGlobalVariables } from "providers"
 import { commaOnThree } from "functions"
-import {
-  BoardDetailInput,
-  BoardDetailComment,
-  CashDetailModal,
-  CommentDeleteModal,
-} from "components";
+import { BoardDetailInput, BoardDetailComment, CashDetailModal } from "components";
 import { layout, style } from "styles";
-import {
-  BackArrowGray,
-  backgroundDarkTop,
-  backgroundDarkMiddle,
-  backgroundDarkTail,
-  background50Top,
-  background50Middle,
-  background50Tail,
-} from "assets";
+import { BackArrowGray, bgCloud70, bgDarkCloud, bgSky70, bgDarkSky, bgMountain70, bgDarkMountain, BackArrowWhite, } from "assets";
 import { boardAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
-import { commentBoardDelete, commentBoardLogin } from "constants/comment";
-
-const INIT_MODAL_STATE = false
+import { commentBoardLogin } from "constants/comment";
 
 // 영수증 상세에서의 날짜 및 시간 display 함수
 //// isDateOnly이면 연-월-일만 출력
@@ -42,6 +27,35 @@ const displayCreatedAt = (dateStr, isDateOnly=true, dateConnector="-") => {
   }
 }
 
+// 영수증 번호를 문자로 바꾸는 함수
+//// 입력된 숫자를 26진수로 바꾸고 그에 맞는 문자열을 반환
+const changeReceiptNumToStr = (num) => {
+  const baseChar = ("a").charCodeAt(0);
+  let str = '';
+
+  do {
+    str = String.fromCharCode(num % 26 + baseChar) + str;
+    num = Math.floor(num / 26);
+  } while(num > 0);
+
+  // 변환된 문자가 8자 미만이면 랜덤 문자를 채워주기
+  while (str.length < 8) {
+    const paddingChars = ['R', 'E', 'C', 'I', 'P', 'T'];
+    const randomChar = paddingChars[Math.floor(Math.random() * paddingChars.length)];
+    str = randomChar + str;
+  }
+
+  // 뽑힌 문자 셔플
+  str = str.split('');
+  for (let i = str.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [str[i], str[j]] = [str[j], str[i]];
+  }
+  str = str.join('');
+
+  return str.toUpperCase();
+}
+
 // function BoardDetail({ isMobile, isBoasting, headerHeight, navHeight, mainHeight }) {
 function BoardDetail({ isBoasting }) {
   const { state } = useLocation();
@@ -57,44 +71,13 @@ function BoardDetail({ isBoasting }) {
   const navHeight = 110;
   const mainHeight = windowSize.height - (navHeight + headerHeight)
 
-  console.log(
-    "BoardDetail rendered:",
-    windowSize,
-    isMobile,
-    headerHeight,
-    screenWidth
-  );
-
   const { id } = useParams(); // boardid 패러미터 받아오기
   // console.log("받아온 id:::", id);
 
-  // const screenWidth = isMobile
-  //   ? parseFloat(localStorage.getItem("screenWidth"))
-  //   : parseFloat(localStorage.getItem("screenWidth")) > 393
-  //   ? 393
-  //   : parseFloat(localStorage.getItem("screenWidth"));
   const navigate = useNavigate();
 
-  // let DATA_CASHBOOK;
-  // let DATA_COMMENTS;
-  // let DATA_USER;
-
-  const {
-    data: response,
-    isLoading,
-    isError,
-  } = useQuery(["receipt", id], () => boardAPI.getBoardDetail(id), {
+  const { data: response, isLoading, isError, } = useQuery(["receipt", id], () => boardAPI.getBoardDetail(id), {
     select: (data) => data.data.data,
-    // onSuccess: (res) => {
-    //   console.log("getRes:::", res);
-    //   DATA_CASHBOOK = res.cashbookDetail;
-    //   DATA_COMMENTS = res.comments;
-    //   DATA_USER = res.userId;
-    //   console.log("receipt:::", res);
-    //   console.log("cashbook:::", DATA_CASHBOOK);
-    //   console.log("comments:::", DATA_COMMENTS);
-    //   console.log("user:::", DATA_USER);
-    // },
   });
 
   useEffect(() => {
@@ -123,11 +106,6 @@ function BoardDetail({ isBoasting }) {
     navigate(-1);
   };
 
-  // 숫자 콤마 표시
-  // const digit3Comma = (digit) => {
-  //   return digit.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-  // };
-
   if (isLoading) {
     <div>Loading...</div>;
   }
@@ -139,56 +117,63 @@ function BoardDetail({ isBoasting }) {
   if (response) {
     return (
       <style.BackgroundPageLayout
+        isBoasting={isBoasting}
         screenWidth={`${screenWidth}px`}
         isMobile={isMobile}
         backPngTop={
-          isBoasting ? `url(${background50Top})` : `url(${backgroundDarkTop})`
+          isBoasting ? `url(${bgSky70})` : `url(${bgDarkSky})`
         }
         backPngTail={
-          isBoasting ? `url(${background50Tail})` : `url(${backgroundDarkTail})`
+          isBoasting ? `url(${bgMountain70})` : `url(${bgDarkMountain})`
         }
         backPngMiddle={
           isBoasting
-            ? `url(${background50Middle})`
-            : `url(${backgroundDarkMiddle})`
+            ? `url(${bgCloud70})`
+            : `url(${bgDarkCloud})`
         }
+        style={{
+          color: isBoasting ? `${sVar.darkGray}` : "#fff"
+        }}
       >
         <layout.Header headerHeight={`${headerHeight}px`}>
-          <div
-            className="statusBarHeight"
-            style={{ width: "inherit", height: "53px" }}
-          ></div>
-          {/* <layout.HeaderContent
-            ratio={widthRatio}
-            style={{ fontSize: "25px", backgroundColor: `${sVar.white70}` }}
-          >
-            <BackArrowGray
-              onClick={onClickBack}
-              style={{ position: "absolute", left: "10%", top: "60%" }}
-            />
-            {!!response.userId.userNickname && response.userId.userNickname}
-          </layout.HeaderContent> */}
+          <div className="statusBarHeight" style={{ width: "inherit", height: "53px" }}></div>
         </layout.Header>
-        <layout.Main
-          headerHeight={`${headerHeight}px`}
-          mainHeight={`${mainHeight}px`}
-        >
+        <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
           <layout.MainContent>
             {/* 영수증 */}
             <layout.HeaderContent
             ratio={widthRatio}
-            style={{ position: "relative", height: "auto", padding: `${25 * widthRatio}px 0`, width: "100%", backgroundColor: `${sVar.white70}` }}
+            style={{
+              position: "relative",
+              height: "auto",
+              padding: `${25 * widthRatio}px 0`,
+              width: "100%",
+              backgroundColor: isBoasting? `${sVar.white70}` : null,
+            }}
             >
-              <BackArrowGray
-                onClick={onClickBack}
-                style={{ position: "absolute", left: `${10 * widthRatio}px` }}
-              />
+              {
+                isBoasting
+                ? (
+                  <BackArrowGray
+                    onClick={onClickBack}
+                    style={{ position: "absolute", left: `${10 * widthRatio}px` }}
+                  />
+                ) : (
+                  <BackArrowWhite
+                    onClick={onClickBack}
+                    style={{ position: "absolute", left: `${10 * widthRatio}px` }}
+                  />
+                )
+              }
               {!!response.userId.userNickname && response.userId.userNickname}
             </layout.HeaderContent>
             <layout.FlexCenterColumn100
-              style={{ backgroundColor: `${sVar.white70}` }}
+              style={{
+                backgroundColor: isBoasting? `${sVar.white70}` : null,
+              }}
             >
               <style.ReceiptInnerContainer
+                isBoasting={isBoasting}
                 padding={`${11 * widthRatio}px ${13 * widthRatio}px`}
                 fontSize={`${9 * widthRatio}px`}
                 style={{ lineHeight: "130%" }}
@@ -196,28 +181,29 @@ function BoardDetail({ isBoasting }) {
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
-                  <div>위트있는 멘트</div>
-                  <div>성공한 기분 멘트</div>
+                  <div>영수증 주인</div>
+                  <div>{!!response.userId.userNickname && `${response.userId.userNickname}의 영수증`}</div>
                 </layout.FlexCenterRow100>
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
-                  <div>아주 흥미로운 멘트</div>
-                  <div>{!!response.boardId && response.boardId}</div>
+                  <div>영수증 번호</div>
+                  <div>{!!response.boardId && changeReceiptNumToStr(response.boardId)}</div>
                 </layout.FlexCenterRow100>
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
-                  <div>웃기고 싶어요 안 선생님</div>
+                  <div>벽보 게시일</div>
                   <div>
                     {!!response.boardCreatedAt && displayCreatedAt(response.boardCreatedAt, false)}
                   </div>
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
-              <style.ReceiptInnerContainer padding={`${16 * widthRatio}px`} fontSize={`${20 * widthRatio}px`}>
+              <style.ReceiptInnerContainer isBoasting={isBoasting} padding={`${16 * widthRatio}px`} fontSize={`${20 * widthRatio}px`}>
                 {!!response.cashbookDetail.cashbookCreatedAt && displayCreatedAt(response.cashbookDetail.cashbookCreatedAt, true, " / ")}
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer
+                isBoasting={isBoasting}
                 padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
                 fontSize={`${14 * widthRatio}px`}
                 style={{ display: "flex", flexDirection: "row" }}
@@ -238,23 +224,31 @@ function BoardDetail({ isBoasting }) {
                 </div>
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer
+                isBoasting={isBoasting}
                 padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
                 fontSize={`${14 * widthRatio}px`}
               >
-                {!!response.cashbookDetail.detail &&
-                  response.cashbookDetail.detail.map((purchase) => {
-                    return (
-                      <layout.FlexCenterRow100
-                        style={{ justifyContent: "space-between" }}
-                        key={purchase.cashDetailId}
-                      >
-                        <div>{purchase.cashDetailText}</div>
-                        <div>{commaOnThree(purchase.cashDetailValue)}원</div>
-                      </layout.FlexCenterRow100>
-                    );
-                  })}
+                {
+                  response.cashbookDetail.cashbookNowValue === null
+                  ? (
+                    <div>🎉 무지출 데이!! 🎉</div>
+                  ) : !!response.cashbookDetail.detail &&
+                    response.cashbookDetail.detail.map((purchase) => {
+                      return (
+                        <layout.FlexCenterRow100
+                          style={{ justifyContent: "space-between" }}
+                          key={purchase.cashDetailId}
+                        >
+                          <div>{purchase.cashDetailText}</div>
+                          <div>{commaOnThree(purchase.cashDetailValue)}원</div>
+                        </layout.FlexCenterRow100>
+                      );
+                    })
+                }
+
               </style.ReceiptInnerContainer>
               <style.ReceiptInnerContainer
+                isBoasting={isBoasting}
                 padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
                 fontSize={`${14 * widthRatio}px`}
               >
@@ -263,20 +257,18 @@ function BoardDetail({ isBoasting }) {
                 >
                   <div>합계</div>
                   <div>
-                    {!!response.cashbookDetail.cashbookNowValue &&
-                      commaOnThree(response.cashbookDetail.cashbookNowValue)}
+                    {!!response.cashbookDetail.cashbookNowValue
+                      ? commaOnThree(response.cashbookDetail.cashbookNowValue)
+                      : response.cashbookDetail.cashbookNowValue === null
+                        ? 0
+                        : ""
+                      }
                     원
                   </div>
                 </layout.FlexCenterRow100>
               </style.ReceiptInnerContainer>
-              {/* <layout.FlexCenterColumn100
-                  style={{
-                    padding: "15px",
-                    fontSize: "14px",
-                    borderBottom: "2px dashed green",
-                  }}
-                > */}
               <style.ReceiptInnerContainer
+                isBoasting={isBoasting}
                 padding={`${20 * widthRatio}px ${10 * widthRatio}px`}
                 fontSize={`${14 * widthRatio}px`}
               >
@@ -298,11 +290,14 @@ function BoardDetail({ isBoasting }) {
             </layout.FlexCenterColumn100>
             {/* 게시글 */}
             <style.ReceiptPostContainer
-              style={{ backgroundColor: `${sVar.white70}` }}
+              isBoasting={isBoasting}
+              style={{
+                backgroundColor: isBoasting? `${sVar.white70}` : null,
+              }}
             >
-              <style.ReceiptPost ratio={widthRatio}>
-                <style.ReceiptMemoTitle ratio={widthRatio}>메모</style.ReceiptMemoTitle>
-                {!!response.boardText && response.boardText}
+              <style.ReceiptPost isBoasting={isBoasting} ratio={widthRatio}>
+                <style.ReceiptMemoTitle isBoasting={isBoasting} ratio={widthRatio}>메모</style.ReceiptMemoTitle>
+                <style.ReceiptMemoContent>{!!response.boardText && response.boardText}</style.ReceiptMemoContent>
               </style.ReceiptPost>
             </style.ReceiptPostContainer>
             {/* 댓글 */}
@@ -319,13 +314,15 @@ function BoardDetail({ isBoasting }) {
                     console.log("comment:::", comment);
                     return (
                       <BoardDetailComment
+                        boardAuthor={response.userId.userId}
+                        commentedBy={comment.userId.userId}
                         boardId={id}
                         isBoasting={isBoasting}
                         key={comment.commentId}
                         id={comment.commentId}
                         userName={comment.userId.userNickname}
                         likeCount={comment.likeCount}
-                        likeCheck={false}
+                        likeCheck={comment.likeCheck}
                       >
                         {comment.commentText}
                       </BoardDetailComment>

@@ -717,7 +717,7 @@ export const ReceiptInnerContainer = styled(layout.FlexCenterColumn100)`
   padding: ${props => props.padding};
   font-family: "DOSGothic";
   font-size: ${props => props.fontSize};
-  border-bottom: 2px dashed ${sVar.darkGray};
+  border-bottom: ${props => props.isBoasting ? `2px dashed ${sVar.darkGray}` : `2px dashed #fff`};
 `
 
 // 영수증 내부의 게시글 부분 컨테이너 스타일링입니다.
@@ -735,17 +735,28 @@ export const ReceiptPost = styled.div`
   padding: calc(${props => props.ratio} * 20px) 0; 
   font-size: calc(${props => props.ratio} * 12px);
   gap: calc(${props => props.ratio} * 10px);
-  border-bottom: 2px dashed ${sVar.darkGray};
+  border-bottom: ${props => props.isBoasting ? `2px dashed ${sVar.darkGray}` : `2px dashed #fff`};
+  color: ${props => props.isBoasting ? `${sVar.darkGray}` : "#fff"};
 `
 
 // 게시글 코멘트 내부의 '메모' 제목 스타일링입니다.
 export const ReceiptMemoTitle = styled.div`
-  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${props => props.isBoasting ? "#fff" : `${sVar.darkGray}`};
   padding: calc(2px * ${props => props.ratio}) calc(6px * ${props => props.ratio});
   gap: calc(10px * ${props => props.ratio});
   border-radius: calc(100px * ${props => props.ratio});
-  background-color: ${sVar.darkGray};
+  background-color: ${props => props.isBoasting ? `${sVar.darkGray}` : "#fff"};
   font-size: calc(14px * ${props => props.ratio});
+`
+// 게시글 코멘트 내부의 '메모' 내용 스타일링입니다.
+export const ReceiptMemoContent = styled.div`
+  width: 80%;
+  min-width: 180px;
+  max-width: 320px;
+  text-align: center;
 `
 
 // 20px 아이콘 스타일링입니다.

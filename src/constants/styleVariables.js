@@ -35,6 +35,7 @@ export const nightyBlue = `rgba(0, 75, 143, 1)`;
 
 export const white70 = `rgba(255, 255, 255, 0.7)`;
 export const white50 = `rgba(255, 255, 255, 0.5)`;
+export const white20 = `rgba(255, 255, 255, 0.2)`;
 
 export const commentGray = `rgba(216, 217, 215, 1)`;
 export const commentGray50 = `rgba(216, 217, 215, 0.5)`
