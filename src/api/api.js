@@ -78,16 +78,16 @@ export const CashBookAPI = {
 }
 
 export const boardAPI = {
-  getBoastList: async () => await instance.get("/api/board/goodjob", {
+  getBoastList: async (page) => await instance.get("/api/board/goodjob", {
     params: {
-      limit: 15,
-      page: 1
+      limit: 20,
+      page
     }
   }),
-  getScoldedList: async () => await instance.get("/api/board/noway", {
+  getScoldedList: async (page) => await instance.get("/api/board/noway", {
     params: {
-      limit: 15,
-      page: 1
+      limit: 20,
+      page
     }
   }),
   getBoardDetail: async (boardId) => await instance.get(`/api/board/detail/${boardId}`),
