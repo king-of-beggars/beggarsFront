@@ -17,7 +17,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, fontSize, isDefault }) {
           svgStyle: null,
           text: {
             value: "0%",
-            alignToBottom: false,
+            alignToBottom: true,
           },
           from: { color: isDefault ? `${sVar.lightYellow}` : "#ffffff"},
           to: { color: isDefault ? `${sVar.strongYellow}` : `${sVar.darkGray}`},

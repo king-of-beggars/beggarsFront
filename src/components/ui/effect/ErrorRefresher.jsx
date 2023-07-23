@@ -16,7 +16,7 @@ function ErrorRefresher() {
         justify-content: center;
         align-items: center;
         position: absolute;
-        bottom: 38%;
+        top: 30px;
         z-index: 2;
         font-size: 0.8rem;
     `

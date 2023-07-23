@@ -28,7 +28,7 @@ function ScreenBlur({ comment, children, addComponent=null }) {
   return (
     <>
       <Comment>
-        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+        <div style={{display: "flex", flexDirection: "column", alignItems: "center", position: "relative"}}>
           {comment}
           {addComponent}
         </div>

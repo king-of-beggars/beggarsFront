@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "react-query";
+import { AutoTextSize } from 'auto-text-size';
 
 import { useGlobalVariables } from "providers"
 import { commaOnThree } from "functions"
@@ -113,6 +114,7 @@ function BoardDetail({ isBoasting }) {
   if (isError) {
     <div>Error!</div>;
   }
+  console.log(response)
 
   if (response) {
     return (
@@ -138,7 +140,7 @@ function BoardDetail({ isBoasting }) {
         <layout.Header headerHeight={`${headerHeight}px`}>
           <div className="statusBarHeight" style={{ width: "inherit", height: "53px" }}></div>
         </layout.Header>
-        <layout.Main headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
+        <layout.Main ratio={widthRatio} headerHeight={`${headerHeight}px`} mainHeight={`${mainHeight}px`}>
           <layout.MainContent>
             {/* 영수증 */}
             <layout.HeaderContent
@@ -165,7 +167,15 @@ function BoardDetail({ isBoasting }) {
                   />
                 )
               }
-              {!!response.userId.userNickname && response.userId.userNickname}
+                <div style={{ width:"70%", display: "flex", justifyContent:"center", alignItems:"center" }}>
+                  <AutoTextSize mode="multiline"
+                    minFontSizePx={1}
+                    maxFontSizePx={24}>
+                    { !!response.boardName
+                      && response.boardName
+                    }
+                  </AutoTextSize>
+                </div>
             </layout.HeaderContent>
             <layout.FlexCenterColumn100
               style={{
@@ -297,7 +307,7 @@ function BoardDetail({ isBoasting }) {
             >
               <style.ReceiptPost isBoasting={isBoasting} ratio={widthRatio}>
                 <style.ReceiptMemoTitle isBoasting={isBoasting} ratio={widthRatio}>메모</style.ReceiptMemoTitle>
-                <style.ReceiptMemoContent>{!!response.boardText && response.boardText}</style.ReceiptMemoContent>
+                <style.ReceiptMemoContent><pre>{!!response.boardText && response.boardText}</pre></style.ReceiptMemoContent>
               </style.ReceiptPost>
             </style.ReceiptPostContainer>
             {/* 댓글 */}
@@ -305,29 +315,32 @@ function BoardDetail({ isBoasting }) {
               <layout.Flex100 style={{ paddingLeft: "8px" }}>
                 <div style={{ fontSize: "20px" }}>댓글</div>
                 <div style={{ fontSize: "10px", margin: "10px" }}>
-                  {!!response.comments.length && response.comments.length}개
+                  {!!response.comments.length && response.comments.length}
+                  {response.comments.length === 0 && 0}개
                 </div>
               </layout.Flex100>
               <layout.FlexCenterColumn100 style={{ gap: "5px" }}>
-                {response.comments.length > 0 &&
-                  response.comments.map((comment) => {
-                    console.log("comment:::", comment);
-                    return (
-                      <BoardDetailComment
-                        boardAuthor={response.userId.userId}
-                        commentedBy={comment.userId.userId}
-                        boardId={id}
-                        isBoasting={isBoasting}
-                        key={comment.commentId}
-                        id={comment.commentId}
-                        userName={comment.userId.userNickname}
-                        likeCount={comment.likeCount}
-                        likeCheck={comment.likeCheck}
-                      >
-                        {comment.commentText}
-                      </BoardDetailComment>
-                    );
-                  })}
+                {response.comments.length > 0
+                  ? response.comments.map((comment) => {
+                      console.log("comment:::", comment);
+                      return (
+                        <BoardDetailComment
+                          boardAuthor={response.userId.userId}
+                          commentedBy={comment.userId.userId}
+                          boardId={id}
+                          isBoasting={isBoasting}
+                          key={comment.commentId}
+                          id={comment.commentId}
+                          userName={comment.userId.userNickname}
+                          likeCount={comment.likeCount}
+                          likeCheck={comment.likeCheck}
+                        >
+                          {comment.commentText}
+                        </BoardDetailComment>
+                      );
+                    })
+                  : (<style.BoardDetailNoComment isBoasting={isBoasting} ratio={widthRatio}>작성된 댓글이 아직 없다네!</style.BoardDetailNoComment>)
+                  }
               </layout.FlexCenterColumn100>
             </layout.FlexCenterColumn100>
           </layout.MainContent>

@@ -11,6 +11,7 @@ function LabledTextarea({ title, placeholder, onChange, name, value, height }) {
         onChange={onChange}
         value={value}
         name={name}
+        required
       />
     </style.CashBookCardWrap>
   )

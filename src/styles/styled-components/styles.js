@@ -194,7 +194,7 @@ export const NavBtn = styled.button`
 
 export const CashBookHeader = styled(layout.FlexCenter)`
   height: inherit;
-  font-size: 1em;
+  font-size: calc(${props => props.ratio} * 25px);
 `;
 
 export const DayPickerWrap = styled(layout.FlexCenter)`
@@ -203,7 +203,7 @@ export const DayPickerWrap = styled(layout.FlexCenter)`
   background-image: url(${cashbookDateBox});
   width: ${(props) => props.dateBoxWidth};
   height: ${(props) => props.dateBoxHeight};
-  margin: 0.5em 1em 1em 1em;
+  margin: calc(${props => props.ratio} * 23px) 0 calc(${props => props.ratio} * 10px) 0;
   font-size: calc(18px * ${props => props.ratio});
 `;
 
@@ -223,6 +223,8 @@ export const CardBoxContainer = styled.div`
   padding-bottom: calc(${(props) => props.ratio} * ${props => props.paddingBottom});
   padding-left: calc(${(props) => props.ratio} * ${props => props.paddingLeft});
   padding-right: calc(${(props) => props.ratio} * ${props => props.paddingRight});
+  transition: filter 0.5s ease-in-out;
+  filter: ${props => props.horizontalSwipe ? "blur(5px)" : "none"};
 `;
 
 // 반응형으로 새로 생성된 Card의 카테고리 컨테이너입니다.
@@ -286,7 +288,7 @@ export const CardProgressBarContainer = styled.div`
 // Card 내 예산 사용량 스타일링입니다.
 export const CardSpendText = styled.div`
   color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
-  margin-top: calc(${(props) => props.ratio} * 1.1em);
+  margin-top: calc(${(props) => props.ratio} * 12px);
   font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
 `;
 
@@ -305,7 +307,7 @@ export const CardBtn = styled.button`
   color: ${(props) => (props.isDefault ? `${sVar.lightYellow}` : "white")};
   border: none;
   outline: none;
-  margin-top: calc(${(props) => props.ratio} * 1.5em);
+  margin-top: calc(${(props) => props.ratio} * 13px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -407,6 +409,7 @@ export const CashBookInput = styled.input`
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   outline: none;
   font-size: 0.8em;
+  white-space: pre-line;
 `;
 
 // Cashbook modal textarea
@@ -757,6 +760,7 @@ export const ReceiptMemoContent = styled.div`
   min-width: 180px;
   max-width: 320px;
   text-align: center;
+  line-height: 140%;
 `
 
 // 20px 아이콘 스타일링입니다.
@@ -812,6 +816,7 @@ export const BoardDetailInputLeft = styled.input`
   border: none;
   outline: none;
   background-color: transparent;
+  text-indent: 10px;
   &:focus {
     outline: none;
   }
@@ -1070,4 +1075,16 @@ export const NavInputContainer = styled.nav`
     display: flex;
     align-items: center;
     justify-content: center;
+`
+
+// 게시판 상세에서 작성된 댓글이 없을 때의 스타일링
+export const BoardDetailNoComment = styled.div`
+  width: inherit;
+  height: calc(${props => props.ratio} * 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(${props => props.ratio} * 14px);
+  font-family: "DOSGothic";
+  background-color: ${props => props.isBoasting ? `${sVar.white50}` : `${sVar.white20}`};
 `

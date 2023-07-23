@@ -10,6 +10,8 @@ function LabledInput({ title, placeholder, onChange, name, value, height }) {
         onChange={onChange}
         name={name}
         value={value}
+        maxLength={15}
+        required
       />
     </style.CashBookCardWrap>
   );
