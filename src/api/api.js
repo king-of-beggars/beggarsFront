@@ -18,6 +18,11 @@ instance.interceptors.response.use(
   function (response) {
     // 2xx 범위에 있는 상태 코드는 이 함수를 트리거
     // 응답 데이터가 있는 작업 수행
+    const accessToken = response.headers.accesstoken;
+    console.log("header response:::", response.headers)
+    if (accessToken) {
+      localStorage.setItem("accessToken", accessToken);
+    }
     return response;
   },
   function (error) {
