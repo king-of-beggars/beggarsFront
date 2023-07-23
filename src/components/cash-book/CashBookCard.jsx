@@ -135,13 +135,17 @@ function CashBookCard({
             isWrite={writeCheck === 0 ? false : true}
             btnWidth={`${bigCardBtnWidth}px`}
             btnHeight={`${bigCardBtnHeight}px`}
-            onClick={writeCheck === 0 ? spend === 0 ? changeDataNoneModal:changeWriteModal : onClickGoBoard}
-            disabled={(spend === 0) | isDiffDate}
+            onClick={writeCheck === 0
+                      ? spend === 0
+                        ? changeDataNoneModal
+                        : changeWriteModal
+                      : onClickGoBoard}
+            disabled={isDiffDate}
           >
             {writeCheck === 0
               ? spend > budget
-                ? "혼쭐나러 가기"
-                : "자랑하러 가기"
+                  ? "혼쭐나러 가기"
+                  : "자랑하러 가기"
               : commentGoBoard}
           </style.CardBtn>
     </style.CardBoxContainer>

@@ -409,6 +409,7 @@ export const CashBookInput = styled.input`
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   outline: none;
   font-size: 0.8em;
+  white-space: pre-line;
 `;
 
 // Cashbook modal textarea
@@ -759,6 +760,7 @@ export const ReceiptMemoContent = styled.div`
   min-width: 180px;
   max-width: 320px;
   text-align: center;
+  line-height: 140%;
 `
 
 // 20px 아이콘 스타일링입니다.
@@ -814,6 +816,7 @@ export const BoardDetailInputLeft = styled.input`
   border: none;
   outline: none;
   background-color: transparent;
+  text-indent: 10px;
   &:focus {
     outline: none;
   }
@@ -1072,4 +1075,16 @@ export const NavInputContainer = styled.nav`
     display: flex;
     align-items: center;
     justify-content: center;
+`
+
+// 게시판 상세에서 작성된 댓글이 없을 때의 스타일링
+export const BoardDetailNoComment = styled.div`
+  width: inherit;
+  height: calc(${props => props.ratio} * 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(${props => props.ratio} * 14px);
+  font-family: "DOSGothic";
+  background-color: ${props => props.isBoasting ? `${sVar.white50}` : `${sVar.white20}`};
 `

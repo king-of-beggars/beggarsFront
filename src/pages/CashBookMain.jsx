@@ -103,7 +103,7 @@ function CashBookMain() {
   // 게시글 작성 Modal
   const [isWriteModal, setIsWriteModal] = useState(false);
   const [isBoasting, setIsBoasting] = useState(null);
-  const [clickedModal, setClickModal] = useState(0);
+  const [clickedModal, setClickModal] = useState(null);
 
   const changeWriteModal = (event) => {
     event.stopPropagation();
@@ -154,9 +154,10 @@ function CashBookMain() {
   const changeDataNoneModal = (event) => {
     event.stopPropagation();
     setClickModal(event.target.id);
-
-    const newIsDataNoneModal = !isDataNoneModal;
-    setIsDataNoneModal(newIsDataNoneModal);
+    console.log("clickedModal:::", clickedModal);
+    setIsDataNoneModal(true)
+    // const newIsDataNoneModal = !isDataNoneModal;
+    // setIsDataNoneModal(newIsDataNoneModal);
   };
   const setDataNoneClose = () => {
     setIsDataNoneModal(false);
@@ -531,7 +532,8 @@ function CashBookMain() {
           )}
           {isWriteModal && (
             <WriteReceipt setClose={setWriteClose} cardId={clickedModal}>
-              {isBoasting ? "자랑하러 가기" : "혼쭐나러 가기"}
+              {isBoasting
+                ?  "자랑하러 가기" : "혼쭐나러 가기"}
             </WriteReceipt>
           )}
           {isDeleteModal && (

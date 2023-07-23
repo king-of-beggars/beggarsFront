@@ -95,6 +95,7 @@ export const Main = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: calc(${props => props.ratio} * 25px);
 `
 
 export const MainContent = styled.div`

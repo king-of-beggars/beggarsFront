@@ -30,6 +30,7 @@ function WriteReceipt({ setClose, cardId, children }) {
 
     setPostContent(newPost);
   }
+  
 
   // 게시글 등록 API
   const queryClient = useQueryClient();
@@ -64,7 +65,7 @@ function WriteReceipt({ setClose, cardId, children }) {
         <layout.FlexCenterColumn100 style={{fontFamily: "DOSGothic"}}>
             <LabeledInput
                 title={"제목"}
-                placeholder={"제목을 입력해주세요."}
+                placeholder={"제목을 입력해주세요 (최대 15자)"}
                 name="title"
                 type="text"
                 value={title}
