@@ -35,9 +35,6 @@ import {
 import { useEffect } from "react";
 import * as sVar from "constants/styleVariables";
 
-const getViewPerSlideInfo = (mainHeight, cardHeight) => {
-  const slidePerView = Math.round((mainHeight / cardHeight) * 10) / 10;
-};
 
 function CashBookMain() {
   // 작성된 context import
