@@ -349,7 +349,7 @@ function CashBookMain() {
             onSlideChange={(swiper) => {
               setActiveSlide(swiper.activeIndex);
             }}
-            scrollbar={{ draggable: true }}
+            // scrollbar={{ draggable: true }}
             onSwiper={(swiper) => {
               setSwiper(swiper);
               console.log(swiper);
@@ -393,6 +393,8 @@ function CashBookMain() {
                       style={{
                         height: `${cardHeight}px`,
                       }}
+                      resistance
+                      resistanceRatio={1}
                       // style={{
                       //   height: `${mainHeight - dateBoxHeight - 24}px`,
                       // }}
@@ -401,10 +403,13 @@ function CashBookMain() {
                           if (cashbookApiRes.length < 5) {
                             window.location.href = "/cash-book/add";
                           } else {
+                            // swiper.slideTo(0)
                             window.location.href = "/cash-book";
                           }
                         }
                       }}
+
+
                     >
                       <SwiperSlide className={`${idx}`}>
                         <CashBookCard
