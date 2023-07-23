@@ -179,7 +179,7 @@ function CashBookMain() {
           style={{ width: "inherit", height: "50px" }}
         ></div>
         <layout.HeaderContent>
-          <style.CashBookHeader>가계부</style.CashBookHeader>
+          <style.CashBookHeader ratio={widthRatio}>가계부</style.CashBookHeader>
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main

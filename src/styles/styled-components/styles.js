@@ -194,7 +194,7 @@ export const NavBtn = styled.button`
 
 export const CashBookHeader = styled(layout.FlexCenter)`
   height: inherit;
-  font-size: 1em;
+  font-size: calc(${props => props.ratio} * 25px);
 `;
 
 export const DayPickerWrap = styled(layout.FlexCenter)`
