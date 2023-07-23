@@ -13,15 +13,25 @@ const instance = axios.create({
   },
 });
 
+// request interceptor
+//// 요청이 이루어질 때마다 헤더 설정 : 토큰 변경시에도 항상 최신의 토큰 사용
+instance.interceptors.request.use(function (config) {
+  config.headers["Authorization"] = `Bearer ${localStorage.getItem("accessToken")}`;
+  config.headers["RefreshToken"] = `${localStorage.getItem("refreshToken")}`;
+  return config;
+});
+
 // response interceptor
 instance.interceptors.response.use(
   function (response) {
     // 2xx 범위에 있는 상태 코드는 이 함수를 트리거
     // 응답 데이터가 있는 작업 수행
-    const accessToken = response.headers.accesstoken;
-    console.log("header response:::", response.headers)
+    const accessToken = response.data.accessToken;
+    const refreshToken = response.data.refreshToken;
+    console.log("header response:::", response)
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
     }
     return response;
   },
