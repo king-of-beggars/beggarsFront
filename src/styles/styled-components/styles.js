@@ -203,7 +203,7 @@ export const DayPickerWrap = styled(layout.FlexCenter)`
   background-image: url(${cashbookDateBox});
   width: ${(props) => props.dateBoxWidth};
   height: ${(props) => props.dateBoxHeight};
-  margin: 0.5em 1em 1em 1em;
+  margin: calc(${props => props.ratio} * 23px) 0 calc(${props => props.ratio} * 10px) 0;
   font-size: calc(18px * ${props => props.ratio});
 `;
 
@@ -223,6 +223,8 @@ export const CardBoxContainer = styled.div`
   padding-bottom: calc(${(props) => props.ratio} * ${props => props.paddingBottom});
   padding-left: calc(${(props) => props.ratio} * ${props => props.paddingLeft});
   padding-right: calc(${(props) => props.ratio} * ${props => props.paddingRight});
+  transition: filter 0.5s ease-in-out;
+  filter: ${props => props.horizontalSwipe ? "blur(5px)" : "none"};
 `;
 
 // 반응형으로 새로 생성된 Card의 카테고리 컨테이너입니다.
@@ -286,7 +288,7 @@ export const CardProgressBarContainer = styled.div`
 // Card 내 예산 사용량 스타일링입니다.
 export const CardSpendText = styled.div`
   color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
-  margin-top: calc(${(props) => props.ratio} * 1.1em);
+  margin-top: calc(${(props) => props.ratio} * 12px);
   font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
 `;
 
@@ -305,7 +307,7 @@ export const CardBtn = styled.button`
   color: ${(props) => (props.isDefault ? `${sVar.lightYellow}` : "white")};
   border: none;
   outline: none;
-  margin-top: calc(${(props) => props.ratio} * 1.5em);
+  margin-top: calc(${(props) => props.ratio} * 13px);
   display: flex;
   flex-direction: column;
   align-items: center;

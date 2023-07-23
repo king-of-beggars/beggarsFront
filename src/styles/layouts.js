@@ -111,7 +111,9 @@ export const CashBookMainContent = styled.div`
 
 export const SwiperWrap = styled(FlexCenterRow)`
     width: auto;
-    height: calc(${props => props.mainHeight} - ${props => props.dateBoxHeight});
+    /* width: inherit; */
+    /* height: calc(${props => props.mainHeight} - ${props => props.dateBoxHeight}); */
+    height: ${props => props.mainHeight};
     min-height: calc(${props => props.cardHeight});
     /* height: calc(${props => props.mainHeight} - 24px - ${props => props.dateBoxHeight});
     min-height: calc(${props => props.cardHeight} + 50px); */

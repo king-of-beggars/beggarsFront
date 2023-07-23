@@ -10,6 +10,7 @@ import { useGlobalVariables } from 'providers';
 
 function CashBookCard({ 
   id,
+  horizontalSwipe,
   cardData,
   onClickHandler,
   budget,
@@ -70,7 +71,7 @@ function CashBookCard({
    };
 
    return (
-    <style.CardBoxContainer className="cardBoxContainer" paddingTop="13px" paddingBottom="25px" paddingLeft="13px" paddingRight="13px" id={id} width={`${cardWidth}px`} height={`${cardHeight}px`} ratio={widthRatio} isDefault={true} onClick={() => onClickHandler(id)}>
+    <style.CardBoxContainer horizontalSwipe={horizontalSwipe} className="cardBoxContainer" paddingTop="13px" paddingBottom="25px" paddingLeft="13px" paddingRight="13px" id={id} width={`${cardWidth}px`} height={`${cardHeight}px`} ratio={widthRatio} isDefault={true} onClick={() => onClickHandler(id)}>
       { /* delete와 수정 버튼 */ }
       <layout.FlexCenterRow100 style={{ justifyContent: "space-between" }}>
         <DeleteCard
@@ -95,12 +96,16 @@ function CashBookCard({
            </style.CardBudgetText>
          </style.CardCategoryContainer>
        ) : (
-         <style.CardCategoryContainer paddingBottom="16.22px" ratio={ratio} isDefault={isDefault}>
-           <style.Card2ndCategoryText
-           fontSize="25px"
-           marginBottom="22px"
-             ratio={ratio}
-             isDefault={isDefault}
+         <style.CardCategoryContainer paddingTop="24.5px" paddingBottom="16.22px" ratio={ratio} isDefault={isDefault}>
+          {/* <div style={{height: `${(14 + 2 + 2) * widthRatio}px`}}></div> */}
+          {/* <style.Card1stCategoryText fontSize="14px" paddingLeft="10px" paddingRight="10px" paddingTop="2px" paddingBottom="2px" ratio={ratio} isDefault={isDefault}>
+             {category}
+          </style.Card1stCategoryText> */}
+          <style.Card2ndCategoryText
+            fontSize="25px"
+            marginBottom="22px"
+            ratio={ratio}
+            isDefault={isDefault}
             //style={{ margin: `${1.5 * ratio}em 0 ${0.5 * ratio}em 0` }}
            >
              {category}

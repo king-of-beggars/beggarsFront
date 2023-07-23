@@ -14,3 +14,28 @@
 .swiper-pagination-vertical.swiper-pagination-bullets, .swiper-vertical>.swiper-pagination-bullets {
     z-index: 0;
 }
+
+.progressbar-text {
+    display: flex;
+    align-items: flex-end;
+}
+
+.fade-out {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0.5; /* adjust as needed */
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+}
+
+/* 
+.swiper-wrapper {
+    gap: 20px;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+} */
