@@ -7,6 +7,7 @@ export
         commentZeroSpend,
         positiveComments,
         negativeComments,
+        welcomeComments,
         ifNotLoggedIn,
         ifLoading,
         ifError,

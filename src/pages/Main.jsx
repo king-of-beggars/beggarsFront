@@ -122,7 +122,7 @@ function Main({ data}) {
 
   return (
     isLoggedIn || isSocialLogin ? (
-      !!data.signupDay && decodeURIComponent(localStorage.getItem("nickname")) !== null ? (
+      (data.signupDay !== null || data.signupDay !== undefined) && decodeURIComponent(localStorage.getItem("nickname")) !== null ? (
         <>
           {mainRenderer("login", data, states)}
         </>

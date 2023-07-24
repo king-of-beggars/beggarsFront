@@ -515,10 +515,11 @@ function CashBookMain() {
               <style.CashBookDummyContainer
                 cardWidth={`${cardWidth}px`}
                 cardHeight={`${cardHeight}px`}
-                style={{ justifyContent: "flex-start" }}
+                style={{ justifyContent: "center", lineHeight: "160%", textAlign: "center", fontSize: `${widthRatio * 16}px` }}
                 onClick={onClickAdd}
               >
-                클릭하여 카드 추가
+                클릭하여<br/>
+                장부를 추가할 수 있네!
               </style.CashBookDummyContainer>
             </layout.FlexCenter>
           ) : (

@@ -1,7 +1,12 @@
 export default function chkLoggedIn() {
+    if (localStorage.getItem("refreshToken") === undefined || !localStorage.getItem("refreshToken")) {
+        localStorage.clear()
+    }
     const isNickname = !!localStorage.getItem("nickname")
     const isUserId = !!localStorage.getItem("userId")
-    console.log("chkLoggedIn:::", isNickname, isUserId)
+    const refreshToken = !!localStorage.getItem("refreshToken")
 
-    return isNickname && isUserId
+    console.log("chkLoggedIn:::", isNickname, isUserId, refreshToken)
+
+    return isNickname && isUserId && refreshToken
 }

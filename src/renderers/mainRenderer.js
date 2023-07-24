@@ -114,7 +114,7 @@ export default function mainRenderer (caseStr, data, states={}) {
                             { /* 메인: 가입한지 n일 & 레코드 카드 */}
                             <layout.FlexCenterColumn100 style={{gap: "5px"}}>
                                 <MainExp dayCount={data.signupDay} />
-                                <MainRecordCard data={data} isLoggedIn={true} isToggleOnLeft={states.isToggleOnLeft} toggleSetter={states.setIsToggleOnLeft}/>
+                                <MainRecordCard dayCount={data.signupDay} data={data} isLoggedIn={true} isToggleOnLeft={states.isToggleOnLeft} toggleSetter={states.setIsToggleOnLeft}/>
                             </layout.FlexCenterColumn100>
                             { /* 메인: 여정 streak */}
                             <layout.FlexCenterColumn>
