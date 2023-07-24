@@ -144,20 +144,21 @@ export const SignupInputWrap = styled(layout.FlexColumn)`
 
 // ProfilePicWrap : 프로필 사진
 export const ProfilePicWrap = styled(layout.FlexCenterColumn)`
-  width: 10em;
-  height: 10em;
-  border: 1px solid black;
+  width: calc(${props => props.ratio} * 156px);
+  height: calc(${props => props.ratio} * 156px);
+  border: none;
   border-radius: 50%;
+  background-color: ${sVar.grayD9D9D9};
 `;
 
 // MidBlackBtn : 프로필 정보수정 버튼
 export const MidBlackBtn = styled.button`
-  width: 10em;
-  height: 2em;
-  border-radius: 6em;
-  background: black;
-  color: white;
-  font-size: 1em;
+  width: calc(${props => props.ratio} * 162px);
+  padding: calc(${props => props.ratio} * 8px) calc(${props => props.ratio} * 12px);
+  border-radius: calc(${props => props.ratio} * 100px);
+  background: ${sVar.black343434};
+  color: ${sVar.whiteFFF};
+  font-size: calc(${props => props.ratio} * 14px);
 `;
 
 // Nav바 컨테이너

@@ -59,6 +59,13 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
 }
 
+  @font-face {
+    font-family: 'DOSIyagiMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
   body, * {
     font-family: 'DOSMyungjo', sans-serif;
