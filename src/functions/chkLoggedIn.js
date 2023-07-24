@@ -13,8 +13,8 @@
 
 export default async function chkLoggedIn() {
     return new Promise((resolve) => {
-        if (localStorage.getItem("refreshToken") === undefined || !!localStorage.getItem("refreshToken")) {
-            localStorage.clear()
+        if (localStorage.getItem("refreshToken") === undefined && !!localStorage.getItem("accessToken")) {
+            localStorage.clear() // 여기서 지워짐
         }
         const isNickname = !!localStorage.getItem("nickname")
         const isUserId = !!localStorage.getItem("userId")

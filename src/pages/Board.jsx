@@ -18,6 +18,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { useInView } from "react-intersection-observer";
 
 function Board({ isBoasting, setIsBoasting }) {
+  
   // 만들어둔 context 사용하기
   //// 1. 화면 비율 렌더링에 필요한 요소
   const {
