@@ -71,6 +71,8 @@ export { ReactComponent as MainFailCoin } from "assets/icons/mainFailCoin.svg";
 export { ReactComponent as MainSilverCoin } from "assets/icons/mainSilverCoin.svg";
 export { ReactComponent as MainGoldCoin } from "assets/icons/mainGoldCoin.svg";
 export { ReactComponent as Refresh } from "assets/icons/refresh.svg";
+export { ReactComponent as InputDrop } from "assets/icons/inputDrop.svg";
+export { default as inputDrop } from "assets/icons/inputDrop.png";
 
 // backgrounds
 export { default as mainBackground } from "assets/pixels/backgrounds/mainBackground.png";

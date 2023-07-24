@@ -29,7 +29,8 @@ import {
   mainToggleBtn,
   mainJourneyTitle,
   mainJourneyBox,
-  mainLogoSmooth
+  mainLogoSmooth,
+  inputDrop
 } from "assets";
 import { SwiperSlide } from "swiper/react";
 import { layout } from "styles";
@@ -396,7 +397,10 @@ export const CashBookHead = styled(layout.FlexCenter)`
 
 // Cashbook Select box
 export const CashBookSelect = styled.select`
-  padding: 10px;
+  padding-left: calc(${props => props.ratio} * 14px);
+  padding-right: calc(${props => props.ratio} * 20px);
+  padding-top: calc(${props => props.ratio} * 10px);
+  padding-bottom: calc(${props => props.ratio} * 10px);
   width: 75%;
   border-radius: 0px 0.8em 0.8em 0px;
   font-size: 0.8em;
@@ -404,6 +408,14 @@ export const CashBookSelect = styled.select`
   border-right: 2px solid ${sVar.bookSelectInputborderColor};
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   font-size: 0.8em;
+  appearance: none;  /* 기본 브라우저 스타일 제거 */
+  -webkit-appearance: none; /* 크롬, 사파리 브라우저 스타일 제거 */
+  -moz-appearance: none; /* 파이어폭스 브라우저 스타일 제거 */
+  /* background-image: ${props => props.isToken ? `url(${inputDrop})` : ""};
+  background-repeat: no-repeat;
+  background-position: right center; */
+  background: url(${inputDrop}) no-repeat 95% 50%/20px auto;
+  background-color: white;
   &:focus {
     outline: none;
   }
@@ -418,6 +430,7 @@ export const CashBookInput = styled.input`
   border-right: 2px solid ${sVar.bookSelectInputborderColor};
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   outline: none;
+  height: calc(${props => props.ratio} * 50px);
   font-size: 0.8em;
   white-space: pre-line;
 `;
