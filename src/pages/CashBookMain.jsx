@@ -138,7 +138,10 @@ function CashBookMain() {
       alert(`장부 삭제가 완료되셨습니다.`);
       window.location.href = "/cash-book";
     },
-    onError: () => alert("장부 삭제를 실패했습니다."),
+    onError: (err) => {
+      console.log("장부 삭제 실패:::", err)
+      alert("장부 삭제를 실패했습니다.")
+    },
   });
 
   const onClickDeleteBtn = () => {
@@ -229,8 +232,10 @@ function CashBookMain() {
             onTouchMove={(swiper) => {
               if (swiper.touches.diff < -160) {
                 if (cashbookApiRes.length < 5) {
+                  console.log("여기로 들어옴!")
                   window.location.href = "/cash-book/add";
                 } else {
+                  console.log("여기 들어옴!")
                   window.location.href = "/cash-book";
                 }
               }
@@ -317,8 +322,8 @@ function CashBookMain() {
                     height: `${mainHeight}px`,
                     width: `${cardWidth}px`,
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
+                    alignItems: "flex-end",
+                    justifyContent: "center",
                     writingMode: "vertical-rl",
                     paddingLeft: "20px",
                     fontSize: `${25 * widthRatio}px`,
@@ -401,9 +406,10 @@ function CashBookMain() {
                       onTouchMove={(swiper) => {
                         if (swiper.touches.diff < -90) {
                           if (cashbookApiRes.length < 5) {
+                            console.log("111111")
                             window.location.href = "/cash-book/add";
                           } else {
-                            // swiper.slideTo(0)
+                            console.log("222222")
                             window.location.href = "/cash-book";
                           }
                         }

@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { style } from "styles";
 import { useNavigate } from "react-router-dom";
 
-function Navigation({ selected, ratio }) {
+import { chkLoggedIn } from 'functions';
+
+function Navigation({ selected, ratio, }) {
   // console.log("selected:::", selected)
   // console.log("selected === main:::", selected === "main")
+  const isLoggedIn = chkLoggedIn();
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   setIsLoggedIn(isLoggedIn)
+  // }, [isLoggedIn])
 
   // main으로 이동
   const onClickHome = () => {
@@ -24,7 +31,7 @@ function Navigation({ selected, ratio }) {
 
   // 프로필로 이동
   const onClickProfile = () => {
-    if (!localStorage.getItem("userId")) {
+    if (!isLoggedIn) {
       alert("로그인이 필요합니다.");
       navigate("/login");
     } else {
