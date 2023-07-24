@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -21,6 +21,7 @@ import BoardDetail from "pages/BoardDetail";
 import { MainAssetProvider } from "components";
 import { chkLoggedIn, getKrDate, setFrameSize } from "functions";
 import { layout } from "styles";
+import { AuthContext } from 'providers';
 
 function Router() {
   // setFrameSize();
@@ -29,6 +30,8 @@ function Router() {
   //   width: window.innerWidth,
   //   height: window.innerHeight
   // })
+  const { isLoggedIn } = useContext(AuthContext)
+  console.log("Router isLoggedIn:::", isLoggedIn)
   // 게시판 상태 : 자랑하기(true) or 혼쭐나기(false)
   const [isBoasting, setIsBoasting] = useState(true);
 
@@ -55,9 +58,6 @@ function Router() {
 
   // const isMobile = /Mobi/i.test(window.navigator.userAgent)
 
-  // 로그인 여부 확인
-  const isLogged = chkLoggedIn();
-
   return (
     <BrowserRouter>
       <Routes>
@@ -75,14 +75,19 @@ function Router() {
         <Route
           exact
           path="/cash-book"
-          element={<Navigate to={`/cash-book/${getKrDate()}`} replace />}
+          element={
+            isLoggedIn
+            ? <Navigate to={`/cash-book/${getKrDate()}`} replace />
+            : <></>
+          
+        }
         />
         <Route path="cash-book/:date" element={<CashBookMain />} />
         {/* <Route path="cash-book/:date" element={<CashBook />} /> */}
         <Route
           path="cash-book/add"
           element={
-            <ProtectedRouter isLogged={isLogged}>
+            <ProtectedRouter isLoggedIn={isLoggedIn}>
               <CashBookAdd />
             </ProtectedRouter>
           }
@@ -90,7 +95,7 @@ function Router() {
         <Route
           path="cash-book/:date/:id"
           element={
-            <ProtectedRouter isLogged={isLogged}>
+            <ProtectedRouter isLoggedIn={isLoggedIn}>
               <CashBookDetail />
             </ProtectedRouter>
           }
@@ -98,7 +103,7 @@ function Router() {
         <Route
           path="cash-book/edit/:id"
           element={
-            <ProtectedRouter isLogged={isLogged}>
+            <ProtectedRouter isLoggedIn={isLoggedIn}>
               <CashBookMod />
             </ProtectedRouter>
           }
@@ -124,7 +129,7 @@ function Router() {
         <Route
           path="profile"
           element={
-            <ProtectedRouter isLogged={isLogged}>
+            <ProtectedRouter isLoggedIn={isLoggedIn}>
               <Profile />
             </ProtectedRouter>
           }
@@ -134,12 +139,13 @@ function Router() {
   );
 }
 
-const ProtectedRouter = ({ isLogged, children }) => {
-  if (isLogged) {
+const ProtectedRouter = ({ isLoggedIn, children }) => {
+  if (isLoggedIn) {
     return children;
   } else {
     // alert("로그인이 필요합니다.");
-    return <Navigate to="/login" replace={true} />;
+    alert("라우터 튕김!")
+    // return <Navigate to="/login" replace={true} />;
   }
 };
 

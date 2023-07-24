@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useMutation, useQuery } from "react-query";
 import moment from "moment";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-import { useGlobalVariables } from "providers";
+import { useGlobalVariables, AuthContext } from "providers";
 import { layout, style } from "styles";
 import {
   DayPicker,
@@ -30,6 +30,7 @@ import * as sVar from "constants/styleVariables";
 
 function CashBookMain() {
   // 작성된 context import
+  const { isLoggedIn } = useContext(AuthContext);
   //// 1. 화면 비율 렌더링에 필요한 요소
   const {
     isMobile,
@@ -164,6 +165,7 @@ function CashBookMain() {
   const queryNode = {
     queryKey: [`cashCard${selectDate.format("YYYY-MM-DD")}`],
     queryFn: () => CashBookAPI.getCashCard(selectDate.format("YYYY-MM-DD")),
+    enabled: isLoggedIn
   };
 
   const { data, isLoading, error } = useQuery(queryNode);
