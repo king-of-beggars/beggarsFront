@@ -478,7 +478,7 @@ function CashBookMain() {
       backPngMiddle={`url(${bgCloud100})`}
       backPngTail={`url(${bgMountain100})`}
     >
-      <layout.Header headerHeight={`${headerHeight}px`}>
+      <layout.Header headerHeight={`${headerHeight}px`} style={{zIndex: "10"}}>
         <div
           className="statusBarHeight"
           style={{ width: "inherit", height: "50px" }}
