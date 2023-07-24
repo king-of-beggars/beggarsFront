@@ -80,7 +80,9 @@ function Login() {
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("userId", userId);
       localStorage.setItem("nickname", nickname);
-      navigate("/") // 회원가입 완료시 메인 이동
+      
+      // setTimeout(() => navigate("/"), 2000);
+      window.location.href = "/"; // 회원가입 완료시 메인 이동
     },
     onError: () => alert("로그인이 실패하였습니다.")
   })
