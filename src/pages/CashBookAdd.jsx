@@ -61,13 +61,13 @@ function CashBookAdd() {
       queryClient.invalidateQueries([`cashCard${moment().format("YYYY-MM-DD")}`]);
       navigate("/cash-book");
     },
-    onError: () => alert("카드 추가에 실패하였습니다."),
+    onError: () => alert("장부 추가에 실패하였네."),
   });
 
   const onClickSave = () => {
     console.log(!category)
     if (!category | !budget) {
-      alert("카테고리와 예산을 선택해주세요.")
+      alert("카테고리와 예산을 선택해주게.")
     } else {
       const newCard = {
         cashCategory: category,
@@ -95,7 +95,7 @@ function CashBookAdd() {
             onClick={onClickBack}
             style={{ position: "absolute", left: "1em", float: "left" }}
           />
-          <div style={{ fontSize: "1em" }}>카드 추가</div>
+          <div style={{ fontSize: `${25 * widthRatio}px`, fontFamily: "DOSIyagiMedium"}}>장부 추가</div>
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main

@@ -90,14 +90,17 @@ function Board({ isBoasting, setIsBoasting }) {
   //     console.log("isError:::", res)
   //   }
   // })
-  const [page, setPage] = useState({boast:1, scoled : 1});
+
+  const [page, setPage] = useState({boast: 1, scoled: 1});
 
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery(
     {
       ...queryNode,
-      getNextPageParam: (lastPage) => {
-        const lastPageData = lastPage.data.data;
-        return lastPageData.hasNextPage ? page : undefined
+      getNextPageParam: (lastPage, pages) => {
+        console.log("param-lastPage:::", lastPage);
+        console.log("param-pages:::", pages)
+        // const lastPageData = lastPage.data.data;
+        // return lastPageData.hasNextPage ? page : undefined
       },
       onSuccess: () => {
         const name = isBoasting ? "boast" : "scoled"
@@ -105,12 +108,25 @@ function Board({ isBoasting, setIsBoasting }) {
           ...page,
           [name] : page[name] + 1
         }
+        console.log("new page:::", newPage)
         setPage(newPage);
       }
     },
   );
 
-  const [ref, isView] = useInView({ threshold: 0 });
+  // const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status, } = useInfiniteQuery('infiniteScroll', queryNode, {
+  //     getNextPageParam: (lastPage, pages) => {
+  //       if (lastPage.data.data.boards.length === 0) {
+  //         return undefined
+  //       } else {
+  //         return pages.length + 1
+  //       }
+  //     },
+  // });
+
+  const {ref, isView} = useInView({ threshold: 0 });
+  console.log("ref:::", ref)
+  console.log("isView:::", isView)
 
   useEffect(() => {
     // 맨 마지막 요소를 보고있고 더이상 페이지가 존재하면

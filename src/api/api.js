@@ -46,9 +46,13 @@ instance.interceptors.response.use(
           break;
         // status code가 403인 경우 로그인 화면으로 이동
         case 403:
-          window.location.href = "/login";
-          break;
-        // return <Navigate to={"/login"} replace={true}/>
+          setTimeout(() => {
+            console.log("403 error:::", error.response)
+            window.location.href = "/login";
+          },30000);
+          // window.location.href = "/login";
+          break
+          // return <Navigate to={"/login"} replace={true}/>
         default:
           return Promise.reject(error);
       }

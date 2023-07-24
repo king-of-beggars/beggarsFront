@@ -20,7 +20,7 @@ import { CashBookAPI } from "api/api";
 // function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
 function CashBookMod() {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } =
+  const { windowSize, widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } =
     useGlobalVariables();
   console.log(
     "CashBookMod rendered:",
@@ -98,7 +98,7 @@ function CashBookMod() {
     };
 
     mutationEditCard.mutate({cardId, editCard});
-    alert("카드 수정이 완료되셨습니다.");
+    alert("장부 수정이 완료되었네!");
     navigate("/cash-book");
   };
   
@@ -121,7 +121,7 @@ function CashBookMod() {
               onClick={onClickBack}
               style={{ position: "absolute", left: "1em", float: "left" }}
             />
-            <div style={{ fontSize: "1em" }}>카드 수정</div>
+            <div style={{ fontSize: `${25 * widthRatio}px` }}>장부 수정</div>
           </layout.HeaderContent>
         </layout.Header>
         <layout.Main
