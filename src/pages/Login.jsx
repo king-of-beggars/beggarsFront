@@ -71,11 +71,15 @@ function Login() {
     onSuccess: (response) => {
       alert("로그인이 완료되었습니다.")
       console.log("login-response:::", response)
-      localStorage.setItem("accessToken", response.data.accessToken);
-      localStorage.setItem("refreshToken", response.data.refreshToken);
-      localStorage.setItem("userId", response.headers.userId);
-      localStorage.setItem("nickname", response.headers.usernickname);
-      // console.log(decodeURIComponent(response.headers["usernickname"]))
+      const accessToken = response.data.accessToken;
+      const refreshToken = response.data.refreshToken;
+      const userId = response.headers.userid;
+      const nickname = response.headers.usernickname;
+      
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("nickname", nickname);
       navigate("/") // 회원가입 완료시 메인 이동
     },
     onError: () => alert("로그인이 실패하였습니다.")

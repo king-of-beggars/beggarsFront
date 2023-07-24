@@ -28,18 +28,6 @@ instance.interceptors.response.use(
   function (response) {
     // 2xx 범위에 있는 상태 코드는 이 함수를 트리거
     // 응답 데이터가 있는 작업 수행
-    const accessToken = response.data.accessToken;
-    const refreshToken = response.data.refreshToken;
-    const userId = response.headers.userid;
-    const nickname = response.headers.usernickname;
-    console.log("header response:::", response)
-    if (!!accessToken) {
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
-      localStorage.setItem("userId", userId);
-      localStorage.setItem("nickname", nickname);
-      // saveUserInfo(response.headers.userid, response.headers.usernickname);
-    }
     return response;
   },
   function (error) {
@@ -50,7 +38,9 @@ instance.interceptors.response.use(
       switch (error.response.status) {
         // status code가 401인 경우 acesstoken 발급 API
         case 401:
-          instance.get("/api/user/refresh");
+          instance.get("/api/user/refresh").then((res) => {
+            localStorage.setItem("accessToken", res.data.accessToken);
+          });
           // useGet401();
           break;
         // status code가 403인 경우 로그인 화면으로 이동

@@ -64,11 +64,11 @@ export function MainFetcher({ children }) {
   //// 공통적으로 데이터를 가져오는 로직을 컴포넌트에서 재사용할 수 있음!
   return (
     <>
-      {React.cloneElement(children, { data })}
+      {React.cloneElement(children, { data, isLoggedIn })}
     </>
   )}
 
-function Main({ data}) {
+function Main({ data, isLoggedIn }) {
   // 로그인 체크
   //// 로그인 여부에 따라 렌더링 다른 페이지 : main, 가계부, 게시판의 일부
   // const isLoggedIn = chkLoggedIn()
@@ -83,7 +83,7 @@ function Main({ data}) {
   // Record Card 내 토글 버튼 state
   const [isToggleOnLeft, setIsToggleOnLeft] = useState(true);
 
-  const isLoggedIn = chkLoggedIn()
+  // const { isLoggedIn } = useContext(AuthContext)
 
   console.log('isLoggedIn-main:::', isLoggedIn)
   console.log("mainData:::", data)

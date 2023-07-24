@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useMutation, useQueryClient, useContext } from "react-query";
+import React, { useState, useContext } from "react";
+import { useMutation, useQueryClient } from "react-query";
 
 import { useGlobalVariables, AuthContext } from 'providers';
 import { style } from "styles";
