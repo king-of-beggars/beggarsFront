@@ -32,7 +32,6 @@ instance.interceptors.response.use(
     const refreshToken = response.data.refreshToken;
     const userId = response.headers.userid;
     const nickname = response.headers.usernickname;
-    console.log("header response:::", response)
     if (!!accessToken) {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);

@@ -166,6 +166,7 @@ function CashBookMain() {
   };
 
   const { data, isLoading, error } = useQuery(queryNode);
+  console.log("cashbook data:::", data);
   if (isLoading || error) {
     return <></>;
   }
@@ -533,7 +534,7 @@ function CashBookMain() {
                 setHorizontalSwipe,
                 setActiveSlide,
                 setSwiper,
-                data.length
+                data
               )
             )}
             {isWriteModal && (
@@ -806,7 +807,6 @@ function CashBookMain() {
     );
   } else {
     console.log("안된걸로 들어옴!")
-    const cashbookApiRes = cashbookDummyData
     return (
       <CashbookErrorRender />
     )
