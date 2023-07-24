@@ -3,7 +3,6 @@ import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 
-// import { useGlobalVariables } from "providers"
 import { chkLoggedIn, saveUserInfo } from "functions"
 import { mainRenderer } from 'renderers';
 import { AuthAPI, mainAPI } from "api/api"
@@ -25,7 +24,6 @@ export function MainFetcher({ children }) {
   // 로그인 체크
   //// 로그인 여부에 따라 렌더링 다른 페이지 : main, 가계부, 게시판의 일부
   const isLoggedIn = chkLoggedIn()
-  console.log('isLoggedIn-fetcher:::', isLoggedIn)
   // get 요청
   const { data, isLoading, isError } = useQuery(["mainData"], mainAPI.getMainData, {
     retry: 10, // 10번까지 재시도
@@ -68,12 +66,11 @@ export function MainFetcher({ children }) {
     </>
   )}
 
-function Main({ data }) {
+function Main({ data}) {
   // 로그인 체크
   //// 로그인 여부에 따라 렌더링 다른 페이지 : main, 가계부, 게시판의 일부
-  const isLoggedIn = chkLoggedIn()
-  console.log('isLoggedIn-main:::', isLoggedIn)
-  console.log("mainData:::", data)
+  // const isLoggedIn = chkLoggedIn()
+
   // 닉네임 모달 관련
   //// 소셜 로그인 모드 판별 state
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
@@ -83,6 +80,11 @@ function Main({ data }) {
   const { search } = useLocation();
   // Record Card 내 토글 버튼 state
   const [isToggleOnLeft, setIsToggleOnLeft] = useState(true);
+
+  const isLoggedIn = chkLoggedIn()
+
+  console.log('isLoggedIn-main:::', isLoggedIn)
+  console.log("mainData:::", data)
 
   // 렌더러에 내려보낼 state들
   const states = { isToggleOnLeft, setIsToggleOnLeft }
@@ -114,12 +116,13 @@ function Main({ data }) {
       }
     }
   }, [isLoggedIn, queryStr, search])
-
+  console.log("isLoggedIn:::", isLoggedIn)
   console.log('isSocialLogin:::', isSocialLogin)
+  console.log("decodedNickname:::", decodeURIComponent(localStorage.getItem("nickname")))
 
   return (
     isLoggedIn || isSocialLogin ? (
-      !!data.signupDay ? (
+      !!data.signupDay && decodeURIComponent(localStorage.getItem("nickname")) !== null ? (
         <>
           {mainRenderer("login", data, states)}
         </>

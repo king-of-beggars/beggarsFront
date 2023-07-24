@@ -6,6 +6,7 @@ import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import { Nav } from "components";
 import { AuthAPI } from "api/api";
+import { chkLoggedIn } from 'functions';
 import { background50Top, background50Middle, background50Tail } from "assets";
 
 // function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
@@ -19,6 +20,8 @@ function Profile() {
     onSuccess: () => {
       localStorage.removeItem("userId");
       localStorage.removeItem("nickname");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
 
       alert("로그아웃에 성공하셨습니다.");
       navigate("/");
