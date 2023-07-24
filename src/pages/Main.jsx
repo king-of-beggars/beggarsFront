@@ -93,19 +93,33 @@ function Main({ data, isLoggedIn }) {
 
   // 소셜로그인 시 발생하는 query url
   let queryStr = queryString.parse(search);
+  const isGetSocial = Object.keys(queryStr).length === 0 ? false :JSON.parse(queryStr.loginSuccess);
 
   // 회원가입이 완료된 소셜로그인 유저 정보
-  useQuery(['socialUser'], AuthAPI.getSocialUser, {
+  useQuery(['socialUser'], ()=>AuthAPI.getSocialUser(queryStr), {
     retry: 10, // 10번까지 재시도
-    enabled: Object.keys(queryStr).length === 0 ? false :JSON.parse(queryStr.loginSuccess), 
-    select: (data) => data.data.data,
+    enabled: isGetSocial, 
+    select: (data) => data.data,
     onError: (error) => {
       console.log('AuthAPI.getSocialUser::: get error : ', error)
     },
-    onSuccess: (data) => {
-      saveUserInfo(data.userId, data.userNickname)
+    onSuccess: (res) => {
+      console.log("response ::: ", res);
+      const accessToken = res.accessToken;
+      const refreshToken = res.refreshToken;
+      const userId = res.socialInfoDto.userId;
+      const nickname = res.socialInfoDto.userNickname;
+      
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("nickname", nickname);
+      
+      window.location.href = "/";
     },
   })
+
+  // console.log("socialData ::::", socialData)
 
   // 만일 socialLogin으로 들어온 유저이면 다음을 처리
   useEffect(() => {
