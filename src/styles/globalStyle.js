@@ -95,6 +95,10 @@ const GlobalStyle = createGlobalStyle`
   html, main {
     scroll-behavior: smooth;
   }
+
+  button {
+    color: black;
+  }
 `;
 
 export default GlobalStyle;
