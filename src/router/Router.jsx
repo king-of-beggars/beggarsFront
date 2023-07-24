@@ -18,10 +18,11 @@ import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
 import CashBookMod from "pages/CashBookMod";
 import BoardDetail from "pages/BoardDetail";
-import { MainAssetProvider } from "components";
+import { BlurOverlay, Loader, MainAssetProvider } from "components";
 import { chkLoggedIn, getKrDate, setFrameSize } from "functions";
 import { layout } from "styles";
 import { AuthContext } from 'providers';
+import CashbookErrorRender from 'components/error/CashbookErrorRender';
 
 function Router() {
   // setFrameSize();
@@ -78,7 +79,12 @@ function Router() {
           element={
             isLoggedIn
             ? <Navigate to={`/cash-book/${getKrDate()}`} replace />
-            : <></>
+            : <>
+                <CashbookErrorRender />
+                {/* <BlurOverlay>
+                  <Loader>잠시만 기다리게</Loader>
+                </BlurOverlay> */}
+              </>
           
         }
         />
