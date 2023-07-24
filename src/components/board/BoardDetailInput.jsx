@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient, useContext } from "react-query";
 
-import { useGlobalVariables } from 'providers';
+import { useGlobalVariables, AuthContext } from 'providers';
 import { style } from "styles";
 import { CommentSubmit } from "assets";
 import { boardAPI } from "api/api";
 import { chkLoggedIn } from "functions";
 
 function BoardDetailInput({ boardId, userId, changeLoginModal }) {
+  const { isLoggedIn } = useContext(AuthContext);
   const { widthRatio } = useGlobalVariables();
   // 댓글 state
   const [comment, setComment] = useState("");
@@ -43,7 +44,7 @@ function BoardDetailInput({ boardId, userId, changeLoginModal }) {
   return (
     <style.NavWrap ratio={widthRatio} style={{ position:"static", padding: "0", height: "50px", justifyContent: "center", alignItems: "center"}}>
       <style.BoardDetailInputContainer>
-        {chkLoggedIn() ? (
+        {isLoggedIn ? (
           <style.BoardDetailInputLeft
             ratio={widthRatio}
             placeholder={
@@ -53,7 +54,7 @@ function BoardDetailInput({ boardId, userId, changeLoginModal }) {
             }
             onChange={onChangeComment}
             value={comment}
-            disabled={!chkLoggedIn()}
+            disabled={!isLoggedIn}
           />
         ) : (
           <style.BoardDetailBtnLeft onClick={changeLoginModal}>

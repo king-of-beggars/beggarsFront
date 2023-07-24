@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { AutoTextSize } from 'auto-text-size';
 
-import { useGlobalVariables } from "providers"
+import { useGlobalVariables, } from "providers"
 import { commaOnThree } from "functions"
 import { BoardDetailInput, BoardDetailComment, CashDetailModal } from "components";
 import { layout, style } from "styles";
@@ -94,7 +94,6 @@ function BoardDetail({ isBoasting }) {
   const [isLoginModal, setIsLoginModal] = useState(false);
 
   const changeLoginModal = () => {
-    alert("ho");
     const newIsLogin = !isLoginModal;
     setIsLoginModal(newIsLogin);
   };
