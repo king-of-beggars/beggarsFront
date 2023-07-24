@@ -44,7 +44,7 @@ export const commentZeroSpend = ["무지출 데이라고...?", "ㅅ,,사실인�
 export const commentGoBoard = "벽보보러 가시게"
 //// 추가 회색 박스 멘트
 export const commentGray = (isOver) => {
-    return isOver ? (<>장부는 5개까지만<br />만들 수 있소</>) : (<>왼쪽으로 밀어서<br/> 장부 추가</>)
+    return isOver ? (<>장부는 5개까지만<br />만들 수 있소</>) : (<>왼쪽으로 밀어서<br/>장부 추가</>)
 }
 //// 카드 삭제 멘트
 export const commentDeleteCard = ["이 장부를 정말로", "지워버릴 텐가?"]

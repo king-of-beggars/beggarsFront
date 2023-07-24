@@ -18,7 +18,7 @@ import CashBookAdd from "pages/CashBookAdd";
 import CashBookDetail from "pages/CashBookDetail";
 import CashBookMod from "pages/CashBookMod";
 import BoardDetail from "pages/BoardDetail";
-import { BlurOverlay, Loader, MainAssetProvider } from "components";
+import { BlurOverlay, Loader, LoggedYet, MainAssetProvider } from "components";
 import { chkLoggedIn, getKrDate, setFrameSize } from "functions";
 import { layout } from "styles";
 import { AuthContext } from 'providers';
@@ -76,16 +76,7 @@ function Router() {
         <Route
           exact
           path="/cash-book"
-          element={
-            isLoggedIn
-            ? <Navigate to={`/cash-book/${getKrDate()}`} replace />
-            : <>
-                <CashbookErrorRender />
-                {/* <BlurOverlay>
-                  <Loader>잠시만 기다리게</Loader>
-                </BlurOverlay> */}
-              </>
-          
+          element={<Navigate to={`/cash-book/${getKrDate()}`} replace />          
         }
         />
         <Route path="cash-book/:date" element={<CashBookMain />} />
@@ -128,16 +119,17 @@ function Router() {
         />
 
         {/* related to auth */}
-        <Route path="login" element={<Login />} />
+        
         <Route path="signup" element={<Signup />} />
+        <Route path="login" element={<Login />} />
 
         {/* related to user */}
         <Route
           path="profile"
           element={
-            <ProtectedRouter isLoggedIn={isLoggedIn}>
-              <Profile />
-            </ProtectedRouter>
+              <ProtectedRouter isLoggedIn={isLoggedIn}>
+                <Profile />
+              </ProtectedRouter>
           }
         />
       </Routes>
@@ -149,9 +141,15 @@ const ProtectedRouter = ({ isLoggedIn, children }) => {
   if (isLoggedIn) {
     return children;
   } else {
-    // alert("로그인이 필요합니다.");
-    alert("라우터 튕김!")
-    // return <Navigate to="/login" replace={true} />;
+    return (
+      <>
+        {children}
+        <BlurOverlay addComponent={<LoggedYet />}>로그인이 되지 않았네!</BlurOverlay>
+      </>
+    )
+    // // alert("로그인이 필요합니다.");
+    // alert("라우터 튕김!")
+    // // return <Navigate to="/login" replace={true} />;
   }
 };
 
