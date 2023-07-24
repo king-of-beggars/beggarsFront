@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
+import { useGlobalVariables } from 'providers';
 import { style } from "styles";
 import { CommentSubmit } from "assets";
 import { boardAPI } from "api/api";
 import { chkLoggedIn } from "functions";
 
 function BoardDetailInput({ boardId, userId, changeLoginModal }) {
+  const { widthRatio } = useGlobalVariables();
   // 댓글 state
   const [comment, setComment] = useState("");
 
@@ -39,10 +41,11 @@ function BoardDetailInput({ boardId, userId, changeLoginModal }) {
   // console.log("API get ::: ", typeof userId)
 
   return (
-    <style.NavWrap style={{ height: "auto", bottom: "auto", justifyContent: "center"}}>
+    <style.NavWrap ratio={widthRatio} style={{ position:"static", padding: "0", height: "50px", justifyContent: "center", alignItems: "center"}}>
       <style.BoardDetailInputContainer>
         {chkLoggedIn() ? (
           <style.BoardDetailInputLeft
+            ratio={widthRatio}
             placeholder={
               localStorage.getItem("userId") === String(userId)
                 ? "첨언을 해보게."

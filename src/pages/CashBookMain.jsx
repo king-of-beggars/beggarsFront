@@ -21,17 +21,9 @@ import {
   CashBookCard,
 } from "components";
 import "styles/css/customSwiper.css";
-import {
-  mainBackgroundMiddle,
-  mainBackgroundTail,
-  mainBackgroundTop,
-} from "assets";
+import { bgCloud100, bgMountain100, bgSky100 } from "assets";
 import { getDateBoxSize } from "functions/getAssetSize";
-import {
-  commentDataNone,
-  commentDeleteCard,
-  commentGray,
-} from "constants/comment";
+import { commentDataNone, commentDeleteCard, commentGray } from "constants/comment";
 import { useEffect } from "react";
 import * as sVar from "constants/styleVariables";
 
@@ -56,8 +48,6 @@ function CashBookMain() {
 
   const cardHeight = cashbookCard.height * widthRatio;
   const cardWidth = cashbookCard.width * widthRatio;
-
-  const CARD_RATIO = 0.9;
 
   console.log(mainHeight);
   console.log("widthRatio:::", widthRatio);
@@ -484,9 +474,9 @@ function CashBookMain() {
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={`url(${mainBackgroundTop})`}
-      backPngMiddle={`url(${mainBackgroundMiddle})`}
-      backPngTail={`url(${mainBackgroundTail})`}
+      backPngTop={`url(${bgSky100})`}
+      backPngMiddle={`url(${bgCloud100})`}
+      backPngTail={`url(${bgMountain100})`}
     >
       <layout.Header headerHeight={`${headerHeight}px`}>
         <div

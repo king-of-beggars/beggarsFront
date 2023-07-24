@@ -70,7 +70,7 @@ function BoardDetail({ isBoasting }) {
   //// 그로 인한 mainHeight 변경
   const headerHeight = 53
   const navHeight = 110;
-  const mainHeight = windowSize.height - (navHeight + headerHeight)
+  const mainHeight = windowSize.height - (navHeight + headerHeight + 25)
 
   const { id } = useParams(); // boardid 패러미터 받아오기
   // console.log("받아온 id:::", id);

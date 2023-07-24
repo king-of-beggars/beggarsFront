@@ -5,34 +5,6 @@ import { getAssetSize, getKrDate } from "functions";
 import { MainRecordCardTag, MainRecordComment, MainWeather, MainRecordStatus, MainToggle, Bar } from "components";
 import { layout, style } from "styles";
 
-const sampleData = [
-  {
-      cashbookCategory: "식비",
-      cashbookNowValue: 1200,
-      // cashbookGoalValue: 10000
-  },
-  {
-      cashbookCategory: "군것질",
-      cashbookNowValue: 1200,
-      // cashbookGoalValue: 10000
-  },
-  {
-      cashbookCategory: "교통비",
-      cashbookNowValue: 3200,
-      // cashbookGoalValue: 3000
-  },
-  {
-      cashbookCategory: "생필품",
-      cashbookNowValue: 10000,
-      // cashbookGoalValue: 4000
-  },
-  {
-      cashbookCategory: "쇼핑",
-      cashbookNowValue: 2990,
-      // cashbookGoalValue: 12000
-  }
-]
-
 
 function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
 
@@ -52,20 +24,6 @@ function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
       const filteredStreak = lastThreeDays.map((day) => data.twoweek[day]).filter((code) => code !== 1 && code !== 2)
       return filteredStreak.length === 3 ? -1 : 0;
     }
-
-    // const yesterday = getKrDate(false)
-    // const yesterdayStreak = data.twoweek[getKrDate(false)]
-    // if (yesterdayStreak === 1 || yesterdayStreak === 2) {
-    //   return yesterdayStreak
-    // } else {
-    //   // 3일 이상 streak가 깨졌을 경우를 탐색
-    //   const twoWeeks = Object.keys(data.twoweek)
-    //   const yesterdayIdx = twoWeeks.indexOf(yesterday)
-    //   const lastThreeDays = twoWeeks.slice(yesterdayIdx - 2, yesterdayIdx + 1)
-    //   const filteredStreak = lastThreeDays.map((day) => data.twoweek[day]).filter((code) => code !== 1 && code !== 2)
-    //   // 3일 이상 streak가 깨졌으면 -1을 리턴, 그렇지 않으면 0을 리턴
-    //   return filteredStreak.length === 3 ? -1 : 0;
-    // }
   }
 
   const { frameSize, screenWidth, mainRecordCard } = useGlobalVariables();
@@ -74,6 +32,29 @@ function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
 
   const weatherCode = getWeatherCode()
   const isSaved = weatherCode > 0
+
+  const groupByCategory = data.groupByCategory
+
+  const barData = data.groupByCategory.reduce((result, entry) => {
+    if (entry.cashbookNowValue === 0) {
+      return result;
+    }
+    
+    const keysToKeep = ['cashbookCategory', 'cashbookNowValue']
+    const newObj = Object.fromEntries(
+      Object.entries(entry).filter(([key, value]) => keysToKeep.includes(key))
+    )
+
+    result.push(newObj);
+    return result;
+  }, []);
+
+  // const budget = data.total.cashbookGoalValue
+  // const spend = data.total.cashbookNowValue
+
+  console.log("mainRecordCardData:::", data)
+  console.log("groupByCategory:::", groupByCategory)
+  console.log("barData:::", barData)
 
 
   return (
@@ -89,23 +70,24 @@ function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
               <MainRecordStatus ratio={ratio} isSaved={isSaved} budget={data.total.cashbookGoalValue} spend={data.total.cashbookNowValue}/>
             </layout.Grid2Row>
           :
-          <>
-            <div style={{height: "40%", width: "90%"}}>
-              <Bar data={sampleData} />
-            </div>
-            <style.Divider borderSize="1px" color={"#3c3c3c"} style={{width: "100%"}}></style.Divider>
-            <layout.FlexDefault style={{width: "90%", justifyContent: "space-around", padding: "5px 6px 0 6px"}}>
-              {
-                sampleData.length > 0 ?
-                sampleData.map((item, idx) => {
-                  return (
-                    <style.MainGraphSection key={idx} ratio={ratio}>{item.cashbookCategory}</style.MainGraphSection>
-                  )
-                }) : 
-                null
-              }
-            </layout.FlexDefault>
-          </>
+          !! barData &&
+            <>
+              <div style={{height: "40%", width: `${90 / groupByCategory.length}%`}}>
+                <Bar data={barData} />
+              </div>
+              <style.Divider borderSize="1px" color={"#3c3c3c"} style={{width: "100%"}}></style.Divider>
+              <layout.FlexDefault style={{width: "90%", justifyContent: "space-around", padding: "5px 6px 0 6px"}}>
+                {
+                  barData.length > 0 ?
+                  barData.map((item, idx) => {
+                    return (
+                      <style.MainGraphSection key={idx} ratio={ratio}>{item.cashbookCategory}</style.MainGraphSection>
+                    )
+                  }) : 
+                  null
+                }
+              </layout.FlexDefault>
+            </>
 
           
             

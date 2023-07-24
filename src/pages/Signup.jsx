@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
 import { AuthAPI } from "api/api";
-import { BackCramps, background30Middle, background30Tail, background30Top } from 'assets';
+import { BackCramps, bgCloud20, bgMountain20, bgSky20 } from 'assets';
 import * as sVar from "constants/styleVariables"
 import { usePassword, useNickname, useId } from 'hooks';
 
@@ -14,7 +14,7 @@ const INIT_INPUT_VALUE = ""
 // function Signup({ isMobile, headerHeight, navHeight, mainHeight }) {
 function Signup() {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  const { windowSize, widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
   console.log('Signup rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // nav가 없는 페이지인 경우 header를 줄이고 main을 늘려주기
@@ -138,9 +138,9 @@ function Signup() {
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={`url(${background30Top})`}
-      backPngMiddle={`url(${background30Middle})`}
-      backPngTail={`url(${background30Tail})`}
+      backPngTop={`url(${bgSky20})`}
+      backPngMiddle={`url(${bgCloud20})`}
+      backPngTail={`url(${bgMountain20})`}
     >
       <layout.Header headerHeight={`${noNavHeaderHeight}px`}>
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
@@ -154,7 +154,7 @@ function Signup() {
       <layout.Main headerHeight={`${noNavHeaderHeight}px`} mainHeight={`${noNavMainHeight}px`}>
         <layout.MainContent>
           <layout.LoginWrap>
-            <style.JoinHeader>회원가입</style.JoinHeader>
+            <style.JoinHeader ratio={widthRatio}>회원가입</style.JoinHeader>
             <style.SignupInputWrap>
               <style.SignupInputBox>
                 <input
@@ -164,6 +164,7 @@ function Signup() {
                   onChange={onChangeInput}
                   placeholder="닉네임 입력"
                   autoComplete="off"
+                  style={{backgroundColor: "transparent"}}
                 />
                 <button style={{marginBottom: "5px"}} tf={isNickChked} onClick={nickDupleChk}>중복확인</button>
               </style.SignupInputBox>
@@ -183,6 +184,7 @@ function Signup() {
                   onChange={onChangeInput}
                   placeholder="아이디 입력"
                   autoComplete="off"
+                  style={{backgroundColor: "transparent"}}
                 />
                 <button style={{marginBottom: "5px"}} onClick={idDupleChk}>중복확인</button>
               </style.SignupInputBox>
@@ -198,7 +200,7 @@ function Signup() {
             </style.SignupInputWrap>
             <style.SignupInputWrap>
               <style.SignupInputBox>
-                <input name="pw" type="text" value={password} onChange={onChangeInput} placeholder="비밀번호 입력" />
+                <input name="pw" type="password" value={password} onChange={onChangeInput} placeholder="비밀번호 입력" style={{backgroundColor: "transparent"}}/>
               </style.SignupInputBox>
               <style.ConditionText>
                 { isValid.isValidRegex === null && <span>영문과 숫자를 사용하고 1개 이상의 특수문자 포함한</span> }
@@ -209,12 +211,12 @@ function Signup() {
                 { isValid.isValidLen === false && <span style={{color: `${sVar.falsyRed}`}}> 6~20자</span> }
               </style.ConditionText>
               <style.SignupInputBox>
-                <input name="pwConfirm" type="text" value={passConfirm} onChange={onChangeInput} placeholder="비밀번호 확인" />
+                <input name="pwConfirm" type="password" value={passConfirm} onChange={onChangeInput} placeholder="비밀번호 확인" style={{backgroundColor: "transparent"}}/>
               </style.SignupInputBox>
               { samePwTextRenderer(passConfirm, password) }
             </style.SignupInputWrap>
             <layout.FlexCenter style={{marginBottom: "3em"}}>
-              <style.BigBlackBtn onClick={signUpHandler}>여정 시작</style.BigBlackBtn>
+              <style.BigBlackBtn ratio={widthRatio} onClick={signUpHandler}>여정 시작</style.BigBlackBtn>
             </layout.FlexCenter>
           </layout.LoginWrap>
         </layout.MainContent>

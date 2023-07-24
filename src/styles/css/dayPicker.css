@@ -15,3 +15,7 @@
 .SingleDatePicker_picker {
   z-index: 10;
 }
+
+.SingleDatePicker_picker .SingleDatePicker_picker_1 .SingleDatePicker_picker__directionLeft .SingleDatePicker_picker__directionLeft_2 {
+  z-index: 100;
+}

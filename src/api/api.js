@@ -43,6 +43,7 @@ instance.interceptors.response.use(
     return response;
   },
   function (error) {
+    console.log("interceptor error:::", error.response)
     // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거
     // 응답 오류가 있는 작업 수행
     if (error.response && error.response.status) {
