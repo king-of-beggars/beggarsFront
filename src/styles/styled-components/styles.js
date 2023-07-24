@@ -28,7 +28,8 @@ import {
   mainToggleBar,
   mainToggleBtn,
   mainJourneyTitle,
-  mainJourneyBox
+  mainJourneyBox,
+  mainLogoSmooth
 } from "assets";
 import { SwiperSlide } from "swiper/react";
 import { layout } from "styles";
@@ -56,7 +57,7 @@ export const Button = styled.button`
 export const LoginLogoWrap = styled(layout.FlexCenterColumn)`
   min-width: 10em;
   min-height: 10em;
-  background-image: url(${mainLineLogo});
+  background-image: url(${mainLogoSmooth});
   object-fit: cover;
   margin-bottom: 0.5em;
   /* border: 1px solid black; */
@@ -82,12 +83,13 @@ export const LoginInputBox = styled(layout.FlexColumn)`
 
 // 로그인 및 여정시작 등 큰 검정 라운드 버튼 스타일링
 export const BigBlackBtn = styled.button`
-  width: 10em;
-  height: 2.5em;
-  border-radius: 6em;
+  width: calc(${props => props.ratio} * 189px);
+  height: calc(${props => props.ratio} * 50px);
+  border-radius: calc(${props => props.ratio} * 100px);
   background: black;
   color: white;
-  font-size: 1em;
+  font-size: calc(${props => props.ratio} * 20px);
+  font-family: "DOSIyagiMedium";
 `;
 // 작은 라운드 버튼 스타일링
 export const SmallBtn = styled.button`
@@ -101,13 +103,14 @@ export const SmallBtn = styled.button`
 `;
 
 export const SocialLoginBtn = styled.button`
-  width: 90%;
-  border-radius: 0.9em;
+  width: calc(${props => props.ratio} * 280px);
+  border-radius: calc(${props => props.ratio} * 100px);
   background: ${(props) => (props.site === "naver" ? `#4EBE44` : `#F8CD40`)};
   color: black;
-  padding: 1em;
-  font-size: 0.8em;
+  padding: calc(${props => props.ratio} * 10px);
+  font-size: calc(${props => props.ratio} * 14px);
   border: none;
+  font-family: "DOSIyagiMedium";
 `;
 
 // SignupInputBox : 회원가입 아이디, 닉네임, 비밀번호 입력 input
@@ -123,6 +126,7 @@ export const SignupInputBox = styled(layout.FlexCenter)`
     border: none;
     outline: none;
     height: 2.6em;
+    font-family: "DOSGothic";
   }
 
   > button {
@@ -132,6 +136,7 @@ export const SignupInputBox = styled(layout.FlexCenter)`
     background: black;
     color: white;
     border-radius: 5px;
+    font-family: "DOSGothic";
   }
 `;
 
@@ -144,20 +149,21 @@ export const SignupInputWrap = styled(layout.FlexColumn)`
 
 // ProfilePicWrap : 프로필 사진
 export const ProfilePicWrap = styled(layout.FlexCenterColumn)`
-  width: 10em;
-  height: 10em;
-  border: 1px solid black;
+  width: calc(${props => props.ratio} * 156px);
+  height: calc(${props => props.ratio} * 156px);
+  border: none;
   border-radius: 50%;
+  background-color: ${sVar.grayD9D9D9};
 `;
 
 // MidBlackBtn : 프로필 정보수정 버튼
 export const MidBlackBtn = styled.button`
-  width: 10em;
-  height: 2em;
-  border-radius: 6em;
-  background: black;
-  color: white;
-  font-size: 1em;
+  width: calc(${props => props.ratio} * 162px);
+  padding: calc(${props => props.ratio} * 8px) calc(${props => props.ratio} * 12px);
+  border-radius: calc(${props => props.ratio} * 100px);
+  background: ${sVar.black343434};
+  color: ${sVar.whiteFFF};
+  font-size: calc(${props => props.ratio} * 14px);
 `;
 
 // Nav바 컨테이너
@@ -172,6 +178,7 @@ export const NavWrap = styled(layout.FlexCenterEven100)`
   background: white;
   height: 100%;
   font-size: calc(${props => props.ratio} * 1.125rem);
+  font-family: "DOSIyagiMedium";
   padding: calc(${props => props.ratio} * 17px) calc(${props => props.ratio} * 43px) calc(${props => props.ratio} * 25px) calc(${props => props.ratio} * 43px);
   /* padding: calc(${props => props.ratio} * 1.06rem) calc(${props => props.ratio} * 2.69rem) calc(${props => props.ratio} * 1.56rem) calc(${props => props.ratio} * 2.69rem); */
 `;
@@ -195,6 +202,7 @@ export const NavBtn = styled.button`
 export const CashBookHeader = styled(layout.FlexCenter)`
   height: inherit;
   font-size: calc(${props => props.ratio} * 25px);
+  font-family: "DOSIyagiMedium";
 `;
 
 export const DayPickerWrap = styled(layout.FlexCenter)`
@@ -258,6 +266,7 @@ export const Card2ndCategoryText = styled.div`
   font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
   color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
   margin-bottom: calc(${props => props.ratio} * ${props => props.marginBottom});
+  font-family: "DOSIyagiMedium";
 `;
 
 // Card에서 중간 border를 넣기 위한 div 스타일링입니다.
@@ -313,6 +322,7 @@ export const CardBtn = styled.button`
   align-items: center;
   justify-content: center;
   font-size: calc(${(props) => props.ratio} * 20px);
+  font-family: "DOSIyagiMedium";
 
   &:focus {
     outline: none;
@@ -524,8 +534,9 @@ export const Modal = styled.div`
 
 // 회원가입의 제목 헤더를 감싸는 div입니다.
 export const JoinHeader = styled.div`
-  font-size: 1.5em;
+  font-size: calc(${props => props.ratio} * 25px);
   margin: 1em 0 2em 0;
+  font-family: "DOSIyagiMedium";
 `;
 
 // 조건 텍스트입니다.
@@ -535,6 +546,10 @@ export const ConditionText = styled.div`
   border: none;
   text-align: left;
   margin: 0.8em 0;
+  font-family: "DOSGothic";
+  span {
+    font-family: "DOSGothic";
+  }
 `;
 
 // 조건에 따라 텍스트 컬러를 다르게 줄 수 있는 조건 텍스트입니다.
@@ -819,6 +834,9 @@ export const BoardDetailInputLeft = styled.input`
   text-indent: 10px;
   &:focus {
     outline: none;
+  }
+  &::placeholder {
+    font-size: calc(${props => props.ratio} * 14px);
   }
 `
 

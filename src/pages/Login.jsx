@@ -5,13 +5,13 @@ import { useMutation } from 'react-query'
 import { useGlobalVariables } from "providers"
 import { saveUserInfo } from 'functions'
 import { layout, style } from 'styles'
-import { BackCramps, background30Middle, background30Tail, background30Top, backgroundBrightTop } from 'assets'
+import { BackCramps, bgCloud20, bgMountain20, bgSky20 } from 'assets'
 import { AuthAPI } from 'api/api'
 
 // function Login({ isMobile, headerHeight, navHeight, mainHeight  }) {
 function Login() {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  const { windowSize,widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
   console.log('Login rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // nav가 없는 페이지인 경우 header를 줄이고 main을 늘려주기
@@ -82,9 +82,9 @@ function Login() {
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={`url(${background30Top})`}
-      backPngMiddle={`url(${background30Middle})`}
-      backPngTail={`url(${background30Tail})`}
+      backPngTop={`url(${bgSky20})`}
+      backPngMiddle={`url(${bgCloud20})`}
+      backPngTail={`url(${bgMountain20})`}
     >
       <layout.Header headerHeight={`${noNavHeaderHeight}px`}>
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
@@ -99,36 +99,38 @@ function Login() {
         <layout.MainContent>
           <layout.LoginWrap>
             <style.LoginLogoWrap></style.LoginLogoWrap>
-            <span style={{fontSize: "1.5em"}}>내일은 거지왕</span>
+            <span style={{fontSize: `${widthRatio * 25}px`, fontFamily: "DOSIyagiMedium"}}>내일은 거지왕</span>
             <layout.LoginInputWrap>
               <style.LoginInputBox>
-                <span>아이디</span>
+                <span style={{fontSize: `${widthRatio * 16}px`, fontFamily: "DOSGothic"}}>아이디</span>
                 <input
                   name="userName"
                   type="text"
                   value={userName}
                   onChange={onChangeInput}
                   autoComplete='off'
+                  style={{backgroundColor: "transparent"}}
                 />
               </style.LoginInputBox>
               <style.LoginInputBox>
-                <span>비밀번호</span>
+                <span style={{fontSize: `${widthRatio * 16}px`, fontFamily: "DOSGothic"}}>비밀번호</span>
                 <input
                   name="userPwd"
-                  type="text"
+                  type="password"
                   value={userPwd}
                   onChange={onChangeInput}
                   autoComplete='off'
+                  style={{backgroundColor: "transparent"}}
                 />
               </style.LoginInputBox>
             </layout.LoginInputWrap>
             <layout.LoginBtnWrap>
-              <style.BigBlackBtn onClick={loginHandler}>로그인</style.BigBlackBtn>
-              <span style={{textDecoration: "underline", fontSize: "0.8em"}} onClick={onClickSignup}>회원가입</span>
+              <style.BigBlackBtn ratio={widthRatio} onClick={loginHandler}>로그인</style.BigBlackBtn>
+              <span style={{textDecoration: "underline", fontSize: `${widthRatio * 14}px`, fontFamily: "DOSIyagiMedium"}} onClick={onClickSignup}>회원가입</span>
             </layout.LoginBtnWrap>
             <layout.SocialBtnWrap style={{gap: "1em", margin: "2em, 0"}}>
-              <style.SocialLoginBtn site="kakao" onClick={kakaoLoginHandler}>카카오 로그인</style.SocialLoginBtn>
-              <style.SocialLoginBtn site="naver" onClick={naverLoginHandler}>네이버 로그인</style.SocialLoginBtn>
+              <style.SocialLoginBtn ratio={widthRatio} site="kakao" onClick={kakaoLoginHandler}>카카오 로그인</style.SocialLoginBtn>
+              <style.SocialLoginBtn ratio={widthRatio} site="naver" onClick={naverLoginHandler}>네이버 로그인</style.SocialLoginBtn>
             </layout.SocialBtnWrap>
           </layout.LoginWrap>
         </layout.MainContent>

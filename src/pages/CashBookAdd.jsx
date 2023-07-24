@@ -5,22 +5,16 @@ import moment from "moment";
 
 import { useGlobalVariables } from "providers"
 import { Nav, CashBookInput, CashAddSelect } from "components";
-import { BackCrampsBlack } from "assets";
+import { BackCrampsBlack, bgCloud50, bgMountain50, bgSky50 } from "assets";
 import { layout, style } from "styles";
 import { categoryList } from "constants/category";
 import { CashBookAPI } from "api/api";
-import {
-  backgroundBrightMiddle,
-  backgroundBrightTail,
-  backgroundBrightTop,
-} from "assets";
-
 
 
 function CashBookAdd() {
 // function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  const { windowSize, widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
   console.log('CashBookAdd rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // 카테고리 정보
@@ -90,9 +84,9 @@ function CashBookAdd() {
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={`url(${backgroundBrightTop})`}
-      backPngMiddle={`url(${backgroundBrightMiddle})`}
-      backPngTail={`url(${backgroundBrightTail})`}
+      backPngTop={`url(${bgSky50})`}
+      backPngMiddle={`url(${bgCloud50})`}
+      backPngTail={`url(${bgMountain50})`}
     >
       <layout.Header headerHeight={`${headerHeight}px`}>
         <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
@@ -138,7 +132,7 @@ function CashBookAdd() {
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="money" />
+        <Nav ratio={widthRatio} selected="money" />
       </layout.Nav>
     </style.BackgroundPageLayout>
   );

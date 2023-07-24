@@ -6,12 +6,12 @@ import { useGlobalVariables } from "providers";
 import { layout, style } from "styles";
 import { Nav, BoardCard } from "components";
 import {
-  background70Top,
-  backgroundDarkTop,
-  background70Middle,
-  backgroundDarkMiddle,
-  background70Tail,
-  backgroundDarkTail,
+  bgSky50,
+  bgDarkSky,
+  bgCloud50,
+  bgDarkCloud,
+  bgMountain50,
+  bgDarkMountain,
 } from "assets";
 import { boardAPI } from "api/api";
 import InfiniteScroll from "react-infinite-scroller";
@@ -128,15 +128,15 @@ function Board({ isBoasting, setIsBoasting }) {
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
       backPngTop={
-        isBoasting ? `url(${background70Top})` : `url(${backgroundDarkTop})`
+        isBoasting ? `url(${bgSky50})` : `url(${bgDarkSky})`
       }
       backPngTail={
-        isBoasting ? `url(${background70Tail})` : `url(${backgroundDarkTail})`
+        isBoasting ? `url(${bgMountain50})` : `url(${bgDarkMountain})`
       }
       backPngMiddle={
         isBoasting
-          ? `url(${background70Middle})`
-          : `url(${backgroundDarkMiddle})`
+          ? `url(${bgCloud50})`
+          : `url(${bgDarkCloud})`
       }
     >
       <layout.Header headerHeight={`${headerHeight}px`}>

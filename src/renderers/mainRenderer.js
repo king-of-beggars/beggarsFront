@@ -1,5 +1,5 @@
 import { useGlobalVariables } from 'providers';
-import { MainLogoText, mainBackgroundTop, mainBackgroundMiddle, mainBackgroundTail } from 'assets';
+import { MainLogoText, bgSky100, bgCloud100, bgMountain100 } from 'assets';
 import { SocialLoginModal, MainExp, MainRecordCard, MainJourney, Nav, ScreenBlur, Loader, LoggedYet, ErrorRefresher } from 'components';
 import { ifNotLoggedIn, ifLoading, ifError } from 'constants';
 import { layout, style } from 'styles';
@@ -18,9 +18,9 @@ const MainLayout = ({children}) => {
         <style.BackgroundPageLayout
             screenWidth={`${screenWidth}px`}
             isMobile={isMobile}
-            backPngTop={`url(${mainBackgroundTop})`}
-            backPngMiddle={`url(${mainBackgroundMiddle})`}
-            backPngTail={`url(${mainBackgroundTail})`}
+            backPngTop={`url(${bgSky100})`}
+            backPngMiddle={`url(${bgCloud100})`}
+            backPngTail={`url(${bgMountain100})`}
         >
             <layout.Header headerHeight={`${headerHeight}px`}>
                 <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>

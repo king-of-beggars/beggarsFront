@@ -4,22 +4,17 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { useGlobalVariables } from "providers"
 import { CashBookAPI } from "api/api";
-import { AddDetail, BackCrampsBlack } from "assets";
+import { AddDetail, BackCrampsBlack, bgCloud50, bgMountain50, bgSky50 } from "assets";
 import { CashBookDetailList, ExpendAddModal, Nav } from "components";
 import CashDetailModal from "components/ui/modal/CashDetailModal";
 import { layout, style } from "styles";
-import {
-  backgroundBrightMiddle,
-  backgroundBrightTail,
-  backgroundBrightTop,
-} from "assets";
 import { commentZeroSpend } from "constants";
 import { AutoTextSize } from "auto-text-size";
 
 function CashBookDetail() {
   // 만들어둔 context 사용하기
   const {
-    // windowSize,
+    widthRatio,
     isMobile,
     headerHeight,
     navHeight,
@@ -118,9 +113,9 @@ function CashBookDetail() {
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={`url(${backgroundBrightTop})`}
-      backPngMiddle={`url(${backgroundBrightMiddle})`}
-      backPngTail={`url(${backgroundBrightTail})`}
+      backPngTop={`url(${bgSky50})`}
+      backPngMiddle={`url(${bgCloud50})`}
+      backPngTail={`url(${bgMountain50})`}
     >
       <layout.PageLayout isMobile={isMobile}>
         <layout.Header headerHeight={`${headerHeight}px`}>
@@ -205,7 +200,7 @@ function CashBookDetail() {
           </layout.MainContent>
         </layout.Main>
         <layout.Nav navHeight={`${navHeight}px`}>
-          <Nav selected="money" />
+          <Nav ratio={widthRatio} selected="money" />
         </layout.Nav>
       </layout.PageLayout>
     </style.BackgroundPageLayout>

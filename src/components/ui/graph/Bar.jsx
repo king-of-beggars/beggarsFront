@@ -11,11 +11,10 @@ function Bar({ data }) {
             <ResponsiveBar
                 data={data}
                 indexBy="cashbookCategory"
-                id={data.cashbookCategory}
-                keys={['cashbookNowValue']}
+                keys={["cashbookNowValue"]}
                 colors={['#E7CC67', '#A5D7DB', '#FF8989', '#C0D1A0', '#BDA5DB']}
                 colorBy="indexValue"
-
+    
                 borderRadius={1}
                 borderWidth={1}
                 borderColor={"#3c3c3c"}
@@ -51,10 +50,7 @@ function Bar({ data }) {
                 ]}
                 valueFormat={value => `${commaOnThree(value)}`}
             />
-
-
-
-      )
+            )
 }
 
 export default Bar
