@@ -2,10 +2,15 @@ import React from 'react'
 
 import { getRandomComment } from 'functions'
 import { style } from 'styles'
-import { positiveComments, negativeComments } from "constants"
+import { positiveComments, negativeComments, welcomeComments } from "constants"
 
-function MainRecordComment({ weatherCode, ratio }) {
-  const overallComment = getRandomComment(weatherCode > 0 ? positiveComments : negativeComments)
+function MainRecordComment({ dayCount, weatherCode, ratio }) {
+  const overallComment = getRandomComment(
+                          dayCount === 0
+                            ? welcomeComments
+                            : weatherCode > 0
+                              ? positiveComments
+                              : negativeComments)
   return (
     <style.MainRecordCardComment ratio={ratio}>
       {overallComment}

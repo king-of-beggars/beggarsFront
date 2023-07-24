@@ -12,10 +12,14 @@
   cursor: pointer;
 }
 
-.SingleDatePicker_picker {
-  z-index: 10;
+.DateInput {
+  position: relative;
 }
 
-.SingleDatePicker_picker .SingleDatePicker_picker_1 .SingleDatePicker_picker__directionLeft .SingleDatePicker_picker__directionLeft_2 {
-  z-index: 100;
+svg[role="presentation"] {
+  top: 45px !important;
+}
+
+.SingleDatePicker_picker {
+  top: 55px !important;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
+import { AutoTextSize } from 'auto-text-size';
 
-import { Textfit } from 'react-textfit'
 import { getAssetSize } from 'functions'
 import { useGlobalVariables } from "providers"
 import { commentDayAfter } from 'constants'
@@ -22,10 +22,12 @@ function MainExp({ dayCount }) {
   return (
     <style.MainExpBox width={`${width}px`} height={`${height}px`} ratio={ratio}>
       {/* {comment} */}
-        <div style={{width: `${width * 0.8}px`, fontFamily: "DOSGothic"}}>
-            <Textfit mode="single">
-                {comment}
-            </Textfit>
+        <div style={{width: `${width}px`, fontFamily: "DOSGothic"}}>
+        <AutoTextSize mode="oneline"
+                    minFontSizePx={1}
+                    maxFontSizePx={24}>
+                    { comment }
+                  </AutoTextSize>
         </div>
     </style.MainExpBox>
   )

@@ -7,13 +7,18 @@ export
         commentZeroSpend,
         positiveComments,
         negativeComments,
+        welcomeComments,
         ifNotLoggedIn,
         ifLoading,
         ifError,
         commentBoardDelete,
+        commentDataNone,
+        commentGray,
+        commentDeleteCard,
     }
     from "constants/comment"
 
 export {
     mainDummyData,
+    cashbookDummyData,
 } from "constants/dummyData"

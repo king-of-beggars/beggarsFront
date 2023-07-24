@@ -27,6 +27,13 @@ export const negativeComments = [
     "이러다가는 정말 탈탈 다 털리겠어...",
     "괜찮네. 오늘부터 굶으면 되지, 안 그런가?",
 ]
+//// 뉴비 환영
+export const welcomeComments = [
+    "거지왕의 여정에 합류한 것을 환영한다네!",
+    "못 보던 얼굴이군! 어서 들어오게!",
+    "으음~ 뉴비의 상콤한 기운이 느껴지네!",
+    "열심히 절약하면, 언젠가 거지왕이 될 수 있지!",
+]
 
 // cashbook
 //// 지출 기록 삭제 멘트
@@ -37,7 +44,7 @@ export const commentZeroSpend = ["무지출 데이라고...?", "ㅅ,,사실인�
 export const commentGoBoard = "벽보보러 가시게"
 //// 추가 회색 박스 멘트
 export const commentGray = (isOver) => {
-    return isOver ? (<>장부는 5개까지만<br />만들 수 있소</>) : (<>왼쪽으로 밀어서<br/> 장부 추가</>)
+    return isOver ? (<>장부는 5개까지만<br />만들 수 있소</>) : (<>왼쪽으로 밀어서<br/>장부 추가</>)
 }
 //// 카드 삭제 멘트
 export const commentDeleteCard = ["이 장부를 정말로", "지워버릴 텐가?"]

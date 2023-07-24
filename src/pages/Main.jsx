@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 
+import { AuthContext } from 'providers';
 import { chkLoggedIn, saveUserInfo } from "functions"
 import { mainRenderer } from 'renderers';
 import { AuthAPI, mainAPI } from "api/api"
@@ -23,7 +24,8 @@ const INIT_LOG_VALUE = false
 export function MainFetcher({ children }) {
   // 로그인 체크
   //// 로그인 여부에 따라 렌더링 다른 페이지 : main, 가계부, 게시판의 일부
-  const isLoggedIn = chkLoggedIn()
+  const { isLoggedIn } = useContext(AuthContext)
+  console.log('isLoggedIn-mainFetcher:::', isLoggedIn)
   // get 요청
   const { data, isLoading, isError } = useQuery(["mainData"], mainAPI.getMainData, {
     retry: 10, // 10번까지 재시도
@@ -107,8 +109,9 @@ function Main({ data}) {
 
   // 만일 socialLogin으로 들어온 유저이면 다음을 처리
   useEffect(() => {
-    if (!isLoggedIn) { // 아직 로그인되지 않은 경우에 소셜 로그인인지 탐색하기
+    if (isLoggedIn !== true) { // 아직 로그인되지 않은 경우에 소셜 로그인인지 탐색하기
       const loginSuccess = Object.keys(queryStr).length === 0 ? true : JSON.parse(queryStr.loginSuccess)
+      console.log("loginSuccess:::", loginSuccess)
   
       if (!loginSuccess){
         console.log(loginSuccess)
@@ -121,8 +124,8 @@ function Main({ data}) {
   console.log("decodedNickname:::", decodeURIComponent(localStorage.getItem("nickname")))
 
   return (
-    isLoggedIn || isSocialLogin ? (
-      !!data.signupDay && decodeURIComponent(localStorage.getItem("nickname")) !== null ? (
+    isLoggedIn === true || isSocialLogin ? (
+      (data.signupDay !== null || data.signupDay !== undefined) && decodeURIComponent(localStorage.getItem("nickname")) !== null ? (
         <>
           {mainRenderer("login", data, states)}
         </>

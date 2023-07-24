@@ -92,6 +92,9 @@ const GlobalStyle = createGlobalStyle`
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* IE */
   }
+  html, main {
+    scroll-behavior: smooth;
+  }
 `;
 
 export default GlobalStyle;

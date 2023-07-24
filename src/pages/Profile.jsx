@@ -18,10 +18,7 @@ function Profile() {
 
   const mutationLogout = useMutation(AuthAPI.postLogout, {
     onSuccess: () => {
-      localStorage.removeItem("userId");
-      localStorage.removeItem("nickname");
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
+      localStorage.clear()
 
       alert("로그아웃에 성공하셨습니다.");
       navigate("/");

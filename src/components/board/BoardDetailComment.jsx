@@ -56,7 +56,7 @@ function BoardDetailComment({ id, boardId, boardAuthor, commentedBy, isBoasting,
       <layout.FlexDefault style={{justifyContent: "center", width:"15%", marginRight:"10px"}}> 
         <style.BoardProfilePhoto />
       </layout.FlexDefault>
-      <layout.FlexColumn100 style={{ width: "75%", fontSize: "0.8em" }}>
+      <layout.FlexColumn100 style={{ width: "75%", fontSize: `${14 * widthRatio}px` }}>
         <layout.FlexDefault style={{ gap: "10px", marginBottom: "5px"}}>
           <layout.FlexCenter style={{fontFamily: "DOSGothic"}}>{userName}</layout.FlexCenter>
           { /* 댓글 작성자가 보드 작성자와 같은 경우 글 작성자 태그 표시 */}
@@ -65,7 +65,7 @@ function BoardDetailComment({ id, boardId, boardAuthor, commentedBy, isBoasting,
             && <style.ReceiptMemoTitle ratio={widthRatio * 0.5} isBoasting={isBoasting} style={{ fontFamily: "DOSGothic"}}>벽보 게시자</style.ReceiptMemoTitle>
           }
         </layout.FlexDefault>
-        <div>{children}</div>
+        <div style={{fontFamily:"DOSGothic", fontSize: `${12 * widthRatio}px`}}>{children}</div>
       </layout.FlexColumn100>
       <layout.FlexColumn100  style={{ width: "10%" }}>
         <layout.FlexCenterColumn>

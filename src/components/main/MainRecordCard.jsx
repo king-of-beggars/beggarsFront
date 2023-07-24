@@ -6,7 +6,7 @@ import { MainRecordCardTag, MainRecordComment, MainWeather, MainRecordStatus, Ma
 import { layout, style } from "styles";
 
 
-function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
+function MainRecordCard({ dayCount, isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
 
   // 마지막 streak를 판별하여 weatherCode를 결정하는 함수
   const getWeatherCode = () => {
@@ -35,19 +35,25 @@ function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
 
   const groupByCategory = data.groupByCategory
 
-  const barData = data.groupByCategory.reduce((result, entry) => {
-    if (entry.cashbookNowValue === 0) {
-      return result;
-    }
-    
+  const barData = data.groupByCategory.map(entry => {
     const keysToKeep = ['cashbookCategory', 'cashbookNowValue']
-    const newObj = Object.fromEntries(
-      Object.entries(entry).filter(([key, value]) => keysToKeep.includes(key))
-    )
+    const newObj = Object.fromEntries(Object.entries(entry).filter(([key, value]) => keysToKeep.includes(key)))
+    return newObj
+  })
 
-    result.push(newObj);
-    return result;
-  }, []);
+  // const barData = data.groupByCategory.reduce((result, entry) => {
+  //   if (entry.cashbookNowValue === 0) {
+  //     return result;
+  //   }
+    
+  //   const keysToKeep = ['cashbookCategory', 'cashbookNowValue']
+  //   const newObj = Object.fromEntries(
+  //     Object.entries(entry).filter(([key, value]) => keysToKeep.includes(key))
+  //   )
+
+  //   result.push(newObj);
+  //   return result;
+  // }, []);
 
   // const budget = data.total.cashbookGoalValue
   // const spend = data.total.cashbookNowValue
@@ -60,8 +66,8 @@ function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
   return (
     <style.MainRecordCardBox width={`${width}px`} height={`${height}px`} ratio={ratio}>
       <layout.FlexColumn100 style={{gap: "5px", marginBottom: "20px"}}>
-        <MainRecordCardTag weatherCode={weatherCode} />
-        <MainRecordComment weatherCode={weatherCode} ratio={ratio} />
+        <MainRecordCardTag dayCount={dayCount} weatherCode={weatherCode} />
+        <MainRecordComment dayCount={dayCount} weatherCode={weatherCode} ratio={ratio} />
       </layout.FlexColumn100>
       {
         isToggleOnLeft ?
@@ -70,9 +76,10 @@ function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
               <MainRecordStatus ratio={ratio} isSaved={isSaved} budget={data.total.cashbookGoalValue} spend={data.total.cashbookNowValue}/>
             </layout.Grid2Row>
           :
-          !! barData &&
+          barData.length > 0 ?
             <>
-              <div style={{height: "40%", width: `${90 / groupByCategory.length}%`}}>
+              {/* <div style={{height: "40%", width: `${90 / groupByCategory.length}%`}}> */}
+              <div style={{height: "40%", width: "90%"}}>
                 <Bar data={barData} />
               </div>
               <style.Divider borderSize="1px" color={"#3c3c3c"} style={{width: "100%"}}></style.Divider>
@@ -87,6 +94,10 @@ function MainRecordCard({ isLoggedIn, isToggleOnLeft, toggleSetter, data }) {
                   null
                 }
               </layout.FlexDefault>
+            </>
+          :
+            <>
+              <div style={{height: "inherit", display: "flex", justifyContent: "center", alignItems: "center", paddingBottom: "40px", fontSize: `${ratio * 14}px`, fontFamily: "DOSGothic"}}>표시할 소비 데이터가 없다네!</div>
             </>
 
           
