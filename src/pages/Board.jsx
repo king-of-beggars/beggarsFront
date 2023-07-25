@@ -140,7 +140,7 @@ function Board({ isBoasting, setIsBoasting }) {
     }
   }, [inView]);
 
-  // console.log("다니 data :::", data);
+  console.log("다니 data :::", data);
   // console.log("다니 page :::", page);
   return (
     <style.BackgroundPageLayout
