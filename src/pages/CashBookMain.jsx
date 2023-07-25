@@ -15,16 +15,14 @@ import { layout, style } from "styles";
 import {
   DayPicker,
   Nav,
-  CardBox,
   WriteReceipt,
   CashDetailModal,
   CashBookCard,
 } from "components";
 import "styles/css/customSwiper.css";
 import { bgCloud100, bgMountain100, bgSky100 } from "assets";
-import { commentDataNone, commentDeleteCard, commentGray, cashbookDummyData } from "constants";
+import { commentDataNone, commentDeleteCard, commentGray } from "constants";
 import * as sVar from "constants/styleVariables";
-import CashbookErrorRender from 'components/error/CashbookErrorRender';
 
 
 function CashBookMain() {
@@ -105,7 +103,6 @@ function CashBookMain() {
 
   // 카드 삭제 Modal
   const [isDeleteModal, setDeleteModal] = useState(false);
-  // const [clickedDeleteModal, setClickModal] = useState(0);
 
   const changeDeleteModal = (event) => {
     event.stopPropagation();
@@ -146,15 +143,12 @@ function CashBookMain() {
     setClickModal(event.target.id);
     console.log("clickedModal:::", clickedModal);
     setIsDataNoneModal(true)
-    // const newIsDataNoneModal = !isDataNoneModal;
-    // setIsDataNoneModal(newIsDataNoneModal);
   };
   const setDataNoneClose = () => {
     setIsDataNoneModal(false);
   };
   const onClickDataNone = () => {
     navigate(`/cash-book/${selectDate.format("YYYY-MM-DD")}/${clickedModal}`);
-    // setIsDataNoneModal(false);
   };
 
   // 가계부 data
@@ -469,12 +463,7 @@ function CashBookMain() {
     }
   };
 
-  // const cashbookApiRes = data.data.data
-  // console.log(cashbookApiRes);
-  // const grayMent = commentGray(cashbookApiRes.length >= 5);
 
-  if (isLoggedIn) {
-    console.log("isLoggedIn으로 들어옴!")
     return (
       <style.BackgroundPageLayout
         screenWidth={`${screenWidth}px`}
@@ -565,253 +554,7 @@ function CashBookMain() {
           <Nav selected="money" ratio={widthRatio} />
         </layout.Nav>
       </style.BackgroundPageLayout>
-  
-      // <style.BackgroundPageLayout
-      //   screenWidth={`${screenWidth}px`}
-      //   isMobile={isMobile}
-      //   backPngTop={`url(${mainBackgroundTop})`}
-      //   backPngMiddle={`url(${mainBackgroundMiddle})`}
-      //   backPngTail={`url(${mainBackgroundTail})`}
-      // >
-      //   <layout.Header headerHeight={`${headerHeight}px`}>
-      //     <div
-      //       className="statusBarHeight"
-      //       style={{ width: "inherit", height: "50px" }}
-      //     ></div>
-      //     <layout.HeaderContent style={{flexDirection: "column"}}>
-      //       <layout.FlexCenter100>
-      //         <style.CashBookHeader ratio={widthRatio}>가계부</style.CashBookHeader>
-      //       </layout.FlexCenter100>
-      //       <layout.Flex100 style={{}}>
-      //         <style.DayPickerWrap
-      //           dateBoxWidth={`${dateBoxWidth}px`}
-      //           dateBoxHeight={`${dateBoxHeight}px`}
-      //           ratio={widthRatio}
-      //         >
-      //           <DayPicker
-      //             selectDate={selectDate}
-      //             setSelectDate={setSelectDate}
-      //             focused={focused}
-      //             setFocused={setFocused}
-      //           />
-      //         </style.DayPickerWrap>
-      //       </layout.Flex100>
-      //     </layout.HeaderContent>
-      //   </layout.Header>
-      //   <layout.Main
-      //     headerHeight={`${headerHeight}px`}
-      //     mainHeight={`${mainHeight}px`}
-      //   >
-      //     <layout.CashBookMainContent className="thisCash">
-  
-      //       {!cashbookApiRes.length ? (
-      //         <layout.FlexCenter>
-      //           <style.CashBookDummyContainer
-      //             cardWidth={`${cardWidth}px`}
-      //             cardHeight={`${cardHeight}px`}
-      //             style={{ justifyContent: "center" }}
-      //             onClick={onClickAdd}
-      //           >
-      //             클릭하여 카드 추가
-      //           </style.CashBookDummyContainer>
-      //         </layout.FlexCenter>
-      //       ) : (
-      //         <layout.SwiperWrap
-      //           className="swiperWrap"
-      //           cardHeight={`${cardHeight}px`}
-      //           mainHeight={`${mainHeight}px`}
-      //           // dateBoxHeight={`${dateBoxHeight}px`}
-      //         >
-      //           <Swiper
-      //             className="swiperClassNo1"
-      //             // spaceBetween={20}
-      //             modules={[Navigation, Scrollbar, Pagination, A11y]}
-      //             slidesPerView={slidesPerViewValue}
-      //             onSlideChange={(swiper) => {
-      //               console.log("slide change");
-      //               console.log("activeIndex:::", swiper.activeIndex);
-      //               console.log("slides", swiper.slides)
-      //               setActiveSlide(swiper.activeIndex);
-      //             }}
-      //             // loop={true}
-      //             onTouchMove={(swiper) => {
-      //               // const currentSlide = swiper.activeIndex
-      //               // const slideLength = swiper.slides.length;
-      //               // if (currentSlide === 3) {
-      //               //   swiper.slideTo(4, 0)
-      //               //   setTimeout(() => {
-      //               //     console.log("timeout ended!")
-      //               //     swiper.update()
-      //               //     console.log("new activeIndex:::", swiper.activeIndex)
-      //               //   }, 500)
-      //               // }
-  
-      //               // if (swiper.touches.startY > swiper.touches.currentY) {
-      //               //   if (currentSlide + 1 < slideLength) {
-      //               //     swiper.slideTo(currentSlide + 1);
-      //               //   }
-  
-      //               // } else if (swiper.touches.startY < swiper.touches.currentY) {
-      //               //   swiper.slidePrev();
-      //               // }
-  
-      //             }}
-      //             // scrollbar={{ draggable: true }}
-      //             onSwiper={(swiper) => {
-      //               setSwiper(swiper);
-      //               console.log(swiper);
-  
-      //             }}
-      //             direction="vertical"
-      //             // style={{ height: `${mainHeight - 24}px` }}
-      //             // loop={true} -> loop 속성 줄시 active가 제대로 동작하지 않음
-      //             pagination={{
-      //               clickable: "true",
-      //             }}
-      //           >
-      //             {cashbookApiRes.map((card, idx) => {
-      //               return (
-      //                 <>
-      //                   <SwiperSlide
-      //                     className={`slide_${idx}`}
-      //                     key={idx}
-      //                     style={{
-      //                       height: `${cardHeight}px`
-      //                     }}
-      //                     // style={{
-      //                     //   height: `${cardHeight * widthRatio}px`,
-      //                     //   width: `100%`,
-      //                     //   marginLeft: "4%",
-      //                     // }}
-      //                   >
-      //                     {" "}
-      //                     {/* height를 CashBookCard와 동일하게 주어야 함*/}
-      //                     {console.log("isActiveSlide:::", idx === activeSlide)}
-      //                     <Swiper
-      //                       key={activeSlide}
-      //                       modules={[Navigation, Pagination, Scrollbar, A11y]}
-      //                       slidesPerView={1.3}
-      //                       centeredSlides={true}
-      //                       spaceBetween={10 * widthRatio}
-      //                       direction="horizontal"
-      //                       touchMoveStopPropagation={false}
-      //                       allowSlideNext={idx === activeSlide}
-      //                       allowSlidePrev={idx === activeSlide}
-      //                       allowTouchMove={idx === activeSlide}
-      //                       style={{
-      //                         height: `${cardHeight}px`
-      //                       }}
-      //                       // style={{
-      //                       //   height: `${mainHeight - dateBoxHeight - 24}px`,
-      //                       // }}
-      //                       onTouchMove={(swiper) => {
-      //                         if (swiper.touches.diff < -90) {
-      //                           if (cashbookApiRes.length < 5) {
-      //                             window.location.href = "/cash-book/add";
-      //                           } else {
-      //                             window.location.href = "/cash-book";
-      //                           }
-      //                         }
-      //                       }}
-      //                     >
-      //                       <SwiperSlide
-      //                         className={`${idx}`}
-      //                       >
-      //                         <CashBookCard
-      //                           id={card.cashbookId}
-      //                           budget={card.cashbookGoalValue}
-      //                           spend={card.cashbookNowValue}
-      //                           category={card.cashbookCategory}
-      //                           title={card.cashbookName}
-      //                           ratio={widthRatio}
-      //                           onClickHandler={onClickCard}
-      //                           changeWriteModal={changeWriteModal}
-      //                           changeDeleteModal={changeDeleteModal}
-      //                           changeDataNoneModal={changeDataNoneModal}
-      //                           writeCheck={card.writeCheck}
-      //                           isDiffDate={isDiffDate}
-      //                           isDefault={true}
-      //                         />
-      //                         {/* <CashBookCard
-      //                                 id={card.id}
-      //                                 budget={card.cashbookGoalValue}
-      //                                 spend={card.cashbookNowValue}
-      //                                 category={card.cashbookCategory}
-      //                                 title={card.cashbookName}
-      //                                 cardWidth={`${cardWidth}px`}
-      //                                 cardHeight={`${cardHeight}px`}
-      //                                 index={idx}
-      //                               /> */}
-      //                       </SwiperSlide>
-      //                       <SwiperSlide>
-      //                         {idx === activeSlide ? (
-      //                           <style.CashBookDummyContainer
-      //                             cardWidth={`${cardWidth}px`}
-      //                             cardHeight={`${cardHeight}px`}
-      //                           >
-      //                             <style.CashBookAddExplain
-      //                               cardWidth={`${cardWidth}px`}
-      //                               cardHeight={`${cardHeight}px`}
-      //                             >
-      //                               {grayMent}
-      //                             </style.CashBookAddExplain>
-      //                           </style.CashBookDummyContainer>
-      //                         ) : (
-      //                           <div
-      //                             style={{
-      //                               width: `${cardWidth}px`,
-      //                               height: `${cardHeight}px`,
-      //                               background: "transparent",
-      //                               display: "flex",
-      //                               alignItems: "center",
-      //                             }}
-      //                           ></div>
-      //                         )}
-      //                       </SwiperSlide>
-      //                     </Swiper>
-      //                   </SwiperSlide>
-      //                 </>
-      //               );
-      //             })}
-      //           </Swiper>
-      //         </layout.SwiperWrap>
-      //       )}
-  
-      //       {isWriteModal && (
-      //         <WriteReceipt setClose={setWriteClose} cardId={clickedModal}>
-      //           {isBoasting ? "자랑하러 가기" : "혼쭐나러 가기"}
-      //         </WriteReceipt>
-      //       )}
-      //       {isDeleteModal && (
-      //         <CashDetailModal
-      //           setClose={setDeleteClose}
-      //           onClickHandler={onClickDeleteBtn}
-      //         >
-      //           {commentDeleteCard}
-      //         </CashDetailModal>
-      //       )}
-      //       {isDataNoneModal && (
-      //         <CashDetailModal
-      //           setClose={setDataNoneClose}
-      //           onClickHandler={onClickDataNone}
-      //         >
-      //           {commentDataNone}
-      //         </CashDetailModal>
-      //       )}
-      //     </layout.CashBookMainContent>
-      //   </layout.Main>
-      //   <layout.Nav navHeight={`${navHeight}px`}>
-      //     <Nav selected="money" ratio={widthRatio} />
-      //   </layout.Nav>
-      // </style.BackgroundPageLayout>
     );
-  } else {
-    console.log("안된걸로 들어옴!")
-    return (
-      <CashbookErrorRender />
-    )
-    
-  }
 
 }
 

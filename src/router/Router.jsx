@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useGlobalVariables } from 'providers';
 import { Login, Signup, Profile, CashBookMain, Board, CashBookAdd, CashBookDetail, CashBookMod, BoardDetail, Main } from "pages";
 import { MainFetcher } from "pages/main/MainFetcher";
-import { BlurOverlay, LoggedYet } from "components";
+import { BlurOverlay, CashbookExceptionRenderer, LoggedYet, ProfileExceptionRenderer } from "components";
+import { ifNotLoggedIn } from 'constants';
 import { getKrDate, } from "functions";
 import { AuthContext } from 'providers';
 
@@ -32,7 +33,10 @@ function Router() {
         <Route
           exact
           path="/cash-book"
-          element={<Navigate to={`/cash-book/${getKrDate()}`} replace />          
+          element={
+            <ProtectedRouter className="cashbook" isLoggedIn={isLoggedIn}>
+              <Navigate to={`/cash-book/${getKrDate()}`} replace />
+            </ProtectedRouter>
         }
         />
         <Route path="cash-book/:date" element={<CashBookMain />} />
@@ -82,7 +86,7 @@ function Router() {
         <Route
           path="profile"
           element={
-              <ProtectedRouter isLoggedIn={isLoggedIn}>
+              <ProtectedRouter className={"profile"} isLoggedIn={isLoggedIn}>
                 <Profile />
               </ProtectedRouter>
           }
@@ -92,18 +96,25 @@ function Router() {
   );
 }
 
-const ProtectedRouter = ({ isLoggedIn, children }) => {
+const ProtectedRouter = ({ isLoggedIn, children, className }) => {
   const { isMobile, navHeight, screenWidth } = useGlobalVariables();
   if (isLoggedIn) {
     return children;
   }
   else {
-    return (
-      <>
-        {children}
-        <BlurOverlay position="absolute" left={isMobile ? "0px" : `${(window.innerWidth - screenWidth) / 2}px`} width={`${screenWidth}px`} height={`${window.innerHeight - navHeight}px`} addComponent={<LoggedYet />}>로그인이 되지 않았네!</BlurOverlay>
-      </>
-    )
+    if (className === "profile") {
+      return <ProfileExceptionRenderer comment={ifNotLoggedIn} addComponent={<LoggedYet />}/>
+    } else if (className === "cashbook") {
+      return <CashbookExceptionRenderer comment={ifNotLoggedIn} addComponent={<LoggedYet />}/>
+    } else {
+      return (
+        <>
+          {children}
+          <BlurOverlay position="absolute" left={isMobile ? "0px" : `${(window.innerWidth - screenWidth) / 2}px`} width={`${screenWidth}px`} height={`${window.innerHeight - navHeight}px`} addComponent={<LoggedYet />}>로그인이 되지 않았네!</BlurOverlay>
+        </>
+      )
+    }
+
   }
 };
 

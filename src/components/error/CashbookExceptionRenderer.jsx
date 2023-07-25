@@ -1,14 +1,13 @@
 import React from 'react'
 
 import { useGlobalVariables } from 'providers'
-import { DayPicker } from 'react-dates';
-import { BlurOverlay, CashBookCard, Nav, LoggedYet } from 'components'
+import { BlurOverlay, CashBookCard, Nav, LoggedYet, ScreenBlur } from 'components'
 import { cashbookDummyData } from 'constants/dummyData'
 import { bgCloud100, bgMountain100, bgSky100 } from "assets";
 import { ifNotLoggedIn } from "constants"
 import { layout, style } from 'styles'
 
-function CashbookErrorRender() {
+function CashbookExceptionRenderer({ comment, addComponent}) {
   const {
     isMobile,
     widthRatio,
@@ -18,12 +17,10 @@ function CashbookErrorRender() {
     screenWidth,
   } = useGlobalVariables();
 
-  const { cashbookDateBox, cashbookCard } = useGlobalVariables();
+  const { cashbookDateBox } = useGlobalVariables();
   const dateBoxWidth = cashbookDateBox.width * widthRatio;
   const dateBoxHeight = cashbookDateBox.height * widthRatio;
 
-  const cardHeight = cashbookCard.height * widthRatio;
-  const cardWidth = cashbookCard.width * widthRatio;
   return (
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
@@ -43,18 +40,15 @@ function CashbookErrorRender() {
               가계부
             </style.CashBookHeader>
           </layout.FlexCenter100>
-          <layout.Flex100 style={{}}>
+          {/* <layout.Flex100>
             <style.DayPickerWrap
               dateBoxWidth={`${dateBoxWidth}px`}
               dateBoxHeight={`${dateBoxHeight}px`}
               ratio={widthRatio}
             >
-              {/* <DayPicker
-                selectDate={"2023-07-24"}
-                setSelectDate={"2023-07-24"}
-              /> */}
+              2023-07-25
             </style.DayPickerWrap>
-          </layout.Flex100>
+          </layout.Flex100> */}
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main
@@ -62,28 +56,30 @@ function CashbookErrorRender() {
         mainHeight={`${mainHeight}px`}
         style={{position: "relative"}}
       >
-        <layout.CashBookMainContent className="thisCash">
-            <layout.FlexCenterColumn style={{gap: "20px"}}>
-             { cashbookDummyData.map((card, idx) => {
-                return (
-                    <CashBookCard
-                        key={idx}
-                        id={card.cashbookId}
-                        budget={card.cashbookGoalValue}
-                        spend={card.cashbookNowValue}
-                        category={card.cashbookCategory}
-                        title={card.cashbookName}
-                        ratio={widthRatio}
-                        writeCheck={card.writeCheck}
-                        isDefault={true}
-                      />
-                )
-            })}
-            </layout.FlexCenterColumn>
-            <BlurOverlay addComponent={<LoggedYet />} width="inherit" top={`${headerHeight - 70}px`} left={window.screenWidth - screenWidth} height={`${mainHeight + 70}px`}>
-                {ifNotLoggedIn}
-            </BlurOverlay>
-        </layout.CashBookMainContent>
+        <ScreenBlur comment={comment} addComponent={addComponent}>
+          <layout.MainContent style={{width: "inherit"}}>
+            <layout.CashBookMainContent className="thisCash">
+                <layout.FlexCenterColumn style={{gap: "20px"}}>
+                { cashbookDummyData.map((card, idx) => {
+                    return (
+                        <CashBookCard
+                            key={idx}
+                            id={card.cashbookId}
+                            budget={card.cashbookGoalValue}
+                            spend={card.cashbookNowValue}
+                            category={card.cashbookCategory}
+                            title={card.cashbookName}
+                            ratio={widthRatio}
+                            writeCheck={card.writeCheck}
+                            isDefault={true}
+                          />
+                    )
+                })}
+                </layout.FlexCenterColumn>
+            </layout.CashBookMainContent>
+          </layout.MainContent>
+
+        </ScreenBlur>
         
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
@@ -93,4 +89,4 @@ function CashbookErrorRender() {
   )
 }
 
-export default CashbookErrorRender
+export default CashbookExceptionRenderer
