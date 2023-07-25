@@ -19,6 +19,7 @@ import { useInView } from "react-intersection-observer";
 
 function Board({ isBoasting, setIsBoasting }) {
   
+  const INIT_PAGE_STATE = { boast: 1, scoled: 1 }
   // 만들어둔 context 사용하기
   //// 1. 화면 비율 렌더링에 필요한 요소
   const {
@@ -58,6 +59,7 @@ function Board({ isBoasting, setIsBoasting }) {
   const toggleBtnHandler = () => {
     setTimeout(() => {
       setIsBoasting(!isBoasting);
+      setPage(INIT_PAGE_STATE);
     }, 500); // 전환시 0.5초의 딜레이
   };
 
@@ -91,7 +93,7 @@ function Board({ isBoasting, setIsBoasting }) {
   //   }
   // })
 
-  const [page, setPage] = useState({boast: 1, scoled: 1});
+  const [page, setPage] = useState(INIT_PAGE_STATE);
 
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery(
     {
