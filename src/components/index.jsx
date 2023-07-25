@@ -51,3 +51,7 @@ export { default as Loader } from "components/ui/effect/Loader"
 export { default as LoggedYet } from "components/ui/effect/LoggedYet"
 export { default as ErrorRefresher } from "components/ui/effect/ErrorRefresher"
 export { default as BlurOverlay } from "components/ui/effect/BlurOverlay"
+
+// error
+export { default as ProfileExceptionRenderer } from "components/error/ProfileExceptionRenderer"
+export { default as CashbookExceptionRenderer } from "components/error/CashbookExceptionRenderer"
