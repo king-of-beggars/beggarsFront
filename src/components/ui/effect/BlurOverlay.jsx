@@ -21,7 +21,7 @@ function BlurOverlay({ children, addComponent, position="fixed", top=0, left=0, 
         backdrop-filter: blur(5px);
 
         z-index: 999;
-        ${props => props.isMobile && `
+        ${isMobile && `
             &::before {
             content: "";
             position: absolute;

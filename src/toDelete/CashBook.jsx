@@ -31,7 +31,6 @@ import { useEffect } from "react";
 // import { commentGray } from "constants/styleVariables";
 
 function CashBook() {
-  // function CashBook({ isMobile, headerHeight, navHeight, mainHeight }) {
   const {
     windowSize,
     frameSize,
@@ -54,38 +53,7 @@ function CashBook() {
     mainHeight
   );
   const navigate = useNavigate();
-  // // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
-  // const [windowSize, setWindowSize] = useState({
-  //   width: window.innerWidth,
-  //   height: window.innerHeight
-  // })
-
-  // const handleResize = () => {
-  //   setWindowSize({
-  //     width: window.innerWidth,
-  //     height: window.innerHeight
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize)
-  //   }
-  // }, [])
-  // const screenWidth = isMobile
-  //   ? parseFloat(localStorage.getItem("screenWidth"))
-  //   : parseFloat(localStorage.getItem("screenWidth")) > 393
-  //   ? 393
-  //   : parseFloat(localStorage.getItem("screenWidth"));
-
-  // datepicker 박스 크기 결정
-  // const dateBoxWidth =
-  //   isMobile || screenWidth < 500
-  //     ? ((screenWidth * 155) / 393) * 0.65
-  //     : ((500 * 155) / 393) * 0.65;
-  // const dateBoxHeight = dateBoxWidth * (36 / 155);
+ 
   const { dateBoxWidth, dateBoxHeight } = getDateBoxSize(
     isMobile,
     frameSize,
