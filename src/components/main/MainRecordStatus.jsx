@@ -37,7 +37,7 @@ function MainRecordStatus({ isSaved, budget, spend, ratio }) {
         </style.MainRecordCardTextRow >
         <style.Divider color={`${sVar.mainBorderGray}`}/>
         <style.MainRecordCardResultRow ratio={ratio}>
-            <div>{`${isSaved ? "+" : "-"} ${commaOnThree(budget - spend)}`}원</div>
+            <div>{`${isSaved ? "+" : "-"} ${commaOnThree(Math.abs(budget - spend))}`}원</div>
         </style.MainRecordCardResultRow>
     </layout.FlexCenterColumn>
   )

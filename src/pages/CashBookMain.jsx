@@ -350,7 +350,7 @@ function CashBookMain() {
               clickable: "true",
             }}
           >
-            {data.map((card, idx) => {
+            {(data !== undefined && dataLength > 0) && data.map((card, idx) => {
               return (
                 <>
                   <SwiperSlide

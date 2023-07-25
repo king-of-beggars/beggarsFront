@@ -22,7 +22,7 @@ function MainExp({ dayCount }) {
   return (
     <style.MainExpBox width={`${width}px`} height={`${height}px`} ratio={ratio}>
       {/* {comment} */}
-        <div style={{width: `${width}px`, fontFamily: "DOSGothic"}}>
+        <div style={{width: `${width * 0.88}px`, fontFamily: "DOSGothic"}}>
         <AutoTextSize mode="oneline"
                     minFontSizePx={1}
                     maxFontSizePx={24}>

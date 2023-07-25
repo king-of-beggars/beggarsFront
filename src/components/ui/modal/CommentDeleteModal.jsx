@@ -6,7 +6,7 @@ import * as sVar from "constants/styleVariables.js";
 function CommentDeleteModal({ setClose, onClickHandler, children }) {
   return (
     <style.ModalOverlay onClick={setClose}>
-      <style.ModalDefault style={{width: "90%"}} onClick={(event) => event.stopPropagation()}>
+      <style.ModalDefault style={{width: "90%", color: "black"}} onClick={(event) => event.stopPropagation()}>
         {children.map((ment)=><span>{ment}</span>)}
         <layout.FlexCenterRow100 style={{gap:"10px"}}>
         <style.CashBookNoneBtn background={sVar.bookModalYesBtn} onClick={onClickHandler}>예</style.CashBookNoneBtn>

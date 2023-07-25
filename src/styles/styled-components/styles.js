@@ -394,6 +394,7 @@ export const CashBookHead = styled(layout.FlexCenter)`
   border-left: 2px solid ${sVar.bookSelectInputborderColor};
   border-top: 2px solid ${sVar.bookSelectInputborderColor};
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
+  height: calc(${props => props.ratio} * 50px);
 `;
 
 // Cashbook Select box
@@ -885,6 +886,7 @@ export const MainExpBox = styled.div`
   height: ${props => props.height};
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: calc(${props => props.ratio} * 5px) calc(${props => props.ratio} * 20px);
   background-size: ${props => props.width} ${props => props.height};
   background-repeat: no-repeat;
