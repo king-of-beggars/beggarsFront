@@ -48,11 +48,23 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
   const mutationSignUp = useMutation(AuthAPI.postNickSocial, {
     onSuccess: (response) => {
       if (response.status === 201) {
-        alert("회원가입이 완료되었습니다.")
-        setSocialModalOn(false)
-        setIsSocialLogin(true)
-        saveUserInfo(response.headers["userid"], response.headers["usernickname"])
-        console.log("login success:::", chkLoggedIn())
+        alert("회원가입이 완료되었습니다.");
+        setSocialModalOn(false);
+        setIsSocialLogin(true);
+        console.log("response", response)
+
+        const accessToken = response.data.accessToken;
+        const refreshToken = response.data.refreshToken;
+        const userId = response.headers.userid;
+        const nickname = response.headers.usernickname;
+
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("nickname", nickname);
+        navigate('/');
+
+        // window.location.href = "/";
       }
       
     },
@@ -70,8 +82,6 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
         userNickname: nickname
       }
       mutationSignUp.mutate(newUser)
-      
-      navigate('/');
     } else {
       alert("정보를 제대로 입력했는지 확인해주세요.")
     }
