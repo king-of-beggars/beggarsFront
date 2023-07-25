@@ -1,5 +1,6 @@
 export { default as Main } from "pages/main/Main"
 export { MainFetcher } from "pages/main/MainFetcher"
+export { default as MainRenderer } from "pages/main/MainRenderer"
 
 
 export { default as CashBookMain } from "pages/CashBookMain"

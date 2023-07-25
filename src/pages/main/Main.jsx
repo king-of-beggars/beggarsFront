@@ -3,7 +3,8 @@ import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 
-import { mainRenderer } from 'renderers';
+// import { mainRenderer } from 'renderers';
+import { MainRenderer } from "pages"
 import { AuthAPI } from "api/api"
 import { mainDummyData } from 'constants';
 import { SocialLoginModal } from 'components';
@@ -78,17 +79,17 @@ function Main({ data, isLoggedIn }) {
     isLoggedIn === true || isSocialLogin ? (
       (data.signupDay !== null || data.signupDay !== undefined) && decodeURIComponent(localStorage.getItem("nickname")) !== null ? (
         <>
-          {mainRenderer("login", data, states)}
+          {MainRenderer("login", data, states)}
         </>
       ) : (
         <>
-          {mainRenderer("loading", mainDummyData)}
+          {MainRenderer("loading", mainDummyData)}
         </>
       )
 
     ) : (
       <>
-        {mainRenderer("default", mainDummyData)}
+        {MainRenderer("default", mainDummyData)}
         { socialModalOn && <SocialLoginModal socialModalOn={socialModalOn} setSocialModalOn={setSocialModalOn} setIsSocialLogin={setIsSocialLogin}>회원가입</SocialLoginModal>}
       </>
     )

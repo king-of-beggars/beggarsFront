@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 
 import { AuthContext } from 'providers';
 import { mainAPI } from 'api/api';
-import { mainRenderer } from 'renderers';
+import { MainRenderer } from 'pages';
 import { mainDummyData } from 'constants';
 
 // 기능 요소 분리 (container와 유사하게..)
@@ -33,13 +33,13 @@ export function MainFetcher({ children }) {
     if (isLoading) {
       return (
         <>
-          {mainRenderer("loading", mainDummyData)}
+          {MainRenderer("loading", mainDummyData)}
         </>
       )
     } else if (isError) {
       return (
         <>
-          {mainRenderer("error", mainDummyData)}
+          {MainRenderer("error", mainDummyData)}
         </>
       )
     }
