@@ -71,6 +71,7 @@ function WriteReceipt({ setClose, cardId, children }) {
                 value={title}
                 onChange={onChangeInput}
                 height="3em"
+                onClick={(event) => event.stopPropagation()}
             />
             <LabeledTextarea
                 title={"코멘트"}
