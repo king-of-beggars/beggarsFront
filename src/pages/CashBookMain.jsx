@@ -250,7 +250,7 @@ function CashBookMain() {
                   height: `${mainHeight}px`,
                 }}
               >
-                {data !== undefined && data.map((card, idx) => {
+                {(data !== undefined && dataLength > 0) && data.map((card, idx) => {
                   console.log("this cardHeight:::", cardHeight);
                   return (
                     <SwiperSlide
