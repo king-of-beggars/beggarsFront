@@ -51,8 +51,8 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
         setIsSocialLogin(true);
         console.log("response", response)
 
-        const accessToken = response.accessToken;
-        const refreshToken = response.refreshToken;
+        const accessToken = response.data.accessToken;
+        const refreshToken = response.data.refreshToken;
         const userId = response.headers.userid;
         const nickname = response.headers.usernickname;
 
@@ -60,8 +60,9 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("userId", userId);
         localStorage.setItem("nickname", nickname);
+        navigate('/');
 
-        window.location.href = "/";
+        // window.location.href = "/";
       }
       
     },
@@ -79,8 +80,6 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
         userNickname: nickname
       }
       mutationSignUp.mutate(newUser)
-      
-      // navigate('/');
     } else {
       alert("정보를 제대로 입력했는지 확인해주세요.")
     }
