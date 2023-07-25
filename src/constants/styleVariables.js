@@ -44,6 +44,7 @@ export const navGray = `rgba(139, 149, 161, 1)` // #8B95A1
 export const navBlack = `rgba(72, 72, 72, 1)` // #484848
 
 export const grayD9D9D9 = `rgba(217, 217, 217, 1)` // #D9D9D9
+export const gray757575 = `rgba(117, 117, 117, 1)` // #757575
 export const black3C3C3C = `rgba(60, 60, 60, 1)` // #3C3C3C
 export const black343434 = `rgba(52, 52, 52, 1)` // #343434
 

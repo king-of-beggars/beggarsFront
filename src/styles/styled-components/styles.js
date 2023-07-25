@@ -860,6 +860,7 @@ export const BoardDetailBtnLeft = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
+  font-size: calc(${props => props.ratio} * 14px);
   &:focus {
     outline: none;
   }

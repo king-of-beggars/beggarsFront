@@ -387,9 +387,13 @@ function BoardDetail({ isBoasting }) {
       </style.BackgroundPageLayout>
     );
   } else {
-    return (<div style={{width: `${screenWidth}px`, height: `${mainHeight}}px`}}>
-              <Loader>데이터 로딩중</Loader>
-            </div>);
+    return (
+      <layout.FlexCenterColumn100>
+      <div style={{width: `${screenWidth}px`, height: "60%"}}>
+        <Loader>데이터 로딩중</Loader>
+      </div>
+    </layout.FlexCenterColumn100>
+    );
   }
 }
 

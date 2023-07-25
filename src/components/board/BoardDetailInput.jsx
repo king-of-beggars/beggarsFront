@@ -5,7 +5,7 @@ import { useGlobalVariables, AuthContext } from 'providers';
 import { style } from "styles";
 import { CommentSubmit } from "assets";
 import { boardAPI } from "api/api";
-import { chkLoggedIn } from "functions";
+import * as sVar from 'constants/styleVariables';
 
 function BoardDetailInput({ boardId, userId, changeLoginModal }) {
   const { isLoggedIn } = useContext(AuthContext);
@@ -57,7 +57,7 @@ function BoardDetailInput({ boardId, userId, changeLoginModal }) {
             disabled={!isLoggedIn}
           />
         ) : (
-          <style.BoardDetailBtnLeft onClick={changeLoginModal}>
+          <style.BoardDetailBtnLeft style={{width: "inherit", textAlign: "left", paddingLeft: `${widthRatio * 10}px`, color: `${sVar.gray757575}`}} ratio={widthRatio} onClick={changeLoginModal}>
             로그인한다면 조언을 할 수 있다네.
           </style.BoardDetailBtnLeft>
         )}
