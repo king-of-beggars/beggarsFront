@@ -51,7 +51,7 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
         alert("회원가입이 완료되었습니다.");
         setSocialModalOn(false);
         setIsSocialLogin(true);
-        console.log("response", response)
+        // console.log("response", response)
 
         const accessToken = response.data.accessToken;
         const refreshToken = response.data.refreshToken;
@@ -69,7 +69,7 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
       
     },
     onError: (response) => {
-      console.log("error on mutationSignUp:::", response)
+      // console.log("error on mutationSignUp:::", response)
       alert("회원가입이 실패하였습니다.")
       setSocialModalOn(false)
       setIsSocialLogin(false)

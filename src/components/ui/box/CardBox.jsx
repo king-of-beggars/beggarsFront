@@ -30,7 +30,7 @@ function CardBox({
     screenWidth > 393
       ? cardWidthOrigin * ratio
       : (screenWidth / screenWidthOrigin) * cardWidthOrigin * ratio;
-  console.log("cardWidth:::", cardWidth);
+  // console.log("cardWidth:::", cardWidth);
   const cardHeight = cardWidth * (cardHeightOrigin / cardWidthOrigin);
 
   const isBoasting = budget - spend >= 0;

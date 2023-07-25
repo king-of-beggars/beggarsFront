@@ -9,7 +9,7 @@ import { commentDetailDelete } from 'constants';
 import { commaOnThree } from 'functions';
 
 function CashBookDetailList({ cardId, cashDetailId, expendName, expendMoney }) {
-  console.log(cardId);
+  // console.log(cardId);
   // 지출 항목 삭제 API
   const queryClient = useQueryClient();
   const mutationDeleteDetail = useMutation(CashBookAPI.deleteCashDetail, {
@@ -45,7 +45,7 @@ function CashBookDetailList({ cardId, cashDetailId, expendName, expendMoney }) {
   };
 
   const punctuatedExpend = commaOnThree(expendMoney)
-  console.log("punc:::", punctuatedExpend)
+  // console.log("punc:::", punctuatedExpend)
 
   return (
     <style.CashBookDetailBox>

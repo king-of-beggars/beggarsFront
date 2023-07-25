@@ -13,7 +13,7 @@ function Router() {
 
   const { isLoggedIn } = useContext(AuthContext)
 
-  console.log("Router isLoggedIn:::", isLoggedIn)
+  // console.log("Router isLoggedIn:::", isLoggedIn)
   // 게시판 상태 : 자랑하기(true) or 혼쭐나기(false)
   const [isBoasting, setIsBoasting] = useState(true);
 

@@ -54,11 +54,11 @@ function Test() {
 
   useEffect (() => {
     if (swiper) {
-      console.log("oh, there's a swiper:::")
-      console.log(swiper)
-      console.log(swiper.activeIndex)
+      // console.log("oh, there's a swiper:::")
+      // console.log(swiper)
+      // console.log(swiper.activeIndex)
     } else {
-      console.log("there's no swiper in state!")
+      // console.log("there's no swiper in state!")
     }
   }, [swiper])
   return (

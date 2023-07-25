@@ -9,10 +9,10 @@ const MainLayout = ({children}) => {
     // get globalVariables
     const { isMobile, widthRatio, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
 
-    console.log("screenWidth: ", screenWidth)
-    console.log("headerHeight: ", headerHeight)
-    console.log("navHeight: ", navHeight)
-    console.log("mainHeight: ", mainHeight)
+    // console.log("screenWidth: ", screenWidth)
+    // console.log("headerHeight: ", headerHeight)
+    // console.log("navHeight: ", navHeight)
+    // console.log("mainHeight: ", mainHeight)
     return (
         <style.BackgroundPageLayout
             screenWidth={`${screenWidth}px`}

@@ -20,7 +20,7 @@ export default async function chkLoggedIn() {
         const isUserId = !!localStorage.getItem("userId")
         const refreshToken = !!localStorage.getItem("refreshToken")
 
-        console.log("chkLoggedIn:::", isNickname, isUserId, refreshToken)
+        // console.log("chkLoggedIn:::", isNickname, isUserId, refreshToken)
 
         resolve(isNickname && isUserId && refreshToken);
     });

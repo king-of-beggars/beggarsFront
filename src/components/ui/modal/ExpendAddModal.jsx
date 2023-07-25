@@ -59,7 +59,7 @@ function ExpendAddModal({ setClose, cardId }) {
     };
 
     setExpendInfo(newExpend);
-    console.log(newExpend);
+    // console.log(newExpend);
   };
 
   return (

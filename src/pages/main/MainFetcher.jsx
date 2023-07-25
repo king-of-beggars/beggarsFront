@@ -11,7 +11,7 @@ export function MainFetcher({ children }) {
     // 로그인 체크
     //// 로그인 여부에 따라 렌더링 다른 페이지 : main, 가계부, 게시판의 일부
     const { isLoggedIn } = useContext(AuthContext)
-    console.log('isLoggedIn-mainFetcher:::', isLoggedIn)
+    // console.log('isLoggedIn-mainFetcher:::', isLoggedIn)
     // get 요청
     const { data, isLoading, isError } = useQuery(["mainData"], mainAPI.getMainData, {
       retry: 10, // 10번까지 재시도
@@ -21,8 +21,8 @@ export function MainFetcher({ children }) {
         console.log('MainAPI.getMainData::: get error : ', error)
       },
       onSuccess: (data) => {
-        console.log('MainAPI.getMainData::: get success')
-        console.log('mainData:::', data)
+        // console.log('MainAPI.getMainData::: get success')
+        // console.log('mainData:::', data)
       },
       onRetry: (failureCount, error) => {
         console.log(`MainAPI.getMainData::: retrying (${failureCount}):`, error);

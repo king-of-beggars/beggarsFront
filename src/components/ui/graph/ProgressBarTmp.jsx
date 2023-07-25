@@ -9,7 +9,7 @@ function ProgressBarTmp( { type, budget, spend, ratio }) {
 
     useEffect(() => {
         const graphValue = (Math.round((spend / budget) * 10)) / 10 * 100
-        console.log("origin:::", Math.round((spend / budget) * 10) / 10)
+        // console.log("origin:::", Math.round((spend / budget) * 10) / 10)
         if (type === "semiCircle") {
           const semiCircle = new ProgressBar.SemiCircle(progressBarRef.current, {
             strokeWidth: 6,
@@ -50,7 +50,7 @@ function ProgressBarTmp( { type, budget, spend, ratio }) {
           semiCircle.text.style.fontSize = `${1 * ratio}em`;
           
           if (graphValue > 100) {
-            console.log(graphValue / 100)
+            // console.log(graphValue / 100)
             semiCircle.animate((graphValue / 100) - 1);
           } else {
             semiCircle.animate(graphValue / 100);

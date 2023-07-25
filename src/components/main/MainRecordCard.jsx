@@ -58,9 +58,9 @@ function MainRecordCard({ dayCount, isLoggedIn, isToggleOnLeft, toggleSetter, da
   // const budget = data.total.cashbookGoalValue
   // const spend = data.total.cashbookNowValue
 
-  console.log("mainRecordCardData:::", data)
-  console.log("groupByCategory:::", groupByCategory)
-  console.log("barData:::", barData)
+  // console.log("mainRecordCardData:::", data)
+  // console.log("groupByCategory:::", groupByCategory)
+  // console.log("barData:::", barData)
 
 
   return (

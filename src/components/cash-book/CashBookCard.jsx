@@ -33,8 +33,8 @@ function CashBookCard({
   const cardHeight = cashbookCard.height
   const bigCardBtnWidth = cashbookCardBtn.width
   const bigCardBtnHeight = cashbookCardBtn.height
-  console.log("cardWidth:::", cardWidth);
-  console.log("cardHeight:::", cardHeight);
+  // console.log("cardWidth:::", cardWidth);
+  // console.log("cardHeight:::", cardHeight);
    // console.log(id, " ::: ", writeCheck)
   //  const [cardWidthOrigin, cardHeightOrigin] = [301, 356];
   //  const [screenWidthOrigin, screenHeightOrigin] = [393, 852];

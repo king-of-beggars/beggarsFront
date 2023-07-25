@@ -63,17 +63,17 @@ function Main({ data, isLoggedIn }) {
   useEffect(() => {
     if (isLoggedIn !== true) { // 아직 로그인되지 않은 경우에 소셜 로그인인지 탐색하기
       const loginSuccess = Object.keys(queryStr).length === 0 ? true : JSON.parse(queryStr.loginSuccess)
-      console.log("loginSuccess:::", loginSuccess)
+      // console.log("loginSuccess:::", loginSuccess)
   
       if (!loginSuccess){
-        console.log(loginSuccess)
+        // console.log(loginSuccess)
         setSocialModalOn(true)
       }
     }
   }, [isLoggedIn, queryStr, search])
-  console.log("isLoggedIn:::", isLoggedIn)
-  console.log('isSocialLogin:::', isSocialLogin)
-  console.log("decodedNickname:::", decodeURIComponent(localStorage.getItem("nickname")))
+  // console.log("isLoggedIn:::", isLoggedIn)
+  // console.log('isSocialLogin:::', isSocialLogin)
+  // console.log("decodedNickname:::", decodeURIComponent(localStorage.getItem("nickname")))
 
   return (
     isLoggedIn === true || isSocialLogin ? (

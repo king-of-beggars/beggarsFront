@@ -83,10 +83,10 @@ function BoardDetail({ isBoasting }) {
 
   useEffect(() => {
     if (response) {
-      console.log("receipt:::", response);
-      console.log("cashbook:::", response.cashbookDetail);
-      console.log("comments:::", response.comments);
-      console.log("user:::", response.userId);
+      // console.log("receipt:::", response);
+      // console.log("cashbook:::", response.cashbookDetail);
+      // console.log("comments:::", response.comments);
+      // console.log("user:::", response.userId);
     }
   }, [response]);
 
@@ -119,7 +119,7 @@ function BoardDetail({ isBoasting }) {
   if (isError) {
     <div>Error!</div>;
   }
-  console.log(response)
+
 
   if (response) {
     return (
@@ -290,7 +290,7 @@ function BoardDetail({ isBoasting }) {
                 <layout.FlexCenterRow100
                   style={{ justifyContent: "space-between" }}
                 >
-                  { console.log("boardType:::", response.boardTypes)}
+                  {/* { console.log("boardType:::", response.boardTypes)} */}
                   <div>{!!response.boardTypes ? "낭비한 금액" : "절약한 금액"}</div>
                   <div>
                     {!!response.cashbookDetail.cashbookGoalValue &&
@@ -327,7 +327,7 @@ function BoardDetail({ isBoasting }) {
               <layout.FlexCenterColumn100 style={{ gap: "5px" }}>
                 {response.comments.length > 0
                   ? response.comments.map((comment) => {
-                      console.log("comment:::", comment);
+                      // console.log("comment:::", comment);
                       return (
                         <BoardDetailComment
                           boardAuthor={response.userId.userId}

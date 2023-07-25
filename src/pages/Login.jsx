@@ -12,7 +12,7 @@ import { AuthAPI } from 'api/api'
 function Login() {
   // 만들어둔 context 사용하기
   const { windowSize,widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
-  console.log('Login rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+  // console.log('Login rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // nav가 없는 페이지인 경우 header를 줄이고 main을 늘려주기
   const noNavHeaderHeight = headerHeight - 50
@@ -63,14 +63,14 @@ function Login() {
   }
 
   const loginHandler = () => {
-    console.log("userInfo:::", userInfo)
+    // console.log("userInfo:::", userInfo)
     mutationLogin.mutate(userInfo)
   }
 
   const mutationLogin = useMutation(AuthAPI.postLogIn, {
     onSuccess: (response) => {
       alert("로그인이 완료되었습니다.")
-      console.log("login-response:::", response)
+      // console.log("login-response:::", response)
       const accessToken = response.data.accessToken;
       const refreshToken = response.data.refreshToken;
       const userId = response.headers.userid;

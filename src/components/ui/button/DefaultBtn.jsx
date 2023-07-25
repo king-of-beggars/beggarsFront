@@ -18,7 +18,7 @@ function DefaultBtn({ children }) {
     // }
 
     const mouseEventHandler = (event) => {
-        console.log(event)
+        // console.log(event)
         if (event.type === "mousedown") {
             setIsPressed(true)
             play()
@@ -26,7 +26,7 @@ function DefaultBtn({ children }) {
             setIsPressed(false)
             stop()
         }
-        console.log(event.type)
+        // console.log(event.type)
     }
 
     const touchEventHandler = (event) => {

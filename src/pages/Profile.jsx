@@ -13,7 +13,7 @@ import * as sVar from 'constants/styleVariables';
 // function Profile({ isMobile, headerHeight, navHeight, mainHeight }) {
 function Profile() {
   // 만들어둔 context 사용하기
-  const { windowSize, isMobile, widthRatio, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  const { isMobile, widthRatio, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
   const navigate = useNavigate();
 
   const mutationLogout = useMutation(AuthAPI.postLogout, {

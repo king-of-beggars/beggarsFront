@@ -22,14 +22,14 @@ function CashBookMod() {
   // 만들어둔 context 사용하기
   const { windowSize, widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } =
     useGlobalVariables();
-  console.log(
-    "CashBookMod rendered:",
-    windowSize,
-    isMobile,
-    headerHeight,
-    navHeight,
-    mainHeight
-  );
+  // console.log(
+  //   "CashBookMod rendered:",
+  //   windowSize,
+  //   isMobile,
+  //   headerHeight,
+  //   navHeight,
+  //   mainHeight
+  // );
 
   // 카테고리 정보
   const options = categoryList;
@@ -70,7 +70,7 @@ function CashBookMod() {
     };
 
     setCardInfo(newCard);
-    console.log(newCard);
+    // console.log(newCard);
   };
 
   // 뒤로가기

@@ -14,8 +14,8 @@ import { CashBookAPI } from "api/api";
 function CashBookAdd() {
 // function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 만들어둔 context 사용하기
-  const { windowSize, widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
-  console.log('CashBookAdd rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+  const { widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  // console.log('CashBookAdd rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // 카테고리 정보
   const options = categoryList;
@@ -65,7 +65,7 @@ function CashBookAdd() {
   });
 
   const onClickSave = () => {
-    console.log(!category)
+    // console.log(!category)
     if (!category | !budget) {
       alert("카테고리와 예산을 선택해주게.")
     } else {

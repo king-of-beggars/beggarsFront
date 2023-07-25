@@ -44,14 +44,14 @@ function CashBook() {
     cashbookCard,
     widthRatio
   } = useGlobalVariables();
-  console.log(
-    "CashBook rendered:",
-    windowSize,
-    isMobile,
-    headerHeight,
-    navHeight,
-    mainHeight
-  );
+  // console.log(
+  //   "CashBook rendered:",
+  //   windowSize,
+  //   isMobile,
+  //   headerHeight,
+  //   navHeight,
+  //   mainHeight
+  // );
   const navigate = useNavigate();
  
   const { dateBoxWidth, dateBoxHeight } = getDateBoxSize(
@@ -163,7 +163,7 @@ function CashBook() {
     return <></>;
   }
   const cashbookApiRes = data.data.data;
-  console.log(cashbookApiRes);
+  // console.log(cashbookApiRes);
   const grayMent = commentGray(cashbookApiRes.length >= 5);
 
   // 카드 상세 박스로 이동
@@ -232,14 +232,14 @@ function CashBook() {
                 modules={[Navigation, Scrollbar, Pagination, A11y]}
                 slidesPerView={slidesPerViewValue}
                 onSlideChange={(swiper) => {
-                  console.log("slide change");
-                  console.log("activeIndex:::", swiper.activeIndex);
+                  // console.log("slide change");
+                  // console.log("activeIndex:::", swiper.activeIndex);
                   setActiveSlide(swiper.activeIndex);
                 }}
                 // scrollbar={{ draggable: true }}
                 onSwiper={(swiper) => {
                   setSwiper(swiper);
-                  console.log(swiper);
+                  // console.log(swiper);
                 }}
                 direction="vertical"
                 style={{ height: `${mainHeight - dateBoxHeight - 24}px` }}
@@ -261,7 +261,7 @@ function CashBook() {
                       >
                         {" "}
                         {/* height를 CashBookCard와 동일하게 주어야 함*/}
-                        {console.log("isActiveSlide:::", idx === activeSlide)}
+                        {/* {console.log("isActiveSlide:::", idx === activeSlide)} */}
                         <Swiper
                           key={activeSlide}
                           modules={[Navigation, Pagination, Scrollbar, A11y]}

@@ -23,7 +23,7 @@ function BoardDetailInput({ boardId, userId, changeLoginModal }) {
   const mutationAddComment = useMutation(boardAPI.postBoardComment, {
     onSuccess: () => {
       queryClient.invalidateQueries(["receipt", boardId]);
-      console.log(boardId, comment);
+      // console.log(boardId, comment);
       setComment("");
     },
     onError: () => alert("조언에 실패하셨구려."),

@@ -52,7 +52,7 @@ function CashBookMain() {
   let slidesPerViewValue = Math.round((mainHeight / cardHeight) * 10) / 10;
   // Math.round((mainHeight / cardHeight) * 10) / 10
 
-  console.log("slidesPerViewValue:::", slidesPerViewValue);
+  // console.log("slidesPerViewValue:::", slidesPerViewValue);
 
   // activeSlide 상태 관리
   const [activeSlide, setActiveSlide] = useState(0);
@@ -121,7 +121,7 @@ function CashBookMain() {
       window.location.href = "/cash-book";
     },
     onError: (err) => {
-      console.log("장부 삭제 실패:::", err)
+      // console.log("장부 삭제 실패:::", err)
       alert("장부 삭제를 실패했습니다.")
     },
   });
@@ -141,7 +141,7 @@ function CashBookMain() {
   const changeDataNoneModal = (event) => {
     event.stopPropagation();
     setClickModal(event.target.id);
-    console.log("clickedModal:::", clickedModal);
+    // console.log("clickedModal:::", clickedModal);
     setIsDataNoneModal(true)
   };
   const setDataNoneClose = () => {
@@ -161,7 +161,7 @@ function CashBookMain() {
   
 
   const { data, isLoading, error } = useQuery(queryNode);
-  console.log("cashbook data:::", data);
+  // console.log("cashbook data:::", data);
   if (isLoading || error) {
     return <></>;
   }
@@ -187,7 +187,7 @@ function CashBookMain() {
   ) => {
     const grayMent = commentGray(dataLength >= 5);
     let slidePerView = Math.ceil((mainHeight / cardHeight) * 10) / 10;
-    console.log(slidePerView);
+    // console.log(slidePerView);
     if (slidePerView > 1.5) {
       slidePerView =
         Math.ceil(((mainHeight - (10 * dataLength - 1)) / cardHeight) * 10) /
@@ -202,8 +202,8 @@ function CashBookMain() {
           <Swiper
             // spaceBetween={30}
             slidesPerView={1}
-            onSlideChange={() => console.log("slide change")}
-            onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log("slide change")}
+            // onSwiper={(swiper) => console.log(swiper)}
             style={{ width: `100%` }}
             resistance={true}
             resistanceRatio={1}
@@ -216,10 +216,10 @@ function CashBookMain() {
             onTouchMove={(swiper) => {
               if (swiper.touches.diff < -160) {
                 if (dataLength < 5) {
-                  console.log("여기로 들어옴!")
+                  // console.log("여기로 들어옴!")
                   window.location.href = "/cash-book/add";
                 } else {
-                  console.log("여기 들어옴!")
+                  // console.log("여기 들어옴!")
                   window.location.href = "/cash-book";
                 }
               }
@@ -239,7 +239,7 @@ function CashBookMain() {
                 slidesPerView={slidePerView}
                 onSwiper={(swiper) => {
                   setSwiper(swiper);
-                  console.log(swiper);
+                  // console.log(swiper);
                 }}
                 direction="vertical"
                 // pagination={{
@@ -251,7 +251,7 @@ function CashBookMain() {
                 }}
               >
                 {(data !== undefined && dataLength > 0) && data.map((card, idx) => {
-                  console.log("this cardHeight:::", cardHeight);
+                  // console.log("this cardHeight:::", cardHeight);
                   return (
                     <SwiperSlide
                       className={`slide_${idx}`}
@@ -341,7 +341,7 @@ function CashBookMain() {
             // scrollbar={{ draggable: true }}
             onSwiper={(swiper) => {
               setSwiper(swiper);
-              console.log(swiper);
+              // console.log(swiper);
             }}
             direction="vertical"
             // style={{ height: `${mainHeight - 24}px` }}
@@ -367,7 +367,7 @@ function CashBookMain() {
                   >
                     {" "}
                     {/* height를 CashBookCard와 동일하게 주어야 함*/}
-                    {console.log("isActiveSlide:::", idx === activeSlide)}
+                    {/* {console.log("isActiveSlide:::", idx === activeSlide)} */}
                     <Swiper
                       key={activeSlide}
                       modules={[Navigation, Pagination, Scrollbar, A11y]}
@@ -390,10 +390,10 @@ function CashBookMain() {
                       onTouchMove={(swiper) => {
                         if (swiper.touches.diff < -90) {
                           if (dataLength < 5) {
-                            console.log("111111")
+                            // console.log("111111")
                             window.location.href = "/cash-book/add";
                           } else {
-                            console.log("222222")
+                            // console.log("222222")
                             window.location.href = "/cash-book";
                           }
                         }
@@ -417,16 +417,6 @@ function CashBookMain() {
                           isDiffDate={isDiffDate}
                           isDefault={true}
                         />
-                        {/* <CashBookCard
-                                    id={card.id}
-                                     budget={card.cashbookGoalValue}
-                                     spend={card.cashbookNowValue}
-                                     category={card.cashbookCategory}
-                                     title={card.cashbookName}
-                                     cardWidth={`${cardWidth}px`}
-                                     cardHeight={`${cardHeight}px`}
-                                     index={idx}
-                                   /> */}
                       </SwiperSlide>
                       <SwiperSlide className="horizontalSlide">
                         {idx === activeSlide ? (

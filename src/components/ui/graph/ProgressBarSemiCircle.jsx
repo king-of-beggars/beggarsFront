@@ -47,7 +47,7 @@ function ProgressBarSemiCircle( { budget, spend, ratio, fontSize, isDefault }) {
         semiCircle.text.style.fontSize = `${parseFloat(fontSize) * ratio}px`;
         
         if (graphValue > 100) {
-          console.log(graphValue / 100)
+          // console.log(graphValue / 100)
           semiCircle.animate((graphValue / 100) - 1);
         } else {
           semiCircle.animate(graphValue / 100);

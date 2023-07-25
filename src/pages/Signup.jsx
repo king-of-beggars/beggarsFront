@@ -15,7 +15,7 @@ const INIT_INPUT_VALUE = ""
 function Signup() {
   // 만들어둔 context 사용하기
   const { windowSize, widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
-  console.log('Signup rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
+  // console.log('Signup rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // nav가 없는 페이지인 경우 header를 줄이고 main을 늘려주기
   const noNavHeaderHeight = headerHeight - 50

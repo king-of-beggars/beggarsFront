@@ -64,14 +64,14 @@ function CashBookDetail() {
     {
       select: (data) => data.data.data.result,
       onSuccess: (data) => {
-        console.log("cashbookDetail:::", data);
+        // console.log("cashbookDetail:::", data);
       },
     }
   );
   if (isLoading || error) {
     return <></>;
   }
-  console.log("writecheck", !!data.writeCheck);
+  // console.log("writecheck", !!data.writeCheck);
 
   let detail = [];
   let result = true;
@@ -160,7 +160,7 @@ function CashBookDetail() {
                 <></>
               ) : (
                 detail.map((expend) => {
-                  console.log("expend:::", expend);
+                  // console.log("expend:::", expend);
                   return (
                     <CashBookDetailList
                       key={expend.cashDetailId}
