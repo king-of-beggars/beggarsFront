@@ -158,13 +158,14 @@ function CashBookMain() {
     enabled: isLoggedIn,
     select: (data) => data.data.data,
   };
+  
 
   const { data, isLoading, error } = useQuery(queryNode);
   console.log("cashbook data:::", data);
   if (isLoading || error) {
     return <></>;
   }
-
+  const dataLength = data !== undefined && data.length > 0 ? data.length: 0;
 
   // 카드 상세 박스로 이동
   const onClickCard = (id) => {
@@ -184,12 +185,12 @@ function CashBookMain() {
     setSwiper,
     data
   ) => {
-    const grayMent = commentGray(data.length >= 5);
+    const grayMent = commentGray(dataLength >= 5);
     let slidePerView = Math.ceil((mainHeight / cardHeight) * 10) / 10;
     console.log(slidePerView);
     if (slidePerView > 1.5) {
       slidePerView =
-        Math.ceil(((mainHeight - (10 * data.length - 1)) / cardHeight) * 10) /
+        Math.ceil(((mainHeight - (10 * dataLength - 1)) / cardHeight) * 10) /
         10;
       return (
         <layout.SwiperWrap
@@ -214,7 +215,7 @@ function CashBookMain() {
             }}
             onTouchMove={(swiper) => {
               if (swiper.touches.diff < -160) {
-                if (data.length < 5) {
+                if (dataLength < 5) {
                   console.log("여기로 들어옴!")
                   window.location.href = "/cash-book/add";
                 } else {
@@ -249,7 +250,7 @@ function CashBookMain() {
                   height: `${mainHeight}px`,
                 }}
               >
-                {data.map((card, idx) => {
+                {data !== undefined && data.map((card, idx) => {
                   console.log("this cardHeight:::", cardHeight);
                   return (
                     <SwiperSlide
@@ -283,7 +284,7 @@ function CashBookMain() {
               </Swiper>
             </SwiperSlide>
             <SwiperSlide>
-              {data.length < 5 ? (
+              {dataLength < 5 ? (
                 <div
                   style={{
                     height: `${mainHeight}px`,
@@ -388,7 +389,7 @@ function CashBookMain() {
                       // }}
                       onTouchMove={(swiper) => {
                         if (swiper.touches.diff < -90) {
-                          if (data.length < 5) {
+                          if (dataLength < 5) {
                             console.log("111111")
                             window.location.href = "/cash-book/add";
                           } else {
@@ -504,7 +505,7 @@ function CashBookMain() {
           mainHeight={`${mainHeight}px`}
         >
           <layout.CashBookMainContent className="thisCash">
-            {!data.length ? (
+            {data !== undefined && !dataLength ? (
               <layout.FlexCenter>
                 <style.CashBookDummyContainer
                   cardWidth={`${cardWidth}px`}
