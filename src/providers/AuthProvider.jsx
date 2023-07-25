@@ -11,7 +11,7 @@ export const AuthContext = React.createContext(null)
 
 export function AuthContextProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
     // const [error, setError] = useState(true)
     // const { pathname } = useLocation()
 
@@ -26,7 +26,7 @@ export function AuthContextProvider({ children }) {
             // setError(false)
         }
 
-        setLoading(false)
+        // setLoading(false)
     }, [])
 
     // useEffect(() => {
@@ -35,11 +35,11 @@ export function AuthContextProvider({ children }) {
     //     })
     // }, [pathname]) // 새 페이지로 이동할 때마다 로그인 여부 확인
 
-    if (loading) {
-        return <BlurOverlay>
-                    <Loader>로그인 중이네!<br/>잠깐만 기다려주게</Loader>
-                </BlurOverlay>
-    }
+    // if (loading) {
+    //     return <BlurOverlay>
+    //                 <Loader>로그인 중이네!<br/>잠깐만 기다려주게</Loader>
+    //             </BlurOverlay>
+    // }
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
