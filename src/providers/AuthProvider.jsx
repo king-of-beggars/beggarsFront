@@ -24,8 +24,9 @@ export function AuthContextProvider({ children }) {
         if (!!refreshToken && !!userId && !!nickname) {
             setIsLoggedIn(true);
             // setError(false)
+        } else {
+            setIsLoggedIn(false);
         }
-
         // setLoading(false)
     }, [])
 
