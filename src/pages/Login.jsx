@@ -140,7 +140,7 @@ function Login() {
             </layout.LoginBtnWrap>
             <layout.SocialBtnWrap style={{gap: "1em", margin: "2em, 0"}}>
               <style.SocialLoginBtn ratio={widthRatio} site="kakao" onClick={kakaoLoginHandler}>카카오 로그인</style.SocialLoginBtn>
-              <style.SocialLoginBtn ratio={widthRatio} site="naver" onClick={naverLoginHandler}>네이버 로그인</style.SocialLoginBtn>
+              {/* <style.SocialLoginBtn ratio={widthRatio} site="naver" onClick={naverLoginHandler}>네이버 로그인</style.SocialLoginBtn> */}
             </layout.SocialBtnWrap>
           </layout.LoginWrap>
         </layout.MainContent>

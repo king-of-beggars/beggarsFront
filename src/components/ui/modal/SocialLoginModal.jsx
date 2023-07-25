@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 
+import { useGlobalVariables } from "providers";
 import { saveUserInfo, chkLoggedIn } from 'functions';
 import { style, layout } from "styles";
 import { AuthAPI } from "api/api";
@@ -11,6 +12,7 @@ import { useNickname} from 'hooks';
 const INIT_INPUT_VALUE = ""
 
 function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, children }) {
+  const { widthRatio } = useGlobalVariables();
   const navigate = useNavigate();
   const [nickname, setNickname, isNickValid] = useNickname(INIT_INPUT_VALUE);
   const [isNickChked, setIsNickChked] = useState(false);
@@ -127,10 +129,11 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
                 color={sVar.borderGray}
                 backcolor={sVar.backgroundGray}
                 border={sVar.borderGray}
+                ratio={widthRatio}
               >
                 닫기
               </style.SmallBtn>
-              <style.BigBlackBtn onClick={signUpHandler}>여정 시작</style.BigBlackBtn>
+              <style.BigBlackBtn ratio={widthRatio} onClick={signUpHandler}>여정 시작</style.BigBlackBtn>
             </layout.FlexDefault>
           </layout.FlexColumn>
         </style.ModalDefault>

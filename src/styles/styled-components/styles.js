@@ -94,12 +94,13 @@ export const BigBlackBtn = styled.button`
 `;
 // 작은 라운드 버튼 스타일링
 export const SmallBtn = styled.button`
-  width: 5em;
-  height: 2.5em;
-  border-radius: 1.5em;
+  width: calc(${props => props.ratio} * 189px);
+  height: calc(${props => props.ratio} * 50px);
+  border-radius: calc(${props => props.ratio} * 100px);
   background-color: ${(props) => props.backcolor};
   color: ${(props) => props.color};
-  font-size: 1em;
+  font-size: calc(${props => props.ratio} * 20px);
+  font-family: "DOSIyagiMedium";
   border: ${(props) => props.border};
 `;
 
@@ -860,6 +861,7 @@ export const BoardDetailBtnLeft = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
+  font-size: calc(${props => props.ratio} * 14px);
   &:focus {
     outline: none;
   }
