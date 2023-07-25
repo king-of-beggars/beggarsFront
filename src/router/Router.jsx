@@ -1,70 +1,24 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Redirect,
-  Navigate,
-} from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import Login from "pages/Login";
-import Signup from "pages/Signup";
-import Main, { MainFetcher } from "pages/Main";
-import Profile from "pages/Profile";
-import CashBook from "pages/CashBook";
-import CashBookMain from 'pages/CashBookMain';
-import Board from "pages/Board";
-import CashBookAdd from "pages/CashBookAdd";
-import CashBookDetail from "pages/CashBookDetail";
-import CashBookMod from "pages/CashBookMod";
-import BoardDetail from "pages/BoardDetail";
-import { BlurOverlay, Loader, LoggedYet, MainAssetProvider } from "components";
-import { chkLoggedIn, getKrDate, setFrameSize } from "functions";
-import { layout } from "styles";
+import { Login, Signup, Profile, CashBookMain, Board, CashBookAdd, CashBookDetail, CashBookMod, BoardDetail, Main } from "pages";
+import { MainFetcher } from "pages/main/MainFetcher";
+import { BlurOverlay, LoggedYet } from "components";
+import { getKrDate, } from "functions";
 import { AuthContext } from 'providers';
-import CashbookErrorRender from 'components/error/CashbookErrorRender';
 
 function Router() {
-  // setFrameSize();
-  // 화면 크기에 따라 header와 nav의 크기를 설정한 후, 나머지 부분을 main으로 잡아 렌더링하는 로직
-  // const [windowSize, setWindowSize] = useState({
-  //   width: window.innerWidth,
-  //   height: window.innerHeight
-  // })
+
   const { isLoggedIn } = useContext(AuthContext)
   console.log("Router isLoggedIn:::", isLoggedIn)
   // 게시판 상태 : 자랑하기(true) or 혼쭐나기(false)
   const [isBoasting, setIsBoasting] = useState(true);
 
-  // const handleResize = () => {
-  //   setWindowSize({
-  //     width: window.innerWidth,
-  //     height: window.innerHeight
-  //   })
-  //   localStorage.setItem("screenWidth", window.innerWidth)
-  //   localStorage.setItem("screenHeight", window.innerHeight)
-  // }
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize)
-  //   }
-  // }, [])
-
-  // const headerHeight = Math.ceil((windowSize.height) * 0.2) > 120 ? 120 : Math.ceil((windowSize.height) * 0.15)
-  // const navHeight = Math.ceil((windowSize.height) * 0.1) > 80 ? 80 : Math.ceil((windowSize.height) * 0.1)
-  // const mainHeight = Math.ceil((windowSize.height) - (headerHeight + navHeight))
-
-  // const isMobile = /Mobi/i.test(window.navigator.userAgent)
 
   return (
     <BrowserRouter>
       <Routes>
-        {/* main */}
-        <Route
-          path="/"
+        <Route path="/"
           element={
             <MainFetcher>
               <Main />
@@ -80,7 +34,6 @@ function Router() {
         }
         />
         <Route path="cash-book/:date" element={<CashBookMain />} />
-        {/* <Route path="cash-book/:date" element={<CashBook />} /> */}
         <Route
           path="cash-book/add"
           element={
@@ -147,9 +100,6 @@ const ProtectedRouter = ({ isLoggedIn, children }) => {
         <BlurOverlay addComponent={<LoggedYet />}>로그인이 되지 않았네!</BlurOverlay>
       </>
     )
-    // // alert("로그인이 필요합니다.");
-    // alert("라우터 튕김!")
-    // // return <Navigate to="/login" replace={true} />;
   }
 };
 
