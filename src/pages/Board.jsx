@@ -33,14 +33,14 @@ function Board({ isBoasting, setIsBoasting }) {
   //// 2. 픽셀아트 적용 에셋
   const { boardBtnBar, boardBtnActivate, boardBtnSleep, boardCard } =
     useGlobalVariables();
-  console.log(
-    "Board rendered:",
-    isMobile,
-    headerHeight,
-    navHeight,
-    mainHeight,
-    screenWidth
-  );
+  // console.log(
+  //   "Board rendered:",
+  //   isMobile,
+  //   headerHeight,
+  //   navHeight,
+  //   mainHeight,
+  //   screenWidth
+  // );
 
   const navigate = useNavigate();
 
@@ -99,10 +99,10 @@ function Board({ isBoasting, setIsBoasting }) {
     {
       ...queryNode,
       getNextPageParam: (lastPage, pages) => {
-        console.log("param-lastPage:::", lastPage);
-        console.log("param-pages:::", pages)
-        // const lastPageData = lastPage.data.data;
-        // return lastPageData.hasNextPage ? page : undefined
+        // console.log("param-lastPage:::", lastPage);
+        // console.log("param-pages:::", pages)
+        const lastPageData = lastPage.data.data;
+        return lastPageData.hasNextPage ? page : undefined
       },
       onSuccess: () => {
         const name = isBoasting ? "boast" : "scoled"
@@ -110,7 +110,7 @@ function Board({ isBoasting, setIsBoasting }) {
           ...page,
           [name] : page[name] + 1
         }
-        console.log("new page:::", newPage)
+        // console.log("new page:::", newPage)
         setPage(newPage);
       }
     },
@@ -126,22 +126,22 @@ function Board({ isBoasting, setIsBoasting }) {
   //     },
   // });
 
-  const {ref, isView} = useInView({ threshold: 0 });
-  console.log("ref:::", ref)
-  console.log("isView:::", isView)
+  const {ref, inView} = useInView({ threshold: 0 });
+  // console.log("ref:::", ref)
+  // console.log("isView:::", inView)
 
   useEffect(() => {
     // 맨 마지막 요소를 보고있고 더이상 페이지가 존재하면
     // 다음 페이지 데이터를 가져옴
-    console.log("다니 isView :::", isView);
-    console.log("다니 hasNextPage :::", hasNextPage);
-    if (isView && hasNextPage) {
+    // console.log("다니 isView :::", inView);
+    // console.log("다니 hasNextPage :::", hasNextPage);
+    if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [isView]);
+  }, [inView]);
 
-  console.log("다니 data :::", data);
-  console.log("다니 page :::", page);
+  // console.log("다니 data :::", data);
+  // console.log("다니 page :::", page);
   return (
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
@@ -227,7 +227,7 @@ function Board({ isBoasting, setIsBoasting }) {
           {!!data ? (
             <layout.Grid2Row ratio={widthRatio}>
               {/* { console.log("cardList.boards:::", cardList.boards)} */}
-              {console.log("boarCard.width:::", boardCard.width)}
+              {/* {console.log("boarCard.width:::", boardCard.width)} */}
               {data.pages.map((pageList, pageNum) => {
                 const cardList = pageList.data.data;
                 return (
