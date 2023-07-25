@@ -94,12 +94,12 @@ export const BigBlackBtn = styled.button`
 `;
 // 작은 라운드 버튼 스타일링
 export const SmallBtn = styled.button`
-  width: calc(${props => props.ratio} * 189px);
-  height: calc(${props => props.ratio} * 50px);
-  border-radius: calc(${props => props.ratio} * 100px);
+  width: calc(${props => props.ratio} * 5em);
+  height: calc(${props => props.ratio} * 2.5em);
+  border-radius: calc(${props => props.ratio} * 1.5em);
   background-color: ${(props) => props.backcolor};
   color: ${(props) => props.color};
-  font-size: calc(${props => props.ratio} * 20px);
+  font-size: calc(${props => props.ratio} * 1em);
   font-family: "DOSIyagiMedium";
   border: ${(props) => props.border};
 `;
