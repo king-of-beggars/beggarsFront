@@ -387,10 +387,10 @@ function BoardDetail({ isBoasting }) {
       </style.BackgroundPageLayout>
     );
   } else {
-    
+    return (<div style={{width: `${screenWidth}px`, height: `${mainHeight}}px`}}>
+              <Loader>데이터 로딩중</Loader>
+            </div>);
   }
-
-  return <div>아무 것도 아닌 경우!</div>;
 }
 
 export default BoardDetail;
