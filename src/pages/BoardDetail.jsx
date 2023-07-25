@@ -387,7 +387,7 @@ function BoardDetail({ isBoasting }) {
       </style.BackgroundPageLayout>
     );
   } else {
-
+    
   }
 
   return <div>아무 것도 아닌 경우!</div>;
