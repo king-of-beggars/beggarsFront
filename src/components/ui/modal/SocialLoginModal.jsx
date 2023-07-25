@@ -62,9 +62,9 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
         localStorage.setItem("refreshToken", refreshToken);
         localStorage.setItem("userId", userId);
         localStorage.setItem("nickname", nickname);
-        navigate('/');
+        // navigate('/');
 
-        // window.location.href = "/";
+        window.location.href = "/";
       }
       
     },
