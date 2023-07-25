@@ -133,7 +133,7 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
               >
                 닫기
               </style.SmallBtn>
-              <style.BigBlackBtn ratio={widthRatio} onClick={signUpHandler}>여정 시작</style.BigBlackBtn>
+              <style.SmallBtn style={{background:"black", color:"white"}} ratio={widthRatio} onClick={signUpHandler}>여정 시작</style.SmallBtn>
             </layout.FlexDefault>
           </layout.FlexColumn>
         </style.ModalDefault>
