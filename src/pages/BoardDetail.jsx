@@ -5,7 +5,7 @@ import { AutoTextSize } from 'auto-text-size';
 
 import { useGlobalVariables, } from "providers"
 import { commaOnThree } from "functions"
-import { BoardDetailInput, BoardDetailComment, CashDetailModal } from "components";
+import { BoardDetailInput, BoardDetailComment, CashDetailModal, Loader } from "components";
 import { layout, style } from "styles";
 import { BackArrowGray, bgCloud70, bgDarkCloud, bgSky70, bgDarkSky, bgMountain70, bgDarkMountain, BackArrowWhite, } from "assets";
 import { boardAPI } from "api/api";
@@ -107,7 +107,13 @@ function BoardDetail({ isBoasting }) {
   };
 
   if (isLoading) {
-    <div>Loading...</div>;
+    <layout.FlexCenterColumn100>
+      <div style={{width: `${screenWidth}px`, height: "60%"}}>
+        <Loader>데이터 로딩중</Loader>
+      </div>
+    </layout.FlexCenterColumn100>
+
+    
   }
 
   if (isError) {
@@ -380,6 +386,8 @@ function BoardDetail({ isBoasting }) {
         } */}
       </style.BackgroundPageLayout>
     );
+  } else {
+    
   }
 
   return <div>아무 것도 아닌 경우!</div>;

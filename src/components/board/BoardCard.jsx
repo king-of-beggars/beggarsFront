@@ -13,7 +13,8 @@ const getDisplayDate = (dateStr) => dateStr.split("T")[0].slice(2).split("-").jo
 const getDisplayBoardName = (boardNameStr) => boardNameStr.length > 7 ? boardNameStr.slice(0, 7) + "..." : boardNameStr;
 
 
-function BoardCard({id, onClickHandler, isDefault, cardData, writeCheck }) {
+// function BoardCard({id, onClickHandler, isDefault, cardData, writeCheck }) {
+const BoardCard = React.forwardRef(({id, onClickHandler, isDefault, cardData, writeCheck}, ref) => {
   const { boardCard, widthRatio } = useGlobalVariables();
   const ratio = widthRatio * 0.96
   const cardWidth = boardCard.width * ratio
@@ -85,6 +86,7 @@ function BoardCard({id, onClickHandler, isDefault, cardData, writeCheck }) {
       </style.CardSpendText>
     </style.CardBoxContainer>
   );
-}
+// }
+})
 
 export default BoardCard

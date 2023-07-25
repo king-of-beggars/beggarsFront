@@ -128,12 +128,12 @@ function Board({ isBoasting, setIsBoasting }) {
 
   const {ref, inView} = useInView({ threshold: 0 });
   // console.log("ref:::", ref)
-  // console.log("isView:::", inView)
+  console.log("isView:::", inView)
 
   useEffect(() => {
     // 맨 마지막 요소를 보고있고 더이상 페이지가 존재하면
     // 다음 페이지 데이터를 가져옴
-    // console.log("다니 isView :::", inView);
+    console.log("다니 isView :::", inView);
     // console.log("다니 hasNextPage :::", hasNextPage);
     if (inView && hasNextPage) {
       fetchNextPage();
@@ -249,7 +249,7 @@ function Board({ isBoasting, setIsBoasting }) {
                           title={card.cashbookId.cashbookName}
                           key={card.boardId}
                           onClickHandler={cardClickHandler}
-                          // ref={ref}
+                          ref={ref}
                         />
                       );
                     }
@@ -284,7 +284,7 @@ function Board({ isBoasting, setIsBoasting }) {
                 //   />
                 // )
               })}
-              <div ref={ref} />
+              <div className="here" ref={ref} />
             </layout.Grid2Row>
           ) : isLoading ? (
             exceptionRenderer("loading")
