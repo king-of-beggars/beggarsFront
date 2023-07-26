@@ -212,9 +212,7 @@ function CashBookMain() {
             }}
             onTouchEnd={(swiper) => {
               setHorizontalSwipe(false);
-            }}
-            onTouchMove={(swiper) => {
-              if (swiper.touches.diff < -160) {
+              if (swiper.touches.diff < -90) {
                 if (dataLength < 5) {
                   // console.log("여기로 들어옴!")
                   window.location.href = "/cash-book/add";
@@ -224,6 +222,17 @@ function CashBookMain() {
                 }
               }
             }}
+            // onTouchMove={(swiper) => {
+            //   if (swiper.touches.diff < -160) {
+            //     if (dataLength < 5) {
+            //       // console.log("여기로 들어옴!")
+            //       window.location.href = "/cash-book/add";
+            //     } else {
+            //       // console.log("여기 들어옴!")
+            //       window.location.href = "/cash-book";
+            //     }
+            //   }
+            // }}
           >
             <SwiperSlide
               className="swiperSlide1"
@@ -387,7 +396,8 @@ function CashBookMain() {
                       // style={{
                       //   height: `${mainHeight - dateBoxHeight - 24}px`,
                       // }}
-                      onTouchMove={(swiper) => {
+                      onTouchEnd={(swiper) => {
+                        console.log(swiper.touches.diff)
                         if (swiper.touches.diff < -90) {
                           if (dataLength < 5) {
                             // console.log("111111")
