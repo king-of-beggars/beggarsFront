@@ -26,6 +26,7 @@ export { default as CashDetailModal } from "components/ui/modal/CashDetailModal"
 export { default as SocialLoginModal } from "components/ui/modal/SocialLoginModal";
 export { default as WriteReceipt } from "components/ui/modal/WriteReceipt";
 export { default as CommentDeleteModal } from "components/ui/modal/CommentDeleteModal";
+export { default as TimeHotDealModal } from "components/ui/modal/TimeHotDealModal";
 
 export { default as BoardCard } from "components/board/BoardCard"
 export { default as BoardDetailInput } from "components/board/BoardDetailInput"

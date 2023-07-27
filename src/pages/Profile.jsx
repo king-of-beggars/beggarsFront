@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 
 import { useGlobalVariables } from "providers"
 import { layout, style } from "styles";
-import { Nav } from "components";
+import { Nav, TimeHotDealModal } from "components";
 import { AuthAPI } from "api/api";
 import { commaOnThree } from 'functions';
 import { bgCloud70, bgSky70, bgMountain70 } from "assets";
@@ -14,6 +14,8 @@ import * as sVar from 'constants/styleVariables';
 function Profile() {
   // 만들어둔 context 사용하기
   const { isMobile, widthRatio, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  const [isHotDealModalOn, setIsHotDealModalOn] = useState(true);
+  
   const navigate = useNavigate();
 
   const mutationLogout = useMutation(AuthAPI.postLogout, {
@@ -60,6 +62,7 @@ function Profile() {
                 <div style={{fontSize: `${widthRatio * 14}px`, borderRadius: "50%", backgroundColor: "#fff", display:"flex", justifyContent: "center", alignItems: "center", width: `${widthRatio * 21}px`, height: `${widthRatio * 21}px`}}>P</div>
                 <div style={{fontSize: `${widthRatio * 14}px`, color: "#fff"}}>{commaOnThree(3000)}</div>
               </div>
+              <div style={{fontSize: `${14 * widthRatio}px`, borderBottom: "1px solid black", padding: `${4 * widthRatio}px`}}>타임 핫딜 등록🔥</div>
               {/* <div style={{ fontSize: "1em", color: "#858585" }}>
                 이메일 정보 출력
               </div> */}
@@ -74,9 +77,10 @@ function Profile() {
               </span>
             </layout.FlexCenterColumn100>
           </layout.FlexCenterColumn100>
-
+            
         </layout.MainContent>
       </layout.Main>
+      { isHotDealModalOn && <TimeHotDealModal>타임핫딜 등록</TimeHotDealModal> }
       <layout.Nav navHeight={`${navHeight}px`}>
         <Nav ratio={widthRatio} selected="profile" />
       </layout.Nav>
