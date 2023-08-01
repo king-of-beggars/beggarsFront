@@ -1,8 +1,0 @@
-export { default as getKrDate } from "functions/getKrDate"
-export { default as debounce } from "functions/debounce"
-export { getDateBoxSize, getAssetSize, getNewAssetSize } from "functions/getAssetSize"
-export { default as commaOnThree } from "functions/commaOnThree"
-export { default as chkLoggedIn } from "functions/chkLoggedIn"
-export { default as getRandomComment } from "functions/getRandomComment"
-export { default as saveUserInfo } from "functions/saveUserInfo"
-export { getIsMobile,getScreenWidth ,getAssetRatio,} from "functions/assetConditions"

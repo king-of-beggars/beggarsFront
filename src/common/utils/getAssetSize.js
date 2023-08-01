@@ -33,3 +33,6 @@ export function getNewAssetSize(assetSize, ratio) {
         return Math.ceil(assetSize * ratio)
     }
 }
+
+
+// 일단 common으로 옮기고, 가계부와 메인의 function을 getNewAssetSize로 대체할 수 없는 경우 분리

@@ -25,3 +25,5 @@ export default async function chkLoggedIn() {
         resolve(isNickname && isUserId && refreshToken);
     });
 }
+
+// 추후 쓰인 곳 다 context로 대체하기
