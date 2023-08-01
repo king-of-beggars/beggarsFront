@@ -116,9 +116,9 @@
     + variables (types?)
     + utils
     + assets
-             - icons
-             - pixels
-             - sounds ☇
+        * icons
+        * pixels
+        * sounds ☇
   
 
 ## 4. 발생 Issue / 챌린지 및 해결방법
