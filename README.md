@@ -116,6 +116,7 @@
     + variables (types?)
     + utils
     + assets
+        * backgrounds
         * icons
         * pixels
         * sounds ☇
