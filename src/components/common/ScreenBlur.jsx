@@ -36,6 +36,7 @@ function ScreenBlur({ comment, children, addComponent=null }) {
       <BackBlur>
         <Vignette />
           {children}
+          
       </BackBlur>
     </>
 
