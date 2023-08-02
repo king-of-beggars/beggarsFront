@@ -88,3 +88,5 @@ function WriteReceipt({ setClose, cardId, children }) {
 }
 
 export default WriteReceipt;
+
+// CashbookMain에서 사용중

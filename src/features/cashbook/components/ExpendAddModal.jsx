@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 
 import { style, layout } from "styles";
@@ -9,7 +8,6 @@ import { CashBookBtn } from "styles/styled-components/styles";
 import { CashBookAPI } from "api/api";
 
 function ExpendAddModal({ setClose, cardId }) {
-  const navigate = useNavigate();
   const INIT_INPUT_VALUE = "";
   // 상세 지출 내역 state
   const [expendInfo, setExpendInfo] = useState({
@@ -102,3 +100,5 @@ function ExpendAddModal({ setClose, cardId }) {
 }
 
 export default ExpendAddModal;
+
+// CashbookDetail에서 사용중

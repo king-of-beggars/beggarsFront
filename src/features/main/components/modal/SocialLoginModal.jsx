@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 
 import { useGlobalVariables } from "providers";
-import { saveUserInfo, chkLoggedIn } from 'functions';
 import { style, layout } from "styles";
 import { AuthAPI } from "api/api";
 import * as sVar from "constants/styleVariables";
@@ -13,7 +11,6 @@ const INIT_INPUT_VALUE = ""
 
 function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, children }) {
   const { widthRatio } = useGlobalVariables();
-  const navigate = useNavigate();
   const [nickname, setNickname, isNickValid] = useNickname(INIT_INPUT_VALUE);
   const [isNickChked, setIsNickChked] = useState(false);
   // const [isModalOpen, setIsModalOpen] = useState(true);
@@ -144,3 +141,5 @@ function SocialLoginModal({ socialModalOn, setSocialModalOn, setIsSocialLogin, c
 }
 
 export default SocialLoginModal;
+
+// main에서 사용

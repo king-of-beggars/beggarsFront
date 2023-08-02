@@ -1,6 +1,5 @@
-import { InputDrop } from 'assets';
 import React from "react";
-import { layout, style } from "styles";
+import { style } from "styles";
 
 import { useGlobalVariables } from 'providers';
 
@@ -33,3 +32,5 @@ function CashAddSelect({ title, options, placeholder, onChange, name, value }) {
 }
 
 export default CashAddSelect;
+
+// CashAddSelect, CashBookAdd, CashBookMod에서 사용중
