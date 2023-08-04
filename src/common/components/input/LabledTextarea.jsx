@@ -1,8 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import { style } from 'styles'
+import { style } from 'styles';
 
-function LabledTextarea({ title, placeholder, onChange, name, value, height }) {
+function LabeledTextarea({
+  title,
+  placeholder,
+  onChange,
+  name,
+  value,
+  height,
+}) {
   return (
     <style.CashBookCardWrap height={height}>
       <style.CashBookHead>{title}</style.CashBookHead>
@@ -14,7 +21,7 @@ function LabledTextarea({ title, placeholder, onChange, name, value, height }) {
         required
       />
     </style.CashBookCardWrap>
-  )
+  );
 }
 
-export default LabledTextarea
+export default LabeledTextarea;

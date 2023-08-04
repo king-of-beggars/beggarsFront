@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useInfiniteQuery, useQuery, useQueryClient } from "react-query";
+import React, { useEffect, useState } from 'react';
 
-import { useGlobalVariables } from "providers";
-import { layout, style } from "styles";
-import { Nav, BoardCard } from "components";
+import { layout, style } from 'styles';
+import { boardAPI } from 'common/utils/api';
+import { useInfiniteQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
+import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
+
 import {
   bgSky50,
   bgDarkSky,
@@ -12,14 +14,14 @@ import {
   bgDarkCloud,
   bgMountain50,
   bgDarkMountain,
-} from "assets";
-import { boardAPI } from "api/api";
-import InfiniteScroll from "react-infinite-scroller";
-import { useInView } from "react-intersection-observer";
+} from 'assets';
+import { Nav } from 'styles/layouts';
+
+import BoardCard from '../components/BoardCard';
+import Navigation from 'common/components/Navigation';
 
 function Board({ isBoasting, setIsBoasting }) {
-  
-  const INIT_PAGE_STATE = { boast: 1, scoled: 1 }
+  const INIT_PAGE_STATE = { boast: 1, scoled: 1 };
   // 만들어둔 context 사용하기
   //// 1. 화면 비율 렌더링에 필요한 요소
   const {
@@ -48,11 +50,11 @@ function Board({ isBoasting, setIsBoasting }) {
   // useQuery의 key가 변경되면 useQuery는 새로운 데이터를 자동으로 가져오므로, useQuery의 key를 isBoasting 상태와 연동시킨다.
   const queryNode = isBoasting
     ? {
-        queryKey: ["boastList"],
+        queryKey: ['boastList'],
         queryFn: () => boardAPI.getBoastList(page.boast),
       }
     : {
-        queryKey: ["scoldedList"],
+        queryKey: ['scoldedList'],
         queryFn: () => boardAPI.getScoldedList(page.scoled),
       };
 
@@ -72,7 +74,7 @@ function Board({ isBoasting, setIsBoasting }) {
     return (
       <>
         {/* 아래로 response type에 따른 backRenderer 호출 조건 변경 추가 예정 */}
-        {responseType === "loading" ? <div>loading...</div> : <div>error!</div>}
+        {responseType === 'loading' ? <div>loading...</div> : <div>error!</div>}
       </>
     );
   };
@@ -95,26 +97,24 @@ function Board({ isBoasting, setIsBoasting }) {
 
   const [page, setPage] = useState(INIT_PAGE_STATE);
 
-  const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery(
-    {
-      ...queryNode,
-      getNextPageParam: (lastPage, pages) => {
-        // console.log("param-lastPage:::", lastPage);
-        // console.log("param-pages:::", pages)
-        const lastPageData = lastPage.data.data;
-        return lastPageData.hasNextPage ? page : undefined
-      },
-      onSuccess: () => {
-        const name = isBoasting ? "boast" : "scoled"
-        const newPage = {
-          ...page,
-          [name] : page[name] + 1
-        }
-        // console.log("new page:::", newPage)
-        setPage(newPage);
-      }
+  const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
+    ...queryNode,
+    getNextPageParam: (lastPage, pages) => {
+      // console.log("param-lastPage:::", lastPage);
+      // console.log("param-pages:::", pages)
+      const lastPageData = lastPage.data.data;
+      return lastPageData.hasNextPage ? page : undefined;
     },
-  );
+    onSuccess: () => {
+      const name = isBoasting ? 'boast' : 'scoled';
+      const newPage = {
+        ...page,
+        [name]: page[name] + 1,
+      };
+      // console.log("new page:::", newPage)
+      setPage(newPage);
+    },
+  });
 
   // const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage, status, } = useInfiniteQuery('infiniteScroll', queryNode, {
   //     getNextPageParam: (lastPage, pages) => {
@@ -126,42 +126,36 @@ function Board({ isBoasting, setIsBoasting }) {
   //     },
   // });
 
-  const {ref, inView} = useInView({ threshold: 0 });
+  const { ref, inView } = useInView({ threshold: 0 });
   // console.log("ref:::", ref)
-  console.log("isView:::", inView)
+  console.log('isView:::', inView);
 
   useEffect(() => {
     // 맨 마지막 요소를 보고있고 더이상 페이지가 존재하면
     // 다음 페이지 데이터를 가져옴
-    console.log("다니 isView :::", inView);
+    console.log('다니 isView :::', inView);
     // console.log("다니 hasNextPage :::", hasNextPage);
     if (inView && hasNextPage) {
       fetchNextPage();
     }
   }, [inView]);
 
-  console.log("다니 data :::", data);
+  console.log('다니 data :::', data);
   // console.log("다니 page :::", page);
   return (
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
       isMobile={isMobile}
-      backPngTop={
-        isBoasting ? `url(${bgSky50})` : `url(${bgDarkSky})`
-      }
+      backPngTop={isBoasting ? `url(${bgSky50})` : `url(${bgDarkSky})`}
       backPngTail={
         isBoasting ? `url(${bgMountain50})` : `url(${bgDarkMountain})`
       }
-      backPngMiddle={
-        isBoasting
-          ? `url(${bgCloud50})`
-          : `url(${bgDarkCloud})`
-      }
+      backPngMiddle={isBoasting ? `url(${bgCloud50})` : `url(${bgDarkCloud})`}
     >
       <layout.Header headerHeight={`${headerHeight}px`}>
         <div
           className="statusBarHeight"
-          style={{ width: "inherit", height: "50px" }}
+          style={{ width: 'inherit', height: '50px' }}
         ></div>
         <layout.HeaderContent>
           {isBoasting ? (
@@ -287,15 +281,15 @@ function Board({ isBoasting, setIsBoasting }) {
               <div className="here" ref={ref} />
             </layout.Grid2Row>
           ) : isLoading ? (
-            exceptionRenderer("loading")
+            exceptionRenderer('loading')
           ) : (
-            exceptionRenderer("error")
+            exceptionRenderer('error')
           )}
           {/* </InfiniteScroll> */}
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="board" ratio={widthRatio} />
+        <Navigation selected="board" ratio={widthRatio} />
       </layout.Nav>
     </style.BackgroundPageLayout>
   );

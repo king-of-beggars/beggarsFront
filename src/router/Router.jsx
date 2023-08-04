@@ -1,27 +1,37 @@
-import React, { useState, useContext } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { COMMENT } from 'common/constants';
+import getKrDate from 'common/utils/getKrDate';
 
-import { useGlobalVariables } from 'providers';
-import { Login, Signup, Profile, CashBookMain, Board, CashBookAdd, CashBookDetail, CashBookMod, BoardDetail, Main } from "pages";
-import { MainFetcher } from "pages/main/MainFetcher";
-import { BlurOverlay, CashbookExceptionRenderer, LoggedYet, ProfileExceptionRenderer } from "components";
-import { ifNotLoggedIn } from 'constants';
-import { getKrDate, } from "functions";
-import { AuthContext } from 'providers';
+import { useAuthContext } from 'features/auth/contexts/AuthProvider';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
+import Main from 'features/main/pages/Main';
+import Login from 'features/auth/pages/Login';
+import Profile from 'features/auth/pages/Profile';
+import Board from 'features/board/pages/Board';
+import Signup from 'features/auth/pages/Signup';
+import BoardDetail from 'features/board/pages/BoardDetail';
+import CashBookAdd from 'features/cashbook/pages/CashBookAdd';
+import CashBookMod from 'features/cashbook/pages/CashBookMod';
+import CashBookMain from 'features/cashbook/pages/CashBookMain';
+import CashBookDetail from 'features/cashbook/pages/CashBookDetail';
+import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
+import { MainFetcher } from 'features/main/utils/MainFetcher';
+import ProfileExceptionRenderer from 'features/auth/components/ProfileExceptionRenderer';
+import LoggedYet from 'common/components/effect/LoggedYet';
+import CashbookExceptionRenderer from 'features/cashbook/components/CashbookExceptionRenderer';
+import BlurOverlay from 'common/components/effect/BlurOverlay';
 
 function Router() {
+  const { isLoggedIn } = useAuthContext();
 
-  const { isLoggedIn } = useContext(AuthContext)
-
-  // console.log("Router isLoggedIn:::", isLoggedIn)
-  // 게시판 상태 : 자랑하기(true) or 혼쭐나기(false)
   const [isBoasting, setIsBoasting] = useState(true);
-
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/"
+        <Route
+          path="/"
           element={
             <MainFetcher>
               <Main />
@@ -37,7 +47,7 @@ function Router() {
             <ProtectedRouter className="cashbook" isLoggedIn={isLoggedIn}>
               <Navigate to={`/cash-book/${getKrDate()}`} replace />
             </ProtectedRouter>
-        }
+          }
         />
         <Route path="cash-book/:date" element={<CashBookMain />} />
         <Route
@@ -78,7 +88,7 @@ function Router() {
         />
 
         {/* related to auth */}
-        
+
         <Route path="signup" element={<Signup />} />
         <Route path="login" element={<Login />} />
 
@@ -86,9 +96,9 @@ function Router() {
         <Route
           path="profile"
           element={
-              <ProtectedRouter className={"profile"} isLoggedIn={isLoggedIn}>
-                <Profile />
-              </ProtectedRouter>
+            <ProtectedRouter className={'profile'} isLoggedIn={isLoggedIn}>
+              <Profile />
+            </ProtectedRouter>
           }
         />
       </Routes>
@@ -100,21 +110,39 @@ const ProtectedRouter = ({ isLoggedIn, children, className }) => {
   const { isMobile, navHeight, screenWidth } = useGlobalVariables();
   if (isLoggedIn) {
     return children;
-  }
-  else {
-    if (className === "profile") {
-      return <ProfileExceptionRenderer comment={ifNotLoggedIn} addComponent={<LoggedYet />}/>
-    } else if (className === "cashbook") {
-      return <CashbookExceptionRenderer comment={ifNotLoggedIn} addComponent={<LoggedYet />}/>
+  } else {
+    if (className === 'profile') {
+      return (
+        <ProfileExceptionRenderer
+          comment={COMMENT.ifNotLoggedIn}
+          addComponent={<LoggedYet />}
+        />
+      );
+    } else if (className === 'cashbook') {
+      return (
+        <CashbookExceptionRenderer
+          comment={COMMENT.ifNotLoggedIn}
+          addComponent={<LoggedYet />}
+        />
+      );
     } else {
       return (
         <>
           {children}
-          <BlurOverlay position="absolute" left={isMobile ? "0px" : `${(window.innerWidth - screenWidth) / 2}px`} width={`${screenWidth}px`} height={`${window.innerHeight - navHeight}px`} addComponent={<LoggedYet />}>로그인이 되지 않았네!</BlurOverlay>
+          <BlurOverlay
+            position="absolute"
+            left={
+              isMobile ? '0px' : `${(window.innerWidth - screenWidth) / 2}px`
+            }
+            width={`${screenWidth}px`}
+            height={`${window.innerHeight - navHeight}px`}
+            addComponent={<LoggedYet />}
+          >
+            로그인이 되지 않았네!
+          </BlurOverlay>
         </>
-      )
+      );
     }
-
   }
 };
 

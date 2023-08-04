@@ -1,21 +1,22 @@
-import React from 'react'
+import React from 'react';
 
-import { getRandomComment } from 'functions'
-import { style } from 'styles'
-import { positiveComments, negativeComments, welcomeComments } from "constants"
+import { style } from 'styles';
+import { COMMENT } from 'common/constants';
+import getRandomComment from '../utils/getRandomComment';
 
 function MainRecordComment({ dayCount, weatherCode, ratio }) {
   const overallComment = getRandomComment(
-                          dayCount === 0
-                            ? welcomeComments
-                            : weatherCode > 0
-                              ? positiveComments
-                              : negativeComments)
+    dayCount === 0
+      ? COMMENT.welcomeComments
+      : weatherCode > 0
+      ? COMMENT.positiveComments
+      : COMMENT.negativeComments
+  );
   return (
     <style.MainRecordCardComment ratio={ratio}>
       {overallComment}
     </style.MainRecordCardComment>
-  )
+  );
 }
 
-export default MainRecordComment
+export default MainRecordComment;

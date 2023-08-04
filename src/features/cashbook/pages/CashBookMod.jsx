@@ -1,27 +1,37 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import queryString from "query-string";
-import moment from "moment";
-import { useMutation, useQueryClient } from "react-query";
+import React, { useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import queryString from 'query-string';
+import moment from 'moment';
+import { useMutation, useQueryClient } from 'react-query';
 
-import { useGlobalVariables } from "providers"
-import { layout, style } from "styles";
-import { BackCrampsBlack } from "assets";
-import { Nav, CashBookInput, CashAddSelect } from "components";
-import { categoryList } from "constants/category";
+import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
+
+import { layout, style } from 'styles';
+import { BackCrampsBlack } from 'assets';
+
+import { CATEGORY_LIST } from 'common/constants';
 import {
   backgroundBrightMiddle,
   backgroundBrightTail,
   backgroundBrightTop,
-} from "assets";
-import { CashBookAPI } from "api/api";
-
+} from 'assets';
+import { CashBookAPI } from 'common/utils/api';
+import Navigation from 'common/components/Navigation';
+import CashAddSelect from '../components/CashAddSelect';
+import CashBookInput from '../components/CashBookInput';
 
 // function CashBookMod({ isMobile, headerHeight, navHeight, mainHeight }) {
 function CashBookMod() {
   // 만들어둔 context 사용하기
-  const { windowSize, widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } =
-    useGlobalVariables();
+  const {
+    windowSize,
+    widthRatio,
+    isMobile,
+    headerHeight,
+    navHeight,
+    mainHeight,
+    screenWidth,
+  } = useGlobalVariables();
   // console.log(
   //   "CashBookMod rendered:",
   //   windowSize,
@@ -32,7 +42,7 @@ function CashBookMod() {
   // );
 
   // 카테고리 정보
-  const options = categoryList;
+  const options = CATEGORY_LIST;
 
   // 쿼리스트링 정보 받아오기
   const { search } = useLocation();
@@ -48,7 +58,7 @@ function CashBookMod() {
   const [cardInfo, setCardInfo] = useState({
     category: searchCondition.category,
     subHead: searchCondition.name,
-    budget: "",
+    budget: '',
   });
   const { category, subHead, budget } = cardInfo;
 
@@ -57,11 +67,11 @@ function CashBookMod() {
     let { name, value } = changeObj.target;
 
     // 가격일 경우 컴마 추가 및 숫자만 허용
-    if (name === "budget") {
-      const onlyNumber = value.replace(/[^0-9]/g, "");
+    if (name === 'budget') {
+      const onlyNumber = value.replace(/[^0-9]/g, '');
 
-      const numValue = onlyNumber.replaceAll(",", "");
-      value = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      const numValue = onlyNumber.replaceAll(',', '');
+      value = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     const newCard = {
@@ -83,10 +93,12 @@ function CashBookMod() {
   const queryClient = useQueryClient();
   const mutationEditCard = useMutation(CashBookAPI.postCashEdit, {
     onSuccess: () => {
-      queryClient.invalidateQueries([`cashCard${moment().format("YYYY-MM-DD")}`]);
-      navigate("/cash-book");
+      queryClient.invalidateQueries([
+        `cashCard${moment().format('YYYY-MM-DD')}`,
+      ]);
+      navigate('/cash-book');
     },
-    onError: () => alert("카드 수정을 실패했습니다."),
+    onError: () => alert('카드 수정을 실패했습니다.'),
   });
 
   // 저장하기 버튼 클릭
@@ -94,14 +106,14 @@ function CashBookMod() {
     const editCard = {
       cashCategory: category,
       cashName: subHead,
-      cashListGoalValue: Number(budget.replace(",", "")),
+      cashListGoalValue: Number(budget.replace(',', '')),
     };
 
-    mutationEditCard.mutate({cardId, editCard});
-    alert("장부 수정이 완료되었네!");
-    navigate("/cash-book");
+    mutationEditCard.mutate({ cardId, editCard });
+    alert('장부 수정이 완료되었네!');
+    navigate('/cash-book');
   };
-  
+
   return (
     <style.BackgroundPageLayout
       screenWidth={`${screenWidth}px`}
@@ -114,12 +126,12 @@ function CashBookMod() {
         <layout.Header headerHeight={`${headerHeight}px`}>
           <div
             className="statusBarHeight"
-            style={{ width: "inherit", height: "50px" }}
+            style={{ width: 'inherit', height: '50px' }}
           ></div>
           <layout.HeaderContent>
             <BackCrampsBlack
               onClick={onClickBack}
-              style={{ position: "absolute", left: "1em", float: "left" }}
+              style={{ position: 'absolute', left: '1em', float: 'left' }}
             />
             <div style={{ fontSize: `${25 * widthRatio}px` }}>장부 수정</div>
           </layout.HeaderContent>
@@ -130,35 +142,35 @@ function CashBookMod() {
         >
           <layout.MainContent>
             <CashAddSelect
-              title={"카테고리"}
+              title={'카테고리'}
               options={options}
-              placeholder={"카테고리 선택"}
+              placeholder={'카테고리 선택'}
               onChange={onChangeInput}
-              name={"category"}
+              name={'category'}
               value={category}
             />
             <CashBookInput
-              title={"소제목"}
-              placeholder={"소제목을 입력해주세요.(선택)"}
+              title={'소제목'}
+              placeholder={'소제목을 입력해주세요.(선택)'}
               onChange={onChangeInput}
-              name={"subHead"}
+              name={'subHead'}
               value={subHead}
               maxLen={15}
             />
             <CashBookInput
-              title={"예산"}
-              placeholder={"일 별 목표 예산을 입력해주세요."}
+              title={'예산'}
+              placeholder={'일 별 목표 예산을 입력해주세요.'}
               onChange={onChangeInput}
-              name={"budget"}
+              name={'budget'}
               value={budget}
             />
             <style.CashBookBtn marginTop="50px" onClick={onClickSave}>
-              {"저장"}
+              {'저장'}
             </style.CashBookBtn>
           </layout.MainContent>
         </layout.Main>
         <layout.Nav navHeight={`${navHeight}px`}>
-          <Nav selected="money" />
+          <Navigation selected="money" />
         </layout.Nav>
       </layout.PageLayout>
     </style.BackgroundPageLayout>

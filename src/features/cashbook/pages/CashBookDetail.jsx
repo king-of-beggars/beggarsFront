@@ -1,15 +1,24 @@
-import React, { useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { useGlobalVariables } from "providers"
-import { CashBookAPI } from "api/api";
-import { AddDetail, BackCrampsBlack, bgCloud50, bgMountain50, bgSky50 } from "assets";
-import { CashBookDetailList, ExpendAddModal, Nav } from "components";
-import CashDetailModal from "components/ui/modal/CashDetailModal";
-import { layout, style } from "styles";
-import { commentZeroSpend } from "constants";
-import { AutoTextSize } from "auto-text-size";
+import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
+import { CashBookAPI } from 'common/utils/api';
+import {
+  AddDetail,
+  BackCrampsBlack,
+  bgCloud50,
+  bgMountain50,
+  bgSky50,
+} from 'assets';
+
+import { layout, style } from 'styles';
+import { COMMENT } from 'common/constants';
+import { AutoTextSize } from 'auto-text-size';
+import Navigation from 'common/components/Navigation';
+import ExpendAddModal from '../components/ExpendAddModal';
+import CashBookDetailList from '../components/CashBookDetailList';
+import CashDetailModal from 'features/board/components/CashDetailModal';
 
 function CashBookDetail() {
   // 만들어둔 context 사용하기
@@ -47,10 +56,10 @@ function CashBookDetail() {
   const queryClient = useQueryClient();
   const mutationNone = useMutation(CashBookAPI.putCashNone, {
     onSuccess: () => {
-      queryClient.invalidateQueries(["cashDetail"]);
+      queryClient.invalidateQueries(['cashDetail']);
       changeNoneModal();
     },
-    onError: () => alert("무지출 등록을 실패하였습니다."),
+    onError: () => alert('무지출 등록을 실패하였습니다.'),
   });
 
   const onClickNone = () => {
@@ -59,7 +68,7 @@ function CashBookDetail() {
 
   // 상세 내역 받아오기
   let { data, isLoading, error } = useQuery(
-    ["cashDetail"],
+    ['cashDetail'],
     () => CashBookAPI.getCashDetail(cardId),
     {
       select: (data) => data.data.data.result,
@@ -75,13 +84,13 @@ function CashBookDetail() {
 
   let detail = [];
   let result = true;
-  if (Object.keys(data).includes("consumption")) {
+  if (Object.keys(data).includes('consumption')) {
     // result = data.result.detail.cashDetailValue;
     result = data.consumption;
     if (!result) {
       detail.push({
         cashDetailId: 0,
-        cashDetailText: "무지출 데이 >__<!",
+        cashDetailText: '무지출 데이 >__<!',
         cashDetailValue: 0,
       });
     }
@@ -121,26 +130,35 @@ function CashBookDetail() {
         <layout.Header headerHeight={`${headerHeight}px`}>
           <div
             className="statusBarHeight"
-            style={{ width: "inherit", height: "50px" }}
+            style={{ width: 'inherit', height: '50px' }}
           ></div>
           <layout.HeaderContent>
             <BackCrampsBlack
               onClick={onClickBack}
-              style={{ position: "absolute", left: "1em", float: "left" }}
+              style={{ position: 'absolute', left: '1em', float: 'left' }}
             />
             {/* <div style={{ fontSize: "1em" }}>
               오늘의{" "}
               {!!data.cashbookName ? data.cashbookName : data.cashbookCategory}{" "}
               지출
             </div> */}
-            <div style={{ width:"80%", display: "flex", justifyContent:"center", alignItems:"center" }}>
-              <AutoTextSize mode="multiline"
+            <div
+              style={{
+                width: '80%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <AutoTextSize
+                mode="multiline"
                 minFontSizePx={1}
-                maxFontSizePx={24}>
-                오늘의{" "}
+                maxFontSizePx={24}
+              >
+                오늘의{' '}
                 {!!data.cashbookName
                   ? data.cashbookName
-                  : data.cashbookCategory}{" "}
+                  : data.cashbookCategory}{' '}
                 지출
               </AutoTextSize>
             </div>
@@ -175,8 +193,8 @@ function CashBookDetail() {
             </layout.SpendingListWrap>
             <style.CashBookDetailAddBox
               onClick={showAddModal}
-              style={!result ? { display: "none" } : {}}
-              visible={!!data.writeCheck ? "hidden" : "visible"}
+              style={!result ? { display: 'none' } : {}}
+              visible={!!data.writeCheck ? 'hidden' : 'visible'}
             >
               <AddDetail />
             </style.CashBookDetailAddBox>
@@ -184,7 +202,7 @@ function CashBookDetail() {
               <ExpendAddModal setClose={closeAddModal} cardId={cardId} />
             )}
             <style.CashBookDetailNoneBtn
-              visible={!detail.length ? "visible" : "hidden"}
+              visible={!detail.length ? 'visible' : 'hidden'}
               onClick={changeNoneModal}
             >
               무지출 데이 기록 🎉
@@ -194,13 +212,13 @@ function CashBookDetail() {
                 setClose={changeNoneModal}
                 onClickHandler={onClickNone}
               >
-                {commentZeroSpend}
+                {COMMENT.commentZeroSpend}
               </CashDetailModal>
             )}
           </layout.MainContent>
         </layout.Main>
         <layout.Nav navHeight={`${navHeight}px`}>
-          <Nav ratio={widthRatio} selected="money" />
+          <Navigation ratio={widthRatio} selected="money" />
         </layout.Nav>
       </layout.PageLayout>
     </style.BackgroundPageLayout>

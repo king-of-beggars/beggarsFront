@@ -1,9 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import { useGlobalVariables } from 'providers';
-import { style } from "styles";
+import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
 
-function CashBookInput({ title, placeholder, onChange, name, value, height, maxLen }) {
+import { style } from 'styles';
+
+function CashBookInput({
+  title,
+  placeholder,
+  onChange,
+  name,
+  value,
+  height,
+  maxLen,
+}) {
   const { widthRatio } = useGlobalVariables();
   return (
     <style.CashBookCardWrap height={height}>

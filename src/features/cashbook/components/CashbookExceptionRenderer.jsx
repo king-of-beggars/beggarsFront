@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
 
-import { useGlobalVariables } from 'providers'
-import { BlurOverlay, CashBookCard, Nav, LoggedYet, ScreenBlur } from 'components'
-import { cashbookDummyData } from 'constants/dummyData'
-import { bgCloud100, bgMountain100, bgSky100 } from "assets";
-import { ifNotLoggedIn } from "constants"
-import { layout, style } from 'styles'
+import { cashbookDummyData } from 'common/constants';
+import { bgCloud100, bgMountain100, bgSky100 } from 'assets';
 
-function CashbookExceptionRenderer({ comment, addComponent}) {
+import { layout, style } from 'styles';
+import Navigation from 'common/components/Navigation';
+import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
+import BlurOverlay from 'common/components/effect/BlurOverlay';
+import CashBookCard from './CashBookCard';
+
+function CashbookExceptionRenderer({ comment, addComponent }) {
   const {
     isMobile,
     widthRatio,
@@ -29,12 +31,15 @@ function CashbookExceptionRenderer({ comment, addComponent}) {
       backPngMiddle={`url(${bgCloud100})`}
       backPngTail={`url(${bgMountain100})`}
     >
-      <layout.Header headerHeight={`${headerHeight}px`} style={{zIndex: "10"}}>
+      <layout.Header
+        headerHeight={`${headerHeight}px`}
+        style={{ zIndex: '10' }}
+      >
         <div
           className="statusBarHeight"
-          style={{ width: "inherit", height: "50px" }}
+          style={{ width: 'inherit', height: '50px' }}
         ></div>
-        <layout.HeaderContent style={{ flexDirection: "column" }}>
+        <layout.HeaderContent style={{ flexDirection: 'column' }}>
           <layout.FlexCenter100>
             <style.CashBookHeader ratio={widthRatio}>
               가계부
@@ -54,39 +59,37 @@ function CashbookExceptionRenderer({ comment, addComponent}) {
       <layout.Main
         headerHeight={`${headerHeight}px`}
         mainHeight={`${mainHeight}px`}
-        style={{position: "relative"}}
+        style={{ position: 'relative' }}
       >
-        <ScreenBlur comment={comment} addComponent={addComponent}>
-          <layout.MainContent style={{width: "inherit"}}>
+        <BlurOverlay comment={comment} addComponent={addComponent}>
+          <layout.MainContent style={{ width: 'inherit' }}>
             <layout.CashBookMainContent className="thisCash">
-                <layout.FlexCenterColumn style={{gap: "20px"}}>
-                { cashbookDummyData.map((card, idx) => {
-                    return (
-                        <CashBookCard
-                            key={idx}
-                            id={card.cashbookId}
-                            budget={card.cashbookGoalValue}
-                            spend={card.cashbookNowValue}
-                            category={card.cashbookCategory}
-                            title={card.cashbookName}
-                            ratio={widthRatio}
-                            writeCheck={card.writeCheck}
-                            isDefault={true}
-                          />
-                    )
+              <layout.FlexCenterColumn style={{ gap: '20px' }}>
+                {cashbookDummyData.map((card, idx) => {
+                  return (
+                    <CashBookCard
+                      key={idx}
+                      id={card.cashbookId}
+                      budget={card.cashbookGoalValue}
+                      spend={card.cashbookNowValue}
+                      category={card.cashbookCategory}
+                      title={card.cashbookName}
+                      ratio={widthRatio}
+                      writeCheck={card.writeCheck}
+                      isDefault={true}
+                    />
+                  );
                 })}
-                </layout.FlexCenterColumn>
+              </layout.FlexCenterColumn>
             </layout.CashBookMainContent>
           </layout.MainContent>
-
-        </ScreenBlur>
-        
+        </BlurOverlay>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav selected="money" ratio={widthRatio} />
+        <Navigation selected="money" ratio={widthRatio} />
       </layout.Nav>
     </style.BackgroundPageLayout>
-  )
+  );
 }
 
-export default CashbookExceptionRenderer
+export default CashbookExceptionRenderer;

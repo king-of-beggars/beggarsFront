@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import React, { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 
-import { style, layout } from "styles";
-import { BackCramps } from "assets";
-import CashBookInput from "components/ui/input/CashBookInput";
-import { CashBookBtn } from "styles/styled-components/styles";
-import { CashBookAPI } from "api/api";
+import { style, layout } from 'styles';
+import { BackCramps } from 'assets';
+
+import { CashBookBtn } from 'styles/styled-components/styles';
+import { CashBookAPI } from 'common/utils/api';
+import CashBookInput from './CashBookInput';
 
 function ExpendAddModal({ setClose, cardId }) {
-  const INIT_INPUT_VALUE = "";
+  const INIT_INPUT_VALUE = '';
   // 상세 지출 내역 state
   const [expendInfo, setExpendInfo] = useState({
     expendName: INIT_INPUT_VALUE,
@@ -20,22 +21,22 @@ function ExpendAddModal({ setClose, cardId }) {
   const queryClient = useQueryClient();
   const mutationAddDetail = useMutation(CashBookAPI.postCashDetailAdd, {
     onSuccess: () => {
-      queryClient.invalidateQueries(["cashDetail"]);
+      queryClient.invalidateQueries(['cashDetail']);
       setClose();
     },
-    onError: () => alert("상세 내역 추가에 실패하였습니다."),
+    onError: () => alert('상세 내역 추가에 실패하였습니다.'),
   });
 
   const onSaveDetail = () => {
     if (!expendName | !expendPrice) {
-      alert("지출 항목과 금액을 입력해주세요.");
+      alert('지출 항목과 금액을 입력해주세요.');
     } else {
       const newDetail = {
-        cashDetailText:expendName,
-        cashDetailValue: Number(expendPrice.replace(",", "")),
+        cashDetailText: expendName,
+        cashDetailValue: Number(expendPrice.replace(',', '')),
       };
       // console.log(newDetail);
-      mutationAddDetail.mutate({cardId, newDetail});
+      mutationAddDetail.mutate({ cardId, newDetail });
     }
   };
 
@@ -44,11 +45,11 @@ function ExpendAddModal({ setClose, cardId }) {
     let { name, value } = changeObj.target;
 
     // 가격일 경우 컴마 추가 및 숫자만 허용
-    if (name === "expendPrice") {
-      const onlyNumber = value.replace(/[^0-9]/g, "");
+    if (name === 'expendPrice') {
+      const onlyNumber = value.replace(/[^0-9]/g, '');
 
-      const numValue = onlyNumber.replaceAll(",", "");
-      value = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      const numValue = onlyNumber.replaceAll(',', '');
+      value = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     const newExpend = {
@@ -63,18 +64,20 @@ function ExpendAddModal({ setClose, cardId }) {
   return (
     <style.ModalOverlay onClick={setClose}>
       <style.Modal onClick={(event) => event.stopPropagation()}>
-        <layout.FlexCenterRow100 style={{ top: "1em", padding: "1em", marginTop: "1em" }}>
+        <layout.FlexCenterRow100
+          style={{ top: '1em', padding: '1em', marginTop: '1em' }}
+        >
           <BackCramps
             onClick={setClose}
-            style={{ position: "absolute", left: "1em", float: "left" }}
+            style={{ position: 'absolute', left: '1em', float: 'left' }}
           />
-          <div style={{ fontSize: "25px" }}>지출 기록</div>
+          <div style={{ fontSize: '25px' }}>지출 기록</div>
         </layout.FlexCenterRow100>
 
-        <layout.FlexCenterColumn style={{ margin: "20px" }}>
+        <layout.FlexCenterColumn style={{ margin: '20px' }}>
           <CashBookInput
-            title={"항목"}
-            placeholder={"지출 항목을 입력해주세요."}
+            title={'항목'}
+            placeholder={'지출 항목을 입력해주세요.'}
             name="expendName"
             type="text"
             value={expendName}
@@ -82,8 +85,8 @@ function ExpendAddModal({ setClose, cardId }) {
             height="3em"
           />
           <CashBookInput
-            title={"가격"}
-            placeholder={"가격을 입력해주세요."}
+            title={'가격'}
+            placeholder={'가격을 입력해주세요.'}
             name="expendPrice"
             type="text"
             value={expendPrice}

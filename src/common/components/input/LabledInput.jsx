@@ -1,7 +1,7 @@
-import React from "react";
-import { style } from "styles";
+import React from 'react';
+import { style } from 'styles';
 
-function LabledInput({ title, placeholder, onChange, name, value, height }) {
+function LabeledInput({ title, placeholder, onChange, name, value, height }) {
   return (
     <style.CashBookCardWrap height={height}>
       <style.CashBookHead>{title}</style.CashBookHead>
@@ -17,4 +17,4 @@ function LabledInput({ title, placeholder, onChange, name, value, height }) {
   );
 }
 
-export default LabledInput;
+export default LabeledInput;

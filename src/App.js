@@ -1,21 +1,16 @@
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { GlobalVariableProvider, AuthContextProvider } from 'providers';
-import { layout, } from 'styles';
-import GlobalStyle from 'styles/globalStyle';
+import { layout } from 'styles';
 import Router from 'router/Router';
+import GlobalStyle from 'styles/globalStyle';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { AuthContextProvider } from 'features/auth/contexts/AuthProvider';
+import { GlobalVariableProvider } from 'common/components/provider/GlobalVariableProvider';
 
 const queryClient = new QueryClient();
 
 function App() {
   return (
-    // <>
-    //   <MainFailCoin />
-    //   <MainGoldCoin />
-    //   <MainSilverCoin />
-    // </>
-
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <AuthContextProvider>
@@ -23,11 +18,9 @@ function App() {
           <layout.FlexCenterColumn>
             <Router />
           </layout.FlexCenterColumn>
-        </GlobalVariableProvider>   
+        </GlobalVariableProvider>
       </AuthContextProvider>
     </QueryClientProvider>
-
-
   );
 }
 

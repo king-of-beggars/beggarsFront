@@ -1,86 +1,75 @@
-import React from "react";
-import { style } from "styles";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { style } from 'styles';
+import { useNavigate } from 'react-router-dom';
+import chkLoggedIn from 'common/utils/chkLoggedIn';
 
-import { chkLoggedIn } from 'functions';
-
-function Navigation({ selected, ratio, }) {
-  // console.log("selected:::", selected)
-  // console.log("selected === main:::", selected === "main")
+function Navigation({ selected, ratio }) {
   const isLoggedIn = chkLoggedIn();
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setIsLoggedIn(isLoggedIn)
-  // }, [isLoggedIn])
-
   // main으로 이동
   const onClickHome = () => {
-    navigate("/");
+    navigate('/');
   };
 
   // 가계부로 이동
   const onClickMoney = () => {
-    navigate("/cash-book");
+    navigate('/cash-book');
   };
 
   // 게시판으로 이동
   const onClickBoard = () => {
-    navigate("/board");
+    navigate('/board');
   };
 
   // 프로필로 이동
   const onClickProfile = () => {
     if (!isLoggedIn) {
-      alert("로그인이 필요합니다.");
-      navigate("/login");
+      alert('로그인이 필요합니다.');
+      navigate('/login');
     } else {
-      navigate("/profile");
+      navigate('/profile');
     }
   };
 
   return (
     <style.NavWrap ratio={ratio}>
-      {selected === "main" ? (
-        <style.NavBtn isSelected={true} ratio={ratio}>홈</style.NavBtn>
+      {selected === 'main' ? (
+        <style.NavBtn isSelected={true} ratio={ratio}>
+          홈
+        </style.NavBtn>
       ) : (
-        <style.NavBtn onClick={onClickHome} isSelected={false} ratio={ratio}>홈</style.NavBtn>
+        <style.NavBtn onClick={onClickHome} isSelected={false} ratio={ratio}>
+          홈
+        </style.NavBtn>
       )}
-      {selected === "money" ? (
-        <style.NavBtn isSelected={true} ratio={ratio}>가계부</style.NavBtn>
-        ) : (
-          <style.NavBtn onClick={onClickMoney} isSelected={false} ratio={ratio}>가계부</style.NavBtn>
-      )}
-      {selected === "board" ? (
-        <style.NavBtn isSelected={true} ratio={ratio}>게시판</style.NavBtn>
-        ) : (
-          <style.NavBtn onClick={onClickBoard} isSelected={false} ratio={ratio}>게시판</style.NavBtn>
-      )}
-      {selected === "profile" ? (
-        <style.NavBtn isSelected={true} ratio={ratio}>프로필</style.NavBtn>
-        ) : (
-          <style.NavBtn onClick={onClickProfile} isSelected={false} ratio={ratio}>프로필</style.NavBtn>
-      )}
-      {/* {selected === "main" ? (
-        <HomeBlack />
+      {selected === 'money' ? (
+        <style.NavBtn isSelected={true} ratio={ratio}>
+          가계부
+        </style.NavBtn>
       ) : (
-        <HomeGray onClick={onClickHome} />
+        <style.NavBtn onClick={onClickMoney} isSelected={false} ratio={ratio}>
+          가계부
+        </style.NavBtn>
       )}
-      {selected === "money" ? (
-        <MoneyBlack />
+      {selected === 'board' ? (
+        <style.NavBtn isSelected={true} ratio={ratio}>
+          게시판
+        </style.NavBtn>
       ) : (
-        <MoneyGray onClick={onClickMoney} />
+        <style.NavBtn onClick={onClickBoard} isSelected={false} ratio={ratio}>
+          게시판
+        </style.NavBtn>
       )}
-      {selected === "board" ? (
-        <BoardBlack />
+      {selected === 'profile' ? (
+        <style.NavBtn isSelected={true} ratio={ratio}>
+          프로필
+        </style.NavBtn>
       ) : (
-        <BoardGray onClick={onClickBoard} />
+        <style.NavBtn onClick={onClickProfile} isSelected={false} ratio={ratio}>
+          프로필
+        </style.NavBtn>
       )}
-      {selected === "profile" ? (
-        <ProfileBlack />
-      ) : (
-        <ProfileGray onClick={onClickProfile} />
-      )} */}
     </style.NavWrap>
   );
 }

@@ -1,29 +1,39 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "react-query";
-import moment from "moment";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from 'react-query';
+import moment from 'moment';
 
-import { useGlobalVariables } from "providers"
-import { Nav, CashBookInput, CashAddSelect } from "components";
-import { BackCrampsBlack, bgCloud50, bgMountain50, bgSky50 } from "assets";
-import { layout, style } from "styles";
-import { categoryList } from "constants/category";
-import { CashBookAPI } from "api/api";
+import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
 
+import { BackCrampsBlack, bgCloud50, bgMountain50, bgSky50 } from 'assets';
+import { layout, style } from 'styles';
+
+import { CashBookAPI } from 'common/utils/api';
+import { CATEGORY_LIST } from 'common/constants';
+import Navigation from 'common/components/Navigation';
+import CashAddSelect from '../components/CashAddSelect';
+import CashBookInput from '../components/CashBookInput';
 
 function CashBookAdd() {
-// function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
+  // function CashBookAdd({ isMobile, headerHeight, navHeight, mainHeight }) {
   // 만들어둔 context 사용하기
-  const { widthRatio, isMobile, headerHeight, navHeight, mainHeight, screenWidth } = useGlobalVariables();
+  const {
+    widthRatio,
+    isMobile,
+    headerHeight,
+    navHeight,
+    mainHeight,
+    screenWidth,
+  } = useGlobalVariables();
   // console.log('CashBookAdd rendered:', windowSize, isMobile, headerHeight, navHeight, mainHeight)
 
   // 카테고리 정보
-  const options = categoryList;
+  const options = CATEGORY_LIST;
   // 카드 정보 state
   const [cardInfo, setCardInfo] = useState({
-    category: "",
-    subHead: "",
-    budget: "",
+    category: '',
+    subHead: '',
+    budget: '',
   });
   const { category, subHead, budget } = cardInfo;
 
@@ -32,11 +42,11 @@ function CashBookAdd() {
     let { name, value } = changeObj.target;
 
     // 가격일 경우 컴마 추가 및 숫자만 허용
-    if (name === "budget") {
-      const onlyNumber = value.replace(/[^0-9]/g, "");
+    if (name === 'budget') {
+      const onlyNumber = value.replace(/[^0-9]/g, '');
 
-      const numValue = onlyNumber.replaceAll(",", "");
-      value = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      const numValue = onlyNumber.replaceAll(',', '');
+      value = numValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
     const newCard = {
@@ -58,25 +68,27 @@ function CashBookAdd() {
   const queryClient = useQueryClient();
   const mutationAddCard = useMutation(CashBookAPI.postCardAdd, {
     onSuccess: () => {
-      queryClient.invalidateQueries([`cashCard${moment().format("YYYY-MM-DD")}`]);
-      navigate("/cash-book");
+      queryClient.invalidateQueries([
+        `cashCard${moment().format('YYYY-MM-DD')}`,
+      ]);
+      navigate('/cash-book');
     },
-    onError: () => alert("장부 추가에 실패하였네."),
+    onError: () => alert('장부 추가에 실패하였네.'),
   });
 
   const onClickSave = () => {
     // console.log(!category)
     if (!category | !budget) {
-      alert("카테고리와 예산을 선택해주게.")
+      alert('카테고리와 예산을 선택해주게.');
     } else {
       const newCard = {
         cashCategory: category,
         cashName: subHead,
-        cashListGoalValue: Number(budget.replace(',','')),
+        cashListGoalValue: Number(budget.replace(',', '')),
       };
       // console.log(newCard);
       mutationAddCard.mutate(newCard);
-      navigate("/cash-book");
+      navigate('/cash-book');
     }
   };
 
@@ -89,13 +101,23 @@ function CashBookAdd() {
       backPngTail={`url(${bgMountain50})`}
     >
       <layout.Header headerHeight={`${headerHeight}px`}>
-        <div className="statusBarHeight" style={{width: "inherit", height: "50px"}}></div>
+        <div
+          className="statusBarHeight"
+          style={{ width: 'inherit', height: '50px' }}
+        ></div>
         <layout.HeaderContent>
           <BackCrampsBlack
             onClick={onClickBack}
-            style={{ position: "absolute", left: "1em", float: "left" }}
+            style={{ position: 'absolute', left: '1em', float: 'left' }}
           />
-          <div style={{ fontSize: `${25 * widthRatio}px`, fontFamily: "DOSIyagiMedium"}}>장부 추가</div>
+          <div
+            style={{
+              fontSize: `${25 * widthRatio}px`,
+              fontFamily: 'DOSIyagiMedium',
+            }}
+          >
+            장부 추가
+          </div>
         </layout.HeaderContent>
       </layout.Header>
       <layout.Main
@@ -104,35 +126,35 @@ function CashBookAdd() {
       >
         <layout.MainContent>
           <CashAddSelect
-            title={"카테고리"}
+            title={'카테고리'}
             options={options}
-            placeholder={"카테고리 선택"}
+            placeholder={'카테고리 선택'}
             onChange={onChangeInput}
-            name={"category"}
+            name={'category'}
             value={category}
           />
           <CashBookInput
-            title={"소제목"}
-            placeholder={"소제목을 입력해주세요.(선택)"}
+            title={'소제목'}
+            placeholder={'소제목을 입력해주세요.(선택)'}
             onChange={onChangeInput}
-            name={"subHead"}
+            name={'subHead'}
             value={subHead}
             maxLen={15}
           />
           <CashBookInput
-            title={"예산"}
-            placeholder={"일 별 목표 예산을 입력해주세요."}
+            title={'예산'}
+            placeholder={'일 별 목표 예산을 입력해주세요.'}
             onChange={onChangeInput}
-            name={"budget"}
+            name={'budget'}
             value={budget}
           />
           <style.CashBookBtn marginTop="50px" onClick={onClickSave}>
-            {"저장"}
+            {'저장'}
           </style.CashBookBtn>
         </layout.MainContent>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
-        <Nav ratio={widthRatio} selected="money" />
+        <Navigation ratio={widthRatio} selected="money" />
       </layout.Nav>
     </style.BackgroundPageLayout>
   );

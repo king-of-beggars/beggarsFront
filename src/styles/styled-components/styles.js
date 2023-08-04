@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {
   btn,
   pressedBtn,
@@ -30,14 +30,14 @@ import {
   mainJourneyTitle,
   mainJourneyBox,
   mainLogoSmooth,
-  inputDrop
-} from "assets";
-import { SwiperSlide } from "swiper/react";
-import { layout } from "styles";
-import * as sVar from "constants/styleVariables.js";
+  inputDrop,
+} from 'assets';
+import { SwiperSlide } from 'swiper/react';
+import { layout } from 'styles';
+import * as sVar from 'common/constants/styleVariables.js';
 import { FlexCenter } from 'styles/layouts';
 
-const defaultFontRatio = 0.8
+const defaultFontRatio = 0.8;
 
 export const CanvasContainer = styled.div`
   width: 98vw;
@@ -84,35 +84,35 @@ export const LoginInputBox = styled(layout.FlexColumn)`
 
 // 로그인 및 여정시작 등 큰 검정 라운드 버튼 스타일링
 export const BigBlackBtn = styled.button`
-  width: calc(${props => props.ratio} * 189px);
-  height: calc(${props => props.ratio} * 50px);
-  border-radius: calc(${props => props.ratio} * 100px);
+  width: calc(${(props) => props.ratio} * 189px);
+  height: calc(${(props) => props.ratio} * 50px);
+  border-radius: calc(${(props) => props.ratio} * 100px);
   background: black;
   color: white;
-  font-size: calc(${props => props.ratio} * 20px);
-  font-family: "DOSIyagiMedium";
+  font-size: calc(${(props) => props.ratio} * 20px);
+  font-family: 'DOSIyagiMedium';
 `;
 // 작은 라운드 버튼 스타일링
 export const SmallBtn = styled.button`
-  width: calc(${props => props.ratio} * 5em);
-  height: calc(${props => props.ratio} * 2.5em);
-  border-radius: calc(${props => props.ratio} * 1.5em);
+  width: calc(${(props) => props.ratio} * 5em);
+  height: calc(${(props) => props.ratio} * 2.5em);
+  border-radius: calc(${(props) => props.ratio} * 1.5em);
   background-color: ${(props) => props.backcolor};
   color: ${(props) => props.color};
-  font-size: calc(${props => props.ratio} * 1em);
-  font-family: "DOSIyagiMedium";
+  font-size: calc(${(props) => props.ratio} * 1em);
+  font-family: 'DOSIyagiMedium';
   border: ${(props) => props.border};
 `;
 
 export const SocialLoginBtn = styled.button`
-  width: calc(${props => props.ratio} * 280px);
-  border-radius: calc(${props => props.ratio} * 100px);
-  background: ${(props) => (props.site === "naver" ? `#4EBE44` : `#F8CD40`)};
+  width: calc(${(props) => props.ratio} * 280px);
+  border-radius: calc(${(props) => props.ratio} * 100px);
+  background: ${(props) => (props.site === 'naver' ? `#4EBE44` : `#F8CD40`)};
   color: black;
-  padding: calc(${props => props.ratio} * 10px);
-  font-size: calc(${props => props.ratio} * 14px);
+  padding: calc(${(props) => props.ratio} * 10px);
+  font-size: calc(${(props) => props.ratio} * 14px);
   border: none;
-  font-family: "DOSIyagiMedium";
+  font-family: 'DOSIyagiMedium';
 `;
 
 // SignupInputBox : 회원가입 아이디, 닉네임, 비밀번호 입력 input
@@ -128,7 +128,7 @@ export const SignupInputBox = styled(layout.FlexCenter)`
     border: none;
     outline: none;
     height: 2.6em;
-    font-family: "DOSGothic";
+    font-family: 'DOSGothic';
   }
 
   > button {
@@ -138,7 +138,7 @@ export const SignupInputBox = styled(layout.FlexCenter)`
     background: black;
     color: white;
     border-radius: 5px;
-    font-family: "DOSGothic";
+    font-family: 'DOSGothic';
   }
 `;
 
@@ -151,8 +151,8 @@ export const SignupInputWrap = styled(layout.FlexColumn)`
 
 // ProfilePicWrap : 프로필 사진
 export const ProfilePicWrap = styled(layout.FlexCenterColumn)`
-  width: calc(${props => props.ratio} * 156px);
-  height: calc(${props => props.ratio} * 156px);
+  width: calc(${(props) => props.ratio} * 156px);
+  height: calc(${(props) => props.ratio} * 156px);
   border: none;
   border-radius: 50%;
   background-color: ${sVar.grayD9D9D9};
@@ -160,12 +160,13 @@ export const ProfilePicWrap = styled(layout.FlexCenterColumn)`
 
 // MidBlackBtn : 프로필 정보수정 버튼
 export const MidBlackBtn = styled.button`
-  width: calc(${props => props.ratio} * 162px);
-  padding: calc(${props => props.ratio} * 8px) calc(${props => props.ratio} * 12px);
-  border-radius: calc(${props => props.ratio} * 100px);
+  width: calc(${(props) => props.ratio} * 162px);
+  padding: calc(${(props) => props.ratio} * 8px)
+    calc(${(props) => props.ratio} * 12px);
+  border-radius: calc(${(props) => props.ratio} * 100px);
   background: ${sVar.black343434};
   color: ${sVar.whiteFFF};
-  font-size: calc(${props => props.ratio} * 14px);
+  font-size: calc(${(props) => props.ratio} * 14px);
 `;
 
 // Nav바 컨테이너
@@ -174,24 +175,31 @@ export const NavWrap = styled(layout.FlexCenterEven100)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* height: calc(${props => props.ratio} * 2.94rem); */
+  /* height: calc(${(props) => props.ratio} * 2.94rem); */
   bottom: 0;
   z-index: 1;
   background: white;
   height: 100%;
-  font-size: calc(${props => props.ratio} * 1.125rem);
-  font-family: "DOSIyagiMedium";
-  padding: calc(${props => props.ratio} * 17px) calc(${props => props.ratio} * 43px) calc(${props => props.ratio} * 25px) calc(${props => props.ratio} * 43px);
-  /* padding: calc(${props => props.ratio} * 1.06rem) calc(${props => props.ratio} * 2.69rem) calc(${props => props.ratio} * 1.56rem) calc(${props => props.ratio} * 2.69rem); */
+  font-size: calc(${(props) => props.ratio} * 1.125rem);
+  font-family: 'DOSIyagiMedium';
+  padding: calc(${(props) => props.ratio} * 17px)
+    calc(${(props) => props.ratio} * 43px)
+    calc(${(props) => props.ratio} * 25px)
+    calc(${(props) => props.ratio} * 43px);
+  /* padding: calc(${(props) => props.ratio} * 1.06rem) calc(${(props) =>
+    props.ratio} * 2.69rem) calc(${(props) => props.ratio} * 1.56rem) calc(${(
+    props
+  ) => props.ratio} * 2.69rem); */
 `;
 
 export const NavBtn = styled.button`
   display: flex;
   justify-content: center;
-  color: ${(props) => (props.isSelected ? `${sVar.navBlack}` : `${sVar.navGray}`)};
-  width: calc(${props => props.ratio} * 47px);
-  height: calc(${props => props.ratio} * 47px);
-  font-size: calc(${props => props.ratio} * 18px);
+  color: ${(props) =>
+    props.isSelected ? `${sVar.navBlack}` : `${sVar.navGray}`};
+  width: calc(${(props) => props.ratio} * 47px);
+  height: calc(${(props) => props.ratio} * 47px);
+  font-size: calc(${(props) => props.ratio} * 18px);
   outline: none;
   background: transparent;
   border: none;
@@ -199,12 +207,12 @@ export const NavBtn = styled.button`
   &:focus {
     outline: none;
   }
-`
+`;
 
 export const CashBookHeader = styled(layout.FlexCenter)`
   height: inherit;
-  font-size: calc(${props => props.ratio} * 25px);
-  font-family: "DOSIyagiMedium";
+  font-size: calc(${(props) => props.ratio} * 25px);
+  font-family: 'DOSIyagiMedium';
 `;
 
 export const DayPickerWrap = styled(layout.FlexCenter)`
@@ -213,8 +221,9 @@ export const DayPickerWrap = styled(layout.FlexCenter)`
   background-image: url(${cashbookDateBox});
   width: ${(props) => props.dateBoxWidth};
   height: ${(props) => props.dateBoxHeight};
-  margin: calc(${props => props.ratio} * 23px) 0 calc(${props => props.ratio} * 10px) 0;
-  font-size: calc(18px * ${props => props.ratio});
+  margin: calc(${(props) => props.ratio} * 23px) 0
+    calc(${(props) => props.ratio} * 10px) 0;
+  font-size: calc(18px * ${(props) => props.ratio});
 `;
 
 // 반응형으로 새로 생성된 CardBox의 컨테이너 스타일링입니다.
@@ -223,18 +232,24 @@ export const CardBoxContainer = styled.div`
     props.isDefault ? `url(${cardBgYellow})` : `url(${cardBgBlack})`};
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  width: calc(${props => props.ratio} * ${props => props.width});
-  height: calc(${props => props.ratio} * ${props => props.height});
+  width: calc(${(props) => props.ratio} * ${(props) => props.width});
+  height: calc(${(props) => props.ratio} * ${(props) => props.height});
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: calc(${(props) => props.ratio}* ${props => props.paddingTop});
-  padding-bottom: calc(${(props) => props.ratio} * ${props => props.paddingBottom});
-  padding-left: calc(${(props) => props.ratio} * ${props => props.paddingLeft});
-  padding-right: calc(${(props) => props.ratio} * ${props => props.paddingRight});
+  padding-top: calc(${(props) => props.ratio}* ${(props) => props.paddingTop});
+  padding-bottom: calc(
+    ${(props) => props.ratio} * ${(props) => props.paddingBottom}
+  );
+  padding-left: calc(
+    ${(props) => props.ratio} * ${(props) => props.paddingLeft}
+  );
+  padding-right: calc(
+    ${(props) => props.ratio} * ${(props) => props.paddingRight}
+  );
   transition: filter 0.5s ease-in-out;
-  filter: ${props => props.horizontalSwipe ? "blur(5px)" : "none"};
+  filter: ${(props) => (props.horizontalSwipe ? 'blur(5px)' : 'none')};
 `;
 
 // 반응형으로 새로 생성된 Card의 카테고리 컨테이너입니다.
@@ -243,22 +258,30 @@ export const CardCategoryContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: calc(${(props) => props.ratio} * ${(props) => props.paddingBottom});
+  padding-bottom: calc(
+    ${(props) => props.ratio} * ${(props) => props.paddingBottom}
+  );
   padding-top: calc(${(props) => props.ratio} * ${(props) => props.paddingTop});
 `;
 
 // Card 대분류명으로 들어가는 스타일링입니다.
 export const Card1stCategoryText = styled.div`
   font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
-  padding-left: calc(${(props) => props.ratio} * ${props => props.paddingLeft});
-  padding-right: calc(${(props) => props.ratio} * ${props => props.paddingRight});
-  padding-top: calc(${(props) => props.ratio} * ${props => props.paddingTop});
-  padding-bottom: calc(${(props) => props.ratio} * ${props => props.paddingBottom});
+  padding-left: calc(
+    ${(props) => props.ratio} * ${(props) => props.paddingLeft}
+  );
+  padding-right: calc(
+    ${(props) => props.ratio} * ${(props) => props.paddingRight}
+  );
+  padding-top: calc(${(props) => props.ratio} * ${(props) => props.paddingTop});
+  padding-bottom: calc(
+    ${(props) => props.ratio} * ${(props) => props.paddingBottom}
+  );
   background-color: ${(props) =>
     props.isDefault ? `${sVar.middleYellow}` : `${sVar.white70}`};
   color: ${(props) =>
     props.isDefault ? `${sVar.lightYellow}` : `${sVar.nightyBlue}`};
-  font-family: "DOSGothic";
+  font-family: 'DOSGothic';
   border-radius: calc(${(props) => props.ratio} * 0.6em);
   margin-bottom: calc(${(props) => props.ratio} * 0.5em);
 `;
@@ -266,9 +289,11 @@ export const Card1stCategoryText = styled.div`
 // Card 소분류명으로 들어가는 스타일링입니다.
 export const Card2ndCategoryText = styled.div`
   font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
-  color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
-  margin-bottom: calc(${props => props.ratio} * ${props => props.marginBottom});
-  font-family: "DOSIyagiMedium";
+  color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : 'white')};
+  margin-bottom: calc(
+    ${(props) => props.ratio} * ${(props) => props.marginBottom}
+  );
+  font-family: 'DOSIyagiMedium';
 `;
 
 // Card에서 중간 border를 넣기 위한 div 스타일링입니다.
@@ -277,20 +302,22 @@ export const CardDivision = styled.div`
   border-bottom: 0.4px solid
     ${(props) =>
       props.isDefault ? `${sVar.middleYellow}` : `${sVar.lightGray}`};
-  margin-bottom: calc(${(props) => props.ratio} * ${props => props.marginBottom});
+  margin-bottom: calc(
+    ${(props) => props.ratio} * ${(props) => props.marginBottom}
+  );
 `;
 
 // 매일의 예산이 출력되는 div의 스타일링입니다.
 export const CardBudgetText = styled.div`
-  font-size: calc(${(props) => props.ratio} * ${props => props.fontSize});
-  font-family: "DOSGothic";
-  color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
+  font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
+  font-family: 'DOSGothic';
+  color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : 'white')};
 `;
 
 // Card 내 프로그레스 바 컨테이너의 스타일링입니다.
 export const CardProgressBarContainer = styled.div`
-  width: calc(${(props) => props.ratio} * ${props => props.width});
-  height: calc(${(props) => props.ratio} * ${props => props.height});
+  width: calc(${(props) => props.ratio} * ${(props) => props.width});
+  height: calc(${(props) => props.ratio} * ${(props) => props.height});
   /* margin-top: calc(${(props) => props.ratio} * 0.5em);
   margin-bottom: calc(${(props) => props.ratio} * 0.9em); */
   /* margin: calc(${(props) => props.ratio} * 0.8em); */
@@ -298,7 +325,7 @@ export const CardProgressBarContainer = styled.div`
 
 // Card 내 예산 사용량 스타일링입니다.
 export const CardSpendText = styled.div`
-  color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : "white")};
+  color: ${(props) => (props.isDefault ? `${sVar.middleYellow}` : 'white')};
   margin-top: calc(${(props) => props.ratio} * 12px);
   font-size: calc(${(props) => props.ratio} * ${(props) => props.fontSize});
 `;
@@ -307,15 +334,17 @@ export const CardSpendText = styled.div`
 export const CardBtn = styled.button`
   background-image: ${(props) =>
     props.isDefault
-      ? props.isWrite ? `url(${cardBtnPost})` : `url(${cardBtnBoardYellow})`
+      ? props.isWrite
+        ? `url(${cardBtnPost})`
+        : `url(${cardBtnBoardYellow})`
       : `url(${cardBtnBoardBlack})`};
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: ${(props) =>
     props.isDefault ? `${sVar.lightYellow}` : `${sVar.darkGray}`};
-  width: calc(${(props) => props.btnWidth} * ${props => props.ratio});
-  height: calc(${(props) => props.btnHeight} * ${props => props.ratio});
-  color: ${(props) => (props.isDefault ? `${sVar.lightYellow}` : "white")};
+  width: calc(${(props) => props.btnWidth} * ${(props) => props.ratio});
+  height: calc(${(props) => props.btnHeight} * ${(props) => props.ratio});
+  color: ${(props) => (props.isDefault ? `${sVar.lightYellow}` : 'white')};
   border: none;
   outline: none;
   margin-top: calc(${(props) => props.ratio} * 13px);
@@ -324,7 +353,7 @@ export const CardBtn = styled.button`
   align-items: center;
   justify-content: center;
   font-size: calc(${(props) => props.ratio} * 20px);
-  font-family: "DOSIyagiMedium";
+  font-family: 'DOSIyagiMedium';
 
   &:focus {
     outline: none;
@@ -342,7 +371,8 @@ export const CashBookCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: calc(20px * ${(props) => props.ratio}) calc(8px * ${(props) => props.ratio});
+  padding: calc(20px * ${(props) => props.ratio})
+    calc(8px * ${(props) => props.ratio});
 `;
 // 회색 dummyCard의 스타일링입니다.
 export const CashBookDummyContainer = styled.div`
@@ -364,7 +394,7 @@ export const CashBookAddExplain = styled(layout.FlexCenter)`
   text-orientation: upright;
   text-align: center;
   line-height: 150%;
-  span{
+  span {
     writing-mode: horizontal-tb;
   }
 `;
@@ -377,7 +407,7 @@ export const CustomedSwiperSlide = styled(SwiperSlide)`
 // Cashbook 카드 추가 & 지출 추가 & 게시글 작성 화면 input, select box 공통 프레임
 export const CashBookCardWrap = styled(layout.FlexCenterRow)`
   width: 100%;
-  height: ${props => props.height};
+  height: ${(props) => props.height};
   margin-bottom: 1em;
 
   /* border: 1px solid ${sVar.bookSelectInputborderColor}; */
@@ -394,15 +424,15 @@ export const CashBookHead = styled(layout.FlexCenter)`
   border-left: 2px solid ${sVar.bookSelectInputborderColor};
   border-top: 2px solid ${sVar.bookSelectInputborderColor};
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
-  height: calc(${props => props.ratio} * 50px);
+  height: calc(${(props) => props.ratio} * 50px);
 `;
 
 // Cashbook Select box
 export const CashBookSelect = styled.select`
-  padding-left: calc(${props => props.ratio} * 14px);
-  padding-right: calc(${props => props.ratio} * 20px);
-  padding-top: calc(${props => props.ratio} * 10px);
-  padding-bottom: calc(${props => props.ratio} * 10px);
+  padding-left: calc(${(props) => props.ratio} * 14px);
+  padding-right: calc(${(props) => props.ratio} * 20px);
+  padding-top: calc(${(props) => props.ratio} * 10px);
+  padding-bottom: calc(${(props) => props.ratio} * 10px);
   width: 75%;
   border-radius: 0px 0.8em 0.8em 0px;
   font-size: 0.8em;
@@ -410,10 +440,10 @@ export const CashBookSelect = styled.select`
   border-right: 2px solid ${sVar.bookSelectInputborderColor};
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   font-size: 0.8em;
-  appearance: none;  /* 기본 브라우저 스타일 제거 */
+  appearance: none; /* 기본 브라우저 스타일 제거 */
   -webkit-appearance: none; /* 크롬, 사파리 브라우저 스타일 제거 */
   -moz-appearance: none; /* 파이어폭스 브라우저 스타일 제거 */
-  /* background-image: ${props => props.isToken ? `url(${inputDrop})` : ""};
+  /* background-image: ${(props) => (props.isToken ? `url(${inputDrop})` : '')};
   background-repeat: no-repeat;
   background-position: right center; */
   background: url(${inputDrop}) no-repeat 95% 50%/20px auto;
@@ -432,7 +462,7 @@ export const CashBookInput = styled.input`
   border-right: 2px solid ${sVar.bookSelectInputborderColor};
   border-bottom: 2px solid ${sVar.bookSelectInputborderColor};
   outline: none;
-  height: calc(${props => props.ratio} * 50px);
+  height: calc(${(props) => props.ratio} * 50px);
   font-size: 0.8em;
   white-space: pre-line;
 `;
@@ -470,7 +500,7 @@ export const CashBookDetailBox = styled.div`
   background-color: rgba(255, 255, 255, 0.7);
   border: 2px solid ${sVar.bookDetailBorderColor};
   border-radius: 0.5em;
-  font-family: "DOSGothic";
+  font-family: 'DOSGothic';
 `;
 
 // Cashbook Detail Textbox
@@ -481,14 +511,14 @@ export const CashBookDetailTextBox = styled(layout.FlexDefault)`
   align-items: center;
   overflow-wrap: break-word;
   word-break: break-all;
-`
+`;
 
 // Cashbook Detail numbox
 export const CashBookDetailNumBox = styled(layout.FlexDefault)`
   margin-right: 20px;
   align-items: center;
   justify-content: flex-end;
-`
+`;
 
 // Cashbook Detail Add Box
 export const CashBookDetailAddBox = styled(layout.FlexCenter)`
@@ -498,7 +528,7 @@ export const CashBookDetailAddBox = styled(layout.FlexCenter)`
   border: 2px dashed ${sVar.bookDetailAddBoxBorderColor};
   border-radius: 0.5em;
   margin-top: 0.4em;
-  visibility: ${props=>props.visible};
+  visibility: ${(props) => props.visible};
 `;
 
 // Cashbook Detail 무지출 버튼
@@ -509,7 +539,7 @@ export const CashBookDetailNoneBtn = styled(layout.FlexCenter)`
   background-image: url(${cashbookNone});
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  visibility: ${props=>props.visible};
+  visibility: ${(props) => props.visible};
 `;
 
 // Cashbook 모달 Button
@@ -518,7 +548,7 @@ export const CashBookNoneBtn = styled.button`
   height: 2.5em;
   margin-top: 10px;
   border-radius: 15px;
-  background-color: ${props => props.background};
+  background-color: ${(props) => props.background};
   border-color: ${sVar.bookModalNoBtn};
   color: white;
 `;
@@ -549,9 +579,9 @@ export const Modal = styled.div`
 
 // 회원가입의 제목 헤더를 감싸는 div입니다.
 export const JoinHeader = styled.div`
-  font-size: calc(${props => props.ratio} * 25px);
+  font-size: calc(${(props) => props.ratio} * 25px);
   margin: 1em 0 2em 0;
-  font-family: "DOSIyagiMedium";
+  font-family: 'DOSIyagiMedium';
 `;
 
 // 조건 텍스트입니다.
@@ -561,9 +591,9 @@ export const ConditionText = styled.div`
   border: none;
   text-align: left;
   margin: 0.8em 0;
-  font-family: "DOSGothic";
+  font-family: 'DOSGothic';
   span {
-    font-family: "DOSGothic";
+    font-family: 'DOSGothic';
   }
 `;
 
@@ -578,7 +608,7 @@ export const FirstCategoryText = styled.div`
   padding: 0.3em 0.6em;
   background-color: ${sVar.middleYellow};
   color: ${sVar.lightYellow};
-  border-radius: calc(54.817px * ${props => props.ratio});
+  border-radius: calc(54.817px * ${(props) => props.ratio});
   margin: 0.3em 0;
 `;
 // 가계부 카드 내 소분류명으로 들어가는 스타일링입니다. 소분류명이 없을 때는 대분류가 여기에 들어갑니다.
@@ -612,7 +642,7 @@ export const CashbookBtn = styled.button`
   justify-content: center;
   color: ${sVar.lightYellow};
   border: none;
-  margin-top: "1em";
+  margin-top: '1em';
   outline: none;
   &:focus {
     outline: none;
@@ -649,7 +679,6 @@ export const BackgroundPageLayout = styled(layout.PageLayout)`
 //   }
 // `;
 
-
 // modal의 검은 background 속성입니다.
 export const ModalOverlay = styled(layout.FlexCenter)`
   position: fixed;
@@ -675,7 +704,9 @@ export const ModalDefault = styled(layout.FlexCenterColumn)`
   border-radius: 10px;
   z-index: 21;
   gap: 5px;
-  span {font-size: 1.2em;}
+  span {
+    font-size: 1.2em;
+  }
 `;
 
 // 모달 제목 스타일링입니다.
@@ -694,8 +725,8 @@ export const BoardProfilePhoto = styled.div`
 
 // 게시판 활성화 버튼 렌더링
 export const BoardBtnActivate = styled.button`
-  width: calc(${props => props.ratio} * ${props => props.width});
-  height: calc(${props => props.ratio} * ${props => props.height});
+  width: calc(${(props) => props.ratio} * ${(props) => props.width});
+  height: calc(${(props) => props.ratio} * ${(props) => props.height});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-image: url(${boardBtnActivate});
@@ -709,8 +740,8 @@ export const BoardBtnActivate = styled.button`
 
 // 게시판 비활성화 버튼 렌더링
 export const BoardBtnSleep = styled.button`
-  width: calc(${props => props.ratio} * ${props => props.width});
-  height: calc(${props => props.ratio} * ${props => props.height});
+  width: calc(${(props) => props.ratio} * ${(props) => props.width});
+  height: calc(${(props) => props.ratio} * ${(props) => props.height});
   background: transparent;
   /* background-image: ${(props) =>
     props.isBoasting ? `url(${boardBtnRight})` : `url(${boardBtnLeft})`}; */
@@ -732,58 +763,62 @@ export const BoardBtnContainer = styled.div`
 `;
 
 export const BoardBtnBar = styled.div`
-  width: calc(${props => props.ratio} * ${props => props.width});
-  height: calc(${props => props.ratio} * ${props => props.height});
+  width: calc(${(props) => props.ratio} * ${(props) => props.width});
+  height: calc(${(props) => props.ratio} * ${(props) => props.height});
   display: flex;
   align-items: center;
   justify-content: center;
   background-image: url(${boardBtnBar});
   background-position: center;
   background-size: 100% 100%;
-  font-size: calc(${props => props.ratio} * 16px);
+  font-size: calc(${(props) => props.ratio} * 16px);
   /* z-index: -1; */
   border: none;
-`
+`;
 
 // 영수증 내부의 컨테이너 스타일링입니다.
 export const ReceiptInnerContainer = styled(layout.FlexCenterColumn100)`
-  padding: ${props => props.padding};
-  font-family: "DOSGothic";
-  font-size: ${props => props.fontSize};
-  border-bottom: ${props => props.isBoasting ? `2px dashed ${sVar.darkGray}` : `2px dashed #fff`};
-`
+  padding: ${(props) => props.padding};
+  font-family: 'DOSGothic';
+  font-size: ${(props) => props.fontSize};
+  border-bottom: ${(props) =>
+    props.isBoasting ? `2px dashed ${sVar.darkGray}` : `2px dashed #fff`};
+`;
 
 // 영수증 내부의 게시글 부분 컨테이너 스타일링입니다.
 export const ReceiptPostContainer = styled.div`
   font-size: 0.8em;
-`
+`;
 
 // 영수증 내부의 게시글 스타일링입니다.
 export const ReceiptPost = styled.div`
-  font-family: "DOSGothic";
+  font-family: 'DOSGothic';
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: calc(${props => props.ratio} * 20px) 0; 
-  font-size: calc(${props => props.ratio} * 12px);
-  gap: calc(${props => props.ratio} * 10px);
-  border-bottom: ${props => props.isBoasting ? `2px dashed ${sVar.darkGray}` : `2px dashed #fff`};
-  color: ${props => props.isBoasting ? `${sVar.darkGray}` : "#fff"};
-`
+  padding: calc(${(props) => props.ratio} * 20px) 0;
+  font-size: calc(${(props) => props.ratio} * 12px);
+  gap: calc(${(props) => props.ratio} * 10px);
+  border-bottom: ${(props) =>
+    props.isBoasting ? `2px dashed ${sVar.darkGray}` : `2px dashed #fff`};
+  color: ${(props) => (props.isBoasting ? `${sVar.darkGray}` : '#fff')};
+`;
 
 // 게시글 코멘트 내부의 '메모' 제목 스타일링입니다.
 export const ReceiptMemoTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${props => props.isBoasting ? "#fff" : `${sVar.darkGray}`};
-  padding: calc(2px * ${props => props.ratio}) calc(6px * ${props => props.ratio});
-  gap: calc(10px * ${props => props.ratio});
-  border-radius: calc(100px * ${props => props.ratio});
-  background-color: ${props => props.isBoasting ? `${sVar.darkGray}` : "#fff"};
-  font-size: calc(14px * ${props => props.ratio});
-`
+  color: ${(props) => (props.isBoasting ? '#fff' : `${sVar.darkGray}`)};
+  padding: calc(2px * ${(props) => props.ratio})
+    calc(6px * ${(props) => props.ratio});
+  gap: calc(10px * ${(props) => props.ratio});
+  border-radius: calc(100px * ${(props) => props.ratio});
+  background-color: ${(props) =>
+    props.isBoasting ? `${sVar.darkGray}` : '#fff'};
+  font-size: calc(14px * ${(props) => props.ratio});
+`;
 // 게시글 코멘트 내부의 '메모' 내용 스타일링입니다.
 export const ReceiptMemoContent = styled.div`
   width: 80%;
@@ -791,7 +826,7 @@ export const ReceiptMemoContent = styled.div`
   max-width: 320px;
   text-align: center;
   line-height: 140%;
-`
+`;
 
 // 20px 아이콘 스타일링입니다.
 export const Comment20 = styled.div`
@@ -800,17 +835,17 @@ export const Comment20 = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 // Board의 comment 아이콘 스타일링입니다.
 export const BoardCommentIcon = styled(Comment20)`
-    background-image: ${props => props.background};
-    background-position: center;
-    background-repeat: no-repeat;
-    &:hover {
-      background-image: ${props => props.changedBackground};
-    }
-`
+  background-image: ${(props) => props.background};
+  background-position: center;
+  background-repeat: no-repeat;
+  &:hover {
+    background-image: ${(props) => props.changedBackground};
+  }
+`;
 
 // Svg 아이콘에 hover 이펙트가 있는 경우 사용하는 스타일링
 export const HoverSvgIcon = styled.svg`
@@ -819,16 +854,16 @@ export const HoverSvgIcon = styled.svg`
   &:hover {
     color: black;
   }
-`
+`;
 
 // BoardCommentLikes의 likeCount 표시해주는 div
 export const LikeCounts = styled.div`
   font-size: 12px;
   position: absolute;
   bottom: 0;
-  color: ${props => props.isGray ? `${sVar.commentGray}` : "black"};
-  visibility: ${props => props.visibility};
-`
+  color: ${(props) => (props.isGray ? `${sVar.commentGray}` : 'black')};
+  visibility: ${(props) => props.visibility};
+`;
 
 // BoardDetail의 input 컨테이너
 export const BoardDetailInputContainer = styled(layout.FlexDefault)`
@@ -837,7 +872,7 @@ export const BoardDetailInputContainer = styled(layout.FlexDefault)`
   box-shadow: 0 0 0 1px ${sVar.commentGray} inset;
   border-radius: 5px;
   background-color: ${sVar.commentGray50};
-`
+`;
 
 // BoardDetail의 input - 왼쪽의 실제 input 자리
 export const BoardDetailInputLeft = styled.input`
@@ -851,9 +886,9 @@ export const BoardDetailInputLeft = styled.input`
     outline: none;
   }
   &::placeholder {
-    font-size: calc(${props => props.ratio} * 14px);
+    font-size: calc(${(props) => props.ratio} * 14px);
   }
-`
+`;
 
 // BoardDetail의 input - 왼쪽의 실제 input 자리(비로그인)
 export const BoardDetailBtnLeft = styled.button`
@@ -862,11 +897,11 @@ export const BoardDetailBtnLeft = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  font-size: calc(${props => props.ratio} * 14px);
+  font-size: calc(${(props) => props.ratio} * 14px);
   &:focus {
     outline: none;
   }
-`
+`;
 
 // BoardDetail의 input - 오른쪽의 icon 자리
 export const BoardDetailInputIcon = styled(FlexCenter)`
@@ -877,117 +912,123 @@ export const BoardDetailInputIcon = styled(FlexCenter)`
   &:focus {
     outline: none;
   }
-`
+`;
 
 // Main의 expBox 컨테이너
 export const MainExpBox = styled.div`
   background-image: url(${mainExpBox});
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(${props => props.ratio} * 5px) calc(${props => props.ratio} * 20px);
-  background-size: ${props => props.width} ${props => props.height};
+  padding: calc(${(props) => props.ratio} * 5px)
+    calc(${(props) => props.ratio} * 20px);
+  background-size: ${(props) => props.width} ${(props) => props.height};
   background-repeat: no-repeat;
-  font-family: "DOSGothic";
-  font-size: calc(${props => props.ratio} * 0.5em);
-`
+  font-family: 'DOSGothic';
+  font-size: calc(${(props) => props.ratio} * 0.5em);
+`;
 
 // Main의 RecordCard 컨테이너
 export const MainRecordCardBox = styled.div`
   background-image: url(${mainRecordCard});
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-size: ${props => props.width} ${props => props.height};
+  background-size: ${(props) => props.width} ${(props) => props.height};
   background-repeat: no-repeat;
   padding: 25px 20px;
   position: relative;
-`
+`;
 
 // Main의 RecordCard 속 태그 부분
 export const MainRecordCardTagBox = styled.div`
-  background-image: ${props => props.isSaved ? `url(${mainTagPositive})` : `url(${mainTagNegative})`};
-  width: ${props => props.width};
-  height: ${props => props.height};
+  background-image: ${(props) =>
+    props.isSaved ? `url(${mainTagPositive})` : `url(${mainTagNegative})`};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: ${props => props.width} ${props => props.height};
+  background-size: ${(props) => props.width} ${(props) => props.height};
   background-repeat: no-repeat;
-  font-size: calc(${props => props.ratio} * 16px);
-  font-family: "DOSGothic";
-`
+  font-size: calc(${(props) => props.ratio} * 16px);
+  font-family: 'DOSGothic';
+`;
 
 // Main의 RecordCard 태그 아래 코멘트
 export const MainRecordCardComment = styled.div`
   width: 100%;
-  font-size: calc(${props => props.ratio} * 25px);
+  font-size: calc(${(props) => props.ratio} * 25px);
   word-break: keep-all;
   overflow-wrap: break-word;
-`
+`;
 
 // Main의 날씨 렌더링 박스
 export const MainWeatherBox = styled(FlexCenter)`
-  background-image: ${props => props.weatherCode === 2 ? `url(${mainWeatherSunny})`
-                                : props.weatherCode === 1 ? `url(${mainWeatherNormal})`
-                                : props.weatherCode === 0 ? `url(${mainWeatherRainy})`
-                                : `url(${mainWeatherThunder})`};
-  background-size: ${props => props.width} ${props => props.height};
+  background-image: ${(props) =>
+    props.weatherCode === 2
+      ? `url(${mainWeatherSunny})`
+      : props.weatherCode === 1
+      ? `url(${mainWeatherNormal})`
+      : props.weatherCode === 0
+      ? `url(${mainWeatherRainy})`
+      : `url(${mainWeatherThunder})`};
+  background-size: ${(props) => props.width} ${(props) => props.height};
   background-repeat: no-repeat;
-  width: ${props => props.width};
-  height: ${props => props.height};
-`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+`;
 
 // Main 날짜 렌더링 박스
 export const MainRecordDateBox = styled.div`
-  font-size: calc(${props => props.ratio} * 16px);
-`
+  font-size: calc(${(props) => props.ratio} * 16px);
+`;
 
 // Main 요일 렌더링 박스
 export const MainRecordDayBox = styled.div`
-  font-size: calc(${props => props.ratio} * 12px);
-  font-family: "DOSGothic";
+  font-size: calc(${(props) => props.ratio} * 12px);
+  font-family: 'DOSGothic';
   margin-bottom: 1px;
-`
+`;
 
 // 디바이더 (선)
 export const Divider = styled.div`
   width: 100%;
-  border-bottom: ${props=> props.borderSize} solid ${props => props.color};
-`
+  border-bottom: ${(props) => props.borderSize} solid ${(props) => props.color};
+`;
 
 // Main의 RecordCard 하단 토글 컨테이너
 export const MainToggleBar = styled.div`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background-image: url(${mainToggleBar});
   display: flex;
   justify-content: center;
   align-items: center;
   background-position: center;
-  background-size: 100% 100%; 
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   /* z-index: -1; */
   border: none;
   position: absolute;
-  bottom: calc(25px * ${props => props.ratio});
-`
+  bottom: calc(25px * ${(props) => props.ratio});
+`;
 
 // 게시판 비활성화 버튼 렌더링
 export const MainToggleBtnSleep = styled.button`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background: transparent;
   /* background-image: ${(props) =>
     props.isBoasting ? `url(${boardBtnRight})` : `url(${boardBtnLeft})`}; */
   /* background-color: ${sVar.darkGray}; */
   border: none;
-  font-family: "DOSGothic";
-  font-size: calc(${props => props.ratio} * 0.75rem);
+  font-family: 'DOSGothic';
+  font-size: calc(${(props) => props.ratio} * 0.75rem);
   &:focus {
     outline: none;
   }
@@ -995,16 +1036,16 @@ export const MainToggleBtnSleep = styled.button`
 
 // 게시판 활성화 버튼 렌더링
 export const MainToggleBtnActivate = styled.button`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background-image: url(${mainToggleBtn});
   background-color: transparent;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   border: none;
   /* z-index: 1; */
-  font-family: "DOSGothic";
-  font-size: calc(${props => props.ratio} * 0.75rem);
+  font-family: 'DOSGothic';
+  font-size: calc(${(props) => props.ratio} * 0.75rem);
   &:focus {
     outline: none;
   }
@@ -1018,32 +1059,32 @@ export const MainRecordCardTextRow = styled.div`
   justify-content: space-between;
   align-items: center;
   .text {
-    font-size: calc(${props => props.ratio} * 12px);
+    font-size: calc(${(props) => props.ratio} * 12px);
   }
   .expense {
-    font-size: calc(${props => props.ratio} * 20px);
+    font-size: calc(${(props) => props.ratio} * 20px);
   }
-`
+`;
 
 // Main의 RecordCard 지출 결과 행 컨테이너
 export const MainRecordCardResultRow = styled.div`
   width: 100%;
-  font-size: calc(${props => props.ratio} * 25px);
+  font-size: calc(${(props) => props.ratio} * 25px);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 8px;
-`
+`;
 
 // Main의 그래프 아래 섹션 컨테이너
 export const MainGraphSection = styled.div`
-  font-size: calc(${props => props.ratio} * 14px);
-`
+  font-size: calc(${(props) => props.ratio} * 14px);
+`;
 
 // Main Journey 제목 컨테이너
 export const MainJourneyTitleBox = styled.div`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1053,73 +1094,77 @@ export const MainJourneyTitleBox = styled.div`
   background-repeat: no-repeat;
   border: none;
   /* z-index: 1; */
-  font-family: "DOSGothic";
-  font-size: calc(${props => props.ratio} * 16px);
+  font-family: 'DOSGothic';
+  font-size: calc(${(props) => props.ratio} * 16px);
   &:focus {
     outline: none;
   }
-`
+`;
 
 // Main Journey streak 컨테이너
 export const MainJourneyStreakBox = styled.div`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   background-image: url(${mainJourneyBox});
   background-color: transparent;
   background-size: 100% 100%;
-  padding: calc(${props => props.ratio} * 1.12rem) calc(${props => props.ratio} * 1.41rem) calc(${props => props.ratio} * 1.4rem) calc(${props => props.ratio} * 1.41rem) ;
+  padding: calc(${(props) => props.ratio} * 1.12rem)
+    calc(${(props) => props.ratio} * 1.41rem)
+    calc(${(props) => props.ratio} * 1.4rem)
+    calc(${(props) => props.ratio} * 1.41rem);
   background-repeat: no-repeat;
   border: none;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  font-size: calc(${props => props.ratio} * 16px);
+  font-size: calc(${(props) => props.ratio} * 16px);
   &:focus {
     outline: none;
   }
-`
+`;
 
 // Main Journey streak의 row box
 export const MainJourneyStreakRowBox = styled.div`
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 4fr 5fr;
-  grid-column-gap: calc(${props => props.ratio} * 1.06rem);
-  grid-row-gap: calc(${props => props.ratio} * 0.19rem);
-`
+  grid-column-gap: calc(${(props) => props.ratio} * 1.06rem);
+  grid-row-gap: calc(${(props) => props.ratio} * 0.19rem);
+`;
 
 // Main Journey streak의 streak 컨테이너
 export const MainJourneyStreak = styled.div`
-  width: ${props => props.width};
-  height: ${props => props.height};
-  border-radius: calc(${props => props.ratio} * 0.625rem);
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  border-radius: calc(${(props) => props.ratio} * 0.625rem);
   background-color: #eee;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 // BoardDetail에 들어가는 NavInput의 container
 export const NavInputContainer = styled.nav`
-    height: ${props => props.navHeight};
-    width: ${props => props.navWidth};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
+  height: ${(props) => props.navHeight};
+  width: ${(props) => props.navWidth};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 // 게시판 상세에서 작성된 댓글이 없을 때의 스타일링
 export const BoardDetailNoComment = styled.div`
   width: inherit;
-  height: calc(${props => props.ratio} * 100px);
+  height: calc(${(props) => props.ratio} * 100px);
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: calc(${props => props.ratio} * 14px);
-  font-family: "DOSGothic";
-  background-color: ${props => props.isBoasting ? `${sVar.white50}` : `${sVar.white20}`};
-`
+  font-size: calc(${(props) => props.ratio} * 14px);
+  font-family: 'DOSGothic';
+  background-color: ${(props) =>
+    props.isBoasting ? `${sVar.white50}` : `${sVar.white20}`};
+`;
