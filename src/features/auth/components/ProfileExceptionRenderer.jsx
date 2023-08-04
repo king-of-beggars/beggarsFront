@@ -5,7 +5,8 @@ import { layout, style } from 'styles';
 import * as sVar from 'common/constants/styleVariables';
 import Navigation from 'common/components/Navigation';
 import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
-import BlurOverlay from 'common/components/effect/BlurOverlay';
+// import BlurOverlay from 'common/components/effect/BlurOverlay';
+import ScreenBlur from 'common/components/effect/ScreenBlur';
 
 function ProfileExceptionRenderer({ comment, addComponent }) {
   const {
@@ -37,7 +38,7 @@ function ProfileExceptionRenderer({ comment, addComponent }) {
         mainHeight={`${mainHeight}px`}
         style={{ fontFamily: 'DOSIyagiMedium' }}
       >
-        <BlurOverlay comment={comment} addComponent={addComponent}>
+        <ScreenBlur comment={comment} addComponent={addComponent}>
           <layout.MainContent>
             <layout.FlexCenterColumn100
               style={{ height: '100%', justifyContent: 'space-around' }}
@@ -98,7 +99,7 @@ function ProfileExceptionRenderer({ comment, addComponent }) {
               </layout.FlexCenterColumn100>
             </layout.FlexCenterColumn100>
           </layout.MainContent>
-        </BlurOverlay>
+        </ScreenBlur>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
         <Navigation ratio={widthRatio} selected="profile" />

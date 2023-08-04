@@ -5,7 +5,8 @@ import { MainLogoText, bgSky100, bgCloud100, bgMountain100 } from 'assets';
 import { COMMENT } from 'common/constants';
 import { layout, style } from 'styles';
 import Navigation from 'common/components/Navigation';
-import BlurOverlay from 'common/components/effect/BlurOverlay';
+// import BlurOverlay from 'common/components/effect/BlurOverlay';
+import ScreenBlur from 'common/components/effect/ScreenBlur';
 import LoggedYet from 'common/components/effect/LoggedYet';
 import MainExp from '../components/MainExp';
 import MainRecordCard from '../components/MainRecordCard';
@@ -69,7 +70,7 @@ export default function MainRenderer(caseStr, data, states = {}) {
     default:
       return (
         <MainLayout>
-          <BlurOverlay
+          <ScreenBlur
             comment={COMMENT.ifNotLoggedIn}
             addComponent={<LoggedYet />}
           >
@@ -90,13 +91,13 @@ export default function MainRenderer(caseStr, data, states = {}) {
                 </layout.FlexCenterColumn>
               </layout.FlexCenterColumn100>
             </layout.MainContent>
-          </BlurOverlay>
+          </ScreenBlur>
         </MainLayout>
       );
     case 'loading':
       return (
         <MainLayout>
-          <BlurOverlay comment={<Loader>{COMMENT.ifLoading}</Loader>}>
+          <ScreenBlur comment={<Loader>{COMMENT.ifLoading}</Loader>}>
             <layout.MainContent>
               <layout.FlexCenterColumn100 style={{ gap: '25px' }}>
                 {/* 메인: 가입한지 n일 & 레코드 카드 */}
@@ -114,13 +115,13 @@ export default function MainRenderer(caseStr, data, states = {}) {
                 </layout.FlexCenterColumn>
               </layout.FlexCenterColumn100>
             </layout.MainContent>
-          </BlurOverlay>
+          </ScreenBlur>
         </MainLayout>
       );
     case 'error':
       return (
         <MainLayout>
-          <BlurOverlay
+          <ScreenBlur
             comment={COMMENT.ifError}
             addComponent={<ErrorRefresher />}
           >
@@ -141,7 +142,7 @@ export default function MainRenderer(caseStr, data, states = {}) {
                 </layout.FlexCenterColumn>
               </layout.FlexCenterColumn100>
             </layout.MainContent>
-          </BlurOverlay>
+          </ScreenBlur>
         </MainLayout>
       );
     case 'login':

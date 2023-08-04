@@ -6,7 +6,8 @@ import { bgCloud100, bgMountain100, bgSky100 } from 'assets';
 import { layout, style } from 'styles';
 import Navigation from 'common/components/Navigation';
 import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
-import BlurOverlay from 'common/components/effect/BlurOverlay';
+// import BlurOverlay from 'common/components/effect/BlurOverlay';
+import ScreenBlur from 'common/components/effect/ScreenBlur';
 import CashBookCard from './CashBookCard';
 
 function CashbookExceptionRenderer({ comment, addComponent }) {
@@ -61,7 +62,7 @@ function CashbookExceptionRenderer({ comment, addComponent }) {
         mainHeight={`${mainHeight}px`}
         style={{ position: 'relative' }}
       >
-        <BlurOverlay comment={comment} addComponent={addComponent}>
+        <ScreenBlur comment={comment} addComponent={addComponent}>
           <layout.MainContent style={{ width: 'inherit' }}>
             <layout.CashBookMainContent className="thisCash">
               <layout.FlexCenterColumn style={{ gap: '20px' }}>
@@ -83,7 +84,7 @@ function CashbookExceptionRenderer({ comment, addComponent }) {
               </layout.FlexCenterColumn>
             </layout.CashBookMainContent>
           </layout.MainContent>
-        </BlurOverlay>
+        </ScreenBlur>
       </layout.Main>
       <layout.Nav navHeight={`${navHeight}px`}>
         <Navigation selected="money" ratio={widthRatio} />

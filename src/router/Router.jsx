@@ -20,7 +20,8 @@ import { MainFetcher } from 'features/main/utils/MainFetcher';
 import ProfileExceptionRenderer from 'features/auth/components/ProfileExceptionRenderer';
 import LoggedYet from 'common/components/effect/LoggedYet';
 import CashbookExceptionRenderer from 'features/cashbook/components/CashbookExceptionRenderer';
-import BlurOverlay from 'common/components/effect/BlurOverlay';
+// import BlurOverlay from 'common/components/effect/BlurOverlay';
+import ScreenBlur from 'common/components/effect/ScreenBlur';
 
 function Router() {
   const { isLoggedIn } = useAuthContext();
@@ -129,7 +130,7 @@ const ProtectedRouter = ({ isLoggedIn, children, className }) => {
       return (
         <>
           {children}
-          <BlurOverlay
+          <ScreenBlur
             position="absolute"
             left={
               isMobile ? '0px' : `${(window.innerWidth - screenWidth) / 2}px`
@@ -139,7 +140,7 @@ const ProtectedRouter = ({ isLoggedIn, children, className }) => {
             addComponent={<LoggedYet />}
           >
             로그인이 되지 않았네!
-          </BlurOverlay>
+          </ScreenBlur>
         </>
       );
     }
