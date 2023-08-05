@@ -53,11 +53,11 @@ function Login() {
 
   // 카카오 로그인 direct
   const kakaoLoginHandler = () => {
-    const redirecKakaotURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_AUTH}&redirect_uri=https://poorkingapi.shop/api/user/login/kakao`;
-    window.location.replace(redirecKakaotURL);
+    const redirectKakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_AUTH}&redirect_uri=https://poorkingapi.shop/api/user/login/kakao`;
+    window.location.replace(redirectKakaoURL);
   };
 
-  // 카카오 로그인 direct
+  // 네이버 로그인 direct
   const naverLoginHandler = () => {
     const redirectNaverURL = ``;
     window.location.replace(redirectNaverURL);
