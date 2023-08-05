@@ -41,7 +41,7 @@
 - 메인 바 그래프 : nivo
 - 글자 렌더링 : auto-text-size
 
-## 3. 폴더구조
+## 3-1. 폴더구조 (변경 전)
 - api
 - assets
     + icons
@@ -68,6 +68,59 @@
     + css
     + styled-components
 
+## 3-2. 폴더구조 (변경 후)
+- features
+    + auth
+        * components
+        * hooks
+        * pages
+        * styles
+        * utils
+        * assets
+             - icons
+             - pixels
+             - sounds ☇
+    + cashbook
+        * components
+        * hooks
+        * pages
+        * styles
+        * utils
+        * assets
+             - icons
+             - pixels
+             - sounds ☇
+    + main
+        * components
+        * hooks
+        * pages
+        * styles
+        * utils
+        * assets
+             - icons
+             - pixels
+             - sounds ☇
+    + board
+        * components
+        * hooks
+        * pages
+        * styles
+        * utils
+        * assets
+             - icons
+             - pixels
+             - sounds ☇
+- common
+    + components
+    + hooks
+    + variables (types?)
+    + utils
+    + assets
+        * backgrounds
+        * icons
+        * pixels
+        * sounds ☇
+  
 
 ## 4. 발생 Issue / 챌린지 및 해결방법
 ### 1) nested swiper (양방향 스와이퍼) 적용
