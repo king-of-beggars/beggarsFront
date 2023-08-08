@@ -5,8 +5,11 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { BackCramps, bgCloud20, bgMountain20, bgSky20 } from 'assets';
 import { useGlobalVariables } from 'common/components/provider/GlobalVariableProvider';
+import { useAuth } from '../hooks';
 
 function Login() {
+  const { isLoggedIn, login, redirect } = useAuth()
+  console.log("login:::", isLoggedIn)
   const {
     widthRatio,
     isMobile,
@@ -65,7 +68,8 @@ function Login() {
 
   const loginHandler = () => {
     // console.log("userInfo:::", userInfo)
-    mutationLogin.mutate(userInfo);
+    // mutationLogin.mutate(userInfo);
+    login(userInfo)
   };
 
   const mutationLogin = useMutation(AuthAPI.postLogIn, {

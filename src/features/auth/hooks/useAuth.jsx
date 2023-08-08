@@ -5,6 +5,7 @@ import { AuthAPI } from 'common/utils/api';
 
 function useAuth() {
     const location = useLocation()
+    console.log("current location:::", location)
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const checkLogin = () => {
@@ -40,6 +41,7 @@ function useAuth() {
 
             _setLogin(accessToken, refreshToken, userId, nickname)
             checkLogin()
+            redirect("/")
         },
         onError: () => logout()
     })
