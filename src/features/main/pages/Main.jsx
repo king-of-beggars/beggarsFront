@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 import { AuthAPI } from 'common/utils/api';
+import { useAuth } from "features/auth/hooks"
 import { mainDummyData } from 'common/constants';
 import SocialLoginModal from '../components/SocialLoginModal';
 import MainRenderer from '../styles/MainRenderer';
