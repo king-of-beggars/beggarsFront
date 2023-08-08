@@ -31,7 +31,7 @@ function useAuth() {
         setIsLoggedIn(false);
     }
 
-    const _mutation = useMutation(AuthAPI.postLogin, {
+    const _mutation = useMutation(AuthAPI.postLogIn, {
         onSuccess: (response) => {
             const accessToken = response.data.accessToken;
             const refreshToken = response.data.refreshToken;
