@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 import { AuthAPI } from 'common/utils/api';
+import { useAuth } from "features/auth/hooks"
 import { mainDummyData } from 'common/constants';
 import SocialLoginModal from '../components/SocialLoginModal';
 import MainRenderer from '../styles/MainRenderer';
@@ -12,6 +13,11 @@ import MainRenderer from '../styles/MainRenderer';
 const INIT_LOG_VALUE = false;
 
 function Main({ data, isLoggedIn }) {
+  const { isLoggedIn: loginStatus, login, logout, redirect } = useAuth();
+  
+  if (!loginStatus) {
+    login()
+  }
   // 닉네임 모달 관련
   //// 소셜 로그인 모드 판별 state
   const [isSocialLogin, setIsSocialLogin] = useState(INIT_LOG_VALUE);
