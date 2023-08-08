@@ -48,19 +48,6 @@ function useAuth() {
         _mutation.mutate(data)
     }
 
-    // const login = useMutation(AuthAPI.postLogin, {
-    //     onSuccess: (response) => {
-    //         const accessToken = response.data.accessToken;
-    //         const refreshToken = response.data.refreshToken;
-    //         const userId = response.headers.userid;
-    //         const nickname = response.headers.usernickname
-
-    //         _setLogin(accessToken, refreshToken, userId, nickname)
-    //         checkLogin()
-    //     },
-    //     onError: () => logout()
-    // })
-
     const redirect = (path) => {
         window.location.href = path
     }
